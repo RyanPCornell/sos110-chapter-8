@@ -2532,7 +2532,300 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 .xm-overbtns{display:flex; gap:.5rem;}
 .xm-over .xm-why{font-size:.84rem;}
 @media(max-width:1100px){ .xm-over .xm-expg{grid-template-columns:repeat(2,minmax(0,1fr));} }
+/* the all-at-once reveal: results ripple left to right, then the champion is stamped */
+.xm-bracket.cascade .xm-match.rev{animation:none;}
+.xm-bracket.cascade .xm-team{animation:xm-turn .55s cubic-bezier(.3,1.3,.5,1) both; animation-delay:calc(var(--d0) - var(--el));}
+.xm-bracket.cascade .xm-usd{animation:xm-pop .45s ease both; animation-delay:calc(var(--d0) + .3s - var(--el));}
+.xm-bracket.cascade .r0{--d0:.15s;} .xm-bracket.cascade .r1{--d0:1s;} .xm-bracket.cascade .r2{--d0:1.85s;} .xm-bracket.cascade .r3{--d0:2.7s;}
+.xm-bracket.cascade .xm-colh{animation:xm-glow 1s ease both; animation-delay:calc(var(--d0,3.5s) - var(--el));}
+.xm-bracket.cascade .xm-champ.real{animation:xm-stamp .8s cubic-bezier(.2,1.6,.4,1) both; animation-delay:calc(3.5s - var(--el));}
+.xm-bracket.cascade .xm-champ.real::after{content:""; position:absolute; inset:-6px; border-radius:16px; border:3px solid var(--gold);
+  animation:xm-ring 1.2s ease-out both; animation-delay:calc(3.9s - var(--el)); pointer-events:none;}
+.xm-champ{position:relative;}
+@keyframes xm-turn{0%{transform:rotateX(80deg); opacity:.2; filter:grayscale(1);} 60%{opacity:1;} 100%{transform:none; opacity:var(--o,1); filter:none;}}
+.xm-team.lose{--o:.55;}
+@keyframes xm-pop{from{transform:scale(.4); opacity:0;} to{transform:none; opacity:1;}}
+@keyframes xm-glow{0%{color:var(--gold);} 40%{color:var(--win); text-shadow:0 0 12px rgba(45,106,79,.35);} 100%{color:var(--gold);}}
+@keyframes xm-stamp{0%{transform:scale(2.2) rotate(-8deg); opacity:0;} 60%{opacity:1;} 100%{transform:none; opacity:1;}}
+@keyframes xm-ring{from{transform:scale(.9); opacity:1;} to{transform:scale(1.35); opacity:0;}}
+/* the story of the bracket */
+.xm-story{margin-top:.9rem; padding-top:.7rem; border-top:1px solid var(--hair);}
+.xm-story.over{margin:0; padding:0; border:0;}
+.xm-sth{display:flex; justify-content:space-between; align-items:center; gap:.8rem; flex-wrap:wrap; margin-bottom:.7rem; padding-right:5.5rem;}
+.xm-tabs{display:flex; gap:.3rem; flex-wrap:wrap;}
+.xm-stab{font:inherit; cursor:pointer; display:inline-flex; align-items:center; gap:.4rem; background:#fdfaf1; border:1px solid var(--hair); border-radius:99px;
+  padding:.28rem .75rem .28rem .3rem; font-size:clamp(.72rem,1.05vw,.84rem); font-weight:700; color:var(--ink2);}
+.xm-stab i{font-style:normal; width:1.35rem; height:1.35rem; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; background:#efe6d2; font-size:.72rem; font-weight:900;}
+.xm-stab.on{background:var(--ink); border-color:var(--ink); color:#fbf6e9;} .xm-stab.on i{background:var(--gold); color:#fff;}
+.xm-stb{animation:xm-in .45s ease both;}
+.xm-lead{margin:0 0 .6rem; color:var(--ink2); font-size:clamp(.84rem,1.25vw,1rem); line-height:1.45;}
+.xm-lead b{color:var(--ink);} .xm-lead .xm-key{display:block; margin:.15rem 0 0; font-size:.85em;}
+.xm-card{position:relative;}
+.xm-card-r{font-family:'Inter',sans-serif; font-weight:800; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:.25rem;}
+.xm-share{display:inline-block; width:3.2rem; height:.4rem; border-radius:99px; background:#efe6d2; overflow:hidden; margin-right:.35rem; vertical-align:1px;}
+.xm-share i{display:block; height:100%; background:var(--win);}
+.xm-expg.three{grid-template-columns:repeat(3,minmax(0,1fr));}
+.xm-card.big{font-size:1.2em; padding:.9rem 1.1rem; border-color:var(--gold); box-shadow:0 0 0 4px rgba(138,106,47,.15);}
+.xm-card.big .xm-vs b{font-size:1.4rem;} .xm-card.big .xm-why{font-size:.95rem;}
+.xm-expg.r0,.xm-expg.r1{grid-template-columns:repeat(4,minmax(0,1fr));}
+.xm-expg.r2{grid-template-columns:repeat(2,minmax(0,440px)); justify-content:center;}
+.xm-rtabs{display:flex; gap:.3rem; margin-bottom:.55rem;}
+.xm-rtab{font:inherit; cursor:pointer; background:transparent; border:none; border-bottom:2px solid transparent; padding:.2rem .5rem; font-weight:700; font-size:.82rem; color:var(--ink3);}
+.xm-rtab.on{color:var(--ink); border-bottom-color:var(--gold);}
+/* 1 · champion */
+.xm-champstory{display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(1rem,2.4vw,2.2rem); align-items:center;}
+.xm-cs-l{display:flex; flex-direction:column; align-items:center; text-align:center; gap:.2rem; padding:1rem; border:1.5px solid var(--gold); border-radius:14px;
+  background:radial-gradient(circle at 50% 20%,#fcf4dc,#fbf6e9 70%); box-shadow:0 0 0 5px rgba(138,106,47,.12);}
+.xm-cs-l .xm-trophy{width:clamp(70px,11vh,104px); height:auto; animation:xm-stamp .8s cubic-bezier(.2,1.6,.4,1) both;}
+.xm-cs-n{font-family:'Merriweather',Georgia,serif; font-weight:900; color:var(--ink); font-size:clamp(1.2rem,2.2vw,1.7rem); line-height:1.15;}
+.xm-cs-q{color:var(--ink3); font-weight:600;}
+.xm-cs-v{font-family:'Merriweather',Georgia,serif; font-weight:900; color:var(--win); font-size:clamp(2rem,4.6vw,3.4rem); line-height:1.05; margin-top:.2rem; font-variant-numeric:tabular-nums;}
+.xm-cs-sub{color:var(--ink2); font-style:italic;} .xm-cs-sh{margin-top:.35rem; font-size:.82rem; font-weight:700; color:var(--gold);}
+.xm-cs-r .xm-why{margin-top:.7rem; font-size:clamp(.84rem,1.2vw,.98rem);}
+.xm-step{display:grid; grid-template-columns:7.4rem 1fr auto 3.6rem; gap:.6rem; align-items:baseline; padding:.45rem 0; border-bottom:1px solid var(--hair2);
+  animation:xm-in .5s ease both;} .xm-step:nth-child(3){animation-delay:.15s;} .xm-step:nth-child(4){animation-delay:.3s;} .xm-step:nth-child(5){animation-delay:.45s;}
+.xm-step i{font-style:normal; font-family:'Inter',sans-serif; font-weight:800; font-size:.6rem; letter-spacing:.12em; text-transform:uppercase; color:var(--gold);}
+.xm-step span{color:var(--ink); font-size:clamp(.82rem,1.2vw,.96rem);} .xm-step em{font-style:normal; color:var(--ink3); font-size:.85em;}
+.xm-stepv{font-family:'Merriweather',Georgia,serif; color:var(--ink2) !important;}
+.xm-stepx{font-family:'Merriweather',Georgia,serif; font-weight:900; color:var(--win) !important; text-align:right;}
+/* 2 · the price ladder */
+.xm-lgrid{position:relative; padding:1.2rem 0 0;}
+.xm-lax{position:absolute; left:calc(34% + .6rem); right:4.8rem; top:0; bottom:0; pointer-events:none;}
+.xm-lax span{position:absolute; top:0; bottom:0; border-left:1px dashed var(--hair);}
+.xm-lax i{position:absolute; top:0; transform:translateX(-50%); font-style:normal; font-size:.64rem; font-weight:700; color:var(--ink3);}
+.xm-lr{display:grid; grid-template-columns:34% 1fr; gap:.6rem; align-items:center; padding:.1rem 0; animation:xm-in .45s ease both; animation-delay:var(--d);}
+.xm-ln{font-family:'Merriweather',Georgia,serif; font-weight:700; font-size:clamp(.66rem,.95vw,.82rem); color:var(--ink); text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.xm-ln em{font-family:'Inter',sans-serif; font-style:normal; font-weight:600; color:var(--ink3); font-size:.85em;}
+.xm-lt{position:relative; height:clamp(12px,1.7vh,17px); margin-right:4.8rem;}
+.xm-lt i{position:absolute; left:0; top:0; bottom:0; border-radius:0 4px 4px 0; transform-origin:left; animation:xm-grow .9s cubic-bezier(.3,1,.4,1) both; animation-delay:var(--d);}
+.xm-lr.ext .xm-lt i{background:var(--ext);} .xm-lr.pay .xm-lt i{background:var(--pay);}
+.xm-lt b{position:absolute; top:50%; transform:translateY(-50%); padding-left:.4rem; font-family:'Merriweather',Georgia,serif; font-weight:900; font-size:clamp(.66rem,.92vw,.8rem); color:var(--ink); white-space:nowrap;}
+@keyframes xm-grow{from{transform:scaleX(0);} to{transform:none;}}
+/* 4 · class scorecard */
+.xm-sc{display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:clamp(1rem,2.4vw,2.2rem); align-items:start;}
+.xm-scr{display:grid; grid-template-columns:8rem 1fr 3rem; gap:.6rem; align-items:center; padding:.45rem 0; border-bottom:1px solid var(--hair2); font-weight:700; color:var(--ink2);}
+.xm-scr b{font-family:'Merriweather',Georgia,serif; color:var(--ink); text-align:right;}
+.xm-scb{height:.8rem; border-radius:99px; background:#efe6d2; overflow:hidden;} .xm-scb i{display:block; height:100%; background:var(--win); transform-origin:left; animation:xm-grow 1s ease both;}
+.xm-sc-r{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.5rem;}
+.xm-stat2{background:#fff; border:1px solid var(--hair); border-radius:10px; padding:.6rem .7rem; display:flex; flex-direction:column;}
+.xm-stat2.wide{grid-column:1/-1;}
+.xm-stat2 b{font-family:'Merriweather',Georgia,serif; font-weight:900; font-size:clamp(1.2rem,2.2vw,1.7rem); color:var(--ink);} .xm-stat2 span{font-size:.78rem; color:var(--ink3);}
+@media(max-width:1100px){ .xm-expg.three,.xm-expg.r0,.xm-expg.r1{grid-template-columns:repeat(2,minmax(0,1fr));} .xm-champstory,.xm-sc{grid-template-columns:1fr;} }
+@media(max-width:640px){ .xm-expg.three,.xm-expg.r0,.xm-expg.r1,.xm-expg.r2{grid-template-columns:1fr;} .xm-sth{padding-right:0;} .xm-step{grid-template-columns:1fr auto;} .xm-step i{grid-column:1/-1;} }
+@media(prefers-reduced-motion:reduce){ .xm-bracket.cascade *,.xm-bracket.cascade *::after,.xm-lr,.xm-lt i,.xm-scb i,.xm-step,.xm-stb{animation:none !important;} }
 /* ── end Externality Madness ── */
+/* ── Where the Costs Come From (harm categories) ── */
+.slide.hc-slide{background:linear-gradient(158deg,#faf7f0,#f1ebdd); --ink:#3b3222; --ink2:#5e5340; --ink3:#8a8069;
+  --hair:rgba(120,100,60,.28); --hair2:rgba(120,100,60,.16); --gold:#8a6a2f;
+  --papyrus:repeating-linear-gradient(90deg,rgba(150,115,55,.045) 0 2px,transparent 2px 7px),repeating-linear-gradient(0deg,rgba(150,115,55,.035) 0 1px,transparent 1px 9px);}
+.hc-slide [hidden]{display:none !important;}
+.hc-root{position:absolute; inset:0; display:flex; flex-direction:column; padding:clamp(1rem,2.6vh,1.8rem) clamp(1.4rem,3.2vw,3.1rem) clamp(3.4rem,7vh,4.2rem);}
+.hc-head{flex:none; padding-bottom:.35rem; margin-bottom:.6rem; border-bottom:1px solid var(--hair);}
+.hc-slide .eyebrow{color:var(--gold);} .hc-slide .eyebrow::before{background:var(--gold);}
+.hc-wm{display:block; width:min(38rem,70%); height:auto; margin:.1rem 0 .05rem;}
+.hc-sub{font-size:clamp(.82rem,1.3vw,.98rem); color:var(--ink2); line-height:1.4; max-width:64rem; margin:.1rem 0 0;}
+.hc-panel{position:relative; isolation:isolate; flex:1; min-height:0; display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); grid-template-rows:minmax(0,1fr); gap:clamp(.8rem,1.8vw,1.6rem);
+  background:var(--papyrus),#fcf8ec; border:1px solid var(--hair); border-radius:12px; padding:clamp(.6rem,1.5vh,1rem) clamp(.8rem,1.6vw,1.3rem); overflow:auto;}
+.hc-left{display:flex; flex-direction:column; min-width:0; min-height:0;}
+.hc-right{display:flex; flex-direction:column; gap:.6rem; min-width:0; min-height:0;}
+.hc-tag{font-family:'Inter',sans-serif; font-weight:800; font-size:clamp(.58rem,.86vw,.68rem); letter-spacing:.16em; text-transform:uppercase; color:var(--gold);}
+.hc-ico{width:1.1em; height:1.1em; flex:none;}
+/* pick a source */
+.hc-picks{display:flex; gap:.5rem; flex-wrap:wrap; align-items:stretch;}
+.hc-picks .hc-tag{width:100%;}
+.hc-pick{flex:1 1 0; min-width:9.5rem; font:inherit; cursor:pointer; display:flex; align-items:center; gap:.55rem; text-align:left; padding:.45rem .7rem;
+  background:#fffdf6; border:1.5px solid var(--hair); border-radius:10px; color:var(--ink); transition:border-color .15s, background .15s, transform .15s;}
+.hc-pick:hover{border-color:var(--gold); transform:translateY(-1px);}
+.hc-pick .hc-ico{width:2.1rem; height:2.1rem;}
+.hc-pick span{display:flex; flex-direction:column; font-family:'Merriweather',Georgia,serif; font-weight:700; font-size:clamp(.74rem,1.05vw,.88rem); line-height:1.2;}
+.hc-pick em{font-family:'Inter',sans-serif; font-style:normal; font-weight:600; font-size:.8em; color:var(--ink3);}
+.hc-pick.on{background:#3b3222; border-color:#3b3222; color:#fbf6e9;} .hc-pick.on em{color:#d9ccaa;} .hc-pick.on .hc-ico{filter:invert(1) sepia(.3) brightness(1.6);}
+/* the flow */
+.hc-flow{flex:1; min-height:0; display:flex; align-items:center; justify-content:center; padding:.4rem 0;}
+.hc-svg{width:100%; height:100%; max-height:100%; overflow:visible;}
+.hc-svg text{fill:var(--ink);}
+.hc-t1{font-family:'Merriweather',Georgia,serif; font-weight:700; font-size:14.5px;}
+.hc-t2{font-family:'Merriweather',Georgia,serif; font-weight:900; font-size:19px;}
+.hc-t3{font-family:'Inter',sans-serif; font-weight:600; font-size:11.5px; fill:#8a8069 !important;}
+.hc-t4{font-family:'Inter',sans-serif; font-weight:600; font-size:12.5px; fill:#5e5340 !important;}
+.hc-t4 .hc-v{font-family:'Merriweather',Georgia,serif; font-weight:900; font-size:14px; fill:#3b3222;}
+.hc-band{cursor:pointer; outline:none;}
+.hc-rib{opacity:.42; transition:opacity .2s;}
+.hc-band:hover .hc-rib,.hc-band:focus-visible .hc-rib{opacity:.66;}
+.hc-band.on .hc-rib{opacity:.88;}
+.hc-band.on .hc-t1{text-decoration:underline; text-decoration-color:var(--gold); text-underline-offset:3px;}
+.hc-band.un:hover path,.hc-band.un.on path{stroke:#3b3222;}
+.hc-svg .hc-band{animation:hc-in .6s ease both;}
+@keyframes hc-in{from{opacity:0;} to{opacity:1;}}
+/* total + insight */
+.hc-total{flex:none; border-top:1px solid var(--hair2); padding-top:.5rem;}
+.hc-bar{display:flex; height:.7rem; border-radius:99px; overflow:hidden; gap:2px; background:#efe6d2;}
+.hc-bar i{min-width:3px; transition:flex .5s ease;}
+.hc-ins{margin:.45rem 0 0; font-size:clamp(.8rem,1.2vw,.95rem); color:var(--ink2); line-height:1.45;}
+.hc-ins b{font-family:'Merriweather',Georgia,serif; color:var(--ink);}
+/* the ledger card */
+.hc-card{flex:1; min-height:0; overflow:auto; background:var(--papyrus),#fffdf5; border:1px solid var(--hair); border-radius:12px; padding:.8rem 1rem .9rem;
+  box-shadow:inset 0 0 0 5px #fffdf5, inset 0 0 0 6px rgba(138,106,47,.25); animation:hc-in .35s ease both;}
+.hc-ch{display:flex; align-items:center; gap:.7rem; padding-bottom:.45rem; border-bottom:1px solid var(--hair2);}
+.hc-cico{width:2.8rem; height:2.8rem; flex:none; padding:.3rem; border-radius:50%; background:color-mix(in srgb,var(--c) 16%,#fffdf5); border:1.5px solid var(--c);}
+.hc-cn{font-family:'Merriweather',Georgia,serif; font-weight:900; font-size:clamp(1.05rem,1.7vw,1.35rem); color:var(--ink); line-height:1.15;}
+.hc-cv{display:flex; align-items:baseline; gap:.6rem; flex-wrap:wrap; margin:.45rem 0 .2rem;}
+.hc-cv b{font-family:'Merriweather',Georgia,serif; font-weight:900; font-size:clamp(1.5rem,2.8vw,2.2rem); color:var(--c); line-height:1;}
+.hc-cv span{font-size:.8rem; font-weight:700; color:var(--ink2); background:#f3ead4; border-radius:99px; padding:.1rem .55rem;}
+.hc-dl{margin:.4rem 0 0;}
+.hc-dl dt{font-family:'Inter',sans-serif; font-weight:800; font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-top:.4rem;}
+.hc-dl dd{margin:.1rem 0 0; font-size:clamp(.74rem,1.02vw,.86rem); color:var(--ink2); line-height:1.45;}
+.hc-via{display:flex; flex-wrap:wrap; gap:.3rem; align-items:center; margin-top:.6rem; font-size:.74rem;}
+.hc-via span{font-weight:700; color:var(--ink3); margin-right:.2rem;}
+.hc-via i{font-style:normal; font-weight:700; color:var(--ink); border:1px solid var(--hair); background:#fff; border-radius:99px; padding:.05rem .5rem;}
+/* weigh the future */
+.hc-rate{flex:none; background:#fffdf6; border:1px solid var(--hair); border-radius:12px; padding:.6rem .8rem;}
+.hc-seg{display:flex; gap:4px; padding:4px; margin:.35rem 0 .35rem; background:#f3ead4; border-radius:10px;}
+.hc-seg button{flex:1; font:inherit; cursor:pointer; border:none; background:transparent; border-radius:7px; padding:.3rem .2rem; color:var(--ink2); display:flex; flex-direction:column; align-items:center; line-height:1.15;}
+.hc-seg button b{font-family:'Merriweather',Georgia,serif; font-weight:900; font-size:clamp(.9rem,1.4vw,1.1rem); color:var(--ink);}
+.hc-seg button em{font-style:normal; font-size:.7rem; font-weight:600;}
+.hc-seg button.on{background:#3b3222;} .hc-seg button.on b,.hc-seg button.on em{color:#fbf6e9;}
+.hc-rate p{margin:0; font-size:clamp(.74rem,1.05vw,.84rem); color:var(--ink2); line-height:1.4;}
+.hc-rate.off .hc-seg{opacity:.4;} .hc-rate.off button{cursor:default;}
+/* sources */
+.hc-head{position:relative;} .hc-srcbtn{position:absolute; right:0; bottom:.45rem;}
+.hc-btn{font:inherit; font-weight:700; cursor:pointer; background:transparent; color:var(--ink2); border:1.5px solid var(--hair); border-radius:8px; padding:.3rem .7rem; font-size:.82rem;}
+.hc-btn:hover{border-color:var(--gold); color:var(--ink);}
+.hc-src{position:absolute; inset:0; z-index:5; background:#fbf7ec; border-radius:12px; overflow:auto; padding:1rem 1.2rem;}
+.hc-src-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:.4rem;}
+.hc-src p{font-size:clamp(.78rem,1.15vw,.9rem); color:var(--ink2); line-height:1.5; margin:0 0 .6rem;}
+.hc-src ol{font-size:clamp(.74rem,1.05vw,.86rem); color:var(--ink2); line-height:1.45; margin:.4rem 0 0; padding-left:1.2rem;}
+.hc-src li{margin-bottom:.4rem;}
+@media(max-width:1000px){ .hc-panel{grid-template-columns:1fr; grid-template-rows:none; grid-auto-rows:auto;} .hc-left,.hc-right{min-height:auto;} .hc-card{flex:none; overflow:visible;} .hc-wm{width:min(26rem,100%);} .hc-flow{min-height:320px;} .hc-srcbtn{position:static; margin-top:.4rem;} }
+@media(prefers-reduced-motion:reduce){ .hc-svg .hc-band,.hc-card{animation:none;} }
+/* ── end Where the Costs Come From ── */
+/* ── Mortality Face-Off ── */
+.slide.mf-slide{background:linear-gradient(158deg,#faf7f0,#f1ebdd); --ink:#3b3222; --ink2:#5e5340; --ink3:#8a8069;
+  --hair:rgba(120,100,60,.28); --hair2:rgba(120,100,60,.16); --gold:#8a6a2f; --win:#2D6A4F; --red:#A4373A; --air:#6b6458;}
+.mf-slide [hidden]{display:none !important;}
+.mf-defs{position:absolute; width:0; height:0;}
+.mf-root{position:absolute; inset:0; display:flex; flex-direction:column; padding:clamp(1rem,2.6vh,1.8rem) clamp(1.4rem,3.2vw,3.1rem) clamp(3.4rem,7vh,4.2rem);}
+.mf-head{flex:none; padding-bottom:.35rem; margin-bottom:.55rem; border-bottom:1px solid var(--hair);}
+.mf-slide .eyebrow{color:var(--gold);} .mf-slide .eyebrow::before{background:var(--gold);}
+.mf-wm{display:block; width:min(28rem,60%); height:auto; margin:.1rem 0 .05rem;}
+.mf-sub{font-size:clamp(.82rem,1.3vw,.98rem); color:var(--ink2); line-height:1.4; max-width:62rem; margin:.1rem 0 0;}
+.mf-slide.mf-inplay .mf-sub{display:none;}
+.mf-panel{position:relative; isolation:isolate; flex:1; min-height:0; background:#fffdf6; border:1px solid var(--hair); border-radius:12px;
+  padding:clamp(.6rem,1.5vh,1rem) clamp(.8rem,1.6vw,1.3rem); overflow:auto;}
+.mf-stage{min-height:100%; display:flex; flex-direction:column;}
+.mf-srcbtn{position:absolute; top:.5rem; right:.6rem; z-index:3;}
+.mf-tag{font-family:'Inter',sans-serif; font-weight:800; font-size:clamp(.6rem,.9vw,.7rem); letter-spacing:.16em; text-transform:uppercase; color:var(--gold);}
+.mf-big{font-family:'Merriweather',Georgia,serif; font-weight:900; color:var(--ink); font-size:clamp(1.4rem,2.6vw,2rem);}
+.mf-muted{color:var(--ink3);}
+.mf-btn{font:inherit; font-weight:700; cursor:pointer; background:var(--gold); color:#fff; border:1.5px solid var(--gold); border-radius:8px; padding:.55rem 1.1rem; font-size:clamp(.85rem,1.3vw,1rem); white-space:nowrap;}
+.mf-btn:hover{background:#76591f;}
+.mf-btn.ghost{background:transparent; color:var(--ink2); border-color:var(--hair);}
+.mf-btn.sm{padding:.3rem .7rem; font-size:.82rem;}
+.mf-setup{margin:auto; display:flex; flex-direction:column; align-items:center; gap:.7rem; text-align:center; max-width:42rem;}
+.mf-emblem{width:clamp(80px,13vh,120px); height:auto;}
+.mf-cap{color:var(--ink2); line-height:1.5; margin:0;}
+.mf-row{display:flex; justify-content:center; gap:.6rem; margin-top:.6rem;}
+/* top bar */
+.mf-bar-top{flex:none; display:flex; align-items:center; gap:clamp(.6rem,1.4vw,1.2rem); flex-wrap:wrap; padding:0 5.5rem .45rem 0; margin-bottom:.5rem; border-bottom:1px solid var(--hair2);}
+.mf-q{font-family:'Merriweather',Georgia,serif; font-weight:700; font-style:italic; color:var(--ink); font-size:clamp(.95rem,1.5vw,1.2rem); flex:1;}
+.mf-stat{color:var(--ink2);} .mf-stat b{font-family:'Merriweather',Georgia,serif; color:var(--ink);}
+/* arena */
+.mf-arena{flex:1; display:flex; align-items:flex-start; justify-content:center; gap:clamp(.8rem,2.4vw,2.4rem);}
+.mf-col{display:flex; flex-direction:column; align-items:center; gap:.6rem; min-width:0;}
+.mf-arena.rev .mf-col{flex:1; max-width:34rem;}
+.mf-vs{align-self:center; font-family:'Merriweather',Georgia,serif; font-weight:900; font-style:italic; color:var(--gold); font-size:clamp(1.3rem,2.4vw,2rem); margin-top:-3rem;}
+.mf-arena.rev .mf-vs{align-self:flex-start; margin-top:clamp(6rem,17vh,9rem);}
+/* cards: cousins of the Ch 7 Face-Off cards */
+.mf-card{--cw:min(20vw, calc(50vh * .75)); width:var(--cw); aspect-ratio:3/4; flex:none; position:relative; perspective:1400px; container-type:inline-size;}
+.mf-slide:not(.host) .mf-arena:not(.rev) .mf-card{--cw:min(25vw, calc(42vh * .75));}
+.mf-arena.rev .mf-card{--cw:min(19vw, calc(40vh * .75));}
+.mf-flip{position:absolute; inset:0; transform-style:preserve-3d;}
+.mf-card.spin .mf-flip{animation:mf-spin 1.3s cubic-bezier(.2,.75,.25,1) both;}
+.mf-col + .mf-vs + .mf-col .mf-card.spin .mf-flip{animation-delay:.12s;}
+@keyframes mf-spin{from{transform:rotateY(-900deg) scale(.86);} 60%{transform:rotateY(-60deg) scale(1.02);} to{transform:rotateY(0) scale(1);}}
+.mf-card.rev .mf-flip{transform:rotateY(180deg);}
+.mf-card.turn .mf-flip{animation:mf-turn 1.6s cubic-bezier(.2,.75,.25,1) both;}
+.mf-col + .mf-vs + .mf-col .mf-card.turn .mf-flip{animation-delay:.25s;}
+@keyframes mf-turn{from{transform:rotateY(0) scale(1);} 35%{transform:rotateY(420deg) scale(.9);} 75%{transform:rotateY(840deg) scale(1.03);} to{transform:rotateY(900deg) scale(1);}}
+.mf-face{position:absolute; inset:0; -webkit-backface-visibility:hidden; backface-visibility:hidden; filter:drop-shadow(0 6px 12px rgba(60,45,20,.16));}
+.mf-back{transform:rotateY(180deg);}
+.mf-frame{position:absolute; inset:0; width:100%; height:100%;}
+.mf-in{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; text-align:center; padding:9.5cqw 9cqw 8cqw;}
+.mf-eb{font-family:'Inter',sans-serif; font-weight:800; text-transform:uppercase; letter-spacing:.16em; color:var(--gold); font-size:4.1cqw; line-height:1; margin-top:1.2cqw;}
+.mf-eb.air{color:var(--air);}
+.mf-art{width:100%; flex:1 1 auto; min-height:0; margin:6cqw 0 2cqw;}
+.mf-name{font-family:'Merriweather',Georgia,serif; font-weight:900; color:var(--ink); font-size:7cqw; line-height:1.14; text-wrap:balance; min-height:2.28em; display:flex; align-items:center; justify-content:center;}
+.mf-qty{font-family:'Inter',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--ink3); font-size:3.5cqw; margin-top:1.6cqw; line-height:1.3;}
+/* the answer side */
+.mf-ans{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; text-align:center; padding:12cqw 10cqw 9cqw;}
+.mf-num{font-family:'Merriweather',Georgia,serif; font-weight:900; color:var(--ink); font-size:15cqw; line-height:1; margin-top:5cqw; font-variant-numeric:tabular-nums;}
+.mf-num small{display:block; font-size:.42em; font-weight:700; margin-top:1.2cqw;}
+.mf-card.win .mf-num{color:var(--red);}
+.mf-yr{font-size:3.8cqw; color:var(--ink3); margin-top:1.6cqw; font-weight:600;}
+.mf-bar{width:84%; height:2.6cqw; border-radius:99px; background:rgba(120,100,60,.16); margin:3.6cqw 0 0; overflow:hidden;}
+.mf-bar i{display:block; height:100%; width:0; border-radius:99px; background:var(--ink3);}
+.mf-card.win .mf-bar i{background:var(--red);}
+.mf-card.rev .mf-bar i{width:var(--w); transition:width 1.1s cubic-bezier(.2,.7,.2,1) 1.4s;}
+.mf-note{margin:4.5cqw 0 0; font-size:5cqw; line-height:1.38; color:var(--ink2); text-wrap:pretty;}
+.mf-cite{margin-top:auto; font-size:3.4cqw; font-style:italic; color:var(--ink3); line-height:1.3;}
+.mf-seal{position:absolute; top:-5cqw; right:-7cqw; width:27cqw; aspect-ratio:1; z-index:2; pointer-events:none; transform:rotate(-12deg); animation:mf-stamp .5s cubic-bezier(.3,1.6,.5,1) 1.7s both;}
+@keyframes mf-stamp{from{transform:scale(1.8) rotate(-30deg); opacity:0;} to{transform:scale(1) rotate(-12deg); opacity:1;}}
+.mf-seal text{font-family:'Inter',sans-serif; font-weight:800; font-size:11px; letter-spacing:.08em; fill:#fff;}
+/* estimate inputs */
+.mf-inp{width:var(--iw,min(25vw,calc(42vh * .75))); display:flex; flex-direction:column; gap:.2rem;}
+.mf-inp label{display:flex; flex-direction:column; gap:.2rem;}
+.mf-inp label span{font-family:'Inter',sans-serif; font-weight:800; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold);}
+.mf-inp input{font:inherit; font-family:'Merriweather',Georgia,serif; font-weight:700; font-size:clamp(1rem,1.6vw,1.2rem); color:var(--ink); padding:.5rem .7rem; border:1.5px solid var(--hair); border-radius:8px; background:#fff; width:100%; box-sizing:border-box;}
+.mf-inp input:focus{outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(138,106,47,.18);}
+.mf-echo{font-size:.8rem; color:var(--ink2); min-height:1.2em;} .mf-echo b{color:var(--red); font-weight:700;}
+.mf-go{display:flex; align-items:center; justify-content:center; gap:.9rem; flex-wrap:wrap; margin-top:.7rem;}
+.mf-ok{color:var(--win); font-weight:700; font-size:.9rem;}
+.mf-wait{color:var(--ink3); font-weight:700; font-size:.9rem;}
+/* distribution of the class's guesses */
+.mf-hist{width:100%; padding-top:1.3rem; animation:mf-fade .6s ease 1.8s both;}
+@keyframes mf-fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+.mf-hplot{position:relative; height:clamp(56px,10vh,96px); border-bottom:1.5px solid var(--ink);}
+.mf-hb{position:absolute; bottom:0; background:#d8c79c; border-radius:3px 3px 0 0; transform-origin:bottom; animation:mf-grow .8s cubic-bezier(.3,1,.4,1) 2s both;}
+.mf-hb b{position:absolute; top:-1.1em; left:0; right:0; text-align:center; font-size:.66rem; font-weight:800; color:var(--ink2);}
+@keyframes mf-grow{from{transform:scaleY(0);} to{transform:none;}}
+.mf-mk{position:absolute; top:-.2rem; bottom:0; width:0; border-left:2.5px solid var(--win); z-index:1;}
+.mf-mk em{position:absolute; bottom:100%; transform:translateX(-50%); font-style:normal; font-size:.62rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; padding:0 .2rem; background:#fffdf6;}
+.mf-mk.truth em{color:var(--win);}
+.mf-mk.med{border-left:2px dashed var(--ink); top:.9rem;} .mf-mk.med em{color:var(--ink);}
+.mf-mk.avg{border-left:2px dotted #b8862e; top:2rem;} .mf-mk.avg em{color:#8a6a2f;}
+.mf-hax{position:relative; height:1.1rem; margin-top:.15rem;}
+.mf-hax span{position:absolute; transform:translateX(-50%); font-size:.62rem; font-weight:700; color:var(--ink3);}
+.mf-hax span:first-child{transform:none;} .mf-hax span:last-child{transform:translateX(-100%);}
+.mf-stats{display:flex; flex-wrap:wrap; gap:.3rem .9rem; justify-content:center; margin-top:.35rem; font-size:clamp(.72rem,1.05vw,.84rem); color:var(--ink2);}
+.mf-stats b{font-family:'Merriweather',Georgia,serif; color:var(--ink);}
+.mf-stats i{display:inline-block; width:.9rem; height:0; margin-right:.3rem; vertical-align:middle;}
+.mf-stats .t i{border-top:2.5px solid var(--win);} .mf-stats .m i{border-top:2px dashed var(--ink);} .mf-stats .a i{border-top:2px dotted #b8862e;}
+.mf-stats .n{color:var(--ink3);}
+.mf-verdict{flex:none; text-align:center; margin:.8rem auto 0; max-width:52rem; font-size:clamp(.9rem,1.4vw,1.1rem); color:var(--ink2); animation:mf-fade .6s ease 2.2s both;}
+.mf-verdict b{font-family:'Merriweather',Georgia,serif; color:var(--ink);} .mf-verdict span{color:var(--ink3); font-size:.9em;}
+/* wrap-up */
+.mf-end{margin:0 auto; width:min(50rem,100%); display:flex; flex-direction:column; gap:.7rem; padding:.3rem 0;}
+.mf-tab{width:100%; border-collapse:collapse; font-size:clamp(.8rem,1.2vw,.95rem);}
+.mf-tab th{text-align:left; font-family:'Inter',sans-serif; font-weight:800; font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); padding:.3rem .5rem; border-bottom:1px solid var(--hair);}
+.mf-tab td{padding:.38rem .5rem; border-bottom:1px solid var(--hair2); color:var(--ink2);}
+.mf-tab tr.first td{border-top:1px solid var(--hair);}
+.mf-tab td:first-child{color:var(--ink); font-weight:700;} .mf-tab td:nth-child(2),.mf-tab td:nth-child(3){font-family:'Merriweather',Georgia,serif; font-weight:900; color:var(--ink);}
+.mf-tab td i{display:inline-block; width:.6rem; height:.6rem; border-radius:50%; margin-right:.45rem; background:var(--gold);}
+.mf-tab tr.air td i{background:var(--air);}
+.mf-close{margin:.2rem 0 0; color:var(--ink2); line-height:1.5; font-size:clamp(.84rem,1.25vw,.98rem);}
+/* sources */
+.mf-src{position:absolute; inset:0; z-index:5; background:#fbf7ec; border-radius:12px; overflow:auto; padding:1rem 1.2rem;}
+.mf-src-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:.4rem;}
+.mf-src p{font-size:clamp(.78rem,1.15vw,.9rem); color:var(--ink2); line-height:1.5; margin:0 0 .5rem;}
+.mf-src ol{font-size:clamp(.74rem,1.05vw,.86rem); color:var(--ink2); line-height:1.45; margin:.4rem 0 0; padding-left:1.2rem;}
+.mf-src li{margin-bottom:.4rem;}
+@media(max-width:900px){
+  .mf-arena{flex-direction:column; align-items:center;} .mf-vs{margin:0; align-self:center !important;}
+  .mf-slide .mf-card,.mf-slide:not(.host) .mf-arena:not(.rev) .mf-card,.mf-arena.rev .mf-card{--cw:min(62vw, calc(46vh * .75));}
+  .mf-inp{--iw:min(78vw,22rem);} .mf-arena.rev .mf-col{width:100%;}
+}
+@media(prefers-reduced-motion:reduce){ .mf-card .mf-flip,.mf-seal,.mf-hist,.mf-hb,.mf-verdict{animation:none !important;} }
+/* ── end Mortality Face-Off ── */
 </style>
 </head>
 <body>
@@ -3139,7 +3432,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 </section>
 <section class="slide xm-slide" data-type="game" data-game-id="ch8-madness" style="--accent:#8a6a2f">
   <div class="xm-root">
-    <div class="xm-head"><div class="eyebrow">8.4 · Hidden Costs of Air Pollution</div><svg class="xm-wm" viewBox="0 0 2163 285" role="img" aria-label="Externality Madness" preserveAspectRatio="xMinYMid meet"><title>Externality Madness</title><defs><filter id="ch8-madness-nib" x="-2%" y="-12%" width="104%" height="124%"><feTurbulence type="fractalNoise" baseFrequency="0.016" numOctaves="3" seed="11" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4.3" xChannelSelector="R" yChannelSelector="G"/></filter></defs><g filter="url(#ch8-madness-nib)" fill="none" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(0,182) skewX(-7.0)"><g transform="translate(19.7,0.5) rotate(0.37,60,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-38.64,-265.43 C-8.60,-170.32 14.72,-74.46 36.05,13.94 M-38.64,-265.43 C-9.24,-259.07 24.24,-246.12 57.13,-226.72 M-3.29,-133.19 C20.97,-128.82 41.57,-120.86 68.81,-105.31 M36.05,13.94 C68.03,21.30 104.08,35.25 136.97,54.65" stroke="#3b3222" stroke-width="19.4"/></g><g transform="translate(148.0,0.5) rotate(0.4,60,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-40,-182 C0,-120 60,-30 112,34 M96,-190 C60,-110 20,-40 -20,40" stroke="#3b3222" stroke-width="22.4"/></g><g transform="translate(276.0,3.4) rotate(0.64,43,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-14.85,-241.20 C10.72,-162.85 23.91,-87.61 41.33,-22.42 C49.80,9.24 67.65,32.85 80.70,21.19 M-35.14,-178.91 C-10.88,-174.54 22.60,-161.59 52.41,-145.05" stroke="#3b3222" stroke-width="22.8"/></g><g transform="translate(368.5,-0.1) rotate(1.27,56,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-7.87,-89.88 C23.61,-84.38 62.24,-69.44 95.92,-51.41 C80.48,-109.14 46.56,-153.99 16.95,-165.45 C-16.53,-178.39 -28.25,-144.52 -13.31,-88.64 C2.13,-30.91 36.55,15.81 71.31,29.25 C95.77,38.71 110.60,29.42 116.01,6.46" stroke="#3b3222" stroke-width="23.2"/></g><g transform="translate(487.7,0.1) rotate(-0.66,45,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-29.69,-180.15 C-7.41,-109.74 6.95,-47.41 21.10,9.83 M-10.27,-107.51 C-13.71,-150.58 -1.08,-172.42 24.67,-162.46 C38.83,-156.98 51.13,-145.55 62.84,-127.66" stroke="#3b3222" stroke-width="22.1"/></g><g transform="translate(577.7,4.1) rotate(-0.79,52,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-29.69,-180.15 C-7.41,-109.74 6.95,-47.41 21.10,9.83 M-12.27,-114.96 C-16.49,-156.67 0.21,-171.92 23.38,-162.96 C46.56,-153.99 66.41,-122.94 77.86,-80.10 C92.39,-34.40 102.05,6.07 111.22,44.69" stroke="#3b3222" stroke-width="21.8"/></g><g transform="translate(689.2,1.8) rotate(0.14,60,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M60.43,-145.29 C79.73,-86.06 91.10,-34.90 99.77,1.85 C107.74,31.65 125.59,55.25 136.06,42.61 M74.37,-93.14 C55.40,-133.87 29.82,-160.47 6.65,-169.43 C-22.97,-180.88 -30.04,-146.88 -15.59,-92.87 C-0.66,-36.99 32.69,14.31 61.01,25.27 C84.19,34.23 97.23,22.58 98.28,-3.74" stroke="#3b3222" stroke-width="20.7"/></g><g transform="translate(817.0,-0.5) rotate(1.12,30,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-42.92,-277.10 C-13.87,-185.71 4.30,-91.85 19.45,-30.89 C27.91,0.78 45.77,24.38 57.52,12.23" stroke="#3b3222" stroke-width="21.6"/></g><g transform="translate(886.9,2.9) rotate(1.32,29,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-21.97,-177.16 C0.32,-106.75 10.69,-59.32 17.37,-30.02 C25.34,-0.22 43.19,23.38 54.95,11.23 M-37.90,-236.76 L-36.12,-234.40" stroke="#3b3222" stroke-width="22.4"/></g><g transform="translate(953.8,3.4) rotate(0.64,43,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-14.85,-241.20 C10.72,-162.85 23.91,-87.61 41.33,-22.42 C49.80,9.24 67.65,32.85 80.70,21.19 M-35.14,-178.91 C-10.88,-174.54 22.60,-161.59 52.41,-145.05" stroke="#3b3222" stroke-width="22.8"/></g><g transform="translate(1046.3,0.2) rotate(0.12,56,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-37.42,-183.13 C-14.14,-109.00 16.37,-33.74 52.08,13.46 C77.08,46.51 97.27,44.30 98.60,14.76 C99.53,-24.96 88.74,-82.57 75.88,-139.31 M75.88,-139.31 C105.14,-42.83 126.88,55.75 131.40,94.24 C133.63,128.50 117.51,137.30 91.85,119.02" stroke="#3b3222" stroke-width="20.8"/></g><g transform="translate(1228.9,3.8) rotate(-0.17,88,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M29.32,14.68 C0.85,-83.17 -23.46,-182.74 -42.22,-270.15 L98.36,-12.05 L117.43,-208.41 C146.49,-117.01 175.95,-15.44 199.27,80.41" stroke="#3b3222" stroke-width="24.9"/></g><g transform="translate(1413.3,1.8) rotate(0.14,60,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M60.43,-145.29 C79.73,-86.06 91.10,-34.90 99.77,1.85 C107.74,31.65 125.59,55.25 136.06,42.61 M74.37,-93.14 C55.40,-133.87 29.82,-160.47 6.65,-169.43 C-22.97,-180.88 -30.04,-146.88 -15.59,-92.87 C-0.66,-36.99 32.69,14.31 61.01,25.27 C84.19,34.23 97.23,22.58 98.28,-3.74" stroke="#3b3222" stroke-width="20.7"/></g><g transform="translate(1541.1,-0.9) rotate(0.11,64,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M43.34,-243.74 C73.10,-145.40 96.42,-49.54 110.07,5.83 C118.04,35.63 135.89,59.24 146.36,46.59 M84.67,-89.15 C65.70,-129.89 40.12,-156.48 16.95,-165.45 C-13.95,-177.40 -23.60,-144.39 -9.16,-90.38 C5.78,-34.50 40.41,17.30 68.74,28.25 C91.91,37.22 107.53,26.56 108.58,0.25" stroke="#3b3222" stroke-width="20.7"/></g><g transform="translate(1667.8,4.1) rotate(-0.79,52,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-29.69,-180.15 C-7.41,-109.74 6.95,-47.41 21.10,9.83 M-12.27,-114.96 C-16.49,-156.67 0.21,-171.92 23.38,-162.96 C46.56,-153.99 66.41,-122.94 77.86,-80.10 C92.39,-34.40 102.05,6.07 111.22,44.69" stroke="#3b3222" stroke-width="21.8"/></g><g transform="translate(1779.3,-0.1) rotate(1.27,56,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-7.87,-89.88 C23.61,-84.38 62.24,-69.44 95.92,-51.41 C80.48,-109.14 46.56,-153.99 16.95,-165.45 C-16.53,-178.39 -28.25,-144.52 -13.31,-88.64 C2.13,-30.91 36.55,15.81 71.31,29.25 C95.77,38.71 110.60,29.42 116.01,6.46" stroke="#3b3222" stroke-width="23.2"/></g><g transform="translate(1898.5,1.3) rotate(-0.55,50,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M70.77,-119.58 C54.99,-144.05 36.26,-157.98 18.23,-164.95 C-7.52,-174.91 -17.99,-162.26 -11.01,-136.18 C-0.06,-95.21 81.55,-61.97 95.49,-9.82 C104.96,25.56 89.04,39.45 63.29,29.49 C41.41,21.02 20.39,2.88 3.62,-25.32" stroke="#3b3222" stroke-width="21.8"/></g><g transform="translate(1999.0,1.3) rotate(-0.55,50,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M70.77,-119.58 C54.99,-144.05 36.26,-157.98 18.23,-164.95 C-7.52,-174.91 -17.99,-162.26 -11.01,-136.18 C-0.06,-95.21 81.55,-61.97 95.49,-9.82 C104.96,25.56 89.04,39.45 63.29,29.49 C41.41,21.02 20.39,2.88 3.62,-25.32" stroke="#3b3222" stroke-width="21.8"/></g><path d="M26,74 C475,68.5 1557,68.5 2099,73 C1557,78.5 475,79.5 26,74 Z" fill="#8a6a2f" fill-opacity=".7" stroke="none"/></g></g></svg><p class="xm-sub">Sixteen entrants: hidden costs of air pollution against prices people pay. You have <b>3 minutes</b> to pick the <b>bigger cost</b> in every matchup, all the way to a champion. Then the real numbers are revealed, one round at a time.</p></div>
+    <div class="xm-head"><div class="eyebrow">8.4 · Hidden Costs of Air Pollution</div><svg class="xm-wm" viewBox="0 0 2163 285" role="img" aria-label="Externality Madness" preserveAspectRatio="xMinYMid meet"><title>Externality Madness</title><defs><filter id="ch8-madness-nib" x="-2%" y="-12%" width="104%" height="124%"><feTurbulence type="fractalNoise" baseFrequency="0.016" numOctaves="3" seed="11" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4.3" xChannelSelector="R" yChannelSelector="G"/></filter></defs><g filter="url(#ch8-madness-nib)" fill="none" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(0,182) skewX(-7.0)"><g transform="translate(19.7,0.5) rotate(0.37,60,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-38.64,-265.43 C-8.60,-170.32 14.72,-74.46 36.05,13.94 M-38.64,-265.43 C-9.24,-259.07 24.24,-246.12 57.13,-226.72 M-3.29,-133.19 C20.97,-128.82 41.57,-120.86 68.81,-105.31 M36.05,13.94 C68.03,21.30 104.08,35.25 136.97,54.65" stroke="#3b3222" stroke-width="19.4"/></g><g transform="translate(148.0,0.5) rotate(0.4,60,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-40,-182 C0,-120 60,-30 112,34 M96,-190 C60,-110 20,-40 -20,40" stroke="#3b3222" stroke-width="22.4"/></g><g transform="translate(276.0,3.4) rotate(0.64,43,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-14.85,-241.20 C10.72,-162.85 23.91,-87.61 41.33,-22.42 C49.80,9.24 67.65,32.85 80.70,21.19 M-35.14,-178.91 C-10.88,-174.54 22.60,-161.59 52.41,-145.05" stroke="#3b3222" stroke-width="22.8"/></g><g transform="translate(368.5,-0.1) rotate(1.27,56,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-7.87,-89.88 C23.61,-84.38 62.24,-69.44 95.92,-51.41 C80.48,-109.14 46.56,-153.99 16.95,-165.45 C-16.53,-178.39 -28.25,-144.52 -13.31,-88.64 C2.13,-30.91 36.55,15.81 71.31,29.25 C95.77,38.71 110.60,29.42 116.01,6.46" stroke="#3b3222" stroke-width="23.2"/></g><g transform="translate(487.7,0.1) rotate(-0.66,45,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-29.69,-180.15 C-7.41,-109.74 6.95,-47.41 21.10,9.83 M-10.27,-107.51 C-13.71,-150.58 -1.08,-172.42 24.67,-162.46 C38.83,-156.98 51.13,-145.55 62.84,-127.66" stroke="#3b3222" stroke-width="22.1"/></g><g transform="translate(577.7,4.1) rotate(-0.79,52,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-29.69,-180.15 C-7.41,-109.74 6.95,-47.41 21.10,9.83 M-12.27,-114.96 C-16.49,-156.67 0.21,-171.92 23.38,-162.96 C46.56,-153.99 66.41,-122.94 77.86,-80.10 C92.39,-34.40 102.05,6.07 111.22,44.69" stroke="#3b3222" stroke-width="21.8"/></g><g transform="translate(689.2,1.8) rotate(0.14,60,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M60.43,-145.29 C79.73,-86.06 91.10,-34.90 99.77,1.85 C107.74,31.65 125.59,55.25 136.06,42.61 M74.37,-93.14 C55.40,-133.87 29.82,-160.47 6.65,-169.43 C-22.97,-180.88 -30.04,-146.88 -15.59,-92.87 C-0.66,-36.99 32.69,14.31 61.01,25.27 C84.19,34.23 97.23,22.58 98.28,-3.74" stroke="#3b3222" stroke-width="20.7"/></g><g transform="translate(817.0,-0.5) rotate(1.12,30,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-42.92,-277.10 C-13.87,-185.71 4.30,-91.85 19.45,-30.89 C27.91,0.78 45.77,24.38 57.52,12.23" stroke="#3b3222" stroke-width="21.6"/></g><g transform="translate(886.9,2.9) rotate(1.32,29,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-21.97,-177.16 C0.32,-106.75 10.69,-59.32 17.37,-30.02 C25.34,-0.22 43.19,23.38 54.95,11.23 M-37.90,-236.76 L-36.12,-234.40" stroke="#3b3222" stroke-width="22.4"/></g><g transform="translate(953.8,3.4) rotate(0.64,43,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-14.85,-241.20 C10.72,-162.85 23.91,-87.61 41.33,-22.42 C49.80,9.24 67.65,32.85 80.70,21.19 M-35.14,-178.91 C-10.88,-174.54 22.60,-161.59 52.41,-145.05" stroke="#3b3222" stroke-width="22.8"/></g><g transform="translate(1046.3,0.2) rotate(0.12,56,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-37.42,-183.13 C-14.14,-109.00 16.37,-33.74 52.08,13.46 C77.08,46.51 97.27,44.30 98.60,14.76 C99.53,-24.96 88.74,-82.57 75.88,-139.31 M75.88,-139.31 C105.14,-42.83 126.88,55.75 131.40,94.24 C133.63,128.50 117.51,137.30 91.85,119.02" stroke="#3b3222" stroke-width="20.8"/></g><g transform="translate(1228.9,3.8) rotate(-0.17,88,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M29.32,14.68 C0.85,-83.17 -23.46,-182.74 -42.22,-270.15 L98.36,-12.05 L117.43,-208.41 C146.49,-117.01 175.95,-15.44 199.27,80.41" stroke="#3b3222" stroke-width="24.9"/></g><g transform="translate(1413.3,1.8) rotate(0.14,60,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M60.43,-145.29 C79.73,-86.06 91.10,-34.90 99.77,1.85 C107.74,31.65 125.59,55.25 136.06,42.61 M74.37,-93.14 C55.40,-133.87 29.82,-160.47 6.65,-169.43 C-22.97,-180.88 -30.04,-146.88 -15.59,-92.87 C-0.66,-36.99 32.69,14.31 61.01,25.27 C84.19,34.23 97.23,22.58 98.28,-3.74" stroke="#3b3222" stroke-width="20.7"/></g><g transform="translate(1541.1,-0.9) rotate(0.11,64,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M43.34,-243.74 C73.10,-145.40 96.42,-49.54 110.07,5.83 C118.04,35.63 135.89,59.24 146.36,46.59 M84.67,-89.15 C65.70,-129.89 40.12,-156.48 16.95,-165.45 C-13.95,-177.40 -23.60,-144.39 -9.16,-90.38 C5.78,-34.50 40.41,17.30 68.74,28.25 C91.91,37.22 107.53,26.56 108.58,0.25" stroke="#3b3222" stroke-width="20.7"/></g><g transform="translate(1667.8,4.1) rotate(-0.79,52,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-29.69,-180.15 C-7.41,-109.74 6.95,-47.41 21.10,9.83 M-12.27,-114.96 C-16.49,-156.67 0.21,-171.92 23.38,-162.96 C46.56,-153.99 66.41,-122.94 77.86,-80.10 C92.39,-34.40 102.05,6.07 111.22,44.69" stroke="#3b3222" stroke-width="21.8"/></g><g transform="translate(1779.3,-0.1) rotate(1.27,56,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-7.87,-89.88 C23.61,-84.38 62.24,-69.44 95.92,-51.41 C80.48,-109.14 46.56,-153.99 16.95,-165.45 C-16.53,-178.39 -28.25,-144.52 -13.31,-88.64 C2.13,-30.91 36.55,15.81 71.31,29.25 C95.77,38.71 110.60,29.42 116.01,6.46" stroke="#3b3222" stroke-width="23.2"/></g><g transform="translate(1898.5,1.3) rotate(-0.55,50,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M70.77,-119.58 C54.99,-144.05 36.26,-157.98 18.23,-164.95 C-7.52,-174.91 -17.99,-162.26 -11.01,-136.18 C-0.06,-95.21 81.55,-61.97 95.49,-9.82 C104.96,25.56 89.04,39.45 63.29,29.49 C41.41,21.02 20.39,2.88 3.62,-25.32" stroke="#3b3222" stroke-width="21.8"/></g><g transform="translate(1999.0,1.3) rotate(-0.55,50,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M70.77,-119.58 C54.99,-144.05 36.26,-157.98 18.23,-164.95 C-7.52,-174.91 -17.99,-162.26 -11.01,-136.18 C-0.06,-95.21 81.55,-61.97 95.49,-9.82 C104.96,25.56 89.04,39.45 63.29,29.49 C41.41,21.02 20.39,2.88 3.62,-25.32" stroke="#3b3222" stroke-width="21.8"/></g><path d="M26,74 C475,68.5 1557,68.5 2099,73 C1557,78.5 475,79.5 26,74 Z" fill="#8a6a2f" fill-opacity=".7" stroke="none"/></g></g></svg><p class="xm-sub">Sixteen entrants: hidden costs of air pollution against prices people pay. You have <b>3 minutes</b> to pick the <b>bigger cost</b> in every matchup, all the way to a champion. Then the whole bracket is revealed at once, with the story behind every result.</p></div>
     <div class="xm-panel"><button class="xm-btn ghost sm xm-srcbtn" data-act="src" hidden>Sources</button><div class="xm-stage" data-xm-stage></div><div class="xm-src" data-xm-src hidden><div class="xm-src-top"><div class="xm-tag">Sources</div><button class="xm-btn ghost sm" data-act="srcclose">Close</button></div><p class="xm-src-note"><b>Hidden costs</b> are externalities: damage from pollution that no one pays for at the register. Climate damage uses the U.S. EPA&rsquo;s social cost of carbon ($190 per metric ton of CO₂). Health damage counts mostly premature deaths from fine particles (PM₂.₅), valued the way federal agencies value lowered mortality risk. <b>Prices</b> are recent U.S. averages or list prices. Values are in different years&rsquo; dollars, as noted.</p><table class="xm-src-t"><tbody><tr><td class="n">One ton of tailpipe PM<sub>2.5</sub> <span>health damage, cars · hidden cost</span></td><td class="v">$700,000</td><td class="c">Benefit per ton of cutting directly emitted PM₂.₅ from light-duty gas cars in 2025: $700,000 (2015 dollars; mortality from the American Cancer Society cohort; 3% discount rate). <em>(Wolfe et al. 2019 (U.S. EPA))</em></td></tr><tr><td class="n">An average new car <span>transaction price · price you pay</span></td><td class="v">$50,089</td><td class="c">Kelley Blue Book average new-vehicle transaction price, August 2026: $50,089. <em>(Kelley Blue Book 2026)</em></td></tr><tr><td class="n">A year of college tuition <span>public 4-year, in-state · price you pay</span></td><td class="v">$11,950</td><td class="c">Average published tuition and fees, public four-year, in-state, 2025–26: $11,950. <em>(College Board 2025)</em></td></tr><tr><td class="n">A year of coal power <span>climate damage, one home · hidden cost</span></td><td class="v">$2,099</td><td class="c">10,791 kWh a year × 2,257 lb CO₂ per MWh from coal = 11.0 metric tons × $190 = $2,099. <em>(EIA; U.S. EPA 2023)</em></td></tr><tr><td class="n">A month’s rent <span>U.S. median · price you pay</span></td><td class="v">$1,413</td><td class="c">Median gross rent, American Community Survey, 2024: $1,413 a month. <em>(U.S. Census Bureau (ACS) 2024)</em></td></tr><tr><td class="n">A year of driving <span>climate damage, typical car · hidden cost</span></td><td class="v">$874</td><td class="c">A typical passenger car emits 4.6 metric tons of CO₂ a year (22.2 mpg, 11,500 miles) × $190 = $874. <em>(U.S. EPA; U.S. EPA 2023)</em></td></tr><tr><td class="n">A new iPhone 17 <span>starting price · price you pay</span></td><td class="v">$799</td><td class="c">Apple’s U.S. starting price for iPhone 17, announced September 2025: $799. <em>(Apple 2025)</em></td></tr><tr><td class="n">A year of coal power <span>health damage, one home · hidden cost</span></td><td class="v">$345</td><td class="c">10,791 kWh a year × 3.2¢ per kWh, the average health and other non-climate damage from U.S. coal plants (SO₂, NOₓ, particulate matter) = $345. <em>(National Research Council 2010)</em></td></tr><tr><td class="n">One metric ton of CO₂ <span>climate damage · hidden cost</span></td><td class="v">$190</td><td class="c">EPA’s central social cost of carbon: $190 per metric ton of CO₂ emitted in 2020 (2020 dollars, 2% discount rate). <em>(U.S. EPA 2023)</em></td></tr><tr><td class="n">A year of solar power <span>climate damage, one home · hidden cost</span></td><td class="v">$74</td><td class="c">10,791 kWh × 36 g CO₂e per kWh (the top of NREL’s 10–36 g life-cycle range for U.S. solar, from making the panels) = 0.39 metric tons × $190 = $74. Air-pollution damage while running is negligible. <em>(NREL 2024; U.S. EPA 2023)</em></td></tr><tr><td class="n">Filling a 15-gallon tank <span>regular gas, 2025 average · price you pay</span></td><td class="v">$46.50</td><td class="c">15 gallons × $3.10, the 2025 U.S. average retail price of regular gasoline = $46.50. <em>(U.S. EIA 2026)</em></td></tr><tr><td class="n">Burning a 15-gallon tank <span>climate damage · hidden cost</span></td><td class="v">$25.33</td><td class="c">15 gallons × 8,887 g CO₂ per gallon = 0.133 metric tons × $190 = $25.33. <em>(U.S. EPA; U.S. EPA 2023)</em></td></tr><tr><td class="n">A month of Netflix <span>Standard plan · price you pay</span></td><td class="v">$19.99</td><td class="c">Netflix Standard (no ads), U.S. list price after the March 2026 increase: $19.99 a month. <em>(Netflix, via CNBC 2026)</em></td></tr><tr><td class="n">A pound of ground beef <span>100% beef · price you pay</span></td><td class="v">$6.92</td><td class="c">BLS average price, ground beef (100% beef), U.S. city average, August 2026: $6.92 a pound. <em>(U.S. BLS 2026)</em></td></tr><tr><td class="n">A dozen eggs <span>Grade A large · price you pay</span></td><td class="v">$2.28</td><td class="c">BLS average price, Grade A large eggs, U.S. city average, August 2026: $2.28 a dozen. <em>(U.S. BLS 2026)</em></td></tr><tr><td class="n">Burning one gallon of gas <span>climate damage · hidden cost</span></td><td class="v">$1.69</td><td class="c">8,887 g CO₂ per gallon = 0.0089 metric tons × $190 = $1.69. <em>(U.S. EPA; U.S. EPA 2023)</em></td></tr></tbody></table><ol class="xm-src-refs"><li>U.S. EPA (2023). <i>Report on the Social Cost of Greenhouse Gases: Estimates Incorporating Recent Scientific Advances</i>. National Center for Environmental Economics. $190/t CO₂, 2020 emissions, 2020 dollars, 2% near-term discount rate. Federal agencies stopped using these estimates in 2025, but they remain the most recent peer-reviewed U.S. government values.</li><li>Wolfe, P., et al. (2019). Monetized health benefits attributable to mobile source emission reductions across the United States in 2025. <i>Science of the Total Environment</i> (U.S. EPA authors). $700,000 per ton of directly emitted PM₂.₅ from light-duty gas cars, 2015 dollars.</li><li>National Research Council (2010). <i>Hidden Costs of Energy: Unpriced Consequences of Energy Production and Use</i>. National Academies Press. Coal plants: about 3.2¢ per kWh of non-climate damage (2007 dollars, 2005 data).</li><li>NREL (2024). <i>An Updated Life Cycle Assessment of Utility-Scale Solar Photovoltaic Systems Installed in the United States</i>. 10–36 g CO₂e per kWh.</li><li>U.S. EIA. <i>How much electricity does an American home use?</i> (10,791 kWh, 2022); <i>Today in Energy</i> (coal: 2,257 lb CO₂/MWh, 2019); <i>Today in Energy</i> (average residential bill $144/month, 2024; regular gasoline averaged $3.10/gal in 2025).</li><li>U.S. EPA. <i>Greenhouse Gas Emissions from a Typical Passenger Vehicle</i> (4.6 t CO₂ a year; 8,887 g CO₂ per gallon).</li><li>U.S. Bureau of Labor Statistics, CPI Average Price Data, August 2026. · U.S. Census Bureau, American Community Survey 2024, table B25064. · College Board (2025), <i>Trends in College Pricing and Student Aid 2025</i>. · Kelley Blue Book / Cox Automotive (Sept. 10, 2026), August ATP report. · Apple Newsroom (Sept. 9, 2025), “Apple debuts iPhone 17.” · CNBC (Mar. 26, 2026), “Netflix raises prices across all streaming plans.”</li></ol></div></div>
   </div>
   <div class="footer"></div>
@@ -3172,11 +3465,11 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
   function blank(){ var b=[]; for(var i=0;i<NM;i++) b.push(-1); return b; }
   function tidy(B){ for(var m=8;m<NM;m++){ var e=entrants(B,m); if(B[m]>-1 && e.indexOf(B[m])<0) B[m]=-1; } return B; }
 
-  var overFor=null, overOpen=false;
+  var overFor=null, overOpen=false, revAt={}, stuTab=null, expR=0, autoT=null;
   var backend=null, HOST=false, state={}, nameFormOpen=false, viewKey=null, saveT=null, localB=null;
   function gid(){ return state.gameId||0; }
   function phase(){ return state.phase||'idle'; }
-  function rr(){ return state.rr||0; }                       // rounds revealed so far
+  function rr(){ return (phase()==='reveal'||phase()==='ended')? 4 : 0; }   // the whole bracket is revealed at once
   function players(){ return state.players||{}; }
   function myMode(){ return ls('xm-mode:'+GID+':'+gid()); }
   function isScored(p){ return p && p.g===gid() && (p.mode==='named'||p.mode==='anon'); }
@@ -3208,8 +3501,10 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 
   // ── actions ──
   function openBracket(){ backend.setDoc('polls', GID, {gameId:gid()+1, phase:'fill', fillEnds:Date.now()+FILL_MS, rr:0}); }
-  function endFill(){ if(phase()==='fill') backend.mergeDoc('polls', GID, {phase:'reveal', rr:0, fillEnds:Date.now()}); }
-  function revealNext(){ if(phase()!=='reveal') return; if(rr()<4) backend.mergeDoc('polls', GID, {rr:rr()+1}); else backend.mergeDoc('polls', GID, {phase:'ended'}); }
+  function endFill(){ if(phase()==='fill') backend.mergeDoc('polls', GID, {phase:'reveal', story:0, fillEnds:Date.now()}); }
+  function finish(){ if(phase()==='reveal') backend.mergeDoc('polls', GID, {phase:'ended'}); }
+  function setStory(i){ if(HOST) backend.mergeDoc('polls', GID, {story:i}); else { stuTab=i; viewKey=null; render(); } }
+  function storyTab(){ return (!HOST && stuTab!=null)? stuTab : (state.story||0); }
   function join(mode, name){
     nameFormOpen=false; ls('xm-mode:'+GID+':'+gid(), mode);
     if(mode!=='watch'){ var rec={g:gid(), mode:mode, t:Date.now(), b:myB().slice()}; if(mode==='named') rec.name=(name||'Anonymous').slice(0,24);
@@ -3247,7 +3542,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
       + team(m, show[0], mB, {rev:rev, live:live, tbdTxt:tbd}) + team(m, show[1], mB, {rev:rev, live:live, tbdTxt:tbd}) + '</div>';
   }
   function bracketHTML(B, mode){
-    var cols=[[0,8],[8,12],[12,14],[14,15]], h='<div class="xm-bracket">';
+    var cols=[[0,8],[8,12],[12,14],[14,15]], el0=mode.el, h='<div class="xm-bracket'+(el0!=null? ' cascade" style="--el:'+el0.toFixed(2)+'s' : '')+'">';
     cols.forEach(function(c,ci){
       h+='<div class="xm-col r'+ci+'"><div class="xm-colh">'+RNAME[ci]+'<b>'+PTS[ci]+' pts each</b></div><div class="xm-colb">';
       if(ci<3){ for(var m=c[0]; m<c[1]; m+=2) h+='<div class="xm-pair">'+matchHTML(m,B,mode)+matchHTML(m+1,B,mode)+'</div>'; }
@@ -3266,20 +3561,78 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 
   // the reveal cards: what really cost more, by how much, and why
   function ratioTxt(a,b){ var r=a/b; return r>=100? Number(r.toPrecision(2)).toLocaleString('en-US') : r>=10? String(Math.round(r)) : r.toFixed(1).replace(/\.0$/,''); }
-  function explainHTML(r, B, over){
-    var h='<div class="xm-exp"><div class="xm-exph"><span>'+RNAME[r]+' · the real numbers</span>'+(over? '<span class="xm-overbtns"><button class="xm-btn ghost sm" data-act="closeover">See the bracket</button><button class="xm-btn sm" data-act="next">'+(rr()<4? 'Reveal the '+RNAME[rr()]+' &rarr;' : 'Final standings &rarr;')+'</button></span>' : '')+'</div><div class="xm-expg r'+r+'">';
-    for(var m=0;m<NM;m++){ if(roundOf(m)!==r) continue;
-      var e=entrants(TRUTH,m), w=TRUTH[m], l=e[0]===w? e[1] : e[0], W=ITEMS[w], L=ITEMS[l], sh=pickShare(m,w);
-      var mine = B ? (B[m]===w ? '<span class="xm-you ok">You got it</span>' : B[m]>-1 ? '<span class="xm-you no">You picked '+ITEMS[B[m]].name+'</span>' : '') : '';
-      var upset = W.x==='e' && L.x==='p';
-      h+='<div class="xm-card'+(upset?' upset':'')+'">'
-        + '<div class="xm-vs"><span class="w">'+W.name+' <em>'+esc(W.qty)+'</em><b>'+money(W.usd)+'</b></span>'
-        + '<span class="x">beats</span><span class="l">'+L.name+' <em>'+esc(L.qty)+'</em><b>'+money(L.usd)+'</b></span></div>'
-        + '<div class="xm-ratio"><b>'+ratioTxt(W.usd,L.usd)+'&times;</b> as much'+(upset? ' · <span class="xm-flag">hidden cost wins</span>' : '')+'</div>'
-        + '<p class="xm-why">'+esc(W.why)+'</p>'
-        + '<div class="xm-meta">'+(sh!==null? sh+'% of the class picked this' : '')+mine+'</div></div>';
-    }
-    return h+'</div></div>';
+  function cardHTML(m, B, big){
+    var e=entrants(TRUTH,m), w=TRUTH[m], l=e[0]===w? e[1] : e[0], W=ITEMS[w], L=ITEMS[l], sh=pickShare(m,w);
+    var mine = B ? (B[m]===w ? '<span class="xm-you ok">You got it</span>' : B[m]>-1 ? '<span class="xm-you no">You picked '+ITEMS[B[m]].name+'</span>' : '') : '';
+    var upset = W.x==='e' && L.x==='p';
+    return '<div class="xm-card'+(upset?' upset':'')+(big?' big':'')+'"><div class="xm-card-r">'+RNAME[roundOf(m)]+'</div>'
+      + '<div class="xm-vs"><span class="w">'+W.name+' <em>'+esc(W.qty)+'</em><b>'+money(W.usd)+'</b></span>'
+      + '<span class="x">beats</span><span class="l">'+L.name+' <em>'+esc(L.qty)+'</em><b>'+money(L.usd)+'</b></span></div>'
+      + '<div class="xm-ratio"><b>'+ratioTxt(W.usd,L.usd)+'&times;</b> as much'+(upset? ' · <span class="xm-flag">hidden cost wins</span>' : '')+'</div>'
+      + '<p class="xm-why">'+esc(W.why)+'</p>'
+      + '<div class="xm-meta">'+(sh!==null? '<span class="xm-share"><i style="width:'+sh+'%"></i></span>'+sh+'% of the class called it' : '')+mine+'</div></div>';
+  }
+  // ── the story of the bracket, told in five parts after the reveal ──
+  var TABS=['The champion','The price ladder','What fooled the class','Class scorecard','Every matchup'];
+  function champHTML(){
+    var c=TRUTH[14], C=ITEMS[c], sh=pickShare(14,c), path='';
+    for(var m=0;m<NM;m++){ if(TRUTH[m]!==c) continue; var e=entrants(TRUTH,m), l=e[0]===c? e[1]:e[0], L=ITEMS[l];
+      path+='<div class="xm-step"><i>'+RNAME[roundOf(m)]+'</i><span>beat <b>'+L.name+'</b> <em>'+esc(L.qty)+'</em></span><span class="xm-stepv">'+money(L.usd)+'</span><span class="xm-stepx">'+ratioTxt(C.usd,L.usd)+'&times;</span></div>'; }
+    return '<div class="xm-champstory"><div class="xm-cs-l">'+TROPHY+'<div class="xm-tag">The champion</div><div class="xm-cs-n">'+C.name+'</div><div class="xm-cs-q">'+esc(C.qty)+'</div>'
+      + '<div class="xm-cs-v" data-count="'+C.usd+'">'+money(C.usd)+'</div><div class="xm-cs-sub">in health damage, paid by no one at the pump</div>'
+      + (sh!==null? '<div class="xm-cs-sh">'+sh+'% of the class picked it to win</div>' : '')+'</div>'
+      + '<div class="xm-cs-r"><div class="xm-tag">Its road to the title</div>'+path+'<p class="xm-why">'+esc(C.why)+'</p></div></div>';
+  }
+  function ladderHTML(){
+    var a=ITEMS.map(function(it,i){ return i; }).sort(function(x,y){ return ITEMS[y].usd-ITEMS[x].usd; }), D=6;
+    var grid=''; for(var d=0; d<=D; d++) grid+='<span style="left:'+(d/D*100)+'%"><i>'+['$1','$10','$100','$1K','$10K','$100K','$1M'][d]+'</i></span>';
+    var rows=a.map(function(i,k){ var it=ITEMS[i], w=Math.max(1,Math.log10(Math.max(1,it.usd))/D*100);
+      return '<div class="xm-lr '+(it.x==='e'?'ext':'pay')+'" style="--d:'+(k*0.07).toFixed(2)+'s"><span class="xm-ln">'+it.name+' <em>'+esc(it.qty)+'</em></span>'
+        + '<span class="xm-lt"><i style="width:'+w.toFixed(1)+'%"></i><b style="left:'+w.toFixed(1)+'%">'+money(it.usd)+'</b></span></div>'; }).join('');
+    var hi=ITEMS[a[0]], lo=ITEMS[a[a.length-1]];
+    return '<div class="xm-ladder"><p class="xm-lead">All sixteen entrants on one scale. Each gridline is <b>ten times</b> the one before, so the top entrant, '+hi.name+', is about <b>'+ratioTxt(hi.usd,lo.usd)+' times</b> the smallest. '
+      + '<span class="xm-key"><i class="ext"></i>hidden cost of air pollution <i class="pay"></i>price you pay</span></p>'
+      + '<div class="xm-lgrid"><div class="xm-lax">'+grid+'</div>'+rows+'</div></div>';
+  }
+  function foolHTML(B){
+    var ms=[]; for(var m=0;m<NM;m++){ var sh=pickShare(m,TRUTH[m]); ms.push([m, sh]); }
+    var any=ms.some(function(x){ return x[1]!==null; });
+    if(any) ms=ms.filter(function(x){ return x[1]!==null; }).sort(function(a,b){ return (a[1]-b[1]) || (b[0]-a[0]); });
+    else ms=ms.filter(function(x){ var e=entrants(TRUTH,x[0]), w=TRUTH[x[0]], l=e[0]===w?e[1]:e[0]; return ITEMS[w].x==='e' && ITEMS[l].x==='p'; })
+             .sort(function(a,b){ var A=entrants(TRUTH,a[0]), Bb=entrants(TRUTH,b[0]); return ITEMS[TRUTH[a[0]]].usd/Math.min(ITEMS[A[0]].usd,ITEMS[A[1]].usd) - ITEMS[TRUTH[b[0]]].usd/Math.min(ITEMS[Bb[0]].usd,ITEMS[Bb[1]].usd); });
+    return '<p class="xm-lead">'+(any? 'The three matchups the class missed most often.' : 'Three matchups where a hidden cost beat a price people pay.')+'</p>'
+      + '<div class="xm-expg three">'+ms.slice(0,3).map(function(x){ return cardHTML(x[0], B); }).join('')+'</div>';
+  }
+  function scorecardHTML(){
+    var ps=players(), ks=[]; for(var k in ps) if(isScored(ps[k]) && bracketOf(k)) ks.push(k);
+    if(!ks.length) return '<p class="xm-lead">No brackets were submitted this time.</p>';
+    var h='<div class="xm-sc"><div class="xm-sc-l"><div class="xm-tag">Class accuracy by round</div>';
+    for(var r=0;r<4;r++){ var ok=0, tot=0; ks.forEach(function(k){ var B=bracketOf(k); for(var m=0;m<NM;m++) if(roundOf(m)===r && B[m]>-1){ tot++; if(B[m]===TRUTH[m]) ok++; } });
+      var pc=tot? Math.round(ok/tot*100) : 0;
+      h+='<div class="xm-scr"><span>'+RNAME[r]+'</span><span class="xm-scb"><i style="width:'+pc+'%"></i></span><b>'+pc+'%</b></div>'; }
+    var sum=0, best=0, perfect=0, champs={};
+    ks.forEach(function(k){ var sc=scoreOf(k); sum+=sc; best=Math.max(best,sc); if(sc===MAXPTS) perfect++; var c=bracketOf(k)[14]; if(c>-1) champs[c]=(champs[c]||0)+1; });
+    var top=Object.keys(champs).sort(function(a,b){ return champs[b]-champs[a]; })[0];
+    h+='</div><div class="xm-sc-r">'
+      + '<div class="xm-stat2"><b>'+ks.length+'</b><span>brackets</span></div>'
+      + '<div class="xm-stat2"><b>'+Math.round(sum/ks.length)+'</b><span>average score of '+MAXPTS+'</span></div>'
+      + '<div class="xm-stat2"><b>'+best+'</b><span>best score'+(perfect? ' · '+perfect+' perfect' : '')+'</span></div>'
+      + (top!=null? '<div class="xm-stat2 wide"><b>'+ITEMS[top].name+'</b><span>the class favorite to win: '+Math.round(champs[top]/ks.length*100)+'% of brackets'+(+top===TRUTH[14]? ', and it won' : '')+'</span></div>' : '')
+      + '</div></div>';
+    return h;
+  }
+  function everyHTML(B){
+    var h='<div class="xm-rtabs">'; for(var r=0;r<4;r++) h+='<button class="xm-rtab'+(expR===r?' on':'')+'" data-exp="'+r+'">'+RNAME[r]+'</button>';
+    h+='</div><div class="xm-expg r'+expR+'">'; for(var m=0;m<NM;m++) if(roundOf(m)===expR) h+=cardHTML(m, B, expR===3);
+    return h+'</div>';
+  }
+  function storyHTML(B, over){
+    var t=storyTab(), h='<div class="xm-story'+(over?' over':'')+'"><div class="xm-sth"><div class="xm-tabs">';
+    TABS.forEach(function(n,i){ h+='<button class="xm-stab'+(i===t?' on':'')+'" data-story="'+i+'"><i>'+(i+1)+'</i>'+n+'</button>'; });
+    h+='</div>'+(over? '<span class="xm-overbtns"><button class="xm-btn ghost sm" data-act="closeover">See the bracket</button>'
+      + (t<TABS.length-1? '<button class="xm-btn sm" data-story="'+(t+1)+'">Next: '+TABS[t+1]+' &rarr;</button>' : '<button class="xm-btn sm" data-act="finish">Final standings &rarr;</button>')+'</span>' : '')+'</div>';
+    h+='<div class="xm-stb" data-tab="'+t+'">'+[champHTML, ladderHTML, foolHTML, scorecardHTML, everyHTML][t](B)+'</div>';
+    return h+'</div>';
   }
   function boardHTML(n, title){
     var lb=board().slice(0,n);
@@ -3307,15 +3660,15 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
     el.srcBtn.hidden = !(ph==='reveal' || ph==='ended');
     if(ph!=='reveal' && ph!=='ended') el.src.hidden=true;
     SEC.classList.toggle('xm-inplay', ph!=='idle');
-    if(ph==='reveal' && HOST && overFor!==gid()+':'+rr()){ overFor=gid()+':'+rr(); overOpen=rr()>0; }
-    var key=[ph, gid(), rr(), overOpen?1:0, HOST?1:0, myMode()||'', nameFormOpen?1:0, JSON.stringify(localB&&localB.b||''), locked()?1:0,
+    if(ph==='reveal' && !revAt[gid()]) revAt[gid()]=Date.now();
+    var key=[ph, gid(), storyTab(), expR, overOpen?1:0, HOST?1:0, myMode()||'', nameFormOpen?1:0, JSON.stringify(localB&&localB.b||''), locked()?1:0,
              (ph==='reveal'||ph==='ended')? JSON.stringify(board().slice(0,10).map(scoreOf)) : ''].join('|');
     if(key===viewKey){ tick(); return; }
     viewKey=key;
     var h='';
     if(ph==='idle'){
       h = HOST ? '<div class="xm-setup">'+TROPHY+'<div class="xm-big">Externality Madness</div>'
-          + '<p class="xm-cap">Sixteen entrants: hidden costs of air pollution and prices people pay. Students have <b>3 minutes</b> to pick the bigger cost in every matchup, all the way to a champion. Then you reveal the real numbers one round at a time. Correct picks earn 10, 20, 40, and 80 points by round.</p>'
+          + '<p class="xm-cap">Sixteen entrants: hidden costs of air pollution and prices people pay. Students have <b>3 minutes</b> to pick the bigger cost in every matchup, all the way to a champion. Then one click reveals the whole bracket at once, followed by the story behind it. Correct picks earn 10, 20, 40, and 80 points by round.</p>'
           + '<button class="xm-btn" data-act="open">Open the bracket (3:00) &rarr;</button></div>'
         : '<div class="xm-setup">'+TROPHY+'<div class="xm-big">Get ready!</div><div class="xm-muted">Waiting for your instructor to open the bracket&hellip;</div></div>';
     } else if(ph==='fill'){
@@ -3335,14 +3688,15 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
           + bracketHTML(B, {rev:0, useB:true, live:!locked()});
       }
     } else if(ph==='reveal'){
-      var r=rr(), next = r<4 ? 'Reveal the '+RNAME[r]+' &rarr;' : 'Final standings &rarr;';
-      var B2 = (!HOST && myMode())? myB() : null;
-      var bar='<div class="xm-bar"><span class="xm-tag">'+(r? RNAME[r-1]+' revealed' : 'Brackets are locked')+'</span>'
-        + (HOST? '<button class="xm-btn" data-act="next">'+next+'</button>'+(r? '<button class="xm-btn ghost sm" data-act="openover">Round results</button>' : '') : '')
+      var B2 = (!HOST && myMode())? myB() : null, secs=(Date.now()-revAt[gid()])/1000, casc= secs<6 ? secs : null;
+      var bar='<div class="xm-bar"><span class="xm-tag">The whole bracket, revealed</span>'
+        + (HOST? '<button class="xm-btn" data-act="openover">The story of the bracket &rarr;</button><button class="xm-btn ghost sm" data-act="finish">Final standings</button>' : '')
         + (B2 && myMode()!=='watch' ? scoreStrip(B2) : '')+'</div>';
-      h = bar + '<div class="xm-revwrap'+(HOST?' host':'')+'"><div class="xm-revmain">'+bracketHTML(B2||[], {rev:r, useB:!!B2, cur:r-1})+'</div>'
+      h = bar + '<div class="xm-revwrap'+(HOST?' host':'')+'"><div class="xm-revmain">'+bracketHTML(B2||[], {rev:4, useB:!!B2, el:casc})+'</div>'
         + (HOST? '<aside class="xm-side">'+boardHTML(10,'Top 10')+'</aside>' : '')+'</div>'
-        + (r? (HOST? (overOpen? '<div class="xm-over">'+explainHTML(r-1, null, true)+'</div>' : '') : explainHTML(r-1, B2)) : '<div class="xm-hint center">'+(HOST? 'Every bracket is in. Reveal the Round of 16 when you are ready.' : 'Watch the screen: the real numbers are coming, one round at a time.')+'</div>');
+        + (HOST? (overOpen? '<div class="xm-over">'+storyHTML(null, true)+'</div>' : '') : storyHTML(B2, false));
+      if(HOST && casc!=null && overFor!==gid()){ overFor=gid(); clearTimeout(autoT);
+        autoT=setTimeout(function(){ if(phase()==='reveal'){ overOpen=true; viewKey=null; render(); } }, Math.max(0,(5.2-casc)*1000)); }
     } else if(ph==='ended'){
       var lb=board(), yours='';
       if(!HOST && myMode() && myMode()!=='watch'){
@@ -3366,19 +3720,21 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
   }
 
   SEC.addEventListener('click', function(e){
-    var t=e.target.closest('[data-act],[data-mode],[data-pick]'); if(!t) return;
+    var t=e.target.closest('[data-act],[data-mode],[data-pick],[data-story],[data-exp]'); if(!t) return;
     if(t.dataset.pick){ var p=t.dataset.pick.split(':'); pick(+p[0], +p[1]); return; }
     if(t.dataset.mode){ if(t.dataset.mode==='named'){ nameFormOpen=true; viewKey=null; render(); } else join(t.dataset.mode); return; }
     var a=t.dataset.act;
     if(a==='src'){ el.src.hidden=false; return; }
     if(a==='srcclose'){ el.src.hidden=true; return; }
     if(a==='closeover'){ overOpen=false; viewKey=null; render(); return; }
+    if(t.dataset.story!=null){ setStory(+t.dataset.story); if(HOST){ overOpen=true; } return; }
+    if(t.dataset.exp!=null){ expR=+t.dataset.exp; viewKey=null; render(); return; }
     if(a==='openover'){ overOpen=true; viewKey=null; render(); return; }
     if(a==='back'){ nameFormOpen=false; viewKey=null; render(); return; }
     if(!backend) return;
     if(a==='open') openBracket();
     else if(a==='endfill') endFill();
-    else if(a==='next') revealNext();
+    else if(a==='finish') finish();
     else if(a==='new') backend.mergeDoc('polls', GID, {phase:'idle'});
   });
   SEC.addEventListener('submit', function(e){ var f=e.target.closest('[data-nf]'); if(!f) return; e.preventDefault();
@@ -3393,6 +3749,123 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
         render();   // re-draws only when the view changes (e.g. the bracket locks at 0:00)
       }
     }, 250);
+  });
+  render();
+})();
+
+  </script>
+</section>
+<section class="slide hc-slide" data-type="content" style="--accent:#8a6a2f">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="hc-i-plant" viewBox="0 0 48 48"><g fill="none" stroke="#3b3222" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 42h38"/><path d="M8 42V27l8 5v-5l8 5v-5l8 5v10" fill="#efe3c4"/><path d="M33 42V14h6v28" fill="#efe3c4"/><path d="M34 10c-3-3 0-7 4-6 1-3 6-3 7 1 3 0 4 4 1 6" stroke-width="2"/><path d="M12 36h2M20 36h2M28 36h2" stroke-width="2"/></g></symbol><symbol id="hc-i-car" viewBox="0 0 48 48"><g fill="none" stroke="#3b3222" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 34c0-4 2-7 6-7l5-7c1-1 2-2 4-2h11c2 0 3 1 4 2l5 7c4 0 6 3 6 7v2H5z" fill="#efe3c4"/><path d="M17 27l3-5h5v5M29 27v-5h3l3 5"/><circle cx="14" cy="37" r="4.2" fill="#fbf6e9"/><circle cx="35" cy="37" r="4.2" fill="#fbf6e9"/><path d="M2 30c-1-2 0-4 1-5M1 36h2" stroke-width="1.8"/></g></symbol><symbol id="hc-i-capitol" viewBox="0 0 48 48"><g fill="none" stroke="#3b3222" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 42h34M9 38h30"/><path d="M12 38V29h24v9M17 29v9M22 29v9M26 29v9M31 29v9"/><path d="M13 29c0-8 5-12 11-12s11 4 11 12" fill="#efe3c4"/><path d="M24 17v-6"/><path d="M24 11l7 2-7 2" fill="#efe3c4" stroke-width="2"/></g></symbol><symbol id="hc-i-thermo" viewBox="0 0 48 48"><g fill="none" stroke="#3b3222" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9a5 5 0 0 1 10 0v19a8.5 8.5 0 1 1-10 0z" fill="#fbf6e9"/><circle cx="24" cy="34.5" r="4.4" fill="#b5543a" stroke="none"/><path d="M24 16v16" stroke="#b5543a" stroke-width="3.2"/><path d="M36 12c2 2-2 4 0 6s-2 4 0 6M41 16c2 2-2 4 0 6" stroke-width="1.8"/></g></symbol><symbol id="hc-i-lungs" viewBox="0 0 48 48"><g fill="none" stroke="#3b3222" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5v15M24 20c-2 2-4 3-6 3M24 20c2 2 4 3 6 3"/><path d="M18 15c-6 1-11 9-11 19 0 5 2 7 5 7 4 0 7-2 7-6V18z" fill="#efe3c4"/><path d="M30 15c6 1 11 9 11 19 0 5-2 7-5 7-4 0-7-2-7-6V18z" fill="#efe3c4"/><circle cx="12" cy="30" r="1.1" fill="#3b3222"/><circle cx="15" cy="35" r="1.1" fill="#3b3222"/><circle cx="35" cy="28" r="1.1" fill="#3b3222"/><circle cx="33" cy="34" r="1.1" fill="#3b3222"/></g></symbol><symbol id="hc-i-pulse" viewBox="0 0 48 48"><g fill="none" stroke="#3b3222" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 41C10 31 6 23 6 17a9 9 0 0 1 18-3 9 9 0 0 1 18 3c0 6-4 14-18 24z" fill="#efe3c4"/><path d="M9 24h7l3-6 4 12 3-9 2 3h11" stroke-width="2.2"/></g></symbol><symbol id="hc-i-leaf" viewBox="0 0 48 48"><g fill="none" stroke="#3b3222" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 39C9 21 21 10 40 8c-2 19-12 31-31 31z" fill="#e3e6c8"/><path d="M9 39l22-22M17 31h7M22 26v-6" stroke-width="2"/><path d="M4 44h16" stroke-width="2"/></g></symbol><symbol id="hc-i-scale" viewBox="0 0 48 48"><g fill="none" stroke="#3b3222" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8v32M15 40h18M9 14h30"/><path d="M9 14l-5 11h10zM39 14l-5 11h10z" fill="#efe3c4" stroke-width="2"/><circle cx="24" cy="8" r="2.2" fill="#3b3222"/></g></symbol><symbol id="hc-i-unknown" viewBox="0 0 48 48"><g fill="none" stroke="#3b3222" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="17" stroke-dasharray="3.5 4" fill="#fbf6e9"/><path d="M19 19c0-4 3-6 5-6s5 2 5 5c0 4-5 4-5 9"/><path d="M24 33v.8" stroke-width="3"/></g></symbol></defs></svg>  <div class="hc-root">
+    <div class="hc-head"><div class="eyebrow">8.6 · Consequences of Air Pollution</div><svg class="hc-wm" viewBox="0 0 2916 285" role="img" aria-label="Where the Costs Come From" preserveAspectRatio="xMinYMid meet"><title>Where the Costs Come From</title><defs><filter id="ch8-harm-nib" x="-2%" y="-12%" width="104%" height="124%"><feTurbulence type="fractalNoise" baseFrequency="0.016" numOctaves="3" seed="11" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4.3" xChannelSelector="R" yChannelSelector="G"/></filter></defs><g filter="url(#ch8-harm-nib)" fill="none" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(0,182) skewX(-7.0)"><g transform="translate(19.7,2.8) rotate(0.03,100,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-62.82,-278.12 L75.67,32.61 L69.99,-169.98 L183.82,74.44 L168.93,-188.49" stroke="#3b3222" stroke-width="22.9"/></g><g transform="translate(228.5,-2.3) rotate(0.49,53,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-54.51,-281.59 C-26.45,-193.92 -2.14,-94.34 24.96,11.32 M-8.40,-113.46 C-12.63,-155.18 4.07,-170.43 27.25,-161.46 C50.42,-152.50 70.27,-121.44 81.72,-78.61 C96.25,-32.91 105.92,7.57 115.09,46.18" stroke="#3b3222" stroke-width="19.9"/></g><g transform="translate(343.3,-0.1) rotate(1.27,56,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-7.87,-89.88 C23.61,-84.38 62.24,-69.44 95.92,-51.41 C80.48,-109.14 46.56,-153.99 16.95,-165.45 C-16.53,-178.39 -28.25,-144.52 -13.31,-88.64 C2.13,-30.91 36.55,15.81 71.31,29.25 C95.77,38.71 110.60,29.42 116.01,6.46" stroke="#3b3222" stroke-width="23.2"/></g><g transform="translate(462.5,0.1) rotate(-0.66,45,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-29.69,-180.15 C-7.41,-109.74 6.95,-47.41 21.10,9.83 M-10.27,-107.51 C-13.71,-150.58 -1.08,-172.42 24.67,-162.46 C38.83,-156.98 51.13,-145.55 62.84,-127.66" stroke="#3b3222" stroke-width="22.1"/></g><g transform="translate(552.5,-0.1) rotate(1.27,56,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-7.87,-89.88 C23.61,-84.38 62.24,-69.44 95.92,-51.41 C80.48,-109.14 46.56,-153.99 16.95,-165.45 C-16.53,-178.39 -28.25,-144.52 -13.31,-88.64 C2.13,-30.91 36.55,15.81 71.31,29.25 C95.77,38.71 110.60,29.42 116.01,6.46" stroke="#3b3222" stroke-width="23.2"/></g><g transform="translate(733.7,3.4) rotate(0.64,43,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-14.85,-241.20 C10.72,-162.85 23.91,-87.61 41.33,-22.42 C49.80,9.24 67.65,32.85 80.70,21.19 M-35.14,-178.91 C-10.88,-174.54 22.60,-161.59 52.41,-145.05" stroke="#3b3222" stroke-width="22.8"/></g><g transform="translate(826.2,-2.3) rotate(0.49,53,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-54.51,-281.59 C-26.45,-193.92 -2.14,-94.34 24.96,11.32 M-8.40,-113.46 C-12.63,-155.18 4.07,-170.43 27.25,-161.46 C50.42,-152.50 70.27,-121.44 81.72,-78.61 C96.25,-32.91 105.92,7.57 115.09,46.18" stroke="#3b3222" stroke-width="19.9"/></g><g transform="translate(941.0,-0.1) rotate(1.27,56,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-7.87,-89.88 C23.61,-84.38 62.24,-69.44 95.92,-51.41 C80.48,-109.14 46.56,-153.99 16.95,-165.45 C-16.53,-178.39 -28.25,-144.52 -13.31,-88.64 C2.13,-30.91 36.55,15.81 71.31,29.25 C95.77,38.71 110.60,29.42 116.01,6.46" stroke="#3b3222" stroke-width="23.2"/></g><g transform="translate(1122.2,-0.8) rotate(1.43,70,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M100.48,-168.21 C73.78,-211.93 44.84,-238.15 17.80,-248.61 C-23.40,-264.55 -38.37,-216.90 -15.96,-133.08 C6.45,-49.27 54.28,26.00 95.48,41.94 C123.81,52.89 143.29,43.73 150.07,12.95" stroke="#3b3222" stroke-width="20.4"/></g><g transform="translate(1270.3,-3.3) rotate(0.10,57,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M18.23,-164.95 C-15.24,-177.89 -27.46,-145.88 -12.52,-90.01 C2.42,-34.13 36.55,15.81 70.02,28.75 C103.50,41.70 115.72,9.69 100.78,-46.19 C85.84,-102.06 51.71,-152.00 18.23,-164.95 Z" stroke="#3b3222" stroke-width="21.7"/></g><g transform="translate(1392.5,1.3) rotate(-0.55,50,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M70.77,-119.58 C54.99,-144.05 36.26,-157.98 18.23,-164.95 C-7.52,-174.91 -17.99,-162.26 -11.01,-136.18 C-0.06,-95.21 81.55,-61.97 95.49,-9.82 C104.96,25.56 89.04,39.45 63.29,29.49 C41.41,21.02 20.39,2.88 3.62,-25.32" stroke="#3b3222" stroke-width="21.8"/></g><g transform="translate(1493.0,3.4) rotate(0.64,43,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-14.85,-241.20 C10.72,-162.85 23.91,-87.61 41.33,-22.42 C49.80,9.24 67.65,32.85 80.70,21.19 M-35.14,-178.91 C-10.88,-174.54 22.60,-161.59 52.41,-145.05" stroke="#3b3222" stroke-width="22.8"/></g><g transform="translate(1585.5,1.3) rotate(-0.55,50,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M70.77,-119.58 C54.99,-144.05 36.26,-157.98 18.23,-164.95 C-7.52,-174.91 -17.99,-162.26 -11.01,-136.18 C-0.06,-95.21 81.55,-61.97 95.49,-9.82 C104.96,25.56 89.04,39.45 63.29,29.49 C41.41,21.02 20.39,2.88 3.62,-25.32" stroke="#3b3222" stroke-width="21.8"/></g><g transform="translate(1748.0,-0.8) rotate(1.43,70,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M100.48,-168.21 C73.78,-211.93 44.84,-238.15 17.80,-248.61 C-23.40,-264.55 -38.37,-216.90 -15.96,-133.08 C6.45,-49.27 54.28,26.00 95.48,41.94 C123.81,52.89 143.29,43.73 150.07,12.95" stroke="#3b3222" stroke-width="20.4"/></g><g transform="translate(1896.1,-3.3) rotate(0.10,57,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M18.23,-164.95 C-15.24,-177.89 -27.46,-145.88 -12.52,-90.01 C2.42,-34.13 36.55,15.81 70.02,28.75 C103.50,41.70 115.72,9.69 100.78,-46.19 C85.84,-102.06 51.71,-152.00 18.23,-164.95 Z" stroke="#3b3222" stroke-width="21.7"/></g><g transform="translate(2018.3,2.5) rotate(-1.13,75,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-32.27,-181.14 C-9.98,-110.73 4.37,-48.41 18.52,8.83 M-14.84,-115.95 C-19.07,-157.67 -7.52,-174.91 13.08,-166.94 C32.40,-159.47 49.17,-131.27 59.13,-94.02 C74.65,-44.60 85.32,-0.40 94.49,38.21 M60.13,-90.30 C56.40,-130.15 68.45,-145.53 89.05,-137.56 C108.36,-130.09 125.13,-101.89 135.09,-64.64 C150.61,-15.22 161.28,28.98 170.45,67.59" stroke="#3b3222" stroke-width="23.1"/></g><g transform="translate(2177.4,-0.1) rotate(1.27,56,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-7.87,-89.88 C23.61,-84.38 62.24,-69.44 95.92,-51.41 C80.48,-109.14 46.56,-153.99 16.95,-165.45 C-16.53,-178.39 -28.25,-144.52 -13.31,-88.64 C2.13,-30.91 36.55,15.81 71.31,29.25 C95.77,38.71 110.60,29.42 116.01,6.46" stroke="#3b3222" stroke-width="23.2"/></g><g transform="translate(2358.6,-1.1) rotate(0.89,57,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-36.07,-264.44 C-6.02,-169.32 17.30,-73.47 38.62,14.94 M-36.07,-264.44 C-6.66,-258.07 26.81,-245.13 59.70,-225.72 M0.28,-128.47 C24.54,-124.10 45.14,-116.13 72.38,-100.59" stroke="#3b3222" stroke-width="21.7"/></g><g transform="translate(2481.2,0.1) rotate(-0.66,45,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-29.69,-180.15 C-7.41,-109.74 6.95,-47.41 21.10,9.83 M-10.27,-107.51 C-13.71,-150.58 -1.08,-172.42 24.67,-162.46 C38.83,-156.98 51.13,-145.55 62.84,-127.66" stroke="#3b3222" stroke-width="22.1"/></g><g transform="translate(2571.2,-3.3) rotate(0.10,57,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M18.23,-164.95 C-15.24,-177.89 -27.46,-145.88 -12.52,-90.01 C2.42,-34.13 36.55,15.81 70.02,28.75 C103.50,41.70 115.72,9.69 100.78,-46.19 C85.84,-102.06 51.71,-152.00 18.23,-164.95 Z" stroke="#3b3222" stroke-width="21.7"/></g><g transform="translate(2693.4,2.5) rotate(-1.13,75,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-32.27,-181.14 C-9.98,-110.73 4.37,-48.41 18.52,8.83 M-14.84,-115.95 C-19.07,-157.67 -7.52,-174.91 13.08,-166.94 C32.40,-159.47 49.17,-131.27 59.13,-94.02 C74.65,-44.60 85.32,-0.40 94.49,38.21 M60.13,-90.30 C56.40,-130.15 68.45,-145.53 89.05,-137.56 C108.36,-130.09 125.13,-101.89 135.09,-64.64 C150.61,-15.22 161.28,28.98 170.45,67.59" stroke="#3b3222" stroke-width="23.1"/></g><path d="M26,74 C641,68.5 2099,68.5 2852,73 C2099,78.5 641,79.5 26,74 Z" fill="#8a6a2f" fill-opacity=".7" stroke="none"/></g></g></svg><p class="hc-sub">Where do the hidden costs of air pollution come from? Pick a source and follow its damage into the kinds of harm economists count. Tap any category to see how it happens and how it is priced.</p><button class="hc-btn hc-srcbtn" data-act="src">Method &amp; sources</button></div>
+    <div class="hc-panel"><div class="hc-left"><div class="hc-picks" data-hc-picks><div class="hc-tag">Pick a source of air pollution</div><button class="hc-pick" data-src="coal" aria-pressed="false"><svg class="hc-ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#hc-i-plant"/></svg><span>A year of coal power<em>one home · 10,791 kWh</em></span></button><button class="hc-pick" data-src="car" aria-pressed="false"><svg class="hc-ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#hc-i-car"/></svg><span>A year of driving<em>one car · 11,500 miles</em></span></button><button class="hc-pick" data-src="caa" aria-pressed="false"><svg class="hc-ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#hc-i-capitol"/></svg><span>U.S. clean air in 2020<em>damage avoided, 2020</em></span></button></div><div class="hc-flow" data-hc-flow></div><div class="hc-total" data-hc-total></div></div><div class="hc-right"><div class="hc-card" data-hc-card aria-live="polite"></div><div class="hc-rate" data-hc-rate><div class="hc-tag">Weigh the future</div><div class="hc-seg"><button data-scc="0" aria-pressed="false"><b>$120</b><em>2.5% discount rate</em></button><button data-scc="1" aria-pressed="false"><b>$190</b><em>2.0% discount rate</em></button><button data-scc="2" aria-pressed="false"><b>$340</b><em>1.5% discount rate</em></button></div><p data-hc-ratecap></p></div></div><div class="hc-src" data-hc-src hidden><div class="hc-src-top"><div class="hc-tag">Method &amp; sources</div><button class="hc-btn" data-act="srcclose">Close</button></div><p>This slide uses the method of the Chapter 2 True Cost Calculator&rsquo;s <b>Harm Categories</b>: each dollar of damage is assigned to exactly one kind of harm, so the categories add up to the total. Where a study reports only a total, we split it with the shares from a study that does break it down, and mark those values with ≈. Dollar years differ by study (noted below), so compare shares more than exact totals. Every value is a <b>damage-cost</b> estimate: a choice about how to count harm, not a measurement of it.</p><ol><li>National Research Council (2010). <i>Hidden Costs of Energy: Unpriced Consequences of Energy Production and Use</i>. Washington, DC: National Academies Press. Coal plants: 3.2¢ per kWh of non-climate damage in 2005 (2007 dollars), 94% of it premature mortality and 85% of it from SO₂; light-duty vehicles: 1.2–1.7¢ per mile. Climate, ecosystem, and mercury damage not included.</li><li>U.S. EPA Office of Air and Radiation (2011). <i>The Benefits and Costs of the Clean Air Act from 1990 to 2020</i> (Second Section 812 Prospective Study). $2.0 trillion in benefits in 2020 (2006 dollars) against about $65 billion in costs; about 85% of benefits from avoided PM₂.₅ mortality (230,000 deaths); the rest roughly equally split among ozone mortality, illness, and ecological and visibility benefits.</li><li>U.S. EPA (2023). <i>Report on the Social Cost of Greenhouse Gases: Estimates Incorporating Recent Scientific Advances</i>. $120, $190, and $340 per metric ton of CO₂ emitted in 2020 at 2.5%, 2.0%, and 1.5% near-term discount rates (2020 dollars). Federal agencies stopped using these estimates in 2025; they remain the most recent peer-reviewed U.S. government values.</li><li>U.S. EPA. <i>Mortality Risk Valuation</i>. Value of a statistical life: $7.4 million (2006 dollars), adjusted for inflation and income growth when applied.</li><li>U.S. EIA. <i>How much electricity does an American home use?</i> (10,791 kWh a year, 2022); <i>Today in Energy</i> (coal: 2,257 lb CO₂ per MWh, 2019).</li><li>U.S. EPA. <i>Greenhouse Gas Emissions from a Typical Passenger Vehicle</i> (4.6 metric tons of CO₂ a year; 22.2 mpg; 11,500 miles).</li></ol></div></div>
+  </div>
+  <div class="footer"></div>
+  <script type="application/json" data-hc-data>{"cats": {"climate": {"name": "Climate damage", "color": "#b5543a", "icon": "thermo", "via": ["CO₂"], "how": "CO₂ stays in the air for centuries and traps heat. Warming brings deadly heat waves, crop losses, flooding, sea-level rise, and lost work hours, mostly in other places and in years to come.", "count": "Tons of CO₂ × the <b>social cost of carbon</b>: the dollar value of all the future damage from one more ton, added up across the world and brought back to today with a discount rate (U.S. EPA 2023)."}, "deaths": {"name": "Premature deaths", "color": "#4a3b2a", "icon": "lungs", "via": ["PM₂.₅", "SO₂", "NOₓ", "ozone"], "how": "Fine particles (PM₂.₅), emitted directly or formed in the air from SO₂ and NOₓ, reach deep into the lungs and bloodstream and raise the risk of heart attack, stroke, lung cancer, and COPD. Ozone inflames the airways.", "count": "Expected early deaths × the <b>value of a statistical life</b>: what people are willing to pay for small cuts in their risk of dying, added up. EPA&rsquo;s standard value is $7.4 million (2006 dollars). It is not a price on any one person&rsquo;s life."}, "illness": {"name": "Illness", "color": "#b8862e", "icon": "pulse", "via": ["PM₂.₅", "ozone", "NO₂"], "how": "Asthma attacks, chronic bronchitis, heart attacks that are not fatal, emergency-room visits, and days missed from work and school.", "count": "Medical bills and lost wages, plus what people say they would pay to avoid the symptoms."}, "env": {"name": "Crops, forests &amp; views", "color": "#5d7a43", "icon": "leaf", "via": ["ozone", "SO₂", "NOₓ", "PM₂.₅"], "how": "Ozone stunts crops and trees. Haze blurs the view in cities and national parks. Sulfur and nitrogen fall as acid rain, harming lakes, forests, and stone buildings.", "count": "Lost harvests and timber at market prices, plus surveys of what people would pay for clearer views."}, "mixed": {"name": "Illness, crops &amp; buildings", "color": "#7d6f96", "icon": "scale", "via": ["SO₂", "NOₓ", "PM₂.₅", "ozone"], "how": "Everything besides early deaths that the National Academies priced for coal: illness, lost grain and timber, soiled and corroded buildings, and lost recreation.", "count": "Reported as one combined number; each piece uses its own method (medical costs, market prices, repair costs)."}, "unpriced": {"name": "Harm left unpriced", "color": "#8a8069", "icon": "unknown", "via": ["mercury", "SO₂", "NOₓ"], "how": "Mercury that builds up in fish, acid rain in lakes and forests, and harm to wildlife and ecosystems.", "count": "Not counted. These harms are real, but too uncertain to put in dollars, so they enter the ledger as zero. <b>Zero dollars does not mean zero harm.</b>"}}, "sources": {"coal": {"label": "a year of coal power", "short": "Coal power", "qty": "one home · 10,791 kWh", "icon": "plant", "unit": "usd", "co2t": 11.047363340904, "whose": "this home&rsquo;s hidden cost", "insight": "A year of coal power for one home: <b>{total}</b> of hidden cost. Climate damage is <b>{climpct}</b> of it; the other <b>{air}</b> comes from breathing the smoke.", "lines": [{"k": "climate", "note": "10,791 kWh × 2,257 lb of CO₂ per MWh from coal = 11.0 metric tons of CO₂ in a year (U.S. EIA)."}, {"k": "deaths", "v": 324.582, "note": "The National Academies put coal&rsquo;s non-climate damage at 3.2¢ per kWh: $345 a year for this home. <b>94%</b> of it is premature death, and <b>85%</b> of it traces back to SO₂, which turns into sulfate particles downwind (2007 dollars)."}, {"k": "mixed", "v": 20.718, "note": "The remaining 6% of coal&rsquo;s $345: illness, crops, timber, buildings, and recreation together."}, {"k": "unpriced", "unpriced": true, "note": "The National Academies&rsquo; figure leaves out mercury, harm to ecosystems, and climate change (priced separately here)."}]}, "car": {"label": "a year of driving", "short": "Driving", "qty": "one car · 11,500 miles", "icon": "car", "unit": "usd", "co2t": 4.6, "whose": "this car&rsquo;s hidden cost", "insight": "One car, one year: <b>{total}</b> of hidden cost. Climate damage is <b>{climpct}</b>; air pollution adds <b>{air}</b>, most of it in early deaths.", "lines": [{"k": "climate", "note": "A typical car gets 22.2 mpg, drives 11,500 miles, and emits 4.6 metric tons of CO₂ a year (U.S. EPA)."}, {"k": "deaths", "v": 150.07500000000002, "share": true, "note": "The National Academies found that cars&rsquo; air pollution does 1.2–1.7¢ of damage per mile (2007 dollars). The midpoint, 1.45¢, gives <b>$167</b> a year. We split it using the shares in EPA&rsquo;s Clean Air Act study: about <b>90%</b> early deaths."}, {"k": "illness", "v": 8.3375, "share": true, "note": "About 5% of the $167, using the shares in EPA&rsquo;s Clean Air Act study."}, {"k": "env", "v": 8.3375, "share": true, "note": "About 5% of the $167, using the shares in EPA&rsquo;s Clean Air Act study."}]}, "caa": {"label": "U.S. clean air in 2020", "short": "Clean Air Act", "qty": "damage avoided, 2020", "icon": "capitol", "unit": "bil", "co2t": 0, "whose": "the $2.0 trillion", "insight": "What cleaner air was worth in 2020: <b>{total}</b> of damage avoided (2006 dollars), more than 30 times what the rules cost. Nine of every ten dollars come from people who did not die early.", "lines": [{"k": "deaths", "v": 1800, "share": true, "note": "EPA estimated the Clean Air Act prevented <b>230,000</b> early deaths in 2020. Fewer deaths from fine particles make up about <b>85%</b> of all the benefits; fewer ozone deaths, about 5%."}, {"k": "illness", "v": 100, "share": true, "note": "About 5% of the benefits: fewer heart attacks, cases of chronic bronchitis, and asthma attacks, and fewer missed work and school days."}, {"k": "env", "v": 100, "share": true, "note": "About 5% of the benefits, led by clearer views; also healthier crops and forests."}, {"k": "unpriced", "unpriced": true, "note": "EPA lists effects it could not put in dollars, especially harm to ecosystems, so the true total is larger."}]}}, "scc": [{"rate": "a 2.5% discount rate", "usd": 120, "lbl": "2.5%"}, {"rate": "a 2.0% discount rate", "usd": 190, "lbl": "2.0%"}, {"rate": "a 1.5% discount rate", "usd": 340, "lbl": "1.5%"}]}</script>
+  <script>
+(function(){
+  var SEC=document.currentScript.closest('.hc-slide');
+  if(!SEC || SEC.__hcWired) return; SEC.__hcWired=true;
+  var D=JSON.parse(SEC.querySelector('[data-hc-data]').textContent);
+  var CATS=D.cats, SRC=D.sources, SCC=D.scc;
+  var st={src:'coal', scc:1, cat:null};
+  var $=function(s){ return SEC.querySelector(s); };
+  var el={flow:$('[data-hc-flow]'), card:$('[data-hc-card]'), total:$('[data-hc-total]'), picks:$('[data-hc-picks]'), rate:$('[data-hc-rate]'), src:$('[data-hc-src]')};
+
+  function fmt(v, unit){
+    if(unit==='bil') return v>=1000? '$'+(v/1000).toFixed(1).replace(/\.0$/,'')+' trillion' : '$'+Math.round(v)+' billion';
+    return '$'+Math.round(v).toLocaleString('en-US');
+  }
+  function lines(S){   // the source's harm lines at the chosen social cost of carbon
+    return S.lines.map(function(l){
+      var v = l.k==='climate' ? S.co2t*SCC[st.scc].usd : l.v;
+      return {k:l.k, v:v, note:l.note, share:l.share, unpriced:!!l.unpriced};
+    });
+  }
+  function icon(name, cls){ return '<svg class="'+(cls||'hc-ico')+'" viewBox="0 0 48 48" aria-hidden="true"><use href="#hc-i-'+name+'"/></svg>'; }
+
+  function drawFlow(S, L){
+    var priced=L.filter(function(l){ return !l.unpriced; }), sum=priced.reduce(function(a,l){ return a+l.v; },0);
+    var TH=236, X0=172, X1=468, NW=14, GAP=12, SLOT=50, PAD=14;
+    var bws=L.map(function(l){ return l.unpriced? 0 : Math.max(3, l.v/sum*TH); });
+    var slots=L.map(function(l,i){ return Math.max(bws[i]+10, SLOT); });
+    var H=PAD*2+slots.reduce(function(a,b){ return a+b; },0)+GAP*(L.length-1);
+    var srcH=bws.reduce(function(a,b){ return a+b; },0), sy=(H-srcH)/2, ty=PAD, h='';
+    h+='<svg class="hc-svg" viewBox="0 0 720 '+H.toFixed(0)+'" role="img" aria-label="Where the hidden cost of '+S.label+' ends up, by type of harm">';
+    // source node
+    h+='<rect x="'+(X0-NW)+'" y="'+sy.toFixed(1)+'" width="'+NW+'" height="'+srcH.toFixed(1)+'" rx="3" fill="#3b3222"/>';
+    h+='<g transform="translate(6,'+(H/2-58).toFixed(1)+')">'+'<use href="#hc-i-'+S.icon+'" width="64" height="64" x="44" y="0"/>'
+      +'<text x="76" y="84" text-anchor="middle" class="hc-t1">'+S.short+'</text><text x="76" y="102" text-anchor="middle" class="hc-t3">'+S.qty+'</text>'
+      +'<text x="76" y="124" text-anchor="middle" class="hc-t2">'+fmt(sum,S.unit)+'</text></g>';
+    var s0=sy;
+    L.forEach(function(l,i){
+      var c=CATS[l.k], bw=bws[i], slot=slots[i], ny=ty+(slot-Math.max(bw,20))/2, on=st.cat===l.k;
+      if(l.unpriced){
+        h+='<g class="hc-band un'+(on?' on':'')+'" data-cat="'+l.k+'" tabindex="0" role="button" aria-label="'+c.name+'">'
+          +'<path d="M'+X0+','+(sy+srcH-1)+' C'+((X0+X1)/2)+','+(sy+srcH-1)+' '+((X0+X1)/2)+','+(ny+10)+' '+X1+','+(ny+10)+'" fill="none" stroke="#8a8069" stroke-width="1.6" stroke-dasharray="4 5"/>'
+          +'<rect x="'+X1+'" y="'+ny.toFixed(1)+'" width="'+NW+'" height="20" rx="3" fill="none" stroke="#8a8069" stroke-width="1.6" stroke-dasharray="3 3"/>';
+      } else {
+        var a=s0, b=s0+bw, m=(X0+X1)/2, t0=ty+(slot-bw)/2, t1=t0+bw; ny=t0;
+        h+='<g class="hc-band'+(on?' on':'')+'" data-cat="'+l.k+'" tabindex="0" role="button" aria-label="'+c.name+'">'
+          +'<path d="M'+X0+','+a.toFixed(1)+' C'+m+','+a.toFixed(1)+' '+m+','+t0.toFixed(1)+' '+X1+','+t0.toFixed(1)+' L'+X1+','+t1.toFixed(1)+' C'+m+','+t1.toFixed(1)+' '+m+','+b.toFixed(1)+' '+X0+','+b.toFixed(1)+' Z" fill="'+c.color+'" class="hc-rib"/>'
+          +'<rect x="'+X1+'" y="'+t0.toFixed(1)+'" width="'+NW+'" height="'+bw.toFixed(1)+'" rx="2" fill="'+c.color+'"/>';
+        s0=b;
+      }
+      var cy=ty+slot/2, pct= l.unpriced? 'not priced' : Math.round(l.v/sum*100)+'%';
+      if(!l.unpriced && l.v/sum<0.005) pct='<1%';
+      h+='<text x="'+(X1+NW+12)+'" y="'+(cy-6).toFixed(1)+'" class="hc-t1">'+c.name+'</text>'
+        +'<text x="'+(X1+NW+12)+'" y="'+(cy+12).toFixed(1)+'" class="hc-t4"><tspan class="hc-v">'+(l.unpriced? '$ ?' : (l.share? '≈ ' : '')+fmt(l.v,S.unit))+'</tspan>  ·  '+pct+'</text>'
+        +'<rect x="'+(X1-4)+'" y="'+ty.toFixed(1)+'" width="'+(720-X1+4)+'" height="'+slot.toFixed(1)+'" fill="transparent"/></g>';
+      ty+=slot+GAP;
+    });
+    return h+'</svg>';
+  }
+
+  function cardHTML(S, L){
+    var l=L.filter(function(x){ return x.k===st.cat; })[0], c=CATS[l.k];
+    var priced=L.filter(function(x){ return !x.unpriced; }), sum=priced.reduce(function(a,x){ return a+x.v; },0);
+    var val = l.unpriced? 'Not priced' : (l.share? '≈ ' : '')+fmt(l.v,S.unit);
+    return '<div class="hc-ch" style="--c:'+c.color+'">'+icon(c.icon,'hc-cico')+'<div><div class="hc-tag">Harm category</div><div class="hc-cn">'+c.name+'</div></div></div>'
+      + '<div class="hc-cv" style="--c:'+c.color+'"><b>'+val+'</b>'+(l.unpriced? '' : '<span>'+Math.max(1,Math.round(l.v/sum*100))+'% of '+S.whose+'</span>')+'</div>'
+      + '<dl class="hc-dl"><dt>How the harm happens</dt><dd>'+c.how+'</dd>'
+      + '<dt>How it is counted</dt><dd>'+c.count+'</dd>'
+      + '<dt>In this example</dt><dd>'+l.note+'</dd></dl>'
+      + '<div class="hc-via"><span>Carried by</span>'+c.via.map(function(p){ return '<i>'+p+'</i>'; }).join('')+'</div>';
+  }
+
+  function render(){
+    var S=SRC[st.src], L=lines(S);
+    if(!st.cat || !L.some(function(l){ return l.k===st.cat; })){
+      st.cat=L.slice().sort(function(a,b){ return (b.unpriced?-1:b.v)-(a.unpriced?-1:a.v); })[0].k;
+    }
+    el.picks.querySelectorAll('[data-src]').forEach(function(b){ var on=b.dataset.src===st.src; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on); });
+    el.flow.innerHTML=drawFlow(S, L);
+    el.card.innerHTML=cardHTML(S, L);
+    var priced=L.filter(function(x){ return !x.unpriced; }), sum=priced.reduce(function(a,x){ return a+x.v; },0);
+    var clim=L.filter(function(x){ return x.k==='climate'; })[0];
+    var bar=priced.map(function(x){ return '<i style="flex:'+x.v.toFixed(2)+';background:'+CATS[x.k].color+'" title="'+CATS[x.k].name+'"></i>'; }).join('');
+    el.total.innerHTML='<div class="hc-bar">'+bar+'</div><p class="hc-ins">'+S.insight
+        .replace('{total}', fmt(sum,S.unit))
+        .replace('{climpct}', clim? Math.round(clim.v/sum*100)+'%' : '')
+        .replace('{air}', fmt(sum-(clim?clim.v:0),S.unit))+'</p>';
+    el.rate.classList.toggle('off', !clim);
+    el.rate.querySelectorAll('[data-scc]').forEach(function(b){ var on=+b.dataset.scc===st.scc; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on); b.disabled=!clim; });
+    el.rate.querySelector('[data-hc-ratecap]').innerHTML = clim
+      ? 'At <b>'+SCC[st.scc].rate+'</b>, each ton of CO₂ does <b>$'+SCC[st.scc].usd+'</b> of damage. Nothing about the physics changes between these three buttons; only how much harm to people in the future counts today.'
+      : 'This study did not put a price on climate damage, so the discount rate does not apply here.';
+  }
+
+  SEC.addEventListener('click', function(e){
+    var t=e.target.closest('[data-src],[data-scc],[data-cat],[data-act]'); if(!t) return;
+    if(t.dataset.src){ st.src=t.dataset.src; st.cat=null; }
+    else if(t.dataset.scc!=null){ st.scc=+t.dataset.scc; }
+    else if(t.dataset.cat){ st.cat=t.dataset.cat; }
+    else if(t.dataset.act==='src'){ el.src.hidden=false; return; }
+    else if(t.dataset.act==='srcclose'){ el.src.hidden=true; return; }
+    render();
+  });
+  SEC.addEventListener('keydown', function(e){
+    var t=e.target.closest('[data-cat]'); if(t && (e.key==='Enter'||e.key===' ')){ e.preventDefault(); e.stopPropagation(); st.cat=t.dataset.cat; render(); }
   });
   render();
 })();
@@ -4043,6 +4516,195 @@ window.__cg = (function(){
     <iframe class="embed-frame" src="https://ourworldindata.org/grapher/share-deaths-indoor-pollution?tab=map" title="Share of deaths from indoor air pollution" loading="lazy" allow="web-share; clipboard-write"></iframe>
     <iframe class="embed-frame" src="https://ourworldindata.org/grapher/death-rates-from-indoor-air-pollution-vs-gdp-per-capita?zoomToSelection=true&endpointsOnly=1&time=1990..2017&country=CHN~IND~MEX~IDN~PHL~BGD~PAK~BRA~ETH~EGY~MOZ~GIN~CIV~NAM~GTM~PRT~EST~CRI~UZB~KEN~NPL~RWA~SEN~SDN~NIC~MAR~BWA&minPopulationFilter=1000000&tab=chart" title="Death rates from indoor air pollution vs GDP per capita" loading="lazy" allow="web-share; clipboard-write"></iframe>
   </div>
+</section>
+<section class="slide mf-slide" data-type="game" data-game-id="ch8-mortality" style="--accent:#8a6a2f">
+<svg class="mf-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><filter id="mfR" x="-4%" y="-4%" width="108%" height="108%"><feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="6"/><feDisplacementMap in="SourceGraphic" scale="2"/></filter><filter id="mfW" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".022" numOctaves="3" seed="11"/><feDisplacementMap in="SourceGraphic" scale="9"/><feGaussianBlur stdDeviation=".7"/></filter></defs></svg>  <div class="mf-root">
+    <div class="mf-head"><div class="eyebrow">8.6 · Consequences of Air Pollution</div><svg class="mf-wm" viewBox="0 0 2006 285" role="img" aria-label="Mortality Face-Off" preserveAspectRatio="xMinYMid meet"><title>Mortality Face-Off</title><defs><filter id="ch8-mortality-nib" x="-2%" y="-12%" width="104%" height="124%"><feTurbulence type="fractalNoise" baseFrequency="0.016" numOctaves="3" seed="11" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4.3" xChannelSelector="R" yChannelSelector="G"/></filter></defs><g filter="url(#ch8-mortality-nib)" fill="none" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(0,182) skewX(-7.0)"><g transform="translate(19.7,3.8) rotate(-0.17,88,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M29.32,14.68 C0.85,-83.17 -23.46,-182.74 -42.22,-270.15 L98.36,-12.05 L117.43,-208.41 C146.49,-117.01 175.95,-15.44 199.27,80.41" stroke="#3b3222" stroke-width="24.9"/></g><g transform="translate(204.1,-3.3) rotate(0.10,57,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M18.23,-164.95 C-15.24,-177.89 -27.46,-145.88 -12.52,-90.01 C2.42,-34.13 36.55,15.81 70.02,28.75 C103.50,41.70 115.72,9.69 100.78,-46.19 C85.84,-102.06 51.71,-152.00 18.23,-164.95 Z" stroke="#3b3222" stroke-width="21.7"/></g><g transform="translate(326.3,0.1) rotate(-0.66,45,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-29.69,-180.15 C-7.41,-109.74 6.95,-47.41 21.10,9.83 M-10.27,-107.51 C-13.71,-150.58 -1.08,-172.42 24.67,-162.46 C38.83,-156.98 51.13,-145.55 62.84,-127.66" stroke="#3b3222" stroke-width="22.1"/></g><g transform="translate(416.3,3.4) rotate(0.64,43,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-14.85,-241.20 C10.72,-162.85 23.91,-87.61 41.33,-22.42 C49.80,9.24 67.65,32.85 80.70,21.19 M-35.14,-178.91 C-10.88,-174.54 22.60,-161.59 52.41,-145.05" stroke="#3b3222" stroke-width="22.8"/></g><g transform="translate(508.8,1.8) rotate(0.14,60,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M60.43,-145.29 C79.73,-86.06 91.10,-34.90 99.77,1.85 C107.74,31.65 125.59,55.25 136.06,42.61 M74.37,-93.14 C55.40,-133.87 29.82,-160.47 6.65,-169.43 C-22.97,-180.88 -30.04,-146.88 -15.59,-92.87 C-0.66,-36.99 32.69,14.31 61.01,25.27 C84.19,34.23 97.23,22.58 98.28,-3.74" stroke="#3b3222" stroke-width="20.7"/></g><g transform="translate(636.6,-0.5) rotate(1.12,30,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-42.92,-277.10 C-13.87,-185.71 4.30,-91.85 19.45,-30.89 C27.91,0.78 45.77,24.38 57.52,12.23" stroke="#3b3222" stroke-width="21.6"/></g><g transform="translate(706.5,2.9) rotate(1.32,29,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-21.97,-177.16 C0.32,-106.75 10.69,-59.32 17.37,-30.02 C25.34,-0.22 43.19,23.38 54.95,11.23 M-37.90,-236.76 L-36.12,-234.40" stroke="#3b3222" stroke-width="22.4"/></g><g transform="translate(773.4,3.4) rotate(0.64,43,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-14.85,-241.20 C10.72,-162.85 23.91,-87.61 41.33,-22.42 C49.80,9.24 67.65,32.85 80.70,21.19 M-35.14,-178.91 C-10.88,-174.54 22.60,-161.59 52.41,-145.05" stroke="#3b3222" stroke-width="22.8"/></g><g transform="translate(865.9,0.2) rotate(0.12,56,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-37.42,-183.13 C-14.14,-109.00 16.37,-33.74 52.08,13.46 C77.08,46.51 97.27,44.30 98.60,14.76 C99.53,-24.96 88.74,-82.57 75.88,-139.31 M75.88,-139.31 C105.14,-42.83 126.88,55.75 131.40,94.24 C133.63,128.50 117.51,137.30 91.85,119.02" stroke="#3b3222" stroke-width="20.8"/></g><g transform="translate(1048.5,-1.1) rotate(0.89,57,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-36.07,-264.44 C-6.02,-169.32 17.30,-73.47 38.62,14.94 M-36.07,-264.44 C-6.66,-258.07 26.81,-245.13 59.70,-225.72 M0.28,-128.47 C24.54,-124.10 45.14,-116.13 72.38,-100.59" stroke="#3b3222" stroke-width="21.7"/></g><g transform="translate(1171.1,1.8) rotate(0.14,60,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M60.43,-145.29 C79.73,-86.06 91.10,-34.90 99.77,1.85 C107.74,31.65 125.59,55.25 136.06,42.61 M74.37,-93.14 C55.40,-133.87 29.82,-160.47 6.65,-169.43 C-22.97,-180.88 -30.04,-146.88 -15.59,-92.87 C-0.66,-36.99 32.69,14.31 61.01,25.27 C84.19,34.23 97.23,22.58 98.28,-3.74" stroke="#3b3222" stroke-width="20.7"/></g><g transform="translate(1298.9,-3.3) rotate(-0.41,52,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M76.62,-110.64 C59.85,-138.83 38.83,-156.98 19.52,-164.45 C-13.95,-177.40 -27.46,-145.88 -12.52,-90.01 C2.92,-32.27 39.12,16.80 73.89,30.25 C95.77,38.71 110.31,32.65 114.93,11.05" stroke="#3b3222" stroke-width="22.5"/></g><g transform="translate(1411.4,-0.1) rotate(1.27,56,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-7.87,-89.88 C23.61,-84.38 62.24,-69.44 95.92,-51.41 C80.48,-109.14 46.56,-153.99 16.95,-165.45 C-16.53,-178.39 -28.25,-144.52 -13.31,-88.64 C2.13,-30.91 36.55,15.81 71.31,29.25 C95.77,38.71 110.60,29.42 116.01,6.46" stroke="#3b3222" stroke-width="23.2"/></g><g transform="translate(1530.6,-0.1) rotate(0.25,36,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-13.02,-91.87 C8.66,-88.49 29.26,-80.53 53.93,-65.98" stroke="#3b3222" stroke-width="22.2"/></g><g transform="translate(1611.0,-0.4) rotate(1.05,76,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M21.66,-247.12 C-22.11,-264.05 -37.87,-215.03 -15.96,-133.08 C6.45,-49.27 55.57,26.50 99.34,43.43 C143.12,60.36 158.38,9.49 135.97,-74.32 C114.06,-156.27 65.44,-230.19 21.66,-247.12 Z" stroke="#3b3222" stroke-width="21.7"/></g><g transform="translate(1771.5,2.3) rotate(-1.16,39,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M26.25,11.82 C-1.55,-100.79 -34.59,-207.09 -37.24,-251.53 C-38.47,-282.07 -14.72,-279.56 8.79,-252.10 M-44.15,-182.40 C-22.47,-179.02 5.86,-168.06 30.53,-153.51" stroke="#3b3222" stroke-width="23.7"/></g><g transform="translate(1856.9,2.3) rotate(-1.16,39,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M26.25,11.82 C-1.55,-100.79 -34.59,-207.09 -37.24,-251.53 C-38.47,-282.07 -14.72,-279.56 8.79,-252.10 M-44.15,-182.40 C-22.47,-179.02 5.86,-168.06 30.53,-153.51" stroke="#3b3222" stroke-width="23.7"/></g><path d="M26,74 C441,68.5 1444,68.5 1942,73 C1444,78.5 441,79.5 26,74 Z" fill="#8a6a2f" fill-opacity=".7" stroke="none"/></g></g></svg><p class="mf-sub">Two causes of death, face to face: one from <b>air pollution</b>, one from the headlines. Estimate how many people each kills worldwide in a year. When your instructor reveals the answers, the cards turn over and you see how the whole class guessed.</p></div>
+    <div class="mf-panel"><button class="mf-btn ghost sm mf-srcbtn" data-act="src" hidden>Sources</button><div class="mf-stage" data-mf-stage></div><div class="mf-src" data-mf-src hidden><div class="mf-src-top"><div class="mf-tag">Sources</div><button class="mf-btn ghost sm" data-act="srcclose">Close</button></div><p>Deaths from air pollution are <b>estimated, not counted</b>. No death certificate says &ldquo;air pollution&rdquo;: epidemiologists combine measured exposure with long-term studies of how exposure raises the risk of heart disease, stroke, lung cancer, COPD, and pneumonia. Estimates vary between research groups and years. The categories overlap, too: tailpipe deaths are part of outdoor air pollution deaths, so the numbers here should not be added together. Deaths from crashes, terrorism, and homicide are counted from records, though many countries&rsquo; records are incomplete.</p><ol><li>World Health Organization. <i>Household air pollution</i> (fact sheet). 2.9 million deaths in 2021, including over 309,000 children under 5; about 2.1 billion people cook with open fires or inefficient stoves fueled by kerosene, biomass, or coal.</li><li>World Health Organization (2024). <i>Ambient (outdoor) air quality and health</i> (fact sheet). 4.2 million premature deaths in 2019; 89% in low- and middle-income countries.</li><li>World Health Organization. <i>Air pollution</i> (health topic). The combined effects of ambient and household air pollution are associated with 6.7 million premature deaths a year.</li><li>Anenberg, S. C., Miller, J., Henze, D. K., Minjares, R., &amp; Achakulwisut, P. (2019). The global burden of transportation tailpipe emissions on air pollution-related mortality in 2010 and 2015. <i>Environmental Research Letters, 14</i>(9), 094012. About 385,000 deaths in 2015 (11.4% of ambient PM₂.₅ and ozone deaths); about 181,000 from on-road diesel.</li><li>World Health Organization (2023). <i>Global Status Report on Road Safety 2023</i>. 1.19 million road traffic deaths a year (2021); leading cause of death for ages 5–29.</li><li>Institute for Economics &amp; Peace (2024). <i>Global Terrorism Index 2024</i>. 8,352 deaths from terrorism in 2023, up 22%; 98% in conflict zones.</li><li>United Nations Office on Drugs and Crime (2023). <i>Global Study on Homicide 2023</i>. 458,000 homicides in 2021, more than armed conflict and terrorism combined.</li></ol></div></div>
+  </div>
+  <div class="footer"></div>
+  <template data-mf-front="hap"><svg class="mf-frame" viewBox="0 0 300 400" preserveAspectRatio="none" aria-hidden="true"><rect x="6" y="6" width="288" height="388" rx="15" fill="#f4f1ea" stroke="#3b3222" stroke-width="2.2" filter="url(#mfR)"/><path d="M14,362 C60,356 96,368 150,361 C204,354 240,366 286,359 L286,378 Q286,388 276,388 L24,388 Q14,388 14,378 Z" fill="#d9d4c8" opacity=".6" filter="url(#mfW)"/><rect x="17" y="17" width="266" height="366" rx="10" fill="none" stroke="#8a6a2f" stroke-width="1.2"/><path d="M30,25 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(0 30 30)"/><path d="M270,25 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(0 270 30)"/><path d="M30,365 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(180 30 370)"/><path d="M270,365 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(180 270 370)"/><path d="M112,50 q4.75,-4 9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0" fill="none" stroke="#8a6a2f" stroke-width="1"/></svg><div class="mf-in"><div class="mf-eb air">Air pollution</div><svg class="mf-art" viewBox="0 0 200 140" role="img" aria-label="A cooking fire inside a home, smoke filling the room"><g filter="url(#mfW)"><path d="M40,128 L40,64 L100,24 L160,64 L160,128 Z" fill="#efe3c4"/><ellipse cx="100" cy="70" rx="44" ry="18" fill="#b9b2a4" opacity=".55"/></g><g filter="url(#mfR)" fill="none" stroke="#3b3222" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M34,68 L100,22 L166,68"/><path d="M42,64 V128 M158,64 V128 M30,128 H170"/><path d="M74,104 h52 c0,14 -10,20 -26,20 s-26,-6 -26,-20 z" fill="#8a8069"/><path d="M70,104 h60"/><path d="M84,126 c-4,-6 2,-8 0,-12 M100,127 c-5,-7 3,-9 0,-14 M116,126 c-4,-6 2,-8 0,-12" stroke="#b5543a" stroke-width="2"/><path d="M76,128 q-8,0 -10,-4 M124,128 q8,0 10,-4" stroke-width="2"/><path d="M92,96 c-6,-8 6,-12 0,-20 c-6,-8 8,-12 2,-22 M108,96 c6,-8 -6,-12 0,-20 c6,-8 -8,-12 -2,-20" stroke="#6b6458" stroke-width="2"/><path d="M58,60 c8,-6 18,-2 22,4 M124,56 c8,-4 18,0 20,8" stroke="#6b6458" stroke-width="1.6" stroke-dasharray="3 4"/></g></svg><div class="mf-name">Smoke from cooking fires at home</div><div class="mf-qty">household air pollution</div></div></template><template data-mf-front="road"><svg class="mf-frame" viewBox="0 0 300 400" preserveAspectRatio="none" aria-hidden="true"><rect x="6" y="6" width="288" height="388" rx="15" fill="#fbf6e9" stroke="#3b3222" stroke-width="2.2" filter="url(#mfR)"/><path d="M14,362 C60,356 96,368 150,361 C204,354 240,366 286,359 L286,378 Q286,388 276,388 L24,388 Q14,388 14,378 Z" fill="#cfe0e8" opacity=".55" filter="url(#mfW)"/><rect x="17" y="17" width="266" height="366" rx="10" fill="none" stroke="#8a6a2f" stroke-width="1.2"/><path d="M30,25 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(0 30 30)"/><path d="M270,25 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(0 270 30)"/><path d="M30,365 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(180 30 370)"/><path d="M270,365 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(180 270 370)"/><path d="M112,50 q4.75,-4 9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0" fill="none" stroke="#8a6a2f" stroke-width="1"/></svg><div class="mf-in"><div class="mf-eb">In the headlines</div><svg class="mf-art" viewBox="0 0 200 140" role="img" aria-label="A traffic warning sign over two cars colliding"><g filter="url(#mfW)"><path d="M0,112 L200,112 L200,140 L0,140 Z" fill="#e2d9c3"/><path d="M130,14 L166,76 L94,76 Z" fill="#f0d98c"/></g><g filter="url(#mfR)" fill="none" stroke="#3b3222" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M130,14 L166,76 L94,76 Z"/><path d="M130,36 v20 M130,64 v2" stroke-width="3.2"/><path d="M130,76 v36"/><path d="M0,112 H200 M20,126 h18 M60,126 h18 M100,126 h18 M140,126 h18 M180,126 h18" stroke-width="2"/><path d="M14,108 c0,-6 3,-10 9,-10 l7,-10 h22 l8,10 c6,0 8,4 8,10 z" fill="#fbf6e9"/><circle cx="28" cy="109" r="5" fill="#fbf6e9"/><circle cx="58" cy="109" r="5" fill="#fbf6e9"/><path d="M70,98 l6,-4 M72,106 l8,0 M70,90 l5,-7" stroke="#b5543a" stroke-width="2"/><path d="M186,108 c0,-6 -3,-10 -9,-10 l-7,-10 h-22 l-8,10 c-6,0 -8,4 -8,10 z" fill="#efe3c4" transform="rotate(-8 160 100)"/></g></svg><div class="mf-name">Road traffic crashes</div><div class="mf-qty">on the world&rsquo;s roads</div></div></template><template data-mf-front="news"><svg class="mf-frame" viewBox="0 0 300 400" preserveAspectRatio="none" aria-hidden="true"><rect x="6" y="6" width="288" height="388" rx="15" fill="#fbf6e9" stroke="#3b3222" stroke-width="2.2" filter="url(#mfR)"/><path d="M14,362 C60,356 96,368 150,361 C204,354 240,366 286,359 L286,378 Q286,388 276,388 L24,388 Q14,388 14,378 Z" fill="#cfe0e8" opacity=".55" filter="url(#mfW)"/><rect x="17" y="17" width="266" height="366" rx="10" fill="none" stroke="#8a6a2f" stroke-width="1.2"/><path d="M30,25 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(0 30 30)"/><path d="M270,25 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(0 270 30)"/><path d="M30,365 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(180 30 370)"/><path d="M270,365 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(180 270 370)"/><path d="M112,50 q4.75,-4 9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0" fill="none" stroke="#8a6a2f" stroke-width="1"/></svg><div class="mf-in"><div class="mf-eb">In the headlines</div><svg class="mf-art" viewBox="0 0 200 140" role="img" aria-label="A newspaper front page with a large headline"><g filter="url(#mfW)"><path d="M36,20 h128 v106 h-128 z" fill="#fbf6e9"/><path d="M52,58 h44 v36 h-44 z" fill="#d8cfbb"/></g><g filter="url(#mfR)" fill="none" stroke="#3b3222" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M36,20 h128 v106 h-128 z"/><path d="M164,30 h10 v88 c0,6 -4,8 -10,8"/><path d="M48,36 h104" stroke-width="5.5"/><path d="M48,48 h76" stroke-width="3"/><path d="M52,58 h44 v36 h-44 z" stroke-width="1.8"/><path d="M104,62 h48 M104,72 h48 M104,82 h40 M104,92 h48 M52,104 h100 M52,114 h84" stroke-width="1.6" stroke="#8a8069"/><path d="M62,86 l10,-14 8,8 8,-12" stroke-width="1.8"/></g></svg><div class="mf-name">Terrorist attacks</div><div class="mf-qty">all attacks, worldwide</div></div></template><template data-mf-front="tail"><svg class="mf-frame" viewBox="0 0 300 400" preserveAspectRatio="none" aria-hidden="true"><rect x="6" y="6" width="288" height="388" rx="15" fill="#f4f1ea" stroke="#3b3222" stroke-width="2.2" filter="url(#mfR)"/><path d="M14,362 C60,356 96,368 150,361 C204,354 240,366 286,359 L286,378 Q286,388 276,388 L24,388 Q14,388 14,378 Z" fill="#d9d4c8" opacity=".6" filter="url(#mfW)"/><rect x="17" y="17" width="266" height="366" rx="10" fill="none" stroke="#8a6a2f" stroke-width="1.2"/><path d="M30,25 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(0 30 30)"/><path d="M270,25 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(0 270 30)"/><path d="M30,365 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(180 30 370)"/><path d="M270,365 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(180 270 370)"/><path d="M112,50 q4.75,-4 9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0" fill="none" stroke="#8a6a2f" stroke-width="1"/></svg><div class="mf-in"><div class="mf-eb air">Air pollution</div><svg class="mf-art" viewBox="0 0 200 140" role="img" aria-label="Exhaust drifting from a car tailpipe toward a city"><g filter="url(#mfW)"><ellipse cx="148" cy="68" rx="46" ry="26" fill="#b9b2a4" opacity=".6"/><path d="M20,70 h14 v-22 h12 v22 h10 v-34 h14 v34 h8 v-16 h12 v16" fill="#e2d9c3"/></g><g filter="url(#mfR)" fill="none" stroke="#3b3222" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20,70 h14 v-22 h12 v22 h10 v-34 h14 v34 h8 v-16 h12 v16" stroke-width="1.8" stroke="#8a8069"/><path d="M14,118 c0,-10 4,-16 14,-18 l14,-18 c2,-2 4,-3 7,-3 h38 c3,0 5,1 7,3 l14,18 c8,2 12,8 12,18 v6 H14 z" fill="#efe3c4"/><path d="M46,98 l10,-12 h34 l10,12" stroke-width="2"/><rect x="22" y="104" width="14" height="7" rx="2" fill="#b5543a"/><rect x="112" y="104" width="14" height="7" rx="2" fill="#b5543a"/><path d="M126,120 h16" stroke-width="3.4"/><path d="M144,118 c6,-10 16,-4 20,-12 c8,-6 18,0 18,-10 c6,-12 -8,-18 -2,-26 M150,124 c8,2 12,-4 18,-2" stroke="#6b6458" stroke-width="2"/><circle cx="176" cy="46" r="2" fill="#6b6458" stroke="none"/><circle cx="160" cy="40" r="1.6" fill="#6b6458" stroke="none"/><circle cx="186" cy="60" r="1.6" fill="#6b6458" stroke="none"/></g></svg><div class="mf-name">Exhaust from cars, trucks &amp; buses</div><div class="mf-qty">PM₂.₅ and ozone from tailpipes</div></div></template><template data-mf-front="city"><svg class="mf-frame" viewBox="0 0 300 400" preserveAspectRatio="none" aria-hidden="true"><rect x="6" y="6" width="288" height="388" rx="15" fill="#f4f1ea" stroke="#3b3222" stroke-width="2.2" filter="url(#mfR)"/><path d="M14,362 C60,356 96,368 150,361 C204,354 240,366 286,359 L286,378 Q286,388 276,388 L24,388 Q14,388 14,378 Z" fill="#d9d4c8" opacity=".6" filter="url(#mfW)"/><rect x="17" y="17" width="266" height="366" rx="10" fill="none" stroke="#8a6a2f" stroke-width="1.2"/><path d="M30,25 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(0 30 30)"/><path d="M270,25 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(0 270 30)"/><path d="M30,365 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(180 30 370)"/><path d="M270,365 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(180 270 370)"/><path d="M112,50 q4.75,-4 9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0" fill="none" stroke="#8a6a2f" stroke-width="1"/></svg><div class="mf-in"><div class="mf-eb air">Air pollution</div><svg class="mf-art" viewBox="0 0 200 140" role="img" aria-label="A city skyline under a haze of smog"><g filter="url(#mfW)"><path d="M0,56 C40,46 80,62 120,52 S180,44 200,50 L200,112 L0,112 Z" fill="#c8b98f" opacity=".55"/><circle cx="150" cy="36" r="16" fill="#f0d98c" opacity=".7"/></g><g filter="url(#mfR)" fill="none" stroke="#3b3222" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="150" cy="36" r="16" stroke-width="1.8" stroke="#8a8069"/><path d="M8,122 V86 h16 V70 h18 v52 M42,122 V58 h20 v64 M62,122 V78 h14 v-18 h12 v62 M88,122 V64 h22 v58 M110,122 V84 h16 V50 h20 v72 M146,122 V74 h18 v48 M164,122 V88 h24 v34"/><path d="M2,122 H198"/><path d="M50,70 v4 M50,84 v4 M96,76 v4 M96,90 v4 M134,62 v4 M134,76 v4 M134,90 v4 M154,86 v4 M154,100 v4" stroke-width="2"/><path d="M6,54 c30,-8 60,6 94,-2 c34,-8 64,-4 96,2 M6,66 c30,-6 58,4 90,-2" stroke="#8a6a2f" stroke-width="1.6" stroke-dasharray="4 5"/></g></svg><div class="mf-name">Outdoor air pollution</div><div class="mf-qty">mostly fine particles (PM₂.₅)</div></div></template><template data-mf-front="badge"><svg class="mf-frame" viewBox="0 0 300 400" preserveAspectRatio="none" aria-hidden="true"><rect x="6" y="6" width="288" height="388" rx="15" fill="#fbf6e9" stroke="#3b3222" stroke-width="2.2" filter="url(#mfR)"/><path d="M14,362 C60,356 96,368 150,361 C204,354 240,366 286,359 L286,378 Q286,388 276,388 L24,388 Q14,388 14,378 Z" fill="#cfe0e8" opacity=".55" filter="url(#mfW)"/><rect x="17" y="17" width="266" height="366" rx="10" fill="none" stroke="#8a6a2f" stroke-width="1.2"/><path d="M30,25 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(0 30 30)"/><path d="M270,25 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(0 270 30)"/><path d="M30,365 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(180 30 370)"/><path d="M270,365 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(180 270 370)"/><path d="M112,50 q4.75,-4 9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0 t9.5,0" fill="none" stroke="#8a6a2f" stroke-width="1"/></svg><div class="mf-in"><div class="mf-eb">In the headlines</div><svg class="mf-art" viewBox="0 0 200 140" role="img" aria-label="A police badge above barrier tape"><g filter="url(#mfW)"><path d="M100,14 l14,10 h18 l4,18 12,12 -8,16 4,18 -16,8 -8,16 -20,-6 -20,6 -8,-16 -16,-8 4,-18 -8,-16 12,-12 4,-18 h18 z" fill="#efe3c4"/><path d="M0,104 L200,88 L200,108 L0,124 Z" fill="#f0d98c"/></g><g filter="url(#mfR)" fill="none" stroke="#3b3222" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M100,14 l14,10 h18 l4,18 12,12 -8,16 4,18 -16,8 -8,16 -20,-6 -20,6 -8,-16 -16,-8 4,-18 -8,-16 12,-12 4,-18 h18 z"/><circle cx="100" cy="62" r="22" stroke-width="1.8"/><path d="M100,48 l4,9 10,1 -7,7 2,10 -9,-5 -9,5 2,-10 -7,-7 10,-1 z" fill="#8a6a2f" stroke-width="1.4"/><path d="M0,104 L200,88 M0,124 L200,108"/><path d="M20,120 l14,-16 M58,117 l14,-16 M96,114 l14,-16 M134,111 l14,-16 M172,108 l14,-16" stroke-width="3"/></g></svg><div class="mf-name">Homicide</div><div class="mf-qty">murders, worldwide</div></div></template><template data-mf-back><svg class="mf-frame" viewBox="0 0 300 400" preserveAspectRatio="none" aria-hidden="true"><rect x="6" y="6" width="288" height="388" rx="15" fill="#f7efdc" stroke="#3b3222" stroke-width="2.2" filter="url(#mfR)"/><rect x="17" y="17" width="266" height="366" rx="10" fill="none" stroke="#8a6a2f" stroke-width="1.2"/><rect x="23" y="23" width="254" height="354" rx="8" fill="none" stroke="#8a6a2f" stroke-width=".6"/><path d="M30,25 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(0 30 30)"/><path d="M270,25 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(0 270 30)"/><path d="M30,365 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(180 30 370)"/><path d="M270,365 c3,4.2 4.4,7 0,10.6 c-4.4,-3.6 -3,-6.4 0,-10.6 Z" fill="#8a6a2f" transform="rotate(180 270 370)"/></svg></template><template data-mf-seal><svg class="mf-seal" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44" fill="#A4373A" stroke="#fbf6e9" stroke-width="3" filter="url(#mfR)"/><circle cx="50" cy="50" r="37" fill="none" stroke="#fbf6e9" stroke-width="1" stroke-dasharray="2 3"/><text x="50" y="47" text-anchor="middle">MORE</text><text x="50" y="61" text-anchor="middle">DEATHS</text></svg></template><template data-mf-emblem><svg class="mf-emblem" viewBox="0 0 120 120" fill="none" stroke="#3b3222" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g filter="url(#mfR)"><path d="M60 16v84M40 100h40M22 32h76"/><circle cx="60" cy="16" r="4" fill="#8a6a2f"/><path d="M22 32l-14 30h28zM98 32l-14 30h28z" fill="#ecd9a0"/><path d="M8 62c2 8 26 8 28 0M84 62c2 8 26 8 28 0"/></g></svg></template>
+  <div hidden data-mf-close>Air pollution is one of the greatest environmental risks to health: the WHO links outdoor and household air pollution together to about <b>6.7 million</b> premature deaths a year. Those deaths rarely make headlines, because they come slowly, as heart attacks, strokes, and lung disease, and not as a single event.</div>
+  <script type="application/json" data-mf-rounds>[{"cards": [{"k": "hap", "air": true, "plain": "Household air pollution", "plainLow": "household air pollution", "deaths": 2900000, "year": "WHO estimate for 2021", "note": "About 2.1 billion people still cook over open fires or simple stoves burning wood, dung, crop waste, coal, or kerosene. Over 309,000 of the dead are children under 5.", "cite": "World Health Organization"}, {"k": "road", "air": false, "plain": "Road traffic crashes", "plainLow": "road traffic crashes", "deaths": 1190000, "year": "WHO estimate for 2021", "note": "More than 3,200 deaths a day. Crashes are the leading killer of children and young people aged 5 to 29.", "cite": "WHO, Global Status Report on Road Safety 2023"}]}, {"cards": [{"k": "news", "air": false, "plain": "Terrorism", "plainLow": "terrorism", "deaths": 8352, "year": "Deaths in 2023", "note": "The highest toll since 2017. Nearly all of these deaths (98%) happened in countries already in armed conflict.", "cite": "Institute for Economics &amp; Peace, Global Terrorism Index 2024"}, {"k": "tail", "air": true, "plain": "Tailpipe pollution", "plainLow": "tailpipe pollution", "deaths": 385000, "year": "Estimate for 2015", "note": "About 1 in 9 of all deaths from outdoor PM₂.₅ and ozone. Diesel vehicles alone caused nearly half, about 181,000.", "cite": "Anenberg et al. 2019, <i>Environmental Research Letters</i>"}]}, {"cards": [{"k": "city", "air": true, "plain": "Outdoor air pollution", "plainLow": "outdoor air pollution", "deaths": 4200000, "year": "WHO estimate for 2019", "note": "Most of these deaths come from heart disease and stroke. 89% happen in low- and middle-income countries.", "cite": "World Health Organization"}, {"k": "badge", "air": false, "plain": "Homicide", "plainLow": "homicide", "deaths": 458000, "year": "Deaths in 2021", "note": "About 52 victims an hour: more people than armed conflict and terrorism killed that year combined.", "cite": "UNODC, Global Study on Homicide 2023"}]}]</script>
+  <script>
+(function(){
+  var SEC=document.currentScript.closest('.mf-slide');
+  if(!SEC || SEC.__mfWired) return; SEC.__mfWired=true;
+  if(!window.__deckLiveReady){ window.__deckLiveReady=new Promise(function(r){ window.__deckLiveResolve=r; }); }
+  var GID=SEC.dataset.gameId;
+  var ROUNDS=JSON.parse(SEC.querySelector('[data-mf-rounds]').textContent);
+  var FRONT={}, BACK=SEC.querySelector('template[data-mf-back]').innerHTML, SEAL=SEC.querySelector('template[data-mf-seal]').innerHTML;
+  SEC.querySelectorAll('template[data-mf-front]').forEach(function(t){ FRONT[t.dataset.mfFront]=t.innerHTML; });
+  var el={stage:SEC.querySelector('[data-mf-stage]'), src:SEC.querySelector('[data-mf-src]'), srcBtn:SEC.querySelector('.mf-srcbtn')};
+
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function ls(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }catch(e){ return null; } }
+  function pid(){ var k='mf-pid:'+GID, v=ls(k); if(!v){ v=Math.random().toString(36).slice(2,9); ls(k,v); } return v; }
+  var PK=pid();
+  SEC.addEventListener('keydown', function(e){ if(e.target.closest('input')) e.stopPropagation(); });
+
+  // "3.2 million", "450k", "1,190,000" → a number
+  function parse(s){
+    s=String(s||'').toLowerCase().replace(/[, _$]/g,'').trim(); if(!s) return null;
+    var m=s.match(/^(\d*\.?\d+)(k|thousand|m|mil|million|mn|b|bn|billion)?$/); if(!m) return NaN;
+    var v=parseFloat(m[1]), u=m[2]||'';
+    if(/^(k|thousand)$/.test(u)) v*=1e3; else if(/^(m|mil|million|mn)$/.test(u)) v*=1e6; else if(/^(b|bn|billion)$/.test(u)) v*=1e9;
+    return v>=0 && v<1e11 ? Math.round(v) : NaN;
+  }
+  function words(v){
+    if(v==null || isNaN(v)) return '';
+    if(v>=1e9) return trim(v/1e9)+' billion'; if(v>=1e6) return trim(v/1e6)+' million';
+    return Math.round(v).toLocaleString('en-US');
+  }
+  function trim(x){ return (x>=100? Math.round(x) : x>=10? Math.round(x*10)/10 : Math.round(x*100)/100).toString(); }
+  function big(v){ return v>=1e6? trim(v/1e6)+'<small> million</small>' : Math.round(v).toLocaleString('en-US'); }
+  function ratio(a,b){ var r=a/b; return r>=10? Math.round(r).toLocaleString('en-US') : r.toFixed(1).replace(/\.0$/,''); }
+
+  var backend=null, HOST=false, state={}, viewKey=null, draft={}, spunFor=null, flipFor=null;
+  function gid(){ return state.gameId||0; }
+  function phase(){ return state.phase||'idle'; }
+  function rnd(){ return Math.min(state.r||0, ROUNDS.length-1); }
+  function players(){ return state.players||{}; }
+  function mine(r){ var p=players()[PK]; return (p && p.g===gid() && p['v'+r])? p['v'+r] : null; }
+  function guesses(r, side){ var ps=players(), a=[]; for(var k in ps){ var p=ps[k]; if(p && p.g===gid() && p['v'+r] && p['v'+r][side]>0) a.push(p['v'+r][side]); } return a.sort(function(x,y){ return x-y; }); }
+  function nVoted(r){ var ps=players(), n=0; for(var k in ps){ var p=ps[k]; if(p && p.g===gid() && p['v'+r]) n++; } return n; }
+  function median(a){ if(!a.length) return null; var m=a.length>>1; return a.length%2? a[m] : (a[m-1]+a[m])/2; }
+  function mean(a){ if(!a.length) return null; return a.reduce(function(s,x){ return s+x; },0)/a.length; }
+  function sideShare(r){ var ps=players(), ok=0, t=0, R=ROUNDS[r], w=R.cards[0].deaths>R.cards[1].deaths?0:1;
+    for(var k in ps){ var v=ps[k] && ps[k].g===gid() && ps[k]['v'+r]; if(v && v[0]>0 && v[1]>0 && v[0]!==v[1]){ t++; if((v[0]>v[1]?0:1)===w) ok++; } }
+    return t? Math.round(ok/t*100) : null; }
+
+  // ── actions ──
+  function start(){ backend.setDoc('polls', GID, {gameId:gid()+1, phase:'vote', r:0}); }
+  function reveal(){ if(phase()==='vote') backend.mergeDoc('polls', GID, {phase:'reveal'}); }
+  function next(){ if(rnd()<ROUNDS.length-1) backend.mergeDoc('polls', GID, {phase:'vote', r:rnd()+1}); else backend.mergeDoc('polls', GID, {phase:'ended'}); }
+  function submit(){
+    var r=rnd(), d=draft[gid()+':'+r]||{}, a=parse(d[0]), b=parse(d[1]);
+    if(!(a>0) || !(b>0)) return;
+    var o={}; o[PK]={g:gid(), t:Date.now()}; o[PK]['v'+r]=[a,b];
+    backend.mergeDocShard('polls', GID, {players:o});
+    viewKey=null; render();
+  }
+
+  // ── cards ──
+  function cardHTML(r, side, rev){
+    var R=ROUNDS[r], c=R.cards[side], o=R.cards[1-side], win=c.deaths>o.deaths;
+    var back='<div class="mf-face mf-back">'+BACK+'<div class="mf-ans"><div class="mf-eb">Deaths per year, worldwide</div>'
+      + '<div class="mf-num">'+big(c.deaths)+'</div><div class="mf-yr">'+esc(c.year)+'</div>'
+      + '<div class="mf-bar"><i style="--w:'+(c.deaths/Math.max(c.deaths,o.deaths)*100).toFixed(1)+'%"></i></div>'
+      + '<p class="mf-note">'+c.note+'</p><div class="mf-cite">'+c.cite+'</div></div>'+(win? SEAL : '')+'</div>';
+    return '<div class="mf-card'+(rev?' rev':'')+(rev && win?' win':'')+'" data-side="'+side+'"><div class="mf-flip">'
+      + '<div class="mf-face mf-front">'+FRONT[c.k]+'</div>'+back+'</div></div>';
+  }
+  function histHTML(r, side){
+    var c=ROUNDS[r].cards[side], a=guesses(r, side), LO=2, HI=8, B=(HI-LO)*2, bins=[];   // half-decade bins, 100 to 100 million
+    for(var i=0;i<B;i++) bins.push(0);
+    a.forEach(function(v){ var x=Math.log10(Math.max(v,1)); var i=Math.floor((x-LO)*2); bins[Math.max(0,Math.min(B-1,i))]++; });
+    var mx=Math.max.apply(null, bins.concat([1])), W=100/B;
+    function pos(v){ return Math.max(0,Math.min(100,(Math.log10(Math.max(v,1))-LO)/(HI-LO)*100)); }
+    var md=median(a), mn=mean(a), h='<div class="mf-hist"><div class="mf-hplot">';
+    bins.forEach(function(n,i){ h+='<i class="mf-hb" style="left:'+(i*W).toFixed(2)+'%;width:'+(W-.6).toFixed(2)+'%;height:'+(n/mx*100).toFixed(1)+'%">'+(n? '<b>'+n+'</b>' : '')+'</i>'; });
+    h+='<span class="mf-mk truth" style="left:'+pos(c.deaths)+'%"><em>True</em></span>';
+    if(md!=null) h+='<span class="mf-mk med" style="left:'+pos(md)+'%"><em>Median</em></span>';
+    if(mn!=null) h+='<span class="mf-mk avg" style="left:'+pos(mn)+'%"><em>Mean</em></span>';
+    h+='</div><div class="mf-hax">'; ['100','1,000','10K','100K','1M','10M','100M'].forEach(function(t,i){ h+='<span style="left:'+(i/6*100)+'%">'+t+'</span>'; });
+    h+='</div><div class="mf-stats"><span class="t"><i></i>True <b>'+words(c.deaths)+'</b></span>'
+      + '<span class="m"><i></i>Median <b>'+(md!=null? words(md) : '–')+'</b></span>'
+      + '<span class="a"><i></i>Mean <b>'+(mn!=null? words(mn) : '–')+'</b></span><span class="n">'+a.length+' guess'+(a.length===1?'':'es')+'</span></div></div>';
+    return h;
+  }
+  function inputHTML(r, side){
+    var k=gid()+':'+r, d=draft[k]||(draft[k]={}), m=mine(r);
+    if(d[side]==null && m) d[side]=String(m[side]);
+    var v=parse(d[side]);
+    return '<div class="mf-inp"><label><span>Your estimate</span><input inputmode="decimal" autocomplete="off" data-in="'+side+'" value="'+esc(d[side]||'')+'" placeholder="e.g. 250,000 or 1.5 million"></label>'
+      + '<div class="mf-echo" data-echo="'+side+'">'+(v>0? '= '+words(v)+' deaths a year' : (isNaN(v)? '<b>Try a number like 40,000 or 2.5 million</b>' : '&nbsp;'))+'</div></div>';
+  }
+
+  function render(){
+    var ph=phase(), r=rnd();
+    el.srcBtn.hidden = ph==='idle';
+    if(ph==='idle') el.src.hidden=true;
+    SEC.classList.toggle('mf-inplay', ph!=='idle');
+    var key=[ph, gid(), r, HOST?1:0, (ph==='reveal'||ph==='ended'||HOST)? JSON.stringify(players()) : JSON.stringify(mine(r))].join('|');
+    if(key===viewKey) return; viewKey=key;
+    var h='', R=ROUNDS[r];
+    if(ph==='idle'){
+      h='<div class="mf-setup">'+SEAL_BIG+'<div class="mf-big">'+(HOST? 'Mortality Face-Off' : 'Get ready!')+'</div>'
+        + (HOST? '<p class="mf-cap">'+ROUNDS.length+' rounds. Each round puts a cause of death linked to <b>air pollution</b> against one that makes the news. Students estimate how many people each one kills worldwide in a year. You reveal the answers, and the class sees its own guesses.</p>'
+          + '<button class="mf-btn" data-act="start">Start round 1 &rarr;</button>' : '<div class="mf-muted">Waiting for your instructor to start&hellip;</div>')+'</div>';
+    } else if(ph==='vote' || ph==='reveal'){
+      var rev=ph==='reveal', m=mine(r), n=nVoted(r);
+      h='<div class="mf-bar-top"><span class="mf-tag">Round '+(r+1)+' of '+ROUNDS.length+'</span><span class="mf-q">How many people die from each, worldwide, in a year?</span>'
+        + (HOST? (rev? '<button class="mf-btn" data-act="next">'+(r<ROUNDS.length-1? 'Next round &rarr;' : 'Wrap up &rarr;')+'</button>'
+                      : '<span class="mf-stat"><b>'+n+'</b> '+(n===1?'student has':'students have')+' guessed</span><button class="mf-btn" data-act="reveal">Reveal &rarr;</button>') : '')+'</div>';
+      h+='<div class="mf-arena'+(rev?' rev':'')+'">';
+      for(var s=0;s<2;s++){
+        h+='<div class="mf-col">'+cardHTML(r, s, rev);
+        if(rev) h+=histHTML(r, s);
+        else if(!HOST) h+=inputHTML(r, s);
+        else h+='<div class="mf-wait">'+n+' guess'+(n===1?'':'es')+' in</div>';
+        h+='</div>';
+        if(s===0) h+='<div class="mf-vs">vs</div>';
+      }
+      h+='</div>';
+      if(!rev && !HOST){
+        h+='<div class="mf-go">'+(m? '<span class="mf-ok">&#10003; Locked in. You can change your guesses until the reveal.</span>' : '')
+          + '<button class="mf-btn" data-act="submit">'+(m? 'Update my guesses' : 'Lock in my guesses')+'</button></div>';
+      }
+      if(rev){
+        var A=R.cards[0], Bc=R.cards[1], w=A.deaths>Bc.deaths? A : Bc, l=w===A? Bc : A, sh=sideShare(r);
+        h+='<div class="mf-verdict"><b>'+esc(w.plain)+'</b> kills <b>'+ratio(w.deaths,l.deaths)+'&times;</b> as many people as '+esc(l.plainLow)+'.'
+          + (sh!=null? ' <span>'+sh+'% of the class guessed which one was bigger.</span>' : '')+'</div>';
+      }
+    } else if(ph==='ended'){
+      h='<div class="mf-end"><div class="mf-big">What the class guessed</div><table class="mf-tab"><thead><tr><th>Cause of death</th><th>True, per year</th><th>Class median</th><th>Off by</th></tr></thead><tbody>';
+      ROUNDS.forEach(function(R, i){ R.cards.forEach(function(c, s){ var md=median(guesses(i,s)), off=md? (md>c.deaths? ratio(md,c.deaths)+'&times; too high' : ratio(c.deaths,md)+'&times; too low') : '–';
+        if(md && Math.max(md,c.deaths)/Math.min(md,c.deaths)<1.25) off='about right';
+        h+='<tr class="'+(c.air?'air':'')+(s===0?' first':'')+'"><td><i></i>'+esc(c.plain)+'</td><td>'+words(c.deaths)+'</td><td>'+(md? words(md) : '–')+'</td><td>'+off+'</td></tr>'; }); });
+      h+='</tbody></table><p class="mf-close">'+ROUNDS_CLOSE+'</p>'+(HOST? '<div class="mf-row"><button class="mf-btn ghost" data-act="new">New game</button></div>' : '')+'</div>';
+    }
+    el.stage.innerHTML=h;
+    // spin the fronts in when a round opens; turn them over on the reveal
+    var sk=gid()+':'+r;
+    if(ph==='vote' && spunFor!==sk){ spunFor=sk; el.stage.querySelectorAll('.mf-card').forEach(function(c){ c.classList.add('spin'); }); }
+    if(ph==='reveal' && flipFor!==sk){ flipFor=sk; el.stage.querySelectorAll('.mf-card').forEach(function(c){ c.classList.add('turn'); });
+      el.stage.querySelectorAll('.mf-num').forEach(countUp); }
+  }
+  function countUp(n){
+    var html=n.innerHTML, m=html.match(/^([\d.,]+)/); if(!m) return;
+    var target=parseFloat(m[1].replace(/,/g,'')), dec=(m[1].split('.')[1]||'').length, rest=html.slice(m[1].length), t0=null;
+    if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    function f(ts){ if(!t0) t0=ts; var p=Math.min(1,(ts-t0-700)/1300); if(p<0) p=0; var e=1-Math.pow(1-p,3), v=target*e;
+      n.innerHTML=(dec? v.toFixed(dec) : Math.round(v).toLocaleString('en-US'))+rest; if(p<1) requestAnimationFrame(f); }
+    requestAnimationFrame(f);
+  }
+  var SEAL_BIG=SEC.querySelector('template[data-mf-emblem]').innerHTML;
+  var ROUNDS_CLOSE=SEC.querySelector('[data-mf-close]').innerHTML;
+
+  SEC.addEventListener('input', function(e){
+    var t=e.target.closest('[data-in]'); if(!t) return;
+    var k=gid()+':'+rnd(); (draft[k]||(draft[k]={}))[t.dataset.in]=t.value;
+    var v=parse(t.value), ec=el.stage.querySelector('[data-echo="'+t.dataset.in+'"]');
+    if(ec) ec.innerHTML = v>0? '= '+words(v)+' deaths a year' : (isNaN(v)? '<b>Try a number like 40,000 or 2.5 million</b>' : '&nbsp;');
+  });
+  SEC.addEventListener('keydown', function(e){ if(e.key==='Enter' && e.target.closest('[data-in]')){ e.preventDefault(); submit(); } }, true);
+  SEC.addEventListener('click', function(e){
+    var t=e.target.closest('[data-act]'); if(!t) return; var a=t.dataset.act;
+    if(a==='src'){ el.src.hidden=false; return; }
+    if(a==='srcclose'){ el.src.hidden=true; return; }
+    if(!backend) return;
+    if(a==='start') start(); else if(a==='reveal') reveal(); else if(a==='next') next(); else if(a==='submit') submit();
+    else if(a==='new') backend.mergeDoc('polls', GID, {phase:'idle'});
+  });
+  window.__deckLiveReady.then(function(live){
+    backend=live.backend; HOST=live.HOST; if(HOST) SEC.classList.add('host');
+    backend.subscribeDoc('polls', GID, function(d){ state=d||{}; render(); });
+  });
+  render();
+})();
+
+  </script>
 </section>
 <section class="slide" data-type="grid" style="--accent:#A4373A">
   <div class="slide-inner col">
@@ -5685,7 +6347,7 @@ window.__cg = (function(){
 
 <div class="hud">
   <button onclick="prev()" title="Previous (left arrow)">&#8249;</button>
-  <span class="counter" id="counter">1 / 29</span>
+  <span class="counter" id="counter">1 / 31</span>
   <button onclick="next()" title="Next (right arrow)">&#8250;</button>
   <button onclick="toggleMenu()" title="Slide menu (O)">&#9776;</button>
   <button onclick="toggleFs()" title="Fullscreen (F)">&#9974;</button>
