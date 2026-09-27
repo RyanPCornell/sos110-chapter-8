@@ -1018,6 +1018,10 @@ img.bleed{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
   padding:.2rem .18rem; color:#4a4436;}
 .ev-pat.on,.ev-food.on{background:var(--accent); border-color:var(--accent); color:#fff;}
 .ev-hint{font-size:clamp(.56rem,.88vw,.67rem); color:#8a8069; line-height:1.32; margin-top:.24rem;}
+.ev-hint.dim{font-style:italic; opacity:.85;}
+.ev-assume{margin:.25rem 0 0; padding-left:1rem; list-style:disc;
+  font-size:clamp(.55rem,.86vw,.66rem); color:#6f6653; line-height:1.36;}
+.ev-assume li{margin-bottom:.28rem;}
 .ev-warn{font-size:clamp(.6rem,.95vw,.72rem); color:#A4373A; text-align:center; margin-top:.2rem;}
 .ev-founding{font-size:clamp(.66rem,1.02vw,.78rem); line-height:1.4; color:#5e5340;
   background:rgba(184,160,100,.14); border-left:3px solid var(--accent);
@@ -1393,385 +1397,6 @@ img.bleed{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
 @media(max-width:1150px){ .ev-body{grid-template-columns:1fr;} }
 
 
-
-/* announcements / upcoming assignments */
-.slide[data-type="announce"]{background:linear-gradient(160deg,#f7faf8,#eaf1ed);}
-.an-head{margin-bottom:clamp(.8rem,2vh,1.4rem);}
-.an-head .heading{margin-bottom:.35rem;}
-.an-sub{font-size:clamp(.88rem,1.4vw,1.05rem); color:var(--muted); max-width:72ch; line-height:1.45;}
-.an-list{display:flex; flex-direction:column; gap:clamp(.55rem,1.5vh,.95rem); width:100%;}
-.an-row{display:flex; align-items:center; gap:clamp(.8rem,1.8vw,1.4rem);
-  background:var(--paper); border:1px solid var(--line); border-left:5px solid var(--accent,var(--green));
-  border-radius:14px; box-shadow:0 4px 14px rgba(20,40,30,.07);
-  padding:clamp(.75rem,1.9vh,1.15rem) clamp(1rem,2.2vw,1.6rem);}
-.an-num{flex:none; width:2.3rem; height:2.3rem; border-radius:50%; background:var(--accent,var(--forest-mid));
-  color:#fff; font-family:'Merriweather',serif; font-weight:800; font-size:clamp(.95rem,1.6vw,1.15rem);
-  display:flex; align-items:center; justify-content:center;}
-.an-main{flex:1; min-width:0;}
-.an-name{font-family:'Merriweather',serif; font-weight:700; color:var(--forest);
-  font-size:clamp(1rem,1.75vw,1.3rem); line-height:1.25;}
-.an-detail{font-size:clamp(.78rem,1.25vw,.95rem); color:var(--muted); line-height:1.4; margin-top:.22rem;}
-.an-due{flex:none; min-width:clamp(112px,13vw,168px); text-align:center;
-  background:var(--pale); border:1.5px solid var(--line); border-radius:11px;
-  padding:.45rem .8rem;}
-.an-due-lbl{display:block; font-size:clamp(.6rem,.95vw,.72rem); font-weight:800; letter-spacing:.08em;
-  text-transform:uppercase; color:var(--muted);}
-.an-due-val{display:block; font-family:'Merriweather',serif; font-weight:800; color:var(--forest);
-  font-size:clamp(.9rem,1.5vw,1.12rem); line-height:1.2; margin-top:.1rem;}
-.an-due.tba{background:repeating-linear-gradient(135deg,#fbfaf6,#fbfaf6 7px,#f4f1e6 7px,#f4f1e6 14px);
-  border:1.5px dashed var(--gold);}
-.an-due.tba .an-due-val{color:var(--gold); letter-spacing:.04em;}
-.an-note{margin-top:clamp(.7rem,1.8vh,1.2rem); padding:.65rem .95rem; background:var(--pale);
-  border-left:3px solid var(--accent,var(--green)); border-radius:0 8px 8px 0;
-  font-size:clamp(.78rem,1.2vw,.92rem); color:#3a4a43; font-style:italic;}
-@media (max-width:820px){
-  .an-row{flex-wrap:wrap; gap:.6rem;}
-  .an-main{flex:1 1 60%;}
-  .an-due{min-width:0; margin-left:3.1rem;}
-}
-/* live attendance — host bar (only rendered on the ?host copy) */
-.an-att{display:flex; align-items:center; gap:.7rem; flex-wrap:wrap;
-  margin-top:clamp(.6rem,1.6vh,1.1rem);}
-.an-att[hidden]{display:none;}
-.an-att-btn{font-family:inherit; font-weight:800; color:#fff; border:none; cursor:pointer;
-  background:var(--accent,var(--forest-mid)); border-radius:11px; padding:.6rem 1.4rem;
-  font-size:clamp(.85rem,1.4vw,1rem); transition:filter .15s;}
-.an-att-btn:hover{filter:brightness(1.1);}
-.an-att-btn[hidden]{display:none;}
-.an-att-btn.go{background:#A4373A;}
-.an-att-cancel{font-family:inherit; font-weight:600; color:var(--muted); background:#fff;
-  border:1.5px solid var(--line); border-radius:11px; padding:.6rem 1rem; cursor:pointer;
-  font-size:clamp(.78rem,1.2vw,.9rem);}
-.an-att-cancel:hover{border-color:var(--accent); color:var(--accent);}
-.an-att-cancel[hidden]{display:none;}
-.an-att-sel{font-family:inherit; font-size:clamp(.8rem,1.28vw,.94rem); font-weight:700;
-  color:var(--forest); background:#fff; border:2px solid var(--line); border-radius:11px;
-  padding:.55rem .7rem; cursor:pointer;}
-.an-att-sel:focus{outline:none; border-color:var(--accent,var(--forest-mid));}
-.an-att-sel:disabled{opacity:.55; cursor:not-allowed;}
-.an-att-status{font-size:clamp(.78rem,1.2vw,.92rem); color:var(--muted);}
-.an-att-status em{font-style:normal; font-weight:800; color:var(--forest);}
-.an-att-status strong{font-family:'Merriweather',serif; color:var(--forest); font-size:1.15em;}
-.an-att-status.warn{color:#A4373A; font-weight:700; font-style:italic;}
-/* live attendance — student pop-up (appended to <body>, shows over any slide) */
-.at-modal{position:fixed; inset:0; z-index:120; display:flex; align-items:center;
-  justify-content:center; padding:1.2rem; background:rgba(16,28,23,.55);
-  backdrop-filter:blur(3px); animation:at-fade .22s ease;}
-.at-modal[hidden]{display:none;}
-@keyframes at-fade{from{opacity:0;}}
-.at-box{background:#fff; border-radius:18px; box-shadow:0 24px 60px rgba(0,0,0,.35);
-  width:min(470px,100%); max-height:92vh; overflow-y:auto;
-  padding:clamp(1.2rem,3.4vw,1.9rem); animation:at-rise .26s cubic-bezier(.22,.61,.36,1);}
-@keyframes at-rise{from{transform:translateY(16px) scale(.97); opacity:0;}}
-.at-title{font-family:'Merriweather',serif; font-weight:800; color:var(--forest);
-  font-size:clamp(1.15rem,2.4vw,1.5rem); line-height:1.2;}
-.at-chapter{font-size:clamp(.8rem,1.3vw,.94rem); color:var(--muted); margin-top:.25rem;}
-.at-section{display:inline-block; margin-top:.45rem; padding:.2em .7em; border-radius:20px;
-  background:var(--pale); border:1px solid var(--line); font-size:clamp(.72rem,1.15vw,.84rem);
-  font-weight:800; color:var(--forest);}
-.at-section[hidden]{display:none;}
-.at-field{display:block; margin-top:.9rem;}
-.at-two{display:grid; grid-template-columns:1fr 1fr; gap:.6rem;}
-@media (max-width:400px){ .at-two{grid-template-columns:1fr;} }
-.at-lbl{display:block; font-size:clamp(.7rem,1.1vw,.8rem); font-weight:800; letter-spacing:.05em;
-  text-transform:uppercase; color:var(--muted); margin-bottom:.25rem;}
-.at-input{width:100%; font-family:inherit; font-size:clamp(.92rem,1.5vw,1.05rem);
-  padding:.62rem .8rem; border:2px solid var(--line); border-radius:11px; color:var(--ink);
-  background:#fff;}
-.at-input:focus{outline:none; border-color:var(--accent,var(--forest-mid));}
-.at-input.bad{border-color:#A4373A; background:#fdf6f6;}
-.at-submit{width:100%; margin-top:1.1rem; font-family:inherit; font-weight:800; color:#fff;
-  border:none; cursor:pointer; background:var(--forest-mid); border-radius:12px;
-  padding:.78rem 1rem; font-size:clamp(.98rem,1.6vw,1.12rem); transition:filter .15s;}
-.at-submit:hover:not(:disabled){filter:brightness(1.1);}
-.at-submit:disabled{background:#bcc7c2; cursor:default;}
-.at-msg{margin-top:.7rem; font-size:clamp(.78rem,1.25vw,.9rem); line-height:1.4; min-height:1.2em;}
-.at-msg.err{color:#A4373A; font-weight:700;}
-.at-msg.ok{color:#2D6A4F; font-weight:700;}
-.at-done{text-align:center; padding:.4rem 0 .2rem;}
-.at-done-tick{font-size:2.6rem; line-height:1;}
-.at-done-txt{font-family:'Merriweather',serif; font-weight:800; color:#2D6A4F;
-  font-size:clamp(1.05rem,2vw,1.3rem); margin-top:.4rem;}
-.at-done-sub{font-size:clamp(.8rem,1.28vw,.94rem); color:var(--muted); margin-top:.35rem; line-height:1.45;}
-.at-close{margin-top:1rem; font-family:inherit; font-weight:700; color:var(--muted); background:#fff;
-  border:1.5px solid var(--line); border-radius:11px; padding:.5rem 1.2rem; cursor:pointer;}
-.at-close:hover{border-color:var(--accent); color:var(--accent);}
-
-
-/* cap-and-trade market simulation (v4: multi-round, tightening cap) */
-.slide.captrade{background:linear-gradient(160deg,#f3f6f4,#e6eee9);}
-.ct-root{position:absolute; inset:0; display:flex; flex-direction:column;
-  padding:clamp(1rem,2.6vh,1.8rem) clamp(1.4rem,3.2vw,3rem) clamp(.8rem,2vh,1.3rem);}
-.ct-head{margin-bottom:clamp(.4rem,1.2vh,.8rem);}
-.ct-head .heading{margin-bottom:.25rem;}
-.ct-sub{font-size:clamp(.82rem,1.3vw,.98rem); color:var(--muted); max-width:76ch;}
-.ct-body{flex:1; min-height:0; display:grid; grid-template-columns:minmax(330px,46%) 1fr;
-  gap:clamp(1.1rem,2.6vw,2.2rem); align-items:stretch;}
-.ct-left{display:flex; flex-direction:column; gap:.55rem; min-width:0; justify-content:center; overflow:auto;}
-.ct-hostbar{display:flex; flex-wrap:wrap; gap:.5rem; padding:.55rem .7rem;
-  background:rgba(164,55,58,.06); border:1px dashed rgba(164,55,58,.4); border-radius:10px;}
-.slide.captrade:not(.host) .ct-hostbar{display:none;}
-.ct-hbtn{font-family:inherit; font-weight:800; font-size:clamp(.82rem,1.3vw,.96rem);
-  padding:.5rem 1rem; border:none; border-radius:9px; cursor:pointer; color:#fff;
-  background:var(--forest-mid); transition:filter .15s, transform .08s;}
-.ct-hbtn:hover{filter:brightness(1.1);} .ct-hbtn:active{transform:translateY(1px);}
-.ct-hbtn.run{background:#BC8A2E;} .ct-hbtn.new{background:#6b7f77;}
-.ct-hbtn[hidden]{display:none;}
-.ct-status{font-size:clamp(.86rem,1.4vw,1.02rem); color:#2c3a34; font-weight:600; line-height:1.4;
-  padding:.55rem .75rem; background:#fff; border:1px solid var(--line); border-radius:10px;}
-.ct-join{display:flex;} .ct-join[hidden]{display:none;}
-.ct-join .ct-hbtn{flex:1; font-size:clamp(.95rem,1.6vw,1.15rem); padding:.7rem 1.2rem;}
-.ct-factory{display:flex; flex-direction:column; gap:.5rem; background:#fff; border:1px solid var(--line);
-  border-left:4px solid var(--accent); border-radius:12px; padding:.65rem .85rem;}
-.ct-factory[hidden]{display:none;}
-.ct-factory-head{font-size:clamp(.8rem,1.3vw,.95rem); color:#33453d; line-height:1.4;}
-.ct-factory-head strong{color:var(--forest);}
-.ct-factory-head [data-ct-cost]{font-family:'Merriweather',serif; color:#A4373A; font-size:1.15em;}
-.ct-hint2{font-size:clamp(.76rem,1.2vw,.9rem); color:#3a4a43; line-height:1.4;
-  background:var(--pale); border-left:3px solid var(--accent); border-radius:0 8px 8px 0; padding:.4rem .6rem;}
-.ct-hint2:empty{display:none;}
-.ct-decide{display:flex; flex-direction:column; gap:.45rem;}
-.ct-ctrl[hidden]{display:none;}
-.ct-ctrl-lbl{font-weight:700; color:var(--forest); font-size:clamp(.82rem,1.35vw,.98rem);}
-.ct-ctrl-sub{font-weight:600; color:var(--muted); font-size:.85em;}
-.ct-decide-row{display:flex; align-items:center; gap:.9rem; margin-top:.15rem;}
-.ct-range{flex:1; accent-color:var(--accent); height:1.5rem; cursor:pointer;}
-.ct-range:disabled{opacity:.55; cursor:default;}
-.ct-range-out{flex:none; display:flex; align-items:baseline; gap:.3rem; min-width:5.6rem; justify-content:flex-end;}
-.ct-range-num{font-family:'Merriweather',serif; font-weight:900; color:var(--accent);
-  font-size:clamp(1.3rem,2.5vw,1.85rem); line-height:1; white-space:nowrap;}
-.ct-range-num.sm{font-size:clamp(1rem,1.9vw,1.4rem);}
-.ct-range-unit{font-size:.7rem; color:var(--muted); font-weight:700; white-space:nowrap;}
-.ct-comply{font-size:clamp(.76rem,1.25vw,.92rem); font-weight:700; line-height:1.4;
-  border-radius:8px; padding:.4rem .6rem;}
-.ct-comply.ok{background:#e9f3ee; color:#1d5a40; border:1px solid #bfe0cd;}
-.ct-comply.tip{background:#eaf2f8; color:#1d4c6b; border:1px solid #c3dcee;}
-.ct-comply.warn{background:#faf3e3; color:#7a5a10; border:1px solid #e8d5a3;}
-.ct-comply.bad{background:#f9e9e9; color:#8c1d22; border:1px solid #ecc5c5;}
-.ct-readout{font-size:clamp(.76rem,1.2vw,.9rem); color:#33453d; line-height:1.55;
-  background:var(--pale); border-radius:8px; padding:.45rem .65rem;}
-.ct-readout strong{color:var(--forest);}
-.ct-readout .net{font-family:'Merriweather',serif; font-weight:800; font-size:1.1em;}
-.ct-readout .profit{color:#2D6A4F;}
-.ct-submit{align-self:flex-start;} .ct-submit:disabled{background:#bcc7c2; cursor:not-allowed;}
-.ct-result{background:#fff; border:1px solid var(--line); border-radius:12px; padding:.6rem .85rem;
-  font-size:clamp(.8rem,1.3vw,.96rem); line-height:1.5; color:#33453d;}
-.ct-result[hidden]{display:none;}
-.ct-result .big{font-family:'Merriweather',serif; font-weight:800; font-size:1.12em;}
-.ct-result.good{border-left:4px solid #2D6A4F;} .ct-result.bad{border-left:4px solid #BC8A2E;}
-.ct-result strong{color:var(--forest);}
-.ct-board{background:#fff; border:1px solid var(--line); border-radius:12px; padding:.55rem .8rem;
-  max-height:clamp(110px,22vh,200px); overflow:auto;}
-.ct-board[hidden]{display:none;}
-.ct-board-title{font-weight:700; color:var(--forest); font-size:clamp(.66rem,1.02vw,.78rem);
-  text-transform:uppercase; letter-spacing:.03em; margin-bottom:.35rem;}
-.ct-board-rows{display:flex; flex-direction:column; gap:.22rem;}
-.ct-brow{display:flex; align-items:baseline; gap:.55rem; font-size:clamp(.74rem,1.15vw,.88rem); color:#2c3a34;}
-.ct-brow .rk{flex:none; width:1.5rem; font-weight:800; color:var(--muted); font-variant-numeric:tabular-nums;}
-.ct-brow .nm{flex:1; min-width:0; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-.ct-brow.me .nm{color:var(--accent);} .ct-brow.me .nm::after{content:" (you)"; font-weight:400; color:var(--muted);}
-.ct-brow .tag{flex:none; font-size:.9em; color:var(--muted);}
-.ct-brow .er{flex:none; font-family:'Merriweather',serif; font-weight:800; color:var(--forest); font-variant-numeric:tabular-nums;}
-.ct-brow:first-child .er{color:#2D6A4F;}
-.ct-right{display:flex; flex-direction:column; gap:.6rem; min-height:0;}
-.ct-capcard{background:#143027; color:#fff; border-radius:14px; padding:.65rem 1rem; text-align:center; box-shadow:var(--shadow);}
-.ct-capcard[hidden]{display:none;}
-.ct-capcard-round{font-size:clamp(.68rem,1.05vw,.8rem); text-transform:uppercase; letter-spacing:.06em; color:#9fd0b8; font-weight:800;}
-.ct-capcard-main{font-family:'Merriweather',serif; font-weight:900; font-size:clamp(1.15rem,2.6vw,1.9rem); line-height:1.15; margin:.15rem 0;}
-.ct-capcard-sub{font-size:clamp(.72rem,1.2vw,.9rem); color:#cfe3da; line-height:1.35;}
-.ct-capcard-sub .px{font-family:'Merriweather',serif; font-weight:900; color:#ffd58a; font-size:1.15em;}
-.ct-chart{flex:1; min-height:0; background:#fff; border:1px solid var(--line); border-radius:14px;
-  box-shadow:var(--shadow); padding:.6rem .8rem .5rem; display:flex; flex-direction:column;}
-.ct-chart[hidden]{display:none;}
-.ct-chart-title{font-weight:700; color:var(--forest); font-size:clamp(.68rem,1.05vw,.8rem);
-  text-transform:uppercase; letter-spacing:.03em; margin-bottom:.3rem;}
-.ct-histbars{flex:1; min-height:0; display:flex; gap:clamp(.5rem,1.4vw,1.1rem); align-items:stretch;}
-.ct-hslot{flex:1 1 0; min-width:0; display:flex; flex-direction:column; gap:.15rem;}
-.ct-harea{flex:1; min-height:0; position:relative; background:#f2f6f4; border-radius:8px; overflow:hidden;}
-.ct-hslot.future .ct-harea{background:transparent; border:2px dashed #d7e2dc;}
-.ct-hbar{position:absolute; left:12%; right:12%; bottom:0; background:var(--accent); border-radius:5px 5px 0 0;
-  transition:height .6s cubic-bezier(.22,.61,.36,1);}
-.ct-hem{position:absolute; left:0; right:0; text-align:center; font-family:'Merriweather',serif; font-weight:900;
-  color:var(--forest); font-size:clamp(.8rem,1.4vw,1.05rem); transform:translateY(-115%);}
-.ct-hcap{position:absolute; left:4%; right:4%; border-top:3px dashed #A4373A; z-index:2;}
-.ct-hcap::after{content:"cap"; position:absolute; right:0; top:-1.15em; font-size:.6rem; font-weight:800; color:#A4373A;}
-.ct-hslot.future .ct-hfut{position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-  text-align:center; font-size:clamp(.62rem,1.05vw,.78rem); color:var(--muted); font-weight:600; line-height:1.35; padding:.3rem;}
-.ct-hlbl{text-align:center; font-size:clamp(.64rem,1.05vw,.78rem); font-weight:800; color:var(--forest); line-height:1.2;}
-.ct-hcost{text-align:center; font-size:clamp(.6rem,1vw,.74rem); color:var(--muted); font-weight:600; line-height:1.2;}
-.ct-chart-key{display:flex; gap:.9rem; flex-wrap:wrap; margin-top:.35rem; font-size:clamp(.6rem,.98vw,.72rem); color:var(--muted);}
-.ct-key.em{color:var(--accent); font-weight:700;} .ct-key.cap{color:#A4373A; font-weight:700;} .ct-key.cost{font-weight:700;}
-.ct-lesson{background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
-  padding:.6rem .85rem; font-size:clamp(.76rem,1.22vw,.92rem); line-height:1.5; color:#33453d;}
-.ct-lesson[hidden]{display:none;}
-.ct-lesson strong{color:var(--forest);}
-.ct-lesson .drop{font-family:'Merriweather',serif; font-weight:900; color:#2D6A4F;}
-.ct-idlehint{color:var(--muted); font-style:italic; font-size:clamp(.82rem,1.35vw,1rem); line-height:1.5;
-  align-self:center; text-align:center; padding:1rem;}
-.ct-idlehint[hidden]{display:none;}
-.ct-foot{margin-top:clamp(.5rem,1.3vh,.85rem); font-size:clamp(.7rem,1.1vw,.84rem); color:var(--muted);
-  font-style:italic; line-height:1.35;}
-@media (max-width:820px){ .ct-body{grid-template-columns:1fr; overflow:auto;} .ct-chart{min-height:30vh;} }
-
-
-.slide.inspect{background:linear-gradient(158deg,#faf7f0,#f1ebdd);}
-.ins-root{position:absolute; inset:0; display:flex; flex-direction:column;
-  padding:clamp(.75rem,2vh,1.3rem) 4.6rem clamp(.55rem,1.5vh,.9rem);}
-@media(max-width:820px){ .ins-root{padding-left:1.1rem; padding-right:1.1rem;} }
-.ins-head{margin-bottom:.3rem;}
-.ins-head .eyebrow{color:#8a6a2f; margin-bottom:.35rem;}
-.ins-head .eyebrow::before{background:#8a6a2f;}
-.ins-head .heading{font-family:'Merriweather',serif; color:#3b3222; margin-bottom:0;
-  font-size:clamp(1.25rem,2.6vw,1.85rem);}
-.ins-sub{font-size:clamp(.76rem,1.18vw,.9rem); color:#7a7260; margin-top:.18rem; line-height:1.4;}
-.ins-body{flex:1 1 0; min-height:0; display:grid; grid-template-columns:minmax(300px,42%) 1fr;
-  gap:clamp(.7rem,1.8vw,1.5rem); align-items:stretch; margin-top:.4rem;}
-.ins-left,.ins-right{display:flex; flex-direction:column; gap:.4rem; min-width:0; min-height:0; overflow:auto;}
-
-/* host controls — hidden entirely on student copies */
-.ins-hostbar{display:none;}
-.slide.inspect.host .ins-hostbar{display:flex; flex-direction:column; gap:.3rem;
-  background:#fffdf8; border:1px solid rgba(120,100,60,.24); border-radius:9px; padding:.4rem .55rem;}
-.ins-hostrow{display:flex; align-items:center; gap:.4rem; flex-wrap:wrap;}
-.ins-hlabel{font-size:clamp(.6rem,.95vw,.71rem); text-transform:uppercase; letter-spacing:.05em; color:#7a7260;}
-.ins-rounds{width:3.6rem; font:inherit; font-size:.86rem; padding:.16rem .3rem;
-  border:1px solid rgba(120,100,60,.32); border-radius:6px; background:#fff; color:#3b3222;}
-.ins-hbtn{font:inherit; font-weight:700; cursor:pointer; border:none; border-radius:8px;
-  padding:.36rem .8rem; font-size:clamp(.76rem,1.15vw,.9rem); color:#fff; background:#8a6a2f;
-  transition:filter .15s, transform .08s;}
-.ins-hbtn:hover{filter:brightness(1.09);} .ins-hbtn:active{transform:translateY(1px);}
-.ins-hbtn.go{background:#2f6b4f;} .ins-hbtn.end{background:#a1503c;} .ins-hbtn.finish{background:#7a7260;}
-.ins-hbtn.lock{width:100%; margin-top:.3rem; background:#3b3222; padding:.45rem 1rem;}
-.ins-hbtn:disabled{opacity:.45; cursor:default; filter:none;}
-.ins-levers{border-top:1px dashed rgba(120,100,60,.3); padding-top:.3rem;}
-.ins-lever-lbl{font-size:clamp(.58rem,.92vw,.68rem); text-transform:uppercase; letter-spacing:.05em;
-  color:#7a7260; margin-bottom:.24rem;}
-.ins-lever-row{display:flex; gap:.35rem;}
-.ins-lever{flex:1 1 0; min-width:0; font:inherit; text-align:left; cursor:pointer;
-  background:#fdf8ec; border:1.5px solid rgba(120,100,60,.3); border-radius:8px; padding:.28rem .5rem;
-  color:#4a4436; transition:border-color .15s, background .15s;}
-.ins-lever:hover{border-color:#b8860b;}
-.ins-lever.on{background:#eef4ef; border-color:#2f6b4f; color:#25402f;}
-.ins-lever b{display:block; font-weight:700; font-size:clamp(.71rem,1.08vw,.83rem); line-height:1.2;}
-.ins-lever em{display:block; font-style:normal; font-size:clamp(.58rem,.9vw,.68rem); color:#8a8069; line-height:1.25;}
-.ins-lever.on em{color:#4a6b56;}
-
-.ins-status{font-size:clamp(.73rem,1.12vw,.86rem); color:#7a7260; line-height:1.4;
-  background:#fffdf8; border:1px solid rgba(120,100,60,.2); border-radius:8px; padding:.32rem .55rem;}
-.slide.inspect.host .ins-status{color:#5e5340;}
-.ins-join{text-align:center;}
-.ins-join-btn{width:100%; background:#2f6b4f; padding:.5rem 1rem; font-size:clamp(.86rem,1.35vw,1rem);}
-.ins-join-note{font-size:clamp(.62rem,.98vw,.73rem); color:#8a8069; margin-top:.22rem; line-height:1.35;}
-
-/* which side you were dealt */
-.ins-rolecard{background:#fffdf8; border:1px solid rgba(120,100,60,.22);
-  border-left:4px solid #8a5a2f; border-radius:9px; padding:.36rem .6rem .42rem;}
-.ins-rolecard.insp{border-left-color:#3f5f7a;}
-.ins-role-tag{font-size:clamp(.57rem,.9vw,.67rem); text-transform:uppercase; letter-spacing:.07em;
-  color:#8a8069; font-weight:700;}
-.ins-role-name{font-family:'Merriweather',serif; font-size:clamp(.95rem,1.6vw,1.18rem);
-  color:#3b3222; line-height:1.2;}
-.ins-role-desc{font-size:clamp(.68rem,1.05vw,.8rem); color:#7a7260; line-height:1.38; margin-top:.1rem;}
-
-.ins-decide-prompt{font-family:'Merriweather',serif; font-size:clamp(.83rem,1.3vw,.98rem);
-  color:#3b3222; margin-bottom:.3rem; line-height:1.3;}
-.ins-opts{display:flex; flex-direction:column; gap:.28rem;}
-.ins-opt{font:inherit; text-align:left; cursor:pointer; background:#fffdf8;
-  border:1.5px solid rgba(120,100,60,.25); border-radius:9px; padding:.34rem .6rem;
-  color:#4a4436; transition:border-color .15s, box-shadow .15s, background .15s;
-  display:flex; align-items:baseline; gap:.5rem;}
-.ins-opt:hover{border-color:#b8860b;}
-.ins-opt.on{border-color:#8a6a2f; background:#fdf4e2; box-shadow:0 3px 10px rgba(120,90,30,.14);}
-.ins-opt .txt{flex:1 1 auto; min-width:0;}
-.ins-opt b{display:block; font-weight:700; font-size:clamp(.78rem,1.2vw,.92rem); line-height:1.2; color:#3b3222;}
-.ins-opt em{display:block; font-style:normal; font-size:clamp(.63rem,1vw,.74rem); color:#8a8069; line-height:1.3;}
-.ins-opt .pay{flex:none; font-family:'Merriweather',serif; font-size:clamp(.8rem,1.28vw,.98rem);
-  color:#5e5340; font-variant-numeric:tabular-nums;}
-.ins-opt.done{opacity:.55; cursor:default;}
-.ins-opt.chosen{border-color:#2f6b4f; background:#eef4ef; opacity:1;}
-
-/* the round verdict, in the register of the commons game's reveal */
-.ins-reveal{background:#fffdf8; border:1px solid rgba(120,100,60,.22); border-radius:9px;
-  padding:.4rem .6rem .45rem;}
-.ins-verdict{font-family:'Merriweather',serif; font-size:clamp(.82rem,1.28vw,.97rem);
-  line-height:1.3; color:#3b3222; margin-bottom:.22rem;}
-.ins-verdict.open{color:#8f3f2c;} .ins-verdict.quiet{color:#8a6a2f;} .ins-verdict.comply{color:#2f6b4f;}
-.ins-revlines{font-size:clamp(.7rem,1.08vw,.83rem); line-height:1.45; color:#5e5340;}
-.ins-revlines strong{color:#3b3222; font-weight:700;}
-.ins-revlines .why{display:block; margin-top:.26rem; padding-top:.24rem;
-  border-top:1px dashed rgba(120,100,60,.3); color:#6b6350;}
-.ins-revlines .why b{color:#8a6a2f;}
-.ins-me{background:#fdf8ec; border:1px solid rgba(120,100,60,.22); border-left:3px solid #b8860b;
-  border-radius:8px; padding:.3rem .55rem; font-size:clamp(.71rem,1.1vw,.84rem); color:#5e5340; line-height:1.4;}
-.ins-me b{font-family:'Merriweather',serif; color:#3b3222;}
-
-.ins-board-title{font-size:clamp(.6rem,.96vw,.71rem); text-transform:uppercase; letter-spacing:.05em;
-  color:#7a6437; margin-bottom:.22rem;}
-.ins-board-cols{display:grid; grid-template-columns:1fr 1fr; gap:.4rem;}
-.ins-board-col{background:#fffdf8; border:1px solid rgba(120,100,60,.2); border-radius:8px; padding:.26rem .42rem .3rem;}
-.ins-board-h{font-size:clamp(.57rem,.9vw,.67rem); text-transform:uppercase; letter-spacing:.04em;
-  font-weight:700; margin-bottom:.18rem;}
-.ins-board-h.plant{color:#8a5a2f;} .ins-board-h.insp{color:#3f5f7a;}
-.ins-board-row{display:flex; justify-content:space-between; gap:.4rem;
-  font-size:clamp(.66rem,1.02vw,.78rem); color:#6b6350; line-height:1.5;}
-.ins-board-row .nm{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-.ins-board-row .vv{flex:none; font-variant-numeric:tabular-nums; color:#3b3222;}
-.ins-board-row.you{font-weight:800; color:#3b3222;}
-.ins-board-empty{font-size:clamp(.64rem,1vw,.75rem); color:#9a9280; font-style:italic;}
-
-/* right column — the deterrence gauge is the teaching object */
-.ins-gauge{background:#fffdf8; border:1px solid rgba(120,100,60,.22); border-radius:9px;
-  padding:.35rem .6rem .4rem; display:flex; flex-direction:column; flex:none;}
-.ins-gauge-title{font-family:'Merriweather',serif; font-size:clamp(.83rem,1.3vw,.98rem);
-  color:#6b6350; margin-bottom:.1rem;}
-.ins-gsvg{width:100%; height:auto; flex:0 0 auto;}
-.ins-gauge-eq{font-size:clamp(.66rem,1.04vw,.78rem); color:#7a7260; line-height:1.45; margin-top:.15rem;}
-.ins-gauge-eq b{font-family:'Merriweather',serif; color:#3b3222;}
-.ins-glbl{font-family:'Inter',sans-serif; font-size:12px; font-weight:700; fill:#5e5340;}
-.ins-gnum{font-family:'Merriweather',serif; font-size:17px; font-weight:700; fill:#3b3222;}
-.ins-gnum.in{fill:#fffdf8;}
-.ins-gsub{font-family:'Inter',sans-serif; font-size:10.5px; fill:#8a8069;}
-.ins-gaxis{stroke:rgba(120,100,60,.28); stroke-width:1.2; fill:none;}
-.ins-gbar.gain{fill:#c98a5a;} .ins-gbar.pen{fill:#3f5f7a;}
-.ins-gbar.pen.over{fill:#2f6b4f;}
-.ins-gverdict{font-family:'Merriweather',serif; font-size:13.5px; font-weight:700;}
-
-.ins-mix,.ins-summary{background:#fffdf8; border:1px solid rgba(120,100,60,.22); border-radius:9px;
-  padding:.35rem .6rem .42rem; flex:none;}
-.ins-mix-title{font-family:'Merriweather',serif; font-size:clamp(.78rem,1.22vw,.92rem);
-  color:#6b6350; margin-bottom:.18rem;}
-.ins-mixsvg{width:100%; height:auto;}
-.ins-mix-key{display:flex; gap:.7rem; flex-wrap:wrap; font-size:clamp(.6rem,.95vw,.7rem); color:#8a8069; margin-top:.1rem;}
-.ins-k.comply{color:#2f6b4f;} .ins-k.quiet{color:#8a6a2f;} .ins-k.open{color:#a1503c;}
-.ins-mixlbl{font-family:'Inter',sans-serif; font-size:10.5px; fill:#8a8069;}
-.ins-grid{stroke:rgba(120,100,60,.22); stroke-width:1; fill:none;}
-.ins-axl{font-family:'Inter',sans-serif; font-size:8.5px; fill:#a09781;}
-.ins-mixnum{font-family:'Inter',sans-serif; font-size:10px; font-weight:700; fill:#fffdf8;}
-.ins-seg.comply{fill:#5f7a6a;} .ins-seg.quiet{fill:#c9a24a;} .ins-seg.open{fill:#a1503c;}
-.ins-detline{stroke:#3f5f7a; stroke-width:2; fill:none; stroke-dasharray:5 4;}
-.ins-detdot{fill:#3f5f7a;}
-
-.ins-chips{display:grid; grid-template-columns:1fr 1fr; gap:.35rem;}
-.ins-chip{background:#fdf8ec; border:1px solid rgba(120,100,60,.22); border-top:3px solid #b8860b;
-  border-radius:8px; padding:.28rem .5rem .34rem;}
-.ins-chip.key{border-top-color:#2f6b4f; grid-column:1 / -1;}
-.ins-chip span{display:block; font-size:clamp(.58rem,.92vw,.68rem); text-transform:uppercase;
-  letter-spacing:.05em; color:#7a7260;}
-.ins-chip b{display:block; font-family:'Merriweather',serif; font-size:clamp(.92rem,1.5vw,1.15rem);
-  color:#3b3222; line-height:1.2;}
-.ins-chip em{display:block; font-style:normal; font-size:clamp(.6rem,.95vw,.71rem);
-  color:#8a8069; line-height:1.32; margin-top:.08rem;}
-
-.ins-disc{margin:.28rem 0 0; padding-top:.26rem; border-top:1px solid rgba(120,100,60,.28);
-  font-size:clamp(.57rem,.9vw,.68rem); line-height:1.38; color:#7a7260;}
-.ins-disc b{color:#5e5340;} .ins-disc em{font-style:italic;}
-.ins-refs{display:block; margin-top:.1rem; color:#8f8672; font-size:.94em;}
-
-@media(max-width:1000px){
-  .ins-body{grid-template-columns:1fr;}
-  .ins-board-cols{grid-template-columns:1fr;}
-}
-@media(prefers-reduced-motion:reduce){.ins-hbtn,.ins-opt,.ins-lever{transition:none;}}
 /* ── Chapters 6–8 Review Game (live multiplayer quiz) ─────────────────────── */
 .slide.rg-slide{background:linear-gradient(158deg,#faf7f0,#f1ebdd);}
 .slide.rg-slide .heading{font-family:'Merriweather',serif; color:#3b3222;}
@@ -2832,6 +2457,385 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 }
 @media(prefers-reduced-motion:reduce){ .mf-card .mf-flip,.mf-seal,.mf-hist,.mf-hb,.mf-verdict{animation:none !important;} }
 /* ── end Mortality Face-Off ── */
+
+/* announcements / upcoming assignments */
+.slide[data-type="announce"]{background:linear-gradient(160deg,#f7faf8,#eaf1ed);}
+.an-head{margin-bottom:clamp(.8rem,2vh,1.4rem);}
+.an-head .heading{margin-bottom:.35rem;}
+.an-sub{font-size:clamp(.88rem,1.4vw,1.05rem); color:var(--muted); max-width:72ch; line-height:1.45;}
+.an-list{display:flex; flex-direction:column; gap:clamp(.55rem,1.5vh,.95rem); width:100%;}
+.an-row{display:flex; align-items:center; gap:clamp(.8rem,1.8vw,1.4rem);
+  background:var(--paper); border:1px solid var(--line); border-left:5px solid var(--accent,var(--green));
+  border-radius:14px; box-shadow:0 4px 14px rgba(20,40,30,.07);
+  padding:clamp(.75rem,1.9vh,1.15rem) clamp(1rem,2.2vw,1.6rem);}
+.an-num{flex:none; width:2.3rem; height:2.3rem; border-radius:50%; background:var(--accent,var(--forest-mid));
+  color:#fff; font-family:'Merriweather',serif; font-weight:800; font-size:clamp(.95rem,1.6vw,1.15rem);
+  display:flex; align-items:center; justify-content:center;}
+.an-main{flex:1; min-width:0;}
+.an-name{font-family:'Merriweather',serif; font-weight:700; color:var(--forest);
+  font-size:clamp(1rem,1.75vw,1.3rem); line-height:1.25;}
+.an-detail{font-size:clamp(.78rem,1.25vw,.95rem); color:var(--muted); line-height:1.4; margin-top:.22rem;}
+.an-due{flex:none; min-width:clamp(112px,13vw,168px); text-align:center;
+  background:var(--pale); border:1.5px solid var(--line); border-radius:11px;
+  padding:.45rem .8rem;}
+.an-due-lbl{display:block; font-size:clamp(.6rem,.95vw,.72rem); font-weight:800; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--muted);}
+.an-due-val{display:block; font-family:'Merriweather',serif; font-weight:800; color:var(--forest);
+  font-size:clamp(.9rem,1.5vw,1.12rem); line-height:1.2; margin-top:.1rem;}
+.an-due.tba{background:repeating-linear-gradient(135deg,#fbfaf6,#fbfaf6 7px,#f4f1e6 7px,#f4f1e6 14px);
+  border:1.5px dashed var(--gold);}
+.an-due.tba .an-due-val{color:var(--gold); letter-spacing:.04em;}
+.an-note{margin-top:clamp(.7rem,1.8vh,1.2rem); padding:.65rem .95rem; background:var(--pale);
+  border-left:3px solid var(--accent,var(--green)); border-radius:0 8px 8px 0;
+  font-size:clamp(.78rem,1.2vw,.92rem); color:#3a4a43; font-style:italic;}
+@media (max-width:820px){
+  .an-row{flex-wrap:wrap; gap:.6rem;}
+  .an-main{flex:1 1 60%;}
+  .an-due{min-width:0; margin-left:3.1rem;}
+}
+/* live attendance — host bar (only rendered on the ?host copy) */
+.an-att{display:flex; align-items:center; gap:.7rem; flex-wrap:wrap;
+  margin-top:clamp(.6rem,1.6vh,1.1rem);}
+.an-att[hidden]{display:none;}
+.an-att-btn{font-family:inherit; font-weight:800; color:#fff; border:none; cursor:pointer;
+  background:var(--accent,var(--forest-mid)); border-radius:11px; padding:.6rem 1.4rem;
+  font-size:clamp(.85rem,1.4vw,1rem); transition:filter .15s;}
+.an-att-btn:hover{filter:brightness(1.1);}
+.an-att-btn[hidden]{display:none;}
+.an-att-btn.go{background:#A4373A;}
+.an-att-cancel{font-family:inherit; font-weight:600; color:var(--muted); background:#fff;
+  border:1.5px solid var(--line); border-radius:11px; padding:.6rem 1rem; cursor:pointer;
+  font-size:clamp(.78rem,1.2vw,.9rem);}
+.an-att-cancel:hover{border-color:var(--accent); color:var(--accent);}
+.an-att-cancel[hidden]{display:none;}
+.an-att-sel{font-family:inherit; font-size:clamp(.8rem,1.28vw,.94rem); font-weight:700;
+  color:var(--forest); background:#fff; border:2px solid var(--line); border-radius:11px;
+  padding:.55rem .7rem; cursor:pointer;}
+.an-att-sel:focus{outline:none; border-color:var(--accent,var(--forest-mid));}
+.an-att-sel:disabled{opacity:.55; cursor:not-allowed;}
+.an-att-status{font-size:clamp(.78rem,1.2vw,.92rem); color:var(--muted);}
+.an-att-status em{font-style:normal; font-weight:800; color:var(--forest);}
+.an-att-status strong{font-family:'Merriweather',serif; color:var(--forest); font-size:1.15em;}
+.an-att-status.warn{color:#A4373A; font-weight:700; font-style:italic;}
+/* live attendance — student pop-up (appended to <body>, shows over any slide) */
+.at-modal{position:fixed; inset:0; z-index:120; display:flex; align-items:center;
+  justify-content:center; padding:1.2rem; background:rgba(16,28,23,.55);
+  backdrop-filter:blur(3px); animation:at-fade .22s ease;}
+.at-modal[hidden]{display:none;}
+@keyframes at-fade{from{opacity:0;}}
+.at-box{background:#fff; border-radius:18px; box-shadow:0 24px 60px rgba(0,0,0,.35);
+  width:min(470px,100%); max-height:92vh; overflow-y:auto;
+  padding:clamp(1.2rem,3.4vw,1.9rem); animation:at-rise .26s cubic-bezier(.22,.61,.36,1);}
+@keyframes at-rise{from{transform:translateY(16px) scale(.97); opacity:0;}}
+.at-title{font-family:'Merriweather',serif; font-weight:800; color:var(--forest);
+  font-size:clamp(1.15rem,2.4vw,1.5rem); line-height:1.2;}
+.at-chapter{font-size:clamp(.8rem,1.3vw,.94rem); color:var(--muted); margin-top:.25rem;}
+.at-section{display:inline-block; margin-top:.45rem; padding:.2em .7em; border-radius:20px;
+  background:var(--pale); border:1px solid var(--line); font-size:clamp(.72rem,1.15vw,.84rem);
+  font-weight:800; color:var(--forest);}
+.at-section[hidden]{display:none;}
+.at-field{display:block; margin-top:.9rem;}
+.at-two{display:grid; grid-template-columns:1fr 1fr; gap:.6rem;}
+@media (max-width:400px){ .at-two{grid-template-columns:1fr;} }
+.at-lbl{display:block; font-size:clamp(.7rem,1.1vw,.8rem); font-weight:800; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--muted); margin-bottom:.25rem;}
+.at-input{width:100%; font-family:inherit; font-size:clamp(.92rem,1.5vw,1.05rem);
+  padding:.62rem .8rem; border:2px solid var(--line); border-radius:11px; color:var(--ink);
+  background:#fff;}
+.at-input:focus{outline:none; border-color:var(--accent,var(--forest-mid));}
+.at-input.bad{border-color:#A4373A; background:#fdf6f6;}
+.at-submit{width:100%; margin-top:1.1rem; font-family:inherit; font-weight:800; color:#fff;
+  border:none; cursor:pointer; background:var(--forest-mid); border-radius:12px;
+  padding:.78rem 1rem; font-size:clamp(.98rem,1.6vw,1.12rem); transition:filter .15s;}
+.at-submit:hover:not(:disabled){filter:brightness(1.1);}
+.at-submit:disabled{background:#bcc7c2; cursor:default;}
+.at-msg{margin-top:.7rem; font-size:clamp(.78rem,1.25vw,.9rem); line-height:1.4; min-height:1.2em;}
+.at-msg.err{color:#A4373A; font-weight:700;}
+.at-msg.ok{color:#2D6A4F; font-weight:700;}
+.at-done{text-align:center; padding:.4rem 0 .2rem;}
+.at-done-tick{font-size:2.6rem; line-height:1;}
+.at-done-txt{font-family:'Merriweather',serif; font-weight:800; color:#2D6A4F;
+  font-size:clamp(1.05rem,2vw,1.3rem); margin-top:.4rem;}
+.at-done-sub{font-size:clamp(.8rem,1.28vw,.94rem); color:var(--muted); margin-top:.35rem; line-height:1.45;}
+.at-close{margin-top:1rem; font-family:inherit; font-weight:700; color:var(--muted); background:#fff;
+  border:1.5px solid var(--line); border-radius:11px; padding:.5rem 1.2rem; cursor:pointer;}
+.at-close:hover{border-color:var(--accent); color:var(--accent);}
+
+
+/* cap-and-trade market simulation (v4: multi-round, tightening cap) */
+.slide.captrade{background:linear-gradient(160deg,#f3f6f4,#e6eee9);}
+.ct-root{position:absolute; inset:0; display:flex; flex-direction:column;
+  padding:clamp(1rem,2.6vh,1.8rem) clamp(1.4rem,3.2vw,3rem) clamp(.8rem,2vh,1.3rem);}
+.ct-head{margin-bottom:clamp(.4rem,1.2vh,.8rem);}
+.ct-head .heading{margin-bottom:.25rem;}
+.ct-sub{font-size:clamp(.82rem,1.3vw,.98rem); color:var(--muted); max-width:76ch;}
+.ct-body{flex:1; min-height:0; display:grid; grid-template-columns:minmax(330px,46%) 1fr;
+  gap:clamp(1.1rem,2.6vw,2.2rem); align-items:stretch;}
+.ct-left{display:flex; flex-direction:column; gap:.55rem; min-width:0; justify-content:center; overflow:auto;}
+.ct-hostbar{display:flex; flex-wrap:wrap; gap:.5rem; padding:.55rem .7rem;
+  background:rgba(164,55,58,.06); border:1px dashed rgba(164,55,58,.4); border-radius:10px;}
+.slide.captrade:not(.host) .ct-hostbar{display:none;}
+.ct-hbtn{font-family:inherit; font-weight:800; font-size:clamp(.82rem,1.3vw,.96rem);
+  padding:.5rem 1rem; border:none; border-radius:9px; cursor:pointer; color:#fff;
+  background:var(--forest-mid); transition:filter .15s, transform .08s;}
+.ct-hbtn:hover{filter:brightness(1.1);} .ct-hbtn:active{transform:translateY(1px);}
+.ct-hbtn.run{background:#BC8A2E;} .ct-hbtn.new{background:#6b7f77;}
+.ct-hbtn[hidden]{display:none;}
+.ct-status{font-size:clamp(.86rem,1.4vw,1.02rem); color:#2c3a34; font-weight:600; line-height:1.4;
+  padding:.55rem .75rem; background:#fff; border:1px solid var(--line); border-radius:10px;}
+.ct-join{display:flex;} .ct-join[hidden]{display:none;}
+.ct-join .ct-hbtn{flex:1; font-size:clamp(.95rem,1.6vw,1.15rem); padding:.7rem 1.2rem;}
+.ct-factory{display:flex; flex-direction:column; gap:.5rem; background:#fff; border:1px solid var(--line);
+  border-left:4px solid var(--accent); border-radius:12px; padding:.65rem .85rem;}
+.ct-factory[hidden]{display:none;}
+.ct-factory-head{font-size:clamp(.8rem,1.3vw,.95rem); color:#33453d; line-height:1.4;}
+.ct-factory-head strong{color:var(--forest);}
+.ct-factory-head [data-ct-cost]{font-family:'Merriweather',serif; color:#A4373A; font-size:1.15em;}
+.ct-hint2{font-size:clamp(.76rem,1.2vw,.9rem); color:#3a4a43; line-height:1.4;
+  background:var(--pale); border-left:3px solid var(--accent); border-radius:0 8px 8px 0; padding:.4rem .6rem;}
+.ct-hint2:empty{display:none;}
+.ct-decide{display:flex; flex-direction:column; gap:.45rem;}
+.ct-ctrl[hidden]{display:none;}
+.ct-ctrl-lbl{font-weight:700; color:var(--forest); font-size:clamp(.82rem,1.35vw,.98rem);}
+.ct-ctrl-sub{font-weight:600; color:var(--muted); font-size:.85em;}
+.ct-decide-row{display:flex; align-items:center; gap:.9rem; margin-top:.15rem;}
+.ct-range{flex:1; accent-color:var(--accent); height:1.5rem; cursor:pointer;}
+.ct-range:disabled{opacity:.55; cursor:default;}
+.ct-range-out{flex:none; display:flex; align-items:baseline; gap:.3rem; min-width:5.6rem; justify-content:flex-end;}
+.ct-range-num{font-family:'Merriweather',serif; font-weight:900; color:var(--accent);
+  font-size:clamp(1.3rem,2.5vw,1.85rem); line-height:1; white-space:nowrap;}
+.ct-range-num.sm{font-size:clamp(1rem,1.9vw,1.4rem);}
+.ct-range-unit{font-size:.7rem; color:var(--muted); font-weight:700; white-space:nowrap;}
+.ct-comply{font-size:clamp(.76rem,1.25vw,.92rem); font-weight:700; line-height:1.4;
+  border-radius:8px; padding:.4rem .6rem;}
+.ct-comply.ok{background:#e9f3ee; color:#1d5a40; border:1px solid #bfe0cd;}
+.ct-comply.tip{background:#eaf2f8; color:#1d4c6b; border:1px solid #c3dcee;}
+.ct-comply.warn{background:#faf3e3; color:#7a5a10; border:1px solid #e8d5a3;}
+.ct-comply.bad{background:#f9e9e9; color:#8c1d22; border:1px solid #ecc5c5;}
+.ct-readout{font-size:clamp(.76rem,1.2vw,.9rem); color:#33453d; line-height:1.55;
+  background:var(--pale); border-radius:8px; padding:.45rem .65rem;}
+.ct-readout strong{color:var(--forest);}
+.ct-readout .net{font-family:'Merriweather',serif; font-weight:800; font-size:1.1em;}
+.ct-readout .profit{color:#2D6A4F;}
+.ct-submit{align-self:flex-start;} .ct-submit:disabled{background:#bcc7c2; cursor:not-allowed;}
+.ct-result{background:#fff; border:1px solid var(--line); border-radius:12px; padding:.6rem .85rem;
+  font-size:clamp(.8rem,1.3vw,.96rem); line-height:1.5; color:#33453d;}
+.ct-result[hidden]{display:none;}
+.ct-result .big{font-family:'Merriweather',serif; font-weight:800; font-size:1.12em;}
+.ct-result.good{border-left:4px solid #2D6A4F;} .ct-result.bad{border-left:4px solid #BC8A2E;}
+.ct-result strong{color:var(--forest);}
+.ct-board{background:#fff; border:1px solid var(--line); border-radius:12px; padding:.55rem .8rem;
+  max-height:clamp(110px,22vh,200px); overflow:auto;}
+.ct-board[hidden]{display:none;}
+.ct-board-title{font-weight:700; color:var(--forest); font-size:clamp(.66rem,1.02vw,.78rem);
+  text-transform:uppercase; letter-spacing:.03em; margin-bottom:.35rem;}
+.ct-board-rows{display:flex; flex-direction:column; gap:.22rem;}
+.ct-brow{display:flex; align-items:baseline; gap:.55rem; font-size:clamp(.74rem,1.15vw,.88rem); color:#2c3a34;}
+.ct-brow .rk{flex:none; width:1.5rem; font-weight:800; color:var(--muted); font-variant-numeric:tabular-nums;}
+.ct-brow .nm{flex:1; min-width:0; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.ct-brow.me .nm{color:var(--accent);} .ct-brow.me .nm::after{content:" (you)"; font-weight:400; color:var(--muted);}
+.ct-brow .tag{flex:none; font-size:.9em; color:var(--muted);}
+.ct-brow .er{flex:none; font-family:'Merriweather',serif; font-weight:800; color:var(--forest); font-variant-numeric:tabular-nums;}
+.ct-brow:first-child .er{color:#2D6A4F;}
+.ct-right{display:flex; flex-direction:column; gap:.6rem; min-height:0;}
+.ct-capcard{background:#143027; color:#fff; border-radius:14px; padding:.65rem 1rem; text-align:center; box-shadow:var(--shadow);}
+.ct-capcard[hidden]{display:none;}
+.ct-capcard-round{font-size:clamp(.68rem,1.05vw,.8rem); text-transform:uppercase; letter-spacing:.06em; color:#9fd0b8; font-weight:800;}
+.ct-capcard-main{font-family:'Merriweather',serif; font-weight:900; font-size:clamp(1.15rem,2.6vw,1.9rem); line-height:1.15; margin:.15rem 0;}
+.ct-capcard-sub{font-size:clamp(.72rem,1.2vw,.9rem); color:#cfe3da; line-height:1.35;}
+.ct-capcard-sub .px{font-family:'Merriweather',serif; font-weight:900; color:#ffd58a; font-size:1.15em;}
+.ct-chart{flex:1; min-height:0; background:#fff; border:1px solid var(--line); border-radius:14px;
+  box-shadow:var(--shadow); padding:.6rem .8rem .5rem; display:flex; flex-direction:column;}
+.ct-chart[hidden]{display:none;}
+.ct-chart-title{font-weight:700; color:var(--forest); font-size:clamp(.68rem,1.05vw,.8rem);
+  text-transform:uppercase; letter-spacing:.03em; margin-bottom:.3rem;}
+.ct-histbars{flex:1; min-height:0; display:flex; gap:clamp(.5rem,1.4vw,1.1rem); align-items:stretch;}
+.ct-hslot{flex:1 1 0; min-width:0; display:flex; flex-direction:column; gap:.15rem;}
+.ct-harea{flex:1; min-height:0; position:relative; background:#f2f6f4; border-radius:8px; overflow:hidden;}
+.ct-hslot.future .ct-harea{background:transparent; border:2px dashed #d7e2dc;}
+.ct-hbar{position:absolute; left:12%; right:12%; bottom:0; background:var(--accent); border-radius:5px 5px 0 0;
+  transition:height .6s cubic-bezier(.22,.61,.36,1);}
+.ct-hem{position:absolute; left:0; right:0; text-align:center; font-family:'Merriweather',serif; font-weight:900;
+  color:var(--forest); font-size:clamp(.8rem,1.4vw,1.05rem); transform:translateY(-115%);}
+.ct-hcap{position:absolute; left:4%; right:4%; border-top:3px dashed #A4373A; z-index:2;}
+.ct-hcap::after{content:"cap"; position:absolute; right:0; top:-1.15em; font-size:.6rem; font-weight:800; color:#A4373A;}
+.ct-hslot.future .ct-hfut{position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  text-align:center; font-size:clamp(.62rem,1.05vw,.78rem); color:var(--muted); font-weight:600; line-height:1.35; padding:.3rem;}
+.ct-hlbl{text-align:center; font-size:clamp(.64rem,1.05vw,.78rem); font-weight:800; color:var(--forest); line-height:1.2;}
+.ct-hcost{text-align:center; font-size:clamp(.6rem,1vw,.74rem); color:var(--muted); font-weight:600; line-height:1.2;}
+.ct-chart-key{display:flex; gap:.9rem; flex-wrap:wrap; margin-top:.35rem; font-size:clamp(.6rem,.98vw,.72rem); color:var(--muted);}
+.ct-key.em{color:var(--accent); font-weight:700;} .ct-key.cap{color:#A4373A; font-weight:700;} .ct-key.cost{font-weight:700;}
+.ct-lesson{background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
+  padding:.6rem .85rem; font-size:clamp(.76rem,1.22vw,.92rem); line-height:1.5; color:#33453d;}
+.ct-lesson[hidden]{display:none;}
+.ct-lesson strong{color:var(--forest);}
+.ct-lesson .drop{font-family:'Merriweather',serif; font-weight:900; color:#2D6A4F;}
+.ct-idlehint{color:var(--muted); font-style:italic; font-size:clamp(.82rem,1.35vw,1rem); line-height:1.5;
+  align-self:center; text-align:center; padding:1rem;}
+.ct-idlehint[hidden]{display:none;}
+.ct-foot{margin-top:clamp(.5rem,1.3vh,.85rem); font-size:clamp(.7rem,1.1vw,.84rem); color:var(--muted);
+  font-style:italic; line-height:1.35;}
+@media (max-width:820px){ .ct-body{grid-template-columns:1fr; overflow:auto;} .ct-chart{min-height:30vh;} }
+
+
+.slide.inspect{background:linear-gradient(158deg,#faf7f0,#f1ebdd);}
+.ins-root{position:absolute; inset:0; display:flex; flex-direction:column;
+  padding:clamp(.75rem,2vh,1.3rem) 4.6rem clamp(.55rem,1.5vh,.9rem);}
+@media(max-width:820px){ .ins-root{padding-left:1.1rem; padding-right:1.1rem;} }
+.ins-head{margin-bottom:.3rem;}
+.ins-head .eyebrow{color:#8a6a2f; margin-bottom:.35rem;}
+.ins-head .eyebrow::before{background:#8a6a2f;}
+.ins-head .heading{font-family:'Merriweather',serif; color:#3b3222; margin-bottom:0;
+  font-size:clamp(1.25rem,2.6vw,1.85rem);}
+.ins-sub{font-size:clamp(.76rem,1.18vw,.9rem); color:#7a7260; margin-top:.18rem; line-height:1.4;}
+.ins-body{flex:1 1 0; min-height:0; display:grid; grid-template-columns:minmax(300px,42%) 1fr;
+  gap:clamp(.7rem,1.8vw,1.5rem); align-items:stretch; margin-top:.4rem;}
+.ins-left,.ins-right{display:flex; flex-direction:column; gap:.4rem; min-width:0; min-height:0; overflow:auto;}
+
+/* host controls — hidden entirely on student copies */
+.ins-hostbar{display:none;}
+.slide.inspect.host .ins-hostbar{display:flex; flex-direction:column; gap:.3rem;
+  background:#fffdf8; border:1px solid rgba(120,100,60,.24); border-radius:9px; padding:.4rem .55rem;}
+.ins-hostrow{display:flex; align-items:center; gap:.4rem; flex-wrap:wrap;}
+.ins-hlabel{font-size:clamp(.6rem,.95vw,.71rem); text-transform:uppercase; letter-spacing:.05em; color:#7a7260;}
+.ins-rounds{width:3.6rem; font:inherit; font-size:.86rem; padding:.16rem .3rem;
+  border:1px solid rgba(120,100,60,.32); border-radius:6px; background:#fff; color:#3b3222;}
+.ins-hbtn{font:inherit; font-weight:700; cursor:pointer; border:none; border-radius:8px;
+  padding:.36rem .8rem; font-size:clamp(.76rem,1.15vw,.9rem); color:#fff; background:#8a6a2f;
+  transition:filter .15s, transform .08s;}
+.ins-hbtn:hover{filter:brightness(1.09);} .ins-hbtn:active{transform:translateY(1px);}
+.ins-hbtn.go{background:#2f6b4f;} .ins-hbtn.end{background:#a1503c;} .ins-hbtn.finish{background:#7a7260;}
+.ins-hbtn.lock{width:100%; margin-top:.3rem; background:#3b3222; padding:.45rem 1rem;}
+.ins-hbtn:disabled{opacity:.45; cursor:default; filter:none;}
+.ins-levers{border-top:1px dashed rgba(120,100,60,.3); padding-top:.3rem;}
+.ins-lever-lbl{font-size:clamp(.58rem,.92vw,.68rem); text-transform:uppercase; letter-spacing:.05em;
+  color:#7a7260; margin-bottom:.24rem;}
+.ins-lever-row{display:flex; gap:.35rem;}
+.ins-lever{flex:1 1 0; min-width:0; font:inherit; text-align:left; cursor:pointer;
+  background:#fdf8ec; border:1.5px solid rgba(120,100,60,.3); border-radius:8px; padding:.28rem .5rem;
+  color:#4a4436; transition:border-color .15s, background .15s;}
+.ins-lever:hover{border-color:#b8860b;}
+.ins-lever.on{background:#eef4ef; border-color:#2f6b4f; color:#25402f;}
+.ins-lever b{display:block; font-weight:700; font-size:clamp(.71rem,1.08vw,.83rem); line-height:1.2;}
+.ins-lever em{display:block; font-style:normal; font-size:clamp(.58rem,.9vw,.68rem); color:#8a8069; line-height:1.25;}
+.ins-lever.on em{color:#4a6b56;}
+
+.ins-status{font-size:clamp(.73rem,1.12vw,.86rem); color:#7a7260; line-height:1.4;
+  background:#fffdf8; border:1px solid rgba(120,100,60,.2); border-radius:8px; padding:.32rem .55rem;}
+.slide.inspect.host .ins-status{color:#5e5340;}
+.ins-join{text-align:center;}
+.ins-join-btn{width:100%; background:#2f6b4f; padding:.5rem 1rem; font-size:clamp(.86rem,1.35vw,1rem);}
+.ins-join-note{font-size:clamp(.62rem,.98vw,.73rem); color:#8a8069; margin-top:.22rem; line-height:1.35;}
+
+/* which side you were dealt */
+.ins-rolecard{background:#fffdf8; border:1px solid rgba(120,100,60,.22);
+  border-left:4px solid #8a5a2f; border-radius:9px; padding:.36rem .6rem .42rem;}
+.ins-rolecard.insp{border-left-color:#3f5f7a;}
+.ins-role-tag{font-size:clamp(.57rem,.9vw,.67rem); text-transform:uppercase; letter-spacing:.07em;
+  color:#8a8069; font-weight:700;}
+.ins-role-name{font-family:'Merriweather',serif; font-size:clamp(.95rem,1.6vw,1.18rem);
+  color:#3b3222; line-height:1.2;}
+.ins-role-desc{font-size:clamp(.68rem,1.05vw,.8rem); color:#7a7260; line-height:1.38; margin-top:.1rem;}
+
+.ins-decide-prompt{font-family:'Merriweather',serif; font-size:clamp(.83rem,1.3vw,.98rem);
+  color:#3b3222; margin-bottom:.3rem; line-height:1.3;}
+.ins-opts{display:flex; flex-direction:column; gap:.28rem;}
+.ins-opt{font:inherit; text-align:left; cursor:pointer; background:#fffdf8;
+  border:1.5px solid rgba(120,100,60,.25); border-radius:9px; padding:.34rem .6rem;
+  color:#4a4436; transition:border-color .15s, box-shadow .15s, background .15s;
+  display:flex; align-items:baseline; gap:.5rem;}
+.ins-opt:hover{border-color:#b8860b;}
+.ins-opt.on{border-color:#8a6a2f; background:#fdf4e2; box-shadow:0 3px 10px rgba(120,90,30,.14);}
+.ins-opt .txt{flex:1 1 auto; min-width:0;}
+.ins-opt b{display:block; font-weight:700; font-size:clamp(.78rem,1.2vw,.92rem); line-height:1.2; color:#3b3222;}
+.ins-opt em{display:block; font-style:normal; font-size:clamp(.63rem,1vw,.74rem); color:#8a8069; line-height:1.3;}
+.ins-opt .pay{flex:none; font-family:'Merriweather',serif; font-size:clamp(.8rem,1.28vw,.98rem);
+  color:#5e5340; font-variant-numeric:tabular-nums;}
+.ins-opt.done{opacity:.55; cursor:default;}
+.ins-opt.chosen{border-color:#2f6b4f; background:#eef4ef; opacity:1;}
+
+/* the round verdict, in the register of the commons game's reveal */
+.ins-reveal{background:#fffdf8; border:1px solid rgba(120,100,60,.22); border-radius:9px;
+  padding:.4rem .6rem .45rem;}
+.ins-verdict{font-family:'Merriweather',serif; font-size:clamp(.82rem,1.28vw,.97rem);
+  line-height:1.3; color:#3b3222; margin-bottom:.22rem;}
+.ins-verdict.open{color:#8f3f2c;} .ins-verdict.quiet{color:#8a6a2f;} .ins-verdict.comply{color:#2f6b4f;}
+.ins-revlines{font-size:clamp(.7rem,1.08vw,.83rem); line-height:1.45; color:#5e5340;}
+.ins-revlines strong{color:#3b3222; font-weight:700;}
+.ins-revlines .why{display:block; margin-top:.26rem; padding-top:.24rem;
+  border-top:1px dashed rgba(120,100,60,.3); color:#6b6350;}
+.ins-revlines .why b{color:#8a6a2f;}
+.ins-me{background:#fdf8ec; border:1px solid rgba(120,100,60,.22); border-left:3px solid #b8860b;
+  border-radius:8px; padding:.3rem .55rem; font-size:clamp(.71rem,1.1vw,.84rem); color:#5e5340; line-height:1.4;}
+.ins-me b{font-family:'Merriweather',serif; color:#3b3222;}
+
+.ins-board-title{font-size:clamp(.6rem,.96vw,.71rem); text-transform:uppercase; letter-spacing:.05em;
+  color:#7a6437; margin-bottom:.22rem;}
+.ins-board-cols{display:grid; grid-template-columns:1fr 1fr; gap:.4rem;}
+.ins-board-col{background:#fffdf8; border:1px solid rgba(120,100,60,.2); border-radius:8px; padding:.26rem .42rem .3rem;}
+.ins-board-h{font-size:clamp(.57rem,.9vw,.67rem); text-transform:uppercase; letter-spacing:.04em;
+  font-weight:700; margin-bottom:.18rem;}
+.ins-board-h.plant{color:#8a5a2f;} .ins-board-h.insp{color:#3f5f7a;}
+.ins-board-row{display:flex; justify-content:space-between; gap:.4rem;
+  font-size:clamp(.66rem,1.02vw,.78rem); color:#6b6350; line-height:1.5;}
+.ins-board-row .nm{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.ins-board-row .vv{flex:none; font-variant-numeric:tabular-nums; color:#3b3222;}
+.ins-board-row.you{font-weight:800; color:#3b3222;}
+.ins-board-empty{font-size:clamp(.64rem,1vw,.75rem); color:#9a9280; font-style:italic;}
+
+/* right column — the deterrence gauge is the teaching object */
+.ins-gauge{background:#fffdf8; border:1px solid rgba(120,100,60,.22); border-radius:9px;
+  padding:.35rem .6rem .4rem; display:flex; flex-direction:column; flex:none;}
+.ins-gauge-title{font-family:'Merriweather',serif; font-size:clamp(.83rem,1.3vw,.98rem);
+  color:#6b6350; margin-bottom:.1rem;}
+.ins-gsvg{width:100%; height:auto; flex:0 0 auto;}
+.ins-gauge-eq{font-size:clamp(.66rem,1.04vw,.78rem); color:#7a7260; line-height:1.45; margin-top:.15rem;}
+.ins-gauge-eq b{font-family:'Merriweather',serif; color:#3b3222;}
+.ins-glbl{font-family:'Inter',sans-serif; font-size:12px; font-weight:700; fill:#5e5340;}
+.ins-gnum{font-family:'Merriweather',serif; font-size:17px; font-weight:700; fill:#3b3222;}
+.ins-gnum.in{fill:#fffdf8;}
+.ins-gsub{font-family:'Inter',sans-serif; font-size:10.5px; fill:#8a8069;}
+.ins-gaxis{stroke:rgba(120,100,60,.28); stroke-width:1.2; fill:none;}
+.ins-gbar.gain{fill:#c98a5a;} .ins-gbar.pen{fill:#3f5f7a;}
+.ins-gbar.pen.over{fill:#2f6b4f;}
+.ins-gverdict{font-family:'Merriweather',serif; font-size:13.5px; font-weight:700;}
+
+.ins-mix,.ins-summary{background:#fffdf8; border:1px solid rgba(120,100,60,.22); border-radius:9px;
+  padding:.35rem .6rem .42rem; flex:none;}
+.ins-mix-title{font-family:'Merriweather',serif; font-size:clamp(.78rem,1.22vw,.92rem);
+  color:#6b6350; margin-bottom:.18rem;}
+.ins-mixsvg{width:100%; height:auto;}
+.ins-mix-key{display:flex; gap:.7rem; flex-wrap:wrap; font-size:clamp(.6rem,.95vw,.7rem); color:#8a8069; margin-top:.1rem;}
+.ins-k.comply{color:#2f6b4f;} .ins-k.quiet{color:#8a6a2f;} .ins-k.open{color:#a1503c;}
+.ins-mixlbl{font-family:'Inter',sans-serif; font-size:10.5px; fill:#8a8069;}
+.ins-grid{stroke:rgba(120,100,60,.22); stroke-width:1; fill:none;}
+.ins-axl{font-family:'Inter',sans-serif; font-size:8.5px; fill:#a09781;}
+.ins-mixnum{font-family:'Inter',sans-serif; font-size:10px; font-weight:700; fill:#fffdf8;}
+.ins-seg.comply{fill:#5f7a6a;} .ins-seg.quiet{fill:#c9a24a;} .ins-seg.open{fill:#a1503c;}
+.ins-detline{stroke:#3f5f7a; stroke-width:2; fill:none; stroke-dasharray:5 4;}
+.ins-detdot{fill:#3f5f7a;}
+
+.ins-chips{display:grid; grid-template-columns:1fr 1fr; gap:.35rem;}
+.ins-chip{background:#fdf8ec; border:1px solid rgba(120,100,60,.22); border-top:3px solid #b8860b;
+  border-radius:8px; padding:.28rem .5rem .34rem;}
+.ins-chip.key{border-top-color:#2f6b4f; grid-column:1 / -1;}
+.ins-chip span{display:block; font-size:clamp(.58rem,.92vw,.68rem); text-transform:uppercase;
+  letter-spacing:.05em; color:#7a7260;}
+.ins-chip b{display:block; font-family:'Merriweather',serif; font-size:clamp(.92rem,1.5vw,1.15rem);
+  color:#3b3222; line-height:1.2;}
+.ins-chip em{display:block; font-style:normal; font-size:clamp(.6rem,.95vw,.71rem);
+  color:#8a8069; line-height:1.32; margin-top:.08rem;}
+
+.ins-disc{margin:.28rem 0 0; padding-top:.26rem; border-top:1px solid rgba(120,100,60,.28);
+  font-size:clamp(.57rem,.9vw,.68rem); line-height:1.38; color:#7a7260;}
+.ins-disc b{color:#5e5340;} .ins-disc em{font-style:italic;}
+.ins-refs{display:block; margin-top:.1rem; color:#8f8672; font-size:.94em;}
+
+@media(max-width:1000px){
+  .ins-body{grid-template-columns:1fr;}
+  .ins-board-cols{grid-template-columns:1fr;}
+}
+@media(prefers-reduced-motion:reduce){.ins-hbtn,.ins-opt,.ins-lever{transition:none;}}
 </style>
 </head>
 <body>
@@ -2839,7 +2843,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 
 <div class="deck" id="deck">
 <section class="slide title-slide" data-type="title">
-  <img class="bleed" src="media/image1.jpg" alt="">
+  <img loading="lazy" decoding="async" class="bleed" data-src="media/image1.jpg" alt="">
   <div class="title-scrim"></div>
   <div class="title-content">
     <div class="chapter-kicker">Chapter 8</div>
@@ -2933,7 +2937,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 <h2 class="heading">Atmospheric Composition &amp; Layers</h2>
 <div class="pairs"><div class="pair"><div class="pair-head">Troposphere</div><div class="pair-desc">Lowest 5–10 miles. Contains most atmospheric mass and all weather.</div></div><div class="pair"><div class="pair-head">Stratosphere</div><div class="pair-desc">Extends ~30 miles above troposphere. Contains the protective ozone layer.</div></div><div class="pair"><div class="pair-head">Mesosphere</div><div class="pair-desc">Coldest layer, temperatures to –148°F.</div></div><div class="pair"><div class="pair-head">Thermosphere</div><div class="pair-desc">Outermost layer — warm from solar/cosmic radiation, very low density.</div></div></div>
     </div>
-    <div class="bleed-media contain"><img src="media/image4.jpg" alt=""></div>
+    <div class="bleed-media contain"><img loading="lazy" decoding="async" data-src="media/image4.jpg" alt=""></div>
   </div>
   <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
 </section>
@@ -2944,7 +2948,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 <h2 class="heading">Weather vs. Climate</h2>
 <ul class="bullets"><li><strong>Weather</strong> = short-term conditions (temperature, moisture, wind). <strong>Climate</strong> = 30-year average of regional weather patterns.</li><li>Temperature varies by latitude, land/water features, and elevation.</li><li>Severe drought — increasingly common with climate change — stresses trees, leaving them vulnerable to insects and disease.</li><li>Wind flows from high to low pressure. Lake-effect snow forms when cold winds cross warmer water.</li><li>Mountain ranges force air upward, cooling it and releasing precipitation on the windward side.</li></ul>
     </div>
-    <div class="bleed-media contain"><img src="media/image5.jpg" alt=""></div>
+    <div class="bleed-media contain"><img loading="lazy" decoding="async" data-src="media/image5.jpg" alt=""></div>
   </div>
   <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
 </section>
@@ -3021,7 +3025,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 <p class="lead">Earth's rotation and temperature differences between equator and poles drive regular global circulation.</p>
 <ul class="bullets"><li><strong>Equatorial low-pressure belt:</strong> intense solar heating causes warm, moist air to rise, fueling tropical rain forests.</li><li><strong>Subtropical high-pressure belts at 30°N/S:</strong> descending dry air creates the world's great deserts (Sahara, Australian interior).</li><li><strong>Hadley cells:</strong> circulation loops between equator and 30° latitude. Ferrel cells at mid-latitudes. Polar cells near the poles.</li><li><strong>Coriolis effect:</strong> Earth's rotation bends winds — westerlies at mid-latitudes, easterlies at the poles.</li><li>Jet streams form at ~6 miles altitude near the tropopause and steer weather systems.</li><li>Atmospheric transport carries dust, soot, and ash across continents — Mojave dust fertilizes Colorado Plateau forests.</li></ul>
     </div>
-    <div class="bleed-media contain"><img src="media/image10.jpg" alt=""></div>
+    <div class="bleed-media contain"><img loading="lazy" decoding="async" data-src="media/image10.jpg" alt=""></div>
   </div>
   <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
 </section>
@@ -3163,7 +3167,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 <h2 class="heading">Primary Pollutants</h2>
 <div class="pairs"><div class="pair"><div class="pair-head">Carbon Monoxide (CO)</div><div class="pair-desc">From incomplete combustion in idling vehicles. Displaces oxygen in blood.</div></div><div class="pair"><div class="pair-head">Particulate Matter (PM)</div><div class="pair-desc">Particles &lt;10μm suspended in air. Smallest particles penetrate lungs and enter bloodstream. <u>Linked to respiratory health problems.</u></div></div><div class="pair"><div class="pair-head">Toxic Metals</div><div class="pair-desc">Lead, mercury, arsenic travel in airborne particles. Lead is a neurotoxin causing developmental damage.</div></div><div class="pair"><div class="pair-head">VOCs</div><div class="pair-desc">Volatile organic compounds from fossil fuel burning and solvents. Higher concentrations indoors.</div></div></div>
     </div>
-    <div class="bleed-media contain"><img src="media/image11.jpg" alt=""></div>
+    <div class="bleed-media contain"><img loading="lazy" decoding="async" data-src="media/image11.jpg" alt=""></div>
   </div>
   <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
 </section>
@@ -3174,7 +3178,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 <h2 class="heading">From Reaction to Pollution</h2>
 <div class="pairs"><div class="pair"><div class="pair-head">Secondary Pollutants</div><div class="pair-desc">Formed by atmospheric reactions (not directly emitted). Smog (VOCs and NOx from fossil fuels), ground-level ozone, and acid rain are all secondary pollutants.</div></div><div class="pair"><div class="pair-head">Thermal Inversion</div><div class="pair-desc">Warm air caps a cooler layer below, trapping pollutants near the surface. Prevents normal vertical mixing and creates sustained smog events.</div></div></div>
     </div>
-    <div class="bleed-media contain"><img src="media/image13.jpg" alt=""></div>
+    <div class="bleed-media contain"><img loading="lazy" decoding="async" data-src="media/image13.jpg" alt=""></div>
   </div>
   <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
 </section>
@@ -3185,7 +3189,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 <h2 class="heading">The Ozone Layer</h2>
 <ul class="bullets"><li><strong>Stratospheric ozone (ozone layer) blocks 99% of incoming UV radiation</strong>, protecting all terrestrial life.</li><li><strong>1970s:</strong> Lovelock, Rowland, and Molina discovered CFCs (refrigerants) accumulate in the stratosphere.</li><li>By the 1980s, satellite data confirmed thinning. An ozone hole over Antarctica showed 50% depletion.</li><li><strong>Important:</strong> ground level ozone is an air pollutant and harmful to human beings.</li></ul>
     </div>
-    <div class="bleed-media contain"><img src="media/image15.jpg" alt=""></div>
+    <div class="bleed-media contain"><img loading="lazy" decoding="async" data-src="media/image15.jpg" alt=""></div>
   </div>
   <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
 </section>
@@ -3312,7 +3316,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 <ul class="bullets"><li>Sulfur dioxide (SO₂) and nitrous oxide (NOₓ) from vehicles, agriculture, and industry react with water vapor to form sulfuric acid (H₂SO₄) and nitric acid (HNO₃), which fall as acid rain, snow, or fog.</li><li><strong>Normal rainwater pH:</strong> 5.6. Acid deposition (acid rain) brings pH well below that threshold.</li><li>Freshwater ecosystems naturally range pH 6–8. Lower pH disrupts insect and fish development.</li></ul>
       </div>
     </div>
-    <div class="stack-media contain"><img src="media/image17.jpg" alt=""></div>
+    <div class="stack-media contain"><img loading="lazy" decoding="async" data-src="media/image17.jpg" alt=""></div>
   </div>
   <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
 </section>
@@ -3323,7 +3327,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 <h2 class="heading">Consequences of Air Pollution</h2>
 
     </div>
-    <div class="bleed-media contain"><img src="media/image18.png" alt=""></div>
+    <div class="bleed-media contain"><img loading="lazy" decoding="async" data-src="media/image18.png" alt=""></div>
   </div>
   <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
 </section>
@@ -4507,7 +4511,7 @@ window.__cg = (function(){
 <ul class="bullets"><li>2.1 billion people cook using solid fuels</li><li>2.9 million people die prematurely from illnesses related to indoor air pollution</li><li>“Energy poverty”</li><li>Is indoor air pollution a problem in the United States?</li></ul>
 <p class="note">Source: https://www.who.int/news-room/fact-sheets/detail/household-air-pollution-and-health</p>
     </div>
-    <div class="bleed-media contain"><img src="media/image19.png" alt=""></div>
+    <div class="bleed-media contain"><img loading="lazy" decoding="async" data-src="media/image19.png" alt=""></div>
   </div>
   <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
 </section>
@@ -5049,7 +5053,7 @@ window.__cg = (function(){
 <h2 class="heading">Clean Air Starts With You</h2>
 <ul class="bullets"><li><strong>Choose transportation wisely:</strong> reduce idling, maintain your vehicle, and use public transit or cycling when possible.</li><li><strong>At home and campus:</strong> raise the thermostat in summer, lower in winter. Use ENERGY STAR appliances.</li><li>Explore new technologies.</li><li>Learn about power generation in your community to influence local energy and air quality policy.</li></ul>
     </div>
-    <div class="bleed-media cover"><img src="media/image22.jpg" alt=""></div>
+    <div class="bleed-media cover"><img loading="lazy" decoding="async" data-src="media/image22.jpg" alt=""></div>
   </div>
   <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
 </section>
@@ -5062,12 +5066,6 @@ window.__cg = (function(){
   </div>
   <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
 </section>
-
-
-
-
-
-
 <section class="slide rg-slide" data-type="game" data-game-id="ch8-review-game"
   data-rg-counts="10,15,20,25" style="--accent:#2D6A4F">
   <script type="application/json" data-rg-bank>[{"topic": "Life-support systems", "q": "Earth’s three life-support systems are the…", "options": ["Atmosphere, hydrosphere, and lithosphere", "Troposphere, stratosphere, and mesosphere", "Population, affluence, and technology", "Nitrogen, oxygen, and argon"], "answer": 0}, {"topic": "Life-support systems", "q": "Which of Earth’s life-support systems includes all the places on Earth that hold water?", "options": ["The hydrosphere", "The atmosphere", "The lithosphere", "The thermosphere"], "answer": 0}, {"topic": "Atmosphere", "q": "How does the atmosphere support life?", "options": ["It contains the gases (oxygen, carbon dioxide, etc.) that are necessary for life", "It stores most of Earth’s fresh water", "It holds the soil that plants grow in", "It produces all of Earth’s weather-free zones"], "answer": 0}, {"topic": "Atmosphere", "q": "Which gas makes up the largest share of the air we breathe (about 78%)?", "options": ["Nitrogen", "Oxygen", "Carbon dioxide", "Argon"], "answer": 0}, {"topic": "Human impact", "q": "Which statement best describes human impact on Earth’s life-support systems?", "options": ["Humans alter ecosystems and natural processes that support life", "Human activity has no measurable effect on natural processes", "Only natural disasters change Earth’s life-support systems", "Human impact is limited to the atmosphere"], "answer": 0}, {"topic": "Deforestation", "q": "Why does deforestation affect all of Earth’s life-support systems?", "options": ["Removing forests changes the air, the water cycle, and the soil at the same time", "It only affects the animals that live in the forest", "It only changes the atmosphere", "It only matters in tropical countries"], "answer": 0}, {"topic": "Deforestation", "q": "In the Viking Greenland example, deforestation for livestock triggered what?", "options": ["Topsoil erosion", "A population boom", "Higher rainfall", "Cleaner rivers"], "answer": 0}, {"topic": "Sustainability", "q": "Sustainability means…", "options": ["Meeting current needs without compromising future generations", "Using resources as fast as possible while they are cheap", "Stopping all economic growth", "Protecting only endangered species"], "answer": 0}, {"topic": "Population growth", "q": "Population growth occurs when…", "options": ["The birth rate exceeds the death rate", "The death rate exceeds the birth rate", "Birth and death rates are equal", "The total fertility rate is below 2.1"], "answer": 0}, {"topic": "Education & family planning", "q": "What is the most powerful predictor of fertility decline?", "options": ["Education, especially for girls", "Higher crop yields", "Colder climates", "Larger family farms"], "answer": 0}, {"topic": "Education & family planning", "q": "Why is family planning important for population change?", "options": ["Access to contraception and reproductive health care enables women’s choices", "It raises the death rate", "It increases the total fertility rate", "It has no connection to birth rates"], "answer": 0}, {"topic": "Population pyramids", "q": "What does it indicate if a population pyramid has a broad base?", "options": ["Birth rates are high", "Birth rates are low", "Most people are elderly", "The population is shrinking"], "answer": 0}, {"topic": "Demographic transition", "q": "Stage 1 of the demographic transition is characterized by…", "options": ["High birth rates and high death rates", "Low birth rates and low death rates", "High birth rates and low death rates", "Low birth rates and high death rates"], "answer": 0}, {"topic": "Carrying capacity", "q": "Carrying capacity is…", "options": ["The maximum population an environment can support sustainably", "The number of people who live in cities", "The total fertility rate of a country", "The amount of water a reservoir can hold"], "answer": 0}, {"topic": "Lowering birth rates", "q": "Which approach is most effective at lowering birth rates?", "options": ["Increased education and access to family planning", "Raising the death rate", "Building more highways", "Increasing fossil fuel use"], "answer": 0}, {"topic": "Ecological footprint", "q": "An ecological footprint estimates…", "options": ["The land and water needed to support a person’s resource use and waste generation", "The number of children a person will have", "How far a person travels each year", "The amount of rain an area receives"], "answer": 0}, {"topic": "Industrialization", "q": "As a country industrializes, its ecological footprint usually…", "options": ["Increases", "Decreases", "Stays exactly the same", "Disappears"], "answer": 0}, {"topic": "Ecological footprint", "q": "Which activity would most likely increase an individual’s ecological footprint?", "options": ["Driving a car alone for a daily commute", "Taking public transit", "Cycling to class", "Walking to work"], "answer": 0}, {"topic": "Overshoot", "q": "Overshoot happens when…", "options": ["Resource use exceeds Earth’s ability to replenish", "Population growth stops", "Birth rates fall below replacement", "Pollution is cleaned up faster than it is made"], "answer": 0}, {"topic": "Meat consumption", "q": "Reducing meat consumption can decrease ecological footprints because…", "options": ["Livestock production requires significant resources", "Meat contains no embedded water", "Crops require more land than livestock", "Livestock absorb carbon dioxide"], "answer": 0}, {"topic": "Fertilizer runoff", "q": "Fertilizer runoff adds which two nutrients to lakes and rivers?", "options": ["Nitrogen and phosphorus", "Oxygen and carbon", "Lead and mercury", "Sulfur and chlorine"], "answer": 0}, {"topic": "Climate change", "q": "What is the largest contributor to climate change?", "options": ["Fossil fuel combustion", "Volcanic eruptions", "Water vapor from lakes", "Transpiration from forests"], "answer": 0}, {"topic": "Acid rain", "q": "Acid rain is caused mainly by emissions of…", "options": ["Sulfur dioxide (SO₂) and nitrogen oxides (NOₓ)", "Oxygen and nitrogen", "Chlorofluorocarbons (CFCs)", "Water vapor and argon"], "answer": 0}, {"topic": "Habitat fragmentation", "q": "Habitat fragmentation occurs when…", "options": ["Large ecosystems are divided into smaller sections", "Two habitats merge into one", "A species moves to a new continent", "Forests grow back after a fire"], "answer": 0}, {"topic": "Urban air pollution", "q": "What is a major source of urban air pollution?", "options": ["Vehicle emissions from transportation", "Transpiration from trees", "Evaporation from lakes", "Groundwater recharge"], "answer": 0}, {"topic": "Urban air pollution", "q": "Carbon monoxide from idling vehicles is dangerous because it…", "options": ["Displaces oxygen in the blood", "Forms the protective ozone layer", "Makes rain less acidic", "Cools the troposphere"], "answer": 0}, {"topic": "Eutrophication", "q": "In eutrophication, excess nutrients fuel algae growth. What happens as the algae die and decay?", "options": ["Oxygen in the water is depleted", "The water becomes saltier", "The lake freezes earlier", "Fish populations grow rapidly"], "answer": 0}, {"topic": "Eutrophication", "q": "Eutrophication is caused by excess nutrients, especially…", "options": ["Phosphorus", "Oxygen", "Chlorine", "Argon"], "answer": 0}, {"topic": "Water budget", "q": "A water budget compares…", "options": ["All the water inputs and outputs", "The price of water in different cities", "Rainfall in two different years", "Fresh water and salt water only"], "answer": 0}, {"topic": "Aquifer depletion", "q": "Withdrawing groundwater faster than it is replenished can lead to…", "options": ["Aquifer depletion", "Groundwater recharge", "Higher water tables", "Transpiration"], "answer": 0}, {"topic": "Aquifer depletion", "q": "When water drains from aquifers, the ground can sink or collapse, often permanently. This is called…", "options": ["Subsidence", "Transpiration", "Eutrophication", "Thermal inversion"], "answer": 0}, {"topic": "Groundwater recharge", "q": "Groundwater recharge is…", "options": ["Water soaking down through the soil into aquifers, replenishing groundwater", "Water evaporating from the ocean", "Pumping water out of a well", "Water vapor released by plants"], "answer": 0}, {"topic": "Groundwater recharge", "q": "How does urbanization affect groundwater recharge?", "options": ["Roads and rooftops send water to storm drains instead of soil, reducing recharge", "Cities always increase recharge", "Buildings pump water back into aquifers", "Urbanization has no effect on groundwater"], "answer": 0}, {"topic": "Transpiration", "q": "Transpiration is…", "options": ["Water vapor released into the atmosphere by plants", "Water soaking into aquifers", "Rain falling on the ocean", "Water flowing from rivers to the sea"], "answer": 0}, {"topic": "Weather & climate", "q": "Weather is best defined as…", "options": ["Short-term conditions such as temperature, moisture, and wind", "The 30-year average of regional weather patterns", "The layers of the atmosphere", "The amount of water in the ocean"], "answer": 0}, {"topic": "Weather & climate", "q": "Climate is best defined as…", "options": ["The 30-year average of regional weather patterns", "Today’s temperature and wind", "A single storm", "The amount of rain in one week"], "answer": 0}, {"topic": "Ozone layer", "q": "Where is the protective ozone layer, and what does it do?", "options": ["In the stratosphere; it blocks about 99% of incoming UV radiation", "In the troposphere; it causes all weather", "In the thermosphere; it creates acid rain", "At ground level; it cleans the air"], "answer": 0}, {"topic": "Ground-level ozone", "q": "Ground-level ozone is…", "options": ["An air pollutant that is harmful to people", "The layer that protects us from UV radiation", "A harmless gas in clean air", "A form of fresh water"], "answer": 0}, {"topic": "Particulate matter", "q": "Particulate matter (PM) is linked to…", "options": ["Respiratory health problems", "Stronger bones", "Cleaner drinking water", "The ozone layer’s recovery"], "answer": 0}, {"topic": "Buffer zones", "q": "How do vegetated buffer zones protect water quality?", "options": ["Trees, shrubs, and grasses along streams trap sediment and absorb fertilizer runoff", "They pump water out of rivers", "They add fertilizer to streams", "They speed up stormwater runoff"], "answer": 0}, {"topic": "Sustainable resource management", "q": "Which strategy helps conserve air, water, and land resources simultaneously?", "options": ["Sustainable resource management", "Pumping more groundwater", "Building taller smokestacks", "Increasing fossil fuel use"], "answer": 0}]</script>
@@ -6462,7 +6460,6 @@ window.__cg = (function(){
 })();
 </script>
 </section>
-
 </div>
 
 <button class="nav-btn prev" onclick="prev()" aria-label="Previous slide">&#8249;</button>
@@ -6478,8 +6475,8 @@ window.__cg = (function(){
 
 <div class="menu" id="menu">
   <button class="menu-close" onclick="toggleMenu(false)" aria-label="Close menu">&times;</button>
-  <h3>Chapter 8 &mdash; Jump to a slide</h3>
-  <div class="menu-grid"><button class="menu-item" data-go="0"><span class="menu-num">1</span>Title</button><button class="menu-item" data-go="1"><span class="menu-num">2</span>Outline</button><button class="menu-item" data-go="2"><span class="menu-num">3</span>Announcements</button><button class="menu-item" data-go="3"><span class="menu-num">4</span>8.1 Air</button><button class="menu-item" data-go="4"><span class="menu-num">5</span>8.1 Layers</button><button class="menu-item" data-go="5"><span class="menu-num">6</span>8.2 Weather vs Climate</button><button class="menu-item" data-go="6"><span class="menu-num">7</span>8.2 Humidity</button><button class="menu-item" data-go="7"><span class="menu-num">8</span>8.3 Circulation</button><button class="menu-item" data-go="8"><span class="menu-num">9</span>8.4 Pollution Sources</button><button class="menu-item" data-go="9"><span class="menu-num">10</span>8.4 Primary Pollutants</button><button class="menu-item" data-go="10"><span class="menu-num">11</span>8.4 Secondary Pollutants</button><button class="menu-item" data-go="11"><span class="menu-num">12</span>8.5 Ozone Layer</button><button class="menu-item" data-go="12"><span class="menu-num">13</span>8.5 ▶ Ozone Destruction (sim)</button><button class="menu-item" data-go="13"><span class="menu-num">14</span>8.6 Acid Rain</button><button class="menu-item" data-go="14"><span class="menu-num">15</span>Consequences</button><button class="menu-item" data-go="15"><span class="menu-num">16</span>Deaths from Air Pollution</button><button class="menu-item" data-go="16"><span class="menu-num">17</span>8.4 Vehicle Emissions</button><button class="menu-item" data-go="17"><span class="menu-num">18</span>8.6 ★ Inversion (game)</button><button class="menu-item" data-go="18"><span class="menu-num">19</span>Indoor Air Pollution</button><button class="menu-item" data-go="19"><span class="menu-num">20</span>Indoor Air Pollution (charts)</button><button class="menu-item" data-go="20"><span class="menu-num">21</span>8.7 US Air Policy</button><button class="menu-item" data-go="21"><span class="menu-num">22</span>Clean Air Act Benefits</button><button class="menu-item" data-go="22"><span class="menu-num">23</span>SO₂ and Coal</button><button class="menu-item" data-go="23"><span class="menu-num">24</span>8.7 ▶ Cap-and-Trade Sim</button><button class="menu-item" data-go="24"><span class="menu-num">25</span>8.7 ▶ Inspector (enforcement game)</button><button class="menu-item" data-go="25"><span class="menu-num">26</span>8.8 What Can I Do?</button><button class="menu-item" data-go="26"><span class="menu-num">27</span>Key Concepts</button></div>
+  <h3>Chapter 8 &middot; Jump to a slide</h3>
+  <div class="menu-grid"><button class="menu-item" data-go="0"><span class="menu-num">1</span>Title</button><button class="menu-item" data-go="1"><span class="menu-num">2</span>Outline</button><button class="menu-item" data-go="2"><span class="menu-num">3</span>Announcements</button><button class="menu-item" data-go="3"><span class="menu-num">4</span>8.1 Air</button><button class="menu-item" data-go="4"><span class="menu-num">5</span>8.1 Layers</button><button class="menu-item" data-go="5"><span class="menu-num">6</span>8.2 Weather vs Climate</button><button class="menu-item" data-go="6"><span class="menu-num">7</span>8.2 Humidity</button><button class="menu-item" data-go="7"><span class="menu-num">8</span>8.3 Circulation</button><button class="menu-item" data-go="8"><span class="menu-num">9</span>8.4 Pollution Sources</button><button class="menu-item" data-go="9"><span class="menu-num">10</span>8.4 Primary Pollutants</button><button class="menu-item" data-go="10"><span class="menu-num">11</span>8.4 Secondary Pollutants</button><button class="menu-item" data-go="11"><span class="menu-num">12</span>8.5 Ozone Layer</button><button class="menu-item" data-go="12"><span class="menu-num">13</span>8.5 ▶ Ozone Destruction (sim)</button><button class="menu-item" data-go="13"><span class="menu-num">14</span>8.6 Acid Rain</button><button class="menu-item" data-go="14"><span class="menu-num">15</span>Consequences</button><button class="menu-item" data-go="15"><span class="menu-num">16</span>Deaths from Air Pollution</button><button class="menu-item" data-go="16"><span class="menu-num">17</span>8.4 Vehicle Emissions</button><button class="menu-item" data-go="17"><span class="menu-num">18</span>8.4 ▶ Externality Madness</button><button class="menu-item" data-go="18"><span class="menu-num">19</span>8.6 Where the Costs Come From</button><button class="menu-item" data-go="19"><span class="menu-num">20</span>8.6 ★ Inversion (game)</button><button class="menu-item" data-go="20"><span class="menu-num">21</span>Indoor Air Pollution</button><button class="menu-item" data-go="21"><span class="menu-num">22</span>Indoor Air Pollution (charts)</button><button class="menu-item" data-go="22"><span class="menu-num">23</span>8.6 ▶ Mortality Compared</button><button class="menu-item" data-go="23"><span class="menu-num">24</span>8.7 US Air Policy</button><button class="menu-item" data-go="24"><span class="menu-num">25</span>8.7 Clean Air Act: Costs &amp; Benefits</button><button class="menu-item" data-go="25"><span class="menu-num">26</span>Clean Air Act Benefits</button><button class="menu-item" data-go="26"><span class="menu-num">27</span>SO₂ and Coal</button><button class="menu-item" data-go="27"><span class="menu-num">28</span>8.7 ▶ Cap-and-Trade Sim</button><button class="menu-item" data-go="28"><span class="menu-num">29</span>8.7 ▶ Inspector (enforcement game)</button><button class="menu-item" data-go="29"><span class="menu-num">30</span>8.8 What Can I Do?</button><button class="menu-item" data-go="30"><span class="menu-num">31</span>Key Concepts</button><button class="menu-item" data-go="31"><span class="menu-num">32</span>Ch 6–8 ▶ Review Game</button></div>
 </div>
 
 <script>
@@ -6502,6 +6499,12 @@ function stageItems(s){ return Array.prototype.slice.call(s.querySelectorAll('.s
 function stageShown(s){ return stageItems(s).filter(function(e){ return e.classList.contains('shown'); }).length; }
 function setStage(s, n){ stageItems(s).forEach(function(e, i){ e.classList.toggle('shown', i < n); }); }
 
+function hydrate(i){
+  if(i < 0 || i >= slides.length) return;
+  slides[i].querySelectorAll('img[data-src]').forEach(function(im){
+    im.src = im.getAttribute('data-src'); im.removeAttribute('data-src');
+  });
+}
 function show(i, back){
   i = Math.max(0, Math.min(slides.length-1, i));
   slides[cur].classList.remove('active');
@@ -6510,6 +6513,10 @@ function show(i, back){
   s.classList.add('active');
   const f = s.querySelector('iframe[data-src]');
   if(f && !f.src){ f.src = f.getAttribute('data-src'); }
+  // photos arrive with their slide, plus the neighbours so paging stays instant.
+  // Every slide is stacked at inset:0, so loading="lazy" alone would still fetch
+  // the whole deck's images on load — 23 MB on a phone, for one slide.
+  hydrate(cur); hydrate(cur+1); hydrate(cur-1);
   // arriving forward starts a staged slide covered; stepping back into one
   // shows everything, so you don't have to click through it again
   const st = stageItems(s);
