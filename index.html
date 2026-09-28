@@ -506,6 +506,48 @@ img.bleed{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
 .air-q .stage-item{transform:translateY(12px); transition:opacity .45s ease, transform .45s ease;}
 .air-q .stage-item.shown{transform:none;}
 
+/* ── One Person, One Year (individual-action ledger, hc- aesthetic) ──────── */
+.ia-slide .heading{font-family:'Merriweather',Georgia,serif; font-weight:900; color:var(--ink);
+  font-size:clamp(1.3rem,2.7vw,2.1rem); line-height:1.1; margin:.12rem 0 .1rem;}
+.ia-panel{grid-template-columns:1fr 1fr !important; grid-template-rows:minmax(0,1fr) auto !important;
+  gap:clamp(.6rem,1.4vw,1.2rem) clamp(.7rem,1.6vw,1.4rem);}
+.ia-col{display:flex; flex-direction:column; gap:clamp(.35rem,1vh,.6rem); min-width:0; min-height:0;}
+.ia-col .hc-tag{display:flex; align-items:baseline; justify-content:space-between; gap:.5rem;}
+.ia-hint{font-family:'Inter',sans-serif; font-style:normal; font-weight:700; text-transform:none;
+  letter-spacing:.02em; color:var(--ink3);}
+.ia-card{display:flex; gap:.7rem; align-items:center; background:#fffdf5; border:1.5px solid var(--hair);
+  border-left:5px solid var(--c); border-radius:11px; padding:.5rem .75rem; min-width:0;}
+.ia-ico{font-size:clamp(1.3rem,2.4vw,1.9rem); line-height:1; flex:none;}
+.ia-txt{min-width:0;}
+.ia-name{font-family:'Merriweather',Georgia,serif; font-weight:700; color:var(--ink);
+  font-size:clamp(.76rem,1.08vw,.93rem); line-height:1.2;}
+.ia-num{display:flex; align-items:baseline; gap:.35rem; margin-top:.12rem;}
+.ia-num b{font-family:'Merriweather',Georgia,serif; font-weight:900; color:var(--c);
+  font-size:clamp(1.2rem,2.3vw,1.8rem); line-height:1;}
+.ia-num span{font-size:clamp(.66rem,.92vw,.76rem); font-weight:700; color:var(--ink2);}
+.ia-note{font-size:clamp(.62rem,.9vw,.73rem); color:var(--ink3); line-height:1.3; margin-top:.1rem;}
+.ia-note i{font-style:normal; font-weight:700; color:var(--gold);}
+/* the swap: both faces share one grid cell, the "after" fades in on a clicker press */
+.ia-swap{position:relative; display:grid; flex:1; min-height:0;}
+.ia-swap>.ia-card{grid-area:1/1;}
+.ia-after{z-index:2;}
+.ia-before{transition:opacity .35s ease;}
+.ia-after.shown ~ .ia-before{opacity:0; visibility:hidden;}
+/* running total */
+.ia-foot{grid-column:1/-1; display:flex; align-items:center; gap:.7rem; flex-wrap:wrap;
+  border-top:1px solid var(--hair2); padding-top:.5rem;}
+.ia-tot{display:flex; flex-direction:column; line-height:1.15;}
+.ia-tot span{font-family:'Inter',sans-serif; font-weight:800; font-size:.6rem; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--gold);}
+.ia-tot b{font-family:'Merriweather',Georgia,serif; font-weight:900; color:var(--ink);
+  font-size:clamp(1rem,1.7vw,1.3rem);}
+.ia-totr b{color:#1c7293;}
+.ia-arrow{color:var(--ink3); font-size:1.1rem;}
+.ia-cut{font-family:'Inter',sans-serif; font-weight:800; font-size:.72rem; letter-spacing:.04em;
+  color:#1c7293; background:#e7f1f6; border:1px solid #bcd9e6; border-radius:99px; padding:.15rem .6rem;}
+.ia-msg{flex:1 1 16rem; margin:0; font-size:clamp(.74rem,1.05vw,.86rem); color:var(--ink2); line-height:1.4;}
+@media (max-width:860px){ .ia-panel{grid-template-columns:1fr !important;} }
+
 /* ── Slide 4: hand-drawn composition-of-air donut ────────────────── */
 .av-media{display:flex; align-items:center; justify-content:center;
   padding:clamp(.8rem,2.4vh,1.6rem) clamp(1rem,2.4vw,2rem) clamp(2rem,4vh,2.6rem);
@@ -4725,6 +4767,153 @@ window.__cg = (function(){
   </div>
   <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
 </section>
+<section class="slide hc-slide ia-slide" data-type="content" style="--accent:#8a6a2f">
+  <div class="hc-root">
+    <div class="hc-head">
+      <div class="eyebrow">8.7  ·  What One Person Can Change</div>
+      <h2 class="heading">One Person, One Year</h2>
+      <p class="hc-sub">Three everyday choices, and what a year of each puts into the air. The right-hand column starts with the perfect version of every choice. Click to trade each one for something a person might actually do.</p>
+      <button class="hc-btn hc-srcbtn" type="button" data-ia-src>Method &amp; sources</button>
+    </div>
+    <div class="hc-panel ia-panel">
+      <div class="ia-col">
+        <div class="hc-tag">What a year costs the air</div>
+        <div class="ia-card" style="--c:#a4373a">
+          <div class="ia-ico">&#128663;</div>
+          <div class="ia-txt">
+            <div class="ia-name">Driving a gas car for a year</div>
+            <div class="ia-num"><b>4.6</b><span>metric tons CO&#8322;</span></div>
+            <div class="ia-note">11,500 miles at 22.2 mpg, 400 g per mile &middot; EPA</div>
+          </div>
+        </div>
+        <div class="ia-card" style="--c:#a4373a">
+          <div class="ia-ico">&#128268;</div>
+          <div class="ia-txt">
+            <div class="ia-name">Electricity from coal for a house, one year</div>
+            <div class="ia-num"><b>8.8</b><span>metric tons CO&#8322;e</span></div>
+            <div class="ia-note">10,791 kWh &times; 820 g per kWh, lifecycle &middot; EIA + IPCC</div>
+          </div>
+        </div>
+        <div class="ia-card" style="--c:#a4373a">
+          <div class="ia-ico">&#129385;</div>
+          <div class="ia-txt">
+            <div class="ia-name">Eating 1 kg of beef every day for a year</div>
+            <div class="ia-num"><b>36.3</b><span>metric tons CO&#8322;e</span></div>
+            <div class="ia-note">365 &times; 99.5 kg per kg &middot; Poore &amp; Nemecek 2018</div>
+          </div>
+        </div>
+      </div>
+      <div class="ia-col">
+        <div class="hc-tag">The other choice <em class="ia-hint" data-ia-hint>click to swap &#8594;</em></div>
+        <div class="ia-swap">
+          <div class="ia-card ia-after stage-item" style="--c:#1c7293" data-v="1216">
+            <div class="ia-ico">&#9889;</div>
+            <div class="ia-txt">
+              <div class="ia-name">Driving an EV for a year, US grid mix</div>
+              <div class="ia-num"><b>1.2</b><span>metric tons CO&#8322;</span></div>
+              <div class="ia-note">3,310 kWh &times; 0.81 lb per kWh &middot; EPA + EIA <i>&#8212; 74% less than the gas car</i></div>
+            </div>
+          </div>
+          <div class="ia-card ia-before" style="--c:#2d6a4f" data-v="0">
+            <div class="ia-ico">&#128694;</div>
+            <div class="ia-txt">
+              <div class="ia-name">Walking for a year</div>
+              <div class="ia-num"><b>0</b><span>kg CO&#8322;</span></div>
+              <div class="ia-note">No fuel burned, nothing out the tailpipe</div>
+            </div>
+          </div>
+        </div>
+        <div class="ia-swap">
+          <div class="ia-card ia-after stage-item" style="--c:#1c7293" data-v="442">
+            <div class="ia-ico">&#9728;&#65039;</div>
+            <div class="ia-txt">
+              <div class="ia-name">Electricity from rooftop solar, one year</div>
+              <div class="ia-num"><b>0.44</b><span>metric tons CO&#8322;e</span></div>
+              <div class="ia-note">10,791 kWh &times; 41 g per kWh, lifecycle &middot; IPCC <i>&#8212; 95% less than coal</i></div>
+            </div>
+          </div>
+          <div class="ia-card ia-before" style="--c:#2d6a4f" data-v="0">
+            <div class="ia-ico">&#128683;</div>
+            <div class="ia-txt">
+              <div class="ia-name">Using no electricity for a year</div>
+              <div class="ia-num"><b>0</b><span>kg CO&#8322;</span></div>
+              <div class="ia-note">Nothing generated, nothing emitted</div>
+            </div>
+          </div>
+        </div>
+        <div class="ia-swap">
+          <div class="ia-card ia-after stage-item" style="--c:#1c7293" data-v="3603">
+            <div class="ia-ico">&#127831;</div>
+            <div class="ia-txt">
+              <div class="ia-name">Eating 1 kg of chicken every day for a year</div>
+              <div class="ia-num"><b>3.6</b><span>metric tons CO&#8322;e</span></div>
+              <div class="ia-note">365 &times; 9.87 kg per kg &middot; Poore &amp; Nemecek <i>&#8212; 90% less than beef</i></div>
+            </div>
+          </div>
+          <div class="ia-card ia-before" style="--c:#2d6a4f" data-v="358">
+            <div class="ia-ico">&#129367;</div>
+            <div class="ia-txt">
+              <div class="ia-name">Eating 1 kg of vegan food every day for a year</div>
+              <div class="ia-num"><b>358</b><span>kg CO&#8322;e</span></div>
+              <div class="ia-note">Peas, 365 &times; 0.98 kg per kg &middot; Poore &amp; Nemecek</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ia-foot">
+        <div class="ia-tot"><span>Left column, one year</span><b>49.8 t CO&#8322;e</b></div>
+        <div class="ia-arrow">&#8594;</div>
+        <div class="ia-tot ia-totr"><span>Right column, one year</span><b data-ia-total>0.4 t CO&#8322;e</b></div>
+        <div class="ia-cut" data-ia-cut>99% lower</div>
+        <p class="ia-msg" data-ia-msg>The perfect version of every choice is almost nothing. Nobody lives this way.</p>
+      </div>
+      <div class="hc-src" hidden data-ia-panel>
+        <div class="hc-src-top"><strong>Method &amp; sources</strong><button class="hc-btn" type="button" data-ia-close>Close</button></div>
+        <p>Each pair is measured on one consistent basis, noted on the cards: the cars count fuel burned and electricity generated, the houses count lifecycle emissions, and the food counts the farm-to-retail supply chain.</p>
+        <ol>
+          <li>EPA, <em>Greenhouse Gas Emissions from a Typical Passenger Vehicle</em>: 4.6 metric tons CO&#8322; a year, from 11,500 miles at 22.2 mpg and about 400 g CO&#8322; per mile.</li>
+          <li>EPA, <em>Automotive Trends Report</em> (2024): 117.1 MPGe for the highest-scoring all-electric fleet. At EPA&rsquo;s 33.7 kWh per gallon-equivalent, 11,500 miles needs about 3,310 kWh.</li>
+          <li>U.S. EIA, <em>FAQ</em>: the average U.S. residential customer used 10,791 kWh in 2022.</li>
+          <li>U.S. EIA (2023): U.S. average generation emits about 0.81 lb CO&#8322; per kWh; coal about 2.31 lb per kWh.</li>
+          <li>IPCC AR5, Annex III, Table A.III.2, lifecycle medians: coal 820 g CO&#8322;eq per kWh; rooftop solar PV 41 g.</li>
+          <li>Poore &amp; Nemecek (2018), <em>Science</em>, via Our World in Data: beef (beef herd) 99.48, poultry 9.87, and peas 0.98 kg CO&#8322;e per kg of food.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
+  <script>
+  (function(){
+    var root=document.currentScript.closest('.ia-slide'); if(!root) return;
+    var LEFT=49759;
+    var totEl=root.querySelector('[data-ia-total]'), cutEl=root.querySelector('[data-ia-cut]'),
+        msgEl=root.querySelector('[data-ia-msg]'), hintEl=root.querySelector('[data-ia-hint]');
+    var MSG=["The perfect version of every choice is almost nothing. Nobody lives this way.",
+             "An electric car is not a zero, but it keeps almost three quarters of the saving.",
+             "Solar panels carry a lifecycle cost. Against coal it barely registers.",
+             "Chicken instead of beef gives up the least and saves the most. Even the realistic column is about 89% lower."];
+    function fmt(kg){ return kg>=1000 ? (kg/1000).toFixed(kg<10000?1:1)+' t CO\u2082e' : Math.round(kg)+' kg CO\u2082e'; }
+    function render(){
+      var sum=0, n=0;
+      Array.prototype.forEach.call(root.querySelectorAll('.ia-swap'), function(sw){
+        var after=sw.querySelector('.ia-after'), before=sw.querySelector('.ia-before');
+        var on=after.classList.contains('shown');
+        if(on) n++;
+        sum += +((on?after:before).getAttribute('data-v')||0);
+      });
+      totEl.textContent=fmt(sum);
+      cutEl.textContent=Math.round((1-sum/LEFT)*100)+'% lower';
+      msgEl.textContent=MSG[n];
+      hintEl.style.visibility = n>=3 ? 'hidden' : '';
+    }
+    new MutationObserver(render).observe(root, {subtree:true, attributes:true, attributeFilter:['class']});
+    var panel=root.querySelector('[data-ia-panel]');
+    root.querySelector('[data-ia-src]').addEventListener('click', function(){ panel.hidden=false; });
+    root.querySelector('[data-ia-close]').addEventListener('click', function(){ panel.hidden=true; });
+    render();
+  })();
+  </script>
+</section>
 <section class="slide hc-slide" data-type="content" style="--accent:#8a6a2f">
   <div class="hc-root">
     <div class="hc-head"><div class="eyebrow">8.7 · The Clean Air Act, 1990–2020</div><svg class="hc-wm" viewBox="0 0 1753 285" role="img" aria-label="Costs & Benefits" preserveAspectRatio="xMinYMid meet"><title>Costs & Benefits</title><defs><filter id="ch8-caa-nib" x="-2%" y="-12%" width="104%" height="124%"><feTurbulence type="fractalNoise" baseFrequency="0.016" numOctaves="3" seed="11" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4.3" xChannelSelector="R" yChannelSelector="G"/></filter></defs><g filter="url(#ch8-caa-nib)" fill="none" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(0,182) skewX(-7.0)"><g transform="translate(19.7,-0.8) rotate(1.43,70,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M100.48,-168.21 C73.78,-211.93 44.84,-238.15 17.80,-248.61 C-23.40,-264.55 -38.37,-216.90 -15.96,-133.08 C6.45,-49.27 54.28,26.00 95.48,41.94 C123.81,52.89 143.29,43.73 150.07,12.95" stroke="#3b3222" stroke-width="20.4"/></g><g transform="translate(167.8,-3.3) rotate(0.10,57,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M18.23,-164.95 C-15.24,-177.89 -27.46,-145.88 -12.52,-90.01 C2.42,-34.13 36.55,15.81 70.02,28.75 C103.50,41.70 115.72,9.69 100.78,-46.19 C85.84,-102.06 51.71,-152.00 18.23,-164.95 Z" stroke="#3b3222" stroke-width="21.7"/></g><g transform="translate(290.0,1.3) rotate(-0.55,50,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M70.77,-119.58 C54.99,-144.05 36.26,-157.98 18.23,-164.95 C-7.52,-174.91 -17.99,-162.26 -11.01,-136.18 C-0.06,-95.21 81.55,-61.97 95.49,-9.82 C104.96,25.56 89.04,39.45 63.29,29.49 C41.41,21.02 20.39,2.88 3.62,-25.32" stroke="#3b3222" stroke-width="21.8"/></g><g transform="translate(390.5,3.4) rotate(0.64,43,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-14.85,-241.20 C10.72,-162.85 23.91,-87.61 41.33,-22.42 C49.80,9.24 67.65,32.85 80.70,21.19 M-35.14,-178.91 C-10.88,-174.54 22.60,-161.59 52.41,-145.05" stroke="#3b3222" stroke-width="22.8"/></g><g transform="translate(483.0,1.3) rotate(-0.55,50,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M70.77,-119.58 C54.99,-144.05 36.26,-157.98 18.23,-164.95 C-7.52,-174.91 -17.99,-162.26 -11.01,-136.18 C-0.06,-95.21 81.55,-61.97 95.49,-9.82 C104.96,25.56 89.04,39.45 63.29,29.49 C41.41,21.02 20.39,2.88 3.62,-25.32" stroke="#3b3222" stroke-width="21.8"/></g><g transform="translate(645.5,-1.9) rotate(-0.95,70,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M141.38,27.96 C81.84,-65.20 17.81,-123.36 0.88,-186.69 C-12.07,-235.11 26.73,-236.81 47.40,-185.40 C64.79,-141.93 30.27,-128.56 22.62,-88.11 C13.39,-44.92 48.34,25.38 89.54,41.31 C125.59,55.25 136.23,25.97 133.59,-18.47" stroke="#3b3222" stroke-width="22.8"/></g><g transform="translate(849.3,1.4) rotate(-0.33,68,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-41.22,-266.43 C-11.17,-171.31 12.15,-75.46 34.47,16.67 M-41.22,-266.43 L20.58,-242.53 C54.06,-229.58 75.98,-199.39 85.94,-162.14 C95.90,-124.89 83.56,-106.28 54.94,-114.01 L-5.86,-134.19 M-5.86,-134.19 L61.09,-108.30 C95.85,-94.85 122.63,-59.44 134.58,-14.74 C147.03,31.82 133.61,55.02 98.85,41.57 L34.47,16.67" stroke="#3b3222" stroke-width="20.1"/></g><g transform="translate(994.8,-0.1) rotate(1.27,56,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-7.87,-89.88 C23.61,-84.38 62.24,-69.44 95.92,-51.41 C80.48,-109.14 46.56,-153.99 16.95,-165.45 C-16.53,-178.39 -28.25,-144.52 -13.31,-88.64 C2.13,-30.91 36.55,15.81 71.31,29.25 C95.77,38.71 110.60,29.42 116.01,6.46" stroke="#3b3222" stroke-width="23.2"/></g><g transform="translate(1114.0,4.1) rotate(-0.79,52,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-29.69,-180.15 C-7.41,-109.74 6.95,-47.41 21.10,9.83 M-12.27,-114.96 C-16.49,-156.67 0.21,-171.92 23.38,-162.96 C46.56,-153.99 66.41,-122.94 77.86,-80.10 C92.39,-34.40 102.05,6.07 111.22,44.69" stroke="#3b3222" stroke-width="21.8"/></g><g transform="translate(1225.5,-0.1) rotate(1.27,56,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-7.87,-89.88 C23.61,-84.38 62.24,-69.44 95.92,-51.41 C80.48,-109.14 46.56,-153.99 16.95,-165.45 C-16.53,-178.39 -28.25,-144.52 -13.31,-88.64 C2.13,-30.91 36.55,15.81 71.31,29.25 C95.77,38.71 110.60,29.42 116.01,6.46" stroke="#3b3222" stroke-width="23.2"/></g><g transform="translate(1344.7,2.3) rotate(-1.16,39,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M26.25,11.82 C-1.55,-100.79 -34.59,-207.09 -37.24,-251.53 C-38.47,-282.07 -14.72,-279.56 8.79,-252.10 M-44.15,-182.40 C-22.47,-179.02 5.86,-168.06 30.53,-153.51" stroke="#3b3222" stroke-width="23.7"/></g><g transform="translate(1430.1,2.9) rotate(1.32,29,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-21.97,-177.16 C0.32,-106.75 10.69,-59.32 17.37,-30.02 C25.34,-0.22 43.19,23.38 54.95,11.23 M-37.90,-236.76 L-36.12,-234.40" stroke="#3b3222" stroke-width="22.4"/></g><g transform="translate(1497.0,3.4) rotate(0.64,43,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M-14.85,-241.20 C10.72,-162.85 23.91,-87.61 41.33,-22.42 C49.80,9.24 67.65,32.85 80.70,21.19 M-35.14,-178.91 C-10.88,-174.54 22.60,-161.59 52.41,-145.05" stroke="#3b3222" stroke-width="22.8"/></g><g transform="translate(1589.5,1.3) rotate(-0.55,50,-50) rotate(-30) scale(1,0.4651) rotate(30)"><path d="M70.77,-119.58 C54.99,-144.05 36.26,-157.98 18.23,-164.95 C-7.52,-174.91 -17.99,-162.26 -11.01,-136.18 C-0.06,-95.21 81.55,-61.97 95.49,-9.82 C104.96,25.56 89.04,39.45 63.29,29.49 C41.41,21.02 20.39,2.88 3.62,-25.32" stroke="#3b3222" stroke-width="21.8"/></g><path d="M26,74 C385,68.5 1262,68.5 1689,73 C1262,78.5 385,79.5 26,74 Z" fill="#8a6a2f" fill-opacity=".7" stroke="none"/></g></g></svg><p class="hc-sub">What did the 1990 Clean Air Act Amendments cost in 2020, and what did they buy? EPA&rsquo;s own accounting, from <i>The Benefits and Costs of the Clean Air Act from 1990 to 2020</i>. Pick a side of the ledger and tap any category.</p><button class="hc-btn hc-srcbtn" data-act="src">Method &amp; sources</button></div>
@@ -6467,7 +6656,7 @@ window.__cg = (function(){
 
 <div class="hud">
   <button onclick="prev()" title="Previous (left arrow)">&#8249;</button>
-  <span class="counter" id="counter">1 / 32</span>
+  <span class="counter" id="counter">1 / 33</span>
   <button onclick="next()" title="Next (right arrow)">&#8250;</button>
   <button onclick="toggleMenu()" title="Slide menu (O)">&#9776;</button>
   <button onclick="toggleFs()" title="Fullscreen (F)">&#9974;</button>
@@ -6476,7 +6665,7 @@ window.__cg = (function(){
 <div class="menu" id="menu">
   <button class="menu-close" onclick="toggleMenu(false)" aria-label="Close menu">&times;</button>
   <h3>Chapter 8 &middot; Jump to a slide</h3>
-  <div class="menu-grid"><button class="menu-item" data-go="0"><span class="menu-num">1</span>Title</button><button class="menu-item" data-go="1"><span class="menu-num">2</span>Outline</button><button class="menu-item" data-go="2"><span class="menu-num">3</span>Announcements</button><button class="menu-item" data-go="3"><span class="menu-num">4</span>8.1 Air</button><button class="menu-item" data-go="4"><span class="menu-num">5</span>8.1 Layers</button><button class="menu-item" data-go="5"><span class="menu-num">6</span>8.2 Weather vs Climate</button><button class="menu-item" data-go="6"><span class="menu-num">7</span>8.2 Humidity</button><button class="menu-item" data-go="7"><span class="menu-num">8</span>8.3 Circulation</button><button class="menu-item" data-go="8"><span class="menu-num">9</span>8.4 Pollution Sources</button><button class="menu-item" data-go="9"><span class="menu-num">10</span>8.4 Primary Pollutants</button><button class="menu-item" data-go="10"><span class="menu-num">11</span>8.4 Secondary Pollutants</button><button class="menu-item" data-go="11"><span class="menu-num">12</span>8.5 Ozone Layer</button><button class="menu-item" data-go="12"><span class="menu-num">13</span>8.5 ▶ Ozone Destruction (sim)</button><button class="menu-item" data-go="13"><span class="menu-num">14</span>8.6 Acid Rain</button><button class="menu-item" data-go="14"><span class="menu-num">15</span>Consequences</button><button class="menu-item" data-go="15"><span class="menu-num">16</span>Deaths from Air Pollution</button><button class="menu-item" data-go="16"><span class="menu-num">17</span>8.4 Vehicle Emissions</button><button class="menu-item" data-go="17"><span class="menu-num">18</span>8.4 ▶ Externality Madness</button><button class="menu-item" data-go="18"><span class="menu-num">19</span>8.6 Where the Costs Come From</button><button class="menu-item" data-go="19"><span class="menu-num">20</span>8.6 ★ Inversion (game)</button><button class="menu-item" data-go="20"><span class="menu-num">21</span>Indoor Air Pollution</button><button class="menu-item" data-go="21"><span class="menu-num">22</span>Indoor Air Pollution (charts)</button><button class="menu-item" data-go="22"><span class="menu-num">23</span>8.6 ▶ Mortality Compared</button><button class="menu-item" data-go="23"><span class="menu-num">24</span>8.7 US Air Policy</button><button class="menu-item" data-go="24"><span class="menu-num">25</span>8.7 Clean Air Act: Costs &amp; Benefits</button><button class="menu-item" data-go="25"><span class="menu-num">26</span>Clean Air Act Benefits</button><button class="menu-item" data-go="26"><span class="menu-num">27</span>SO₂ and Coal</button><button class="menu-item" data-go="27"><span class="menu-num">28</span>8.7 ▶ Cap-and-Trade Sim</button><button class="menu-item" data-go="28"><span class="menu-num">29</span>8.7 ▶ Inspector (enforcement game)</button><button class="menu-item" data-go="29"><span class="menu-num">30</span>8.8 What Can I Do?</button><button class="menu-item" data-go="30"><span class="menu-num">31</span>Key Concepts</button><button class="menu-item" data-go="31"><span class="menu-num">32</span>Ch 6–8 ▶ Review Game</button></div>
+  <div class="menu-grid"><button class="menu-item" data-go="0"><span class="menu-num">1</span>Title</button><button class="menu-item" data-go="1"><span class="menu-num">2</span>Outline</button><button class="menu-item" data-go="2"><span class="menu-num">3</span>Announcements</button><button class="menu-item" data-go="3"><span class="menu-num">4</span>8.1 Air</button><button class="menu-item" data-go="4"><span class="menu-num">5</span>8.1 Layers</button><button class="menu-item" data-go="5"><span class="menu-num">6</span>8.2 Weather vs Climate</button><button class="menu-item" data-go="6"><span class="menu-num">7</span>8.2 Humidity</button><button class="menu-item" data-go="7"><span class="menu-num">8</span>8.3 Circulation</button><button class="menu-item" data-go="8"><span class="menu-num">9</span>8.4 Pollution Sources</button><button class="menu-item" data-go="9"><span class="menu-num">10</span>8.4 Primary Pollutants</button><button class="menu-item" data-go="10"><span class="menu-num">11</span>8.4 Secondary Pollutants</button><button class="menu-item" data-go="11"><span class="menu-num">12</span>8.5 Ozone Layer</button><button class="menu-item" data-go="12"><span class="menu-num">13</span>8.5 ▶ Ozone Destruction (sim)</button><button class="menu-item" data-go="13"><span class="menu-num">14</span>8.6 Acid Rain</button><button class="menu-item" data-go="14"><span class="menu-num">15</span>Consequences</button><button class="menu-item" data-go="15"><span class="menu-num">16</span>Deaths from Air Pollution</button><button class="menu-item" data-go="16"><span class="menu-num">17</span>8.4 Vehicle Emissions</button><button class="menu-item" data-go="17"><span class="menu-num">18</span>8.4 ▶ Externality Madness</button><button class="menu-item" data-go="18"><span class="menu-num">19</span>8.6 Where the Costs Come From</button><button class="menu-item" data-go="19"><span class="menu-num">20</span>8.6 ★ Inversion (game)</button><button class="menu-item" data-go="20"><span class="menu-num">21</span>Indoor Air Pollution</button><button class="menu-item" data-go="21"><span class="menu-num">22</span>Indoor Air Pollution (charts)</button><button class="menu-item" data-go="22"><span class="menu-num">23</span>8.6 ▶ Mortality Compared</button><button class="menu-item" data-go="23"><span class="menu-num">24</span>8.7 US Air Policy</button><button class="menu-item" data-go="24"><span class="menu-num">25</span>8.7 One Person, One Year</button><button class="menu-item" data-go="25"><span class="menu-num">26</span>8.7 Clean Air Act: Costs &amp; Benefits</button><button class="menu-item" data-go="26"><span class="menu-num">27</span>Clean Air Act Benefits</button><button class="menu-item" data-go="27"><span class="menu-num">28</span>SO₂ and Coal</button><button class="menu-item" data-go="28"><span class="menu-num">29</span>8.7 ▶ Cap-and-Trade Sim</button><button class="menu-item" data-go="29"><span class="menu-num">30</span>8.7 ▶ Inspector (enforcement game)</button><button class="menu-item" data-go="30"><span class="menu-num">31</span>8.8 What Can I Do?</button><button class="menu-item" data-go="31"><span class="menu-num">32</span>Key Concepts</button><button class="menu-item" data-go="32"><span class="menu-num">33</span>Ch 6–8 ▶ Review Game</button></div>
 </div>
 
 <script>
@@ -6651,6 +6840,7 @@ show(start);
       bump(coll,id,k,delta){ merge(coll,id,{counts:{[k]:{__inc:(delta===undefined?1:delta)}}}); },
       reset(coll,id){ const d=read(coll,id); d.counts={}; write(coll,id,d); emit(coll,id); },
       subscribeDoc(coll,id,cb){ return on(coll,id, ()=>cb(read(coll,id))); },
+      subscribeMain(coll,id,cb){ return on(coll,id, ()=>cb(read(coll,id))); },
       setDoc(coll,id,obj){ write(coll,id, applyInc({},obj)); emit(coll,id); },
       mergeDoc:merge,
       mergeDocShard:merge,
@@ -6688,6 +6878,8 @@ show(start);
         bump(coll,id,key,delta){ return fsMod.setDoc(ref(coll,shardName(id,myShard)), {counts:{[key]:fsMod.increment(delta===undefined?1:delta)}}, {merge:true}); },
         reset(coll,id){ return resetAll(coll,id,{counts:{}}); },
         subscribeDoc:multiSub,
+        // main doc only (no shards): for players who never need the other players' writes
+        subscribeMain(coll,id,cb){ return fsMod.onSnapshot(ref(coll,id), s=>cb(s.data()||{})); },
         setDoc:resetAll,
         mergeDoc(coll,id,obj){ return fsMod.setDoc(ref(coll,id), obj, {merge:true}); },
         mergeDocShard(coll,id,obj){ return fsMod.setDoc(ref(coll,shardName(id,myShard)), obj, {merge:true}); },
