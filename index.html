@@ -509,15 +509,21 @@ img.bleed{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
 /* ── One Person, One Year (individual-action ledger, hc- aesthetic) ──────── */
 .ia-slide .heading{font-family:'Merriweather',Georgia,serif; font-weight:900; color:var(--ink);
   font-size:clamp(1.3rem,2.7vw,2.1rem); line-height:1.1; margin:.12rem 0 .1rem;}
-.ia-panel{grid-template-columns:1fr 1fr !important; grid-template-rows:minmax(0,1fr) auto !important;
-  gap:clamp(.6rem,1.4vw,1.2rem) clamp(.7rem,1.6vw,1.4rem);}
-.ia-col{display:flex; flex-direction:column; gap:clamp(.35rem,1vh,.6rem); min-width:0; min-height:0;}
-.ia-col .hc-tag{display:flex; align-items:baseline; justify-content:space-between; gap:.5rem;}
+.ia-sprite{position:absolute; width:0; height:0; overflow:hidden;}
+/* one row per pair, so a left box and its partner are the same height */
+.ia-panel{grid-template-columns:minmax(0,1fr) clamp(3.4rem,6.2vw,5.8rem) minmax(0,1fr) !important;
+  grid-template-rows:auto repeat(3,minmax(0,1fr)) auto !important;
+  gap:clamp(.35rem,1vh,.6rem) 0 !important; align-items:stretch;}
+.ia-tl{grid-column:1;} .ia-sp{grid-column:2;} .ia-tr{grid-column:3;}
+.ia-tr{display:flex; align-items:baseline; justify-content:space-between; gap:.5rem;}
 .ia-hint{font-family:'Inter',sans-serif; font-style:normal; font-weight:700; text-transform:none;
   letter-spacing:.02em; color:var(--ink3);}
-.ia-card{display:flex; gap:.7rem; align-items:center; background:#fffdf5; border:1.5px solid var(--hair);
-  border-left:5px solid var(--c); border-radius:11px; padding:.5rem .75rem; min-width:0;}
-.ia-ico{font-size:clamp(1.3rem,2.4vw,1.9rem); line-height:1; flex:none;}
+.ia-card{display:flex; gap:.75rem; align-items:center; height:100%; background:#fffdf5;
+  border:1.5px solid var(--hair); border-left:5px solid var(--c); border-radius:11px;
+  padding:.5rem .8rem; min-width:0;}
+.ia-ico{width:clamp(2rem,3.4vw,2.7rem); height:clamp(2rem,3.4vw,2.7rem); flex:none;
+  fill:none; stroke:var(--c); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round;
+  filter:url(#iaNib);}
 .ia-txt{min-width:0;}
 .ia-name{font-family:'Merriweather',Georgia,serif; font-weight:700; color:var(--ink);
   font-size:clamp(.76rem,1.08vw,.93rem); line-height:1.2;}
@@ -526,16 +532,21 @@ img.bleed{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
   font-size:clamp(1.2rem,2.3vw,1.8rem); line-height:1;}
 .ia-num span{font-size:clamp(.66rem,.92vw,.76rem); font-weight:700; color:var(--ink2);}
 .ia-note{font-size:clamp(.62rem,.9vw,.73rem); color:var(--ink3); line-height:1.3; margin-top:.1rem;}
-.ia-note i{font-style:normal; font-weight:700; color:var(--gold);}
+/* the connector, drawn in the same ink as the next slide's ribbons */
+.ia-link{grid-column:2; display:flex; align-items:center; justify-content:center; padding:0 .25rem;}
+.ia-link svg{width:100%; height:auto; overflow:visible;}
+.ia-link-line,.ia-link-head{fill:none; stroke:var(--gold); stroke-width:2.1; stroke-linecap:round;
+  stroke-linejoin:round; opacity:.72; filter:url(#iaNib);}
+.ia-link-line{stroke-dasharray:4.5 4;}
 /* the swap: both faces share one grid cell, the "after" fades in on a clicker press */
-.ia-swap{position:relative; display:grid; flex:1; min-height:0;}
+.ia-swap{position:relative; display:grid; height:100%; min-height:0;}
 .ia-swap>.ia-card{grid-area:1/1;}
 .ia-after{z-index:2;}
 .ia-before{transition:opacity .35s ease;}
 .ia-after.shown ~ .ia-before{opacity:0; visibility:hidden;}
 /* running total */
-.ia-foot{grid-column:1/-1; display:flex; align-items:center; gap:.7rem; flex-wrap:wrap;
-  border-top:1px solid var(--hair2); padding-top:.5rem;}
+.ia-foot{grid-column:1/-1; display:flex; align-items:center; gap:.8rem; flex-wrap:wrap;
+  border-top:1px solid var(--hair2); padding-top:.5rem; margin-top:.25rem;}
 .ia-tot{display:flex; flex-direction:column; line-height:1.15;}
 .ia-tot span{font-family:'Inter',sans-serif; font-weight:800; font-size:.6rem; letter-spacing:.13em;
   text-transform:uppercase; color:var(--gold);}
@@ -545,8 +556,10 @@ img.bleed{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
 .ia-arrow{color:var(--ink3); font-size:1.1rem;}
 .ia-cut{font-family:'Inter',sans-serif; font-weight:800; font-size:.72rem; letter-spacing:.04em;
   color:#1c7293; background:#e7f1f6; border:1px solid #bcd9e6; border-radius:99px; padding:.15rem .6rem;}
-.ia-msg{flex:1 1 16rem; margin:0; font-size:clamp(.74rem,1.05vw,.86rem); color:var(--ink2); line-height:1.4;}
-@media (max-width:860px){ .ia-panel{grid-template-columns:1fr !important;} }
+@media (max-width:860px){
+  .ia-panel{grid-template-columns:1fr !important; grid-template-rows:none !important;}
+  .ia-link{display:none;}
+}
 
 /* ── Slide 4: hand-drawn composition-of-air donut ────────────────── */
 .av-media{display:flex; align-items:center; justify-content:center;
@@ -2604,122 +2617,6 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 .at-close:hover{border-color:var(--accent); color:var(--accent);}
 
 
-/* cap-and-trade market simulation (v4: multi-round, tightening cap) */
-.slide.captrade{background:linear-gradient(160deg,#f3f6f4,#e6eee9);}
-.ct-root{position:absolute; inset:0; display:flex; flex-direction:column;
-  padding:clamp(1rem,2.6vh,1.8rem) clamp(1.4rem,3.2vw,3rem) clamp(.8rem,2vh,1.3rem);}
-.ct-head{margin-bottom:clamp(.4rem,1.2vh,.8rem);}
-.ct-head .heading{margin-bottom:.25rem;}
-.ct-sub{font-size:clamp(.82rem,1.3vw,.98rem); color:var(--muted); max-width:76ch;}
-.ct-body{flex:1; min-height:0; display:grid; grid-template-columns:minmax(330px,46%) 1fr;
-  gap:clamp(1.1rem,2.6vw,2.2rem); align-items:stretch;}
-.ct-left{display:flex; flex-direction:column; gap:.55rem; min-width:0; justify-content:center; overflow:auto;}
-.ct-hostbar{display:flex; flex-wrap:wrap; gap:.5rem; padding:.55rem .7rem;
-  background:rgba(164,55,58,.06); border:1px dashed rgba(164,55,58,.4); border-radius:10px;}
-.slide.captrade:not(.host) .ct-hostbar{display:none;}
-.ct-hbtn{font-family:inherit; font-weight:800; font-size:clamp(.82rem,1.3vw,.96rem);
-  padding:.5rem 1rem; border:none; border-radius:9px; cursor:pointer; color:#fff;
-  background:var(--forest-mid); transition:filter .15s, transform .08s;}
-.ct-hbtn:hover{filter:brightness(1.1);} .ct-hbtn:active{transform:translateY(1px);}
-.ct-hbtn.run{background:#BC8A2E;} .ct-hbtn.new{background:#6b7f77;}
-.ct-hbtn[hidden]{display:none;}
-.ct-status{font-size:clamp(.86rem,1.4vw,1.02rem); color:#2c3a34; font-weight:600; line-height:1.4;
-  padding:.55rem .75rem; background:#fff; border:1px solid var(--line); border-radius:10px;}
-.ct-join{display:flex;} .ct-join[hidden]{display:none;}
-.ct-join .ct-hbtn{flex:1; font-size:clamp(.95rem,1.6vw,1.15rem); padding:.7rem 1.2rem;}
-.ct-factory{display:flex; flex-direction:column; gap:.5rem; background:#fff; border:1px solid var(--line);
-  border-left:4px solid var(--accent); border-radius:12px; padding:.65rem .85rem;}
-.ct-factory[hidden]{display:none;}
-.ct-factory-head{font-size:clamp(.8rem,1.3vw,.95rem); color:#33453d; line-height:1.4;}
-.ct-factory-head strong{color:var(--forest);}
-.ct-factory-head [data-ct-cost]{font-family:'Merriweather',serif; color:#A4373A; font-size:1.15em;}
-.ct-hint2{font-size:clamp(.76rem,1.2vw,.9rem); color:#3a4a43; line-height:1.4;
-  background:var(--pale); border-left:3px solid var(--accent); border-radius:0 8px 8px 0; padding:.4rem .6rem;}
-.ct-hint2:empty{display:none;}
-.ct-decide{display:flex; flex-direction:column; gap:.45rem;}
-.ct-ctrl[hidden]{display:none;}
-.ct-ctrl-lbl{font-weight:700; color:var(--forest); font-size:clamp(.82rem,1.35vw,.98rem);}
-.ct-ctrl-sub{font-weight:600; color:var(--muted); font-size:.85em;}
-.ct-decide-row{display:flex; align-items:center; gap:.9rem; margin-top:.15rem;}
-.ct-range{flex:1; accent-color:var(--accent); height:1.5rem; cursor:pointer;}
-.ct-range:disabled{opacity:.55; cursor:default;}
-.ct-range-out{flex:none; display:flex; align-items:baseline; gap:.3rem; min-width:5.6rem; justify-content:flex-end;}
-.ct-range-num{font-family:'Merriweather',serif; font-weight:900; color:var(--accent);
-  font-size:clamp(1.3rem,2.5vw,1.85rem); line-height:1; white-space:nowrap;}
-.ct-range-num.sm{font-size:clamp(1rem,1.9vw,1.4rem);}
-.ct-range-unit{font-size:.7rem; color:var(--muted); font-weight:700; white-space:nowrap;}
-.ct-comply{font-size:clamp(.76rem,1.25vw,.92rem); font-weight:700; line-height:1.4;
-  border-radius:8px; padding:.4rem .6rem;}
-.ct-comply.ok{background:#e9f3ee; color:#1d5a40; border:1px solid #bfe0cd;}
-.ct-comply.tip{background:#eaf2f8; color:#1d4c6b; border:1px solid #c3dcee;}
-.ct-comply.warn{background:#faf3e3; color:#7a5a10; border:1px solid #e8d5a3;}
-.ct-comply.bad{background:#f9e9e9; color:#8c1d22; border:1px solid #ecc5c5;}
-.ct-readout{font-size:clamp(.76rem,1.2vw,.9rem); color:#33453d; line-height:1.55;
-  background:var(--pale); border-radius:8px; padding:.45rem .65rem;}
-.ct-readout strong{color:var(--forest);}
-.ct-readout .net{font-family:'Merriweather',serif; font-weight:800; font-size:1.1em;}
-.ct-readout .profit{color:#2D6A4F;}
-.ct-submit{align-self:flex-start;} .ct-submit:disabled{background:#bcc7c2; cursor:not-allowed;}
-.ct-result{background:#fff; border:1px solid var(--line); border-radius:12px; padding:.6rem .85rem;
-  font-size:clamp(.8rem,1.3vw,.96rem); line-height:1.5; color:#33453d;}
-.ct-result[hidden]{display:none;}
-.ct-result .big{font-family:'Merriweather',serif; font-weight:800; font-size:1.12em;}
-.ct-result.good{border-left:4px solid #2D6A4F;} .ct-result.bad{border-left:4px solid #BC8A2E;}
-.ct-result strong{color:var(--forest);}
-.ct-board{background:#fff; border:1px solid var(--line); border-radius:12px; padding:.55rem .8rem;
-  max-height:clamp(110px,22vh,200px); overflow:auto;}
-.ct-board[hidden]{display:none;}
-.ct-board-title{font-weight:700; color:var(--forest); font-size:clamp(.66rem,1.02vw,.78rem);
-  text-transform:uppercase; letter-spacing:.03em; margin-bottom:.35rem;}
-.ct-board-rows{display:flex; flex-direction:column; gap:.22rem;}
-.ct-brow{display:flex; align-items:baseline; gap:.55rem; font-size:clamp(.74rem,1.15vw,.88rem); color:#2c3a34;}
-.ct-brow .rk{flex:none; width:1.5rem; font-weight:800; color:var(--muted); font-variant-numeric:tabular-nums;}
-.ct-brow .nm{flex:1; min-width:0; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-.ct-brow.me .nm{color:var(--accent);} .ct-brow.me .nm::after{content:" (you)"; font-weight:400; color:var(--muted);}
-.ct-brow .tag{flex:none; font-size:.9em; color:var(--muted);}
-.ct-brow .er{flex:none; font-family:'Merriweather',serif; font-weight:800; color:var(--forest); font-variant-numeric:tabular-nums;}
-.ct-brow:first-child .er{color:#2D6A4F;}
-.ct-right{display:flex; flex-direction:column; gap:.6rem; min-height:0;}
-.ct-capcard{background:#143027; color:#fff; border-radius:14px; padding:.65rem 1rem; text-align:center; box-shadow:var(--shadow);}
-.ct-capcard[hidden]{display:none;}
-.ct-capcard-round{font-size:clamp(.68rem,1.05vw,.8rem); text-transform:uppercase; letter-spacing:.06em; color:#9fd0b8; font-weight:800;}
-.ct-capcard-main{font-family:'Merriweather',serif; font-weight:900; font-size:clamp(1.15rem,2.6vw,1.9rem); line-height:1.15; margin:.15rem 0;}
-.ct-capcard-sub{font-size:clamp(.72rem,1.2vw,.9rem); color:#cfe3da; line-height:1.35;}
-.ct-capcard-sub .px{font-family:'Merriweather',serif; font-weight:900; color:#ffd58a; font-size:1.15em;}
-.ct-chart{flex:1; min-height:0; background:#fff; border:1px solid var(--line); border-radius:14px;
-  box-shadow:var(--shadow); padding:.6rem .8rem .5rem; display:flex; flex-direction:column;}
-.ct-chart[hidden]{display:none;}
-.ct-chart-title{font-weight:700; color:var(--forest); font-size:clamp(.68rem,1.05vw,.8rem);
-  text-transform:uppercase; letter-spacing:.03em; margin-bottom:.3rem;}
-.ct-histbars{flex:1; min-height:0; display:flex; gap:clamp(.5rem,1.4vw,1.1rem); align-items:stretch;}
-.ct-hslot{flex:1 1 0; min-width:0; display:flex; flex-direction:column; gap:.15rem;}
-.ct-harea{flex:1; min-height:0; position:relative; background:#f2f6f4; border-radius:8px; overflow:hidden;}
-.ct-hslot.future .ct-harea{background:transparent; border:2px dashed #d7e2dc;}
-.ct-hbar{position:absolute; left:12%; right:12%; bottom:0; background:var(--accent); border-radius:5px 5px 0 0;
-  transition:height .6s cubic-bezier(.22,.61,.36,1);}
-.ct-hem{position:absolute; left:0; right:0; text-align:center; font-family:'Merriweather',serif; font-weight:900;
-  color:var(--forest); font-size:clamp(.8rem,1.4vw,1.05rem); transform:translateY(-115%);}
-.ct-hcap{position:absolute; left:4%; right:4%; border-top:3px dashed #A4373A; z-index:2;}
-.ct-hcap::after{content:"cap"; position:absolute; right:0; top:-1.15em; font-size:.6rem; font-weight:800; color:#A4373A;}
-.ct-hslot.future .ct-hfut{position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-  text-align:center; font-size:clamp(.62rem,1.05vw,.78rem); color:var(--muted); font-weight:600; line-height:1.35; padding:.3rem;}
-.ct-hlbl{text-align:center; font-size:clamp(.64rem,1.05vw,.78rem); font-weight:800; color:var(--forest); line-height:1.2;}
-.ct-hcost{text-align:center; font-size:clamp(.6rem,1vw,.74rem); color:var(--muted); font-weight:600; line-height:1.2;}
-.ct-chart-key{display:flex; gap:.9rem; flex-wrap:wrap; margin-top:.35rem; font-size:clamp(.6rem,.98vw,.72rem); color:var(--muted);}
-.ct-key.em{color:var(--accent); font-weight:700;} .ct-key.cap{color:#A4373A; font-weight:700;} .ct-key.cost{font-weight:700;}
-.ct-lesson{background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
-  padding:.6rem .85rem; font-size:clamp(.76rem,1.22vw,.92rem); line-height:1.5; color:#33453d;}
-.ct-lesson[hidden]{display:none;}
-.ct-lesson strong{color:var(--forest);}
-.ct-lesson .drop{font-family:'Merriweather',serif; font-weight:900; color:#2D6A4F;}
-.ct-idlehint{color:var(--muted); font-style:italic; font-size:clamp(.82rem,1.35vw,1rem); line-height:1.5;
-  align-self:center; text-align:center; padding:1rem;}
-.ct-idlehint[hidden]{display:none;}
-.ct-foot{margin-top:clamp(.5rem,1.3vh,.85rem); font-size:clamp(.7rem,1.1vw,.84rem); color:var(--muted);
-  font-style:italic; line-height:1.35;}
-@media (max-width:820px){ .ct-body{grid-template-columns:1fr; overflow:auto;} .ct-chart{min-height:30vh;} }
-
-
 .slide.inspect{background:linear-gradient(158deg,#faf7f0,#f1ebdd);}
 .ins-root{position:absolute; inset:0; display:flex; flex-direction:column;
   padding:clamp(.75rem,2vh,1.3rem) 4.6rem clamp(.55rem,1.5vh,.9rem);}
@@ -3059,18 +2956,6 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
   </div>
   <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
 </section>
-<section class="slide" data-type="content" style="--accent:#6D597A">
-  <div class="bleed-grid">
-    <div class="bleed-text">
-<div class="eyebrow">8.3  ·  How Does the Atmosphere Circulate?</div>
-<h2 class="heading">Global Circulation Patterns</h2>
-<p class="lead">Earth's rotation and temperature differences between equator and poles drive regular global circulation.</p>
-<ul class="bullets"><li><strong>Equatorial low-pressure belt:</strong> intense solar heating causes warm, moist air to rise, fueling tropical rain forests.</li><li><strong>Subtropical high-pressure belts at 30°N/S:</strong> descending dry air creates the world's great deserts (Sahara, Australian interior).</li><li><strong>Hadley cells:</strong> circulation loops between equator and 30° latitude. Ferrel cells at mid-latitudes. Polar cells near the poles.</li><li><strong>Coriolis effect:</strong> Earth's rotation bends winds — westerlies at mid-latitudes, easterlies at the poles.</li><li>Jet streams form at ~6 miles altitude near the tropopause and steer weather systems.</li><li>Atmospheric transport carries dust, soot, and ash across continents — Mojave dust fertilizes Colorado Plateau forests.</li></ul>
-    </div>
-    <div class="bleed-media contain"><img loading="lazy" decoding="async" data-src="media/image10.jpg" alt=""></div>
-  </div>
-  <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
-</section>
 <section class="slide ap-slide" data-type="content" style="--accent:#BC8A2E">
   <div class="ap-grid">
     <div class="ap-text">
@@ -3234,118 +3119,6 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
     <div class="bleed-media contain"><img loading="lazy" decoding="async" data-src="media/image15.jpg" alt=""></div>
   </div>
   <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
-</section>
-<section class="slide ix-slide oz-slide" data-type="content" style="--accent:#B5651D">
-  <div class="slide-inner col ix-inner">
-    <div class="eyebrow">8.5 · What Is Happening to the Ozone Layer?</div>
-    <h2 class="heading ix-head">How one chlorine atom destroys ozone — over and over</h2>
-    <div class="ix-body">
-      <div class="ix-scenecol">
-        <div class="ix-scene oz-scene">
-        <svg class="ix-svg oz-svg" viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" data-oz-svg>
-          <defs><linearGradient id="ozsky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#161d4a"/><stop offset="1" stop-color="#3f6fb0"/></linearGradient></defs>
-          <rect x="0" y="0" width="760" height="360" fill="url(#ozsky)"/>
-          <!-- sun + UV -->
-          <circle cx="86" cy="60" r="26" fill="#ffe066"/><circle cx="86" cy="60" r="38" fill="#ffe066" opacity=".25"/>
-          <text x="86" y="112" text-anchor="middle" class="ix-lbl2" fill="#e6c3ff">UV rays</text>
-          <g stroke="#c77dff" stroke-width="3" stroke-linecap="round" opacity=".85">
-            <line class="oz-uv" x1="112" y1="82" x2="230" y2="150"/>
-            <line class="oz-uv" x1="130" y1="70" x2="300" y2="150" style="animation-delay:.6s"/>
-            <line class="oz-uv" x1="150" y1="64" x2="380" y2="150" style="animation-delay:1.1s"/>
-          </g>
-          <text x="700" y="150" text-anchor="end" class="ix-lbl2" fill="#dfe8f5">← ozone layer (stratosphere)</text>
-          <!-- ozone molecules injected by JS -->
-          <g data-oz-layer></g>
-          <!-- roaming chlorine atom -->
-          <g data-oz-cl class="oz-cl"><circle r="13" fill="#38b000" stroke="#fff" stroke-width="2"/>
-            <text y="4" text-anchor="middle" class="oz-cltext">Cl</text></g>
-          <!-- ground + CFC source -->
-          <rect x="0" y="360" width="760" height="40" fill="#5a6b52"/>
-          <rect x="330" y="332" width="46" height="28" rx="4" fill="#dfe6ea" stroke="#9fb0b8" stroke-width="2"/>
-          <text x="353" y="350" text-anchor="middle" class="oz-cfclbl">CFC</text>
-          <text x="353" y="392" text-anchor="middle" class="ix-lbl" fill="#eaf3ee">refrigerants / aerosols</text>
-          <path class="oz-rise" d="M353 332 L353 210" fill="none" stroke="#38b000" stroke-width="2.5" stroke-dasharray="6 8"/>
-        </svg>
-        </div>
-        <div class="oz-eqs">
-          <div class="oz-eq" data-oz-eq="0"><span class="oz-eq-r">CFCl₃</span> + UV → <span class="oz-eq-p">CFCl₂ + Cl·</span><span class="oz-eq-cap">UV frees a chlorine atom</span></div>
-          <div class="oz-eq" data-oz-eq="1"><span class="oz-eq-r">Cl· + O₃</span> → <span class="oz-eq-p">ClO + O₂</span><span class="oz-eq-cap">chlorine destroys ozone</span></div>
-          <div class="oz-eq" data-oz-eq="2"><span class="oz-eq-r">ClO + O</span> → <span class="oz-eq-p">Cl· + O₂</span><span class="oz-eq-cap">chlorine is set free again — and repeats</span></div>
-        </div>
-      </div>
-      <div class="ix-side">
-        <div class="oz-counter">
-          <div class="oz-count-num" data-oz-count>0</div>
-          <div class="oz-count-lbl">ozone molecules destroyed by this <b>one</b> chlorine atom</div>
-          <div class="oz-count-note">A single Cl atom can destroy <b>100,000+</b> before it&rsquo;s removed.</div>
-        </div>
-        <div class="ix-explain" data-oz-explain></div>
-        <button class="oz-montreal" type="button" data-oz-montreal>🌍 Enact the Montreal Protocol (ban CFCs)</button>
-      </div>
-    </div>
-    <p class="ix-src">Simplified catalytic cycle (Rowland &amp; Molina, 1974 — Nobel Prize 1995). Chlorine is regenerated, so one atom destroys ozone repeatedly. The 1987 Montreal Protocol phased out CFCs; the Antarctic ozone hole is projected to recover by ~2066 (WMO/UNEP).</p>
-  </div>
-  <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
-  <script>(function(){
-    var root=document.currentScript.closest('.oz-slide');
-    if(!root||root.dataset.wired)return; root.dataset.wired='1';
-    var svg=root.querySelector('[data-oz-svg]');
-    var layer=svg.querySelector('[data-oz-layer]'), cl=svg.querySelector('[data-oz-cl]');
-    var countEl=root.querySelector('[data-oz-count]'), explain=root.querySelector('[data-oz-explain]');
-    var eqs=root.querySelectorAll('[data-oz-eq]');
-    var N=12, Y=190, X0=110, DX=52;
-    var mols=[], intact=[];
-    function ozGlyph(i){
-      var x=X0+i*DX;
-      return '<g class="oz-mol" data-m="'+i+'" transform="translate('+x+','+Y+')">'
-        +'<circle class="o1" cx="-9" cy="4" r="8" fill="#4cc9f0"/>'
-        +'<circle class="o2" cx="9" cy="4" r="8" fill="#4cc9f0"/>'
-        +'<circle class="o3" cx="0" cy="-8" r="8" fill="#4361ee"/></g>';
-    }
-    function molX(i){ return X0+i*DX; }
-    function buildLayer(){
-      var h=''; for(var i=0;i<N;i++){ h+=ozGlyph(i); intact[i]=true; } layer.innerHTML=h;
-      mols=[].slice.call(layer.querySelectorAll('.oz-mol'));
-    }
-    buildLayer();
-    var count=0, cur=-1, timer=null, montreal=false;
-    cl.setAttribute('transform','translate('+ (X0-40) +','+Y+')');
-    function setExplain(){
-      if(montreal){ explain.innerHTML='With CFCs banned, no new chlorine reaches the stratosphere. The ozone layer slowly <b>heals</b> — proof that global policy can reverse a planetary problem.'; return; }
-      explain.innerHTML='A freed <b>chlorine atom</b> collides with an ozone molecule (O₃), stripping an oxygen to make O₂. The chlorine is then <b>regenerated</b>, so it attacks the next ozone — again and again.';
-    }
-    function litEq(k){ eqs.forEach(function(e,i){ e.classList.toggle('lit', i===k); }); }
-    function step(){
-      if(montreal) return;
-      var next=-1;
-      for(var i=cur+1;i<N;i++){ if(intact[i]){ next=i; break; } }
-      if(next===-1){ buildLayer(); cur=-1; for(var j=0;j<N;j++){ if(intact[j]){ next=j; break; } } }
-      cur=next;
-      cl.setAttribute('transform','translate('+molX(cur)+','+(Y-2)+')');
-      litEq(1);
-      setTimeout(function(){
-        if(montreal) return;
-        var g=mols[cur]; if(g){ g.classList.add('dead'); intact[cur]=false; }
-        count += 900 + Math.floor(Math.random()*1600);
-        countEl.textContent=count.toLocaleString();
-        litEq(2);
-      }, 560);
-    }
-    function start(){ if(timer)return; timer=setInterval(step, 1150); step(); }
-    function stop(){ if(timer){clearInterval(timer); timer=null;} }
-    var mBtn=root.querySelector('[data-oz-montreal]');
-    mBtn.addEventListener('click',function(){
-      montreal=!montreal;
-      root.classList.toggle('oz-healed', montreal);
-      mBtn.textContent = montreal ? '↩ Undo — bring CFCs back' : '🌍 Enact the Montreal Protocol (ban CFCs)';
-      if(montreal){ stop(); buildLayer(); cur=-1; cl.setAttribute('transform','translate('+(X0-40)+','+Y+')'); litEq(0); }
-      else { start(); }
-      setExplain();
-    });
-    setExplain(); litEq(1);
-    start();
-  })();</script>
 </section>
 <section class="slide" data-type="content" style="--accent:#52796F">
   <div class="stack-grid">
@@ -3924,627 +3697,6 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 
   </script>
 </section>
-<section class="slide cg-slide iv-slide" data-type="game"
-         data-game-id="ch8-inversion" data-segments="9" style="--accent:#52796F">
-  <div class="cg-root" data-cg>
-
-    <div class="cg-top">
-      <div class="cg-titlewrap">
-        <div class="eyebrow">8.6  ·  Consequences of Air Pollution</div>
-        <h2 class="heading cg-h">Inversion — a live class game</h2>
-        <p class="cg-sub">Nine towns share one valley and one column of air. Build yours — then find out which way the wind blows, and where you happen to live.</p>
-      </div>
-      <div class="cg-clockwrap" data-clockwrap hidden>
-        <div class="cg-phase" data-phasename></div>
-        <div class="cg-clock" data-clock>0:00</div>
-      </div>
-    </div>
-
-    <!-- ── host bar: only on the ?host copy ── -->
-    <div class="cg-hostbar" data-hostbar hidden>
-      <span class="cg-hostlbl">Instructor</span>
-      <button class="cg-btn go" type="button" data-open>Open the lobby</button>
-      <label class="cg-set">Build time
-        <select data-buildmin>
-          <option value="5">5 min</option>
-          <option value="7" selected>7 min</option>
-          <option value="10">10 min</option>
-        </select></label>
-      <label class="cg-set">Rounds
-        <select data-rounds>
-          <option value="1" selected>1</option>
-          <option value="2">2</option>
-        </select></label>
-      <button class="cg-btn" type="button" data-start hidden>Start ▸</button>
-      <button class="cg-btn ghost" type="button" data-skip hidden>Skip ahead ▸</button>
-      <button class="cg-btn ghost" type="button" data-reset>Reset</button>
-      <span class="cg-hoststatus" data-hoststatus></span>
-    </div>
-
-    <div class="cg-body">
-
-      <!-- ── left: the build palette ── -->
-      <div class="iv-build" data-buildpane>
-        <div class="iv-meters">
-          <div class="iv-meter"><span>Power</span><div class="iv-bar"><b data-m-pow></b></div><i data-v-pow>0 / 100</i></div>
-          <div class="iv-meter"><span>Mobility</span><div class="iv-bar"><b data-m-mob></b></div><i data-v-mob>0 / 100</i></div>
-          <div class="iv-meter budget"><span>Budget</span><div class="iv-bar"><b data-m-bud></b></div><i data-v-bud>0 / 120</i></div>
-        </div>
-        <div class="iv-cat" data-catalogue></div>
-        <div class="iv-emit"><span>Your emissions</span><b data-v-emit>0</b></div>
-      </div>
-
-      <!-- ── centre: the valley ── -->
-      <div class="iv-stage">
-        <div class="iv-caption" data-caption></div>
-        <svg viewBox="0 0 1000 700" class="iv-svg" data-valley preserveAspectRatio="xMidYMid meet"></svg>
-      </div>
-
-      <!-- ── right: status, plume read-out, leaderboards ── -->
-      <div class="cg-panel">
-        <div class="cg-status" data-status>Waiting for the instructor.</div>
-        <div class="cg-join" data-joinbox hidden>
-          <button class="cg-btn go big" type="button" data-join>Join the game</button>
-          <div class="cg-joinhint">You will be dealt a plot in the valley.</div>
-        </div>
-        <div class="iv-me" data-me hidden></div>
-        <div class="iv-boards" data-boards hidden></div>
-      </div>
-
-    </div>
-  </div>
-  <div class="footer"></div>
-  <script>(function(){
-    var root=document.currentScript.closest('.iv-slide');
-    if(!root||root.dataset.wired) return; root.dataset.wired='1';
-    
-if(!window.__cg){
-/* the deck's shared script may not have run yet — whoever is first creates it */
-if(!window.__deckLiveReady){
-  window.__deckLiveReady = new Promise(function(res){ window.__deckLiveResolve = res; });
-}
-window.__cg = (function(){
-  /* deterministic [0,1) from a string — every client agrees with no write */
-  function rnd(s){
-    var h=2166136261;
-    for(var i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); }
-    h^=h>>>15; h=Math.imul(h,2246822507); h^=h>>>13; h^=h>>>16;
-    return (h>>>0)/4294967296;
-  }
-  function pick(s,n){ return Math.floor(rnd(s)*n)%n; }
-  /* a stable per-browser player key, one per game id */
-  function pid(gid){
-    var k='cg-pid:'+gid, v=null;
-    try{ v=localStorage.getItem(k); }catch(e){}
-    if(!v){ v=Math.random().toString(36).slice(2,9);
-            try{ localStorage.setItem(k,v); }catch(e){} }
-    return v;
-  }
-  function clock(ms){
-    if(ms==null) return '';
-    var t=Math.max(0,Math.ceil(ms/1000)), m=Math.floor(t/60), s=t%60;
-    return m+':'+(s<10?'0':'')+s;
-  }
-  /* keyboard inside a game must not drive the deck */
-  function trapKeys(el){
-    var NAV=['ArrowLeft','ArrowRight','ArrowUp','ArrowDown',' ','PageUp','PageDown','Home','End'];
-    el.addEventListener('keydown', function(e){ if(NAV.indexOf(e.key)>-1) e.stopPropagation(); });
-  }
-  return {rnd:rnd, pick:pick, pid:pid, clock:clock, trapKeys:trapKeys};
-})();
-}
-
-    var CG=window.__cg, wrap=root.querySelector('[data-cg]');
-    CG.trapKeys(wrap);
-    var GID=root.dataset.gameId, NSEG=parseInt(root.dataset.segments,10)||9;
-    var NS='http://www.w3.org/2000/svg';
-    function el(n,at){ var e=document.createElementNS(NS,n); for(var k in at) e.setAttribute(k,at[k]); return e; }
-    function esc(t){ return String(t==null?'':t).replace(/[&<>"]/g,function(c){
-      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
-
-    /* ── the catalogue: cost / output / emissions ───────────────────────────
-       Numbers are tuned so no single strategy wins: the cheap build is filthy,
-       the clean build is expensive, and nobody can afford to be clean AND rich. */
-    var CAT=[
-      {id:'coal',  grp:'Power',    name:'Coal plant',       cost:20, pow:40, emit:40, max:3,
-       note:'Cheap and dependable. Soot, sulphur, the lot.'},
-      {id:'gas',   grp:'Power',    name:'Gas plant',        cost:30, pow:35, emit:16, max:3,
-       note:'Half the emissions of coal, half again the price.'},
-      {id:'solar', grp:'Power',    name:'Solar farm',       cost:34, pow:16, emit:0,  max:4,
-       note:'Nothing out of the stack. You need a lot of it.'},
-      {id:'wind',  grp:'Power',    name:'Wind turbines',    cost:38, pow:21, emit:0,  max:4,
-       note:'Clean, dear, and the valley is often still.'},
-      {id:'stove', grp:'Power',    name:'Wood stoves',      cost:5,  pow:9,  emit:30, max:4,
-       note:'Almost free heat — and the classic inversion smoke.'},
-      {id:'free',  grp:'Mobility', name:'Freeway & cars',   cost:15, mob:44, emit:26, max:3,
-       note:'Moves everyone. Tailpipes at ground level.'},
-      {id:'bus',   grp:'Mobility', name:'Bus network',      cost:20, mob:30, emit:10, max:3,
-       note:'Fewer engines for the same trips.'},
-      {id:'rail',  grp:'Mobility', name:'Light rail',       cost:44, mob:42, emit:3,  max:3,
-       note:'Expensive to lay. Barely emits.'},
-      {id:'bike',  grp:'Mobility', name:'Bike & walk grid', cost:9,  mob:18, emit:0,  max:3,
-       note:'Cheapest clean trips. Only goes so far.'},
-      {id:'smelt', grp:'Industry', name:'Smelter',          cost:25, inc:40, emit:34, max:2,
-       note:'The best money in the valley, out of one tall stack.'},
-      {id:'light', grp:'Industry', name:'Light manufacturing', cost:20, inc:19, emit:7, max:3,
-       note:'Modest money, modest plume.'},
-      {id:'scrub', grp:'Controls', name:'Stack scrubbers',  cost:26, cut:'stack', max:1,
-       note:'Strips 45% off every stack you own.'},
-      {id:'ev',    grp:'Controls', name:'EV incentives',    cost:22, cut:'road',  max:1,
-       note:'Halves what your traffic puts out.'}
-    ];
-    var CMAP={}; CAT.forEach(function(c){ CMAP[c.id]=c; });
-    var BUDGET=120, NEED_POW=100, NEED_MOB=100, ADAPT_BUDGET=35;
-
-    function totals(b){
-      b=b||{};
-      var pow=0,mob=0,inc=0,cost=0,stack=0,road=0;
-      CAT.forEach(function(c){
-        var n=b[c.id]||0; if(!n) return;
-        cost+=c.cost*n;
-        if(c.pow) pow+=c.pow*n;
-        if(c.mob) mob+=c.mob*n;
-        if(c.inc) inc+=c.inc*n;
-        if(c.emit){ if(c.grp==='Mobility') road+=c.emit*n; else stack+=c.emit*n; }
-      });
-      if(b.scrub) stack*=0.55;
-      if(b.ev)    road *=0.50;
-      return {pow:pow, mob:mob, inc:inc, cost:cost, emit:Math.round(stack+road)};
-    }
-
-    /* ── live state ─────────────────────────────────────────────────────── */
-    var backend=null, HOST=false, state={}, PK=CG.pid(GID), myBuild={}, dirty=false;
-    function players(){ return state.players||{}; }
-    function R(){ return state.round||1; }
-    function NR(){ return state.rounds||1; }
-    function phase(){ return state.phase||'idle'; }
-    function joined(){ return !HOST && players()[PK]!==undefined; }
-    function segOf(k){ return CG.pick(GID+':seg:'+k, NSEG); }
-    function homeOf(k,r){ return CG.pick(GID+':home:'+k+':'+r, NSEG); }
-    function seed(r){ return GID+':'+(state.gameId||0)+':'+r; }
-    function windOf(r){ return CG.rnd(seed(r)+':wind')<0.5 ? 1 : -1; }   /* +1 = down-valley */
-    function invOf(r){
-      var u=CG.rnd(seed(r)+':inv');
-      return u<0.34 ? {k:'none', mult:1.0, name:'No inversion'}
-           : u<0.70 ? {k:'weak', mult:2.1, name:'Weak inversion'}
-                    : {k:'strong', mult:3.8, name:'Strong inversion'};
-    }
-    function buildsFor(r){ return (state.builds&&state.builds['r'+r])||{}; }
-
-    /* segment emissions, summed over everyone who built there */
-    function segEmit(r){
-      var out=new Array(NSEG).fill(0), bs=buildsFor(r);
-      Object.keys(bs).forEach(function(k){ out[segOf(k)] += totals(bs[k]).emit; });
-      return out;
-    }
-    /* concentration: local share + everything upwind, decaying with distance,
-       all of it multiplied by the inversion that stops the valley venting */
-    function concentration(r){
-      var e=segEmit(r), w=windOf(r), inv=invOf(r), c=new Array(NSEG).fill(0);
-      for(var j=0;j<NSEG;j++){
-        var acc=0.55*e[j];
-        for(var k=0;k<NSEG;k++){
-          if(k===j) continue;
-          var d=(j-k)*w;                       /* positive = k is upwind of j */
-          if(d>0) acc += e[k]*Math.pow(0.62,d);
-        }
-        c[j]=acc*inv.mult;
-      }
-      return c;
-    }
-    /* how much of MY emissions landed on people whose home is elsewhere */
-    function harmExported(k,r){
-      var b=buildsFor(r)[k]; if(!b) return 0;
-      var mine=totals(b).emit, s=segOf(k), w=windOf(r), inv=invOf(r), acc=0;
-      var homes={};
-      Object.keys(players()).forEach(function(q){ var h=homeOf(q,r); homes[h]=(homes[h]||0)+1; });
-      for(var j=0;j<NSEG;j++){
-        if(!homes[j]) continue;
-        var d=(j-s)*w, share = (j===s) ? 0.55 : (d>0 ? Math.pow(0.62,d) : 0);
-        if(j===s) share=0;                     /* only what leaves your own plot counts */
-        acc += mine*share*inv.mult*homes[j];
-      }
-      return Math.round(acc);
-    }
-    function prosperity(b){
-      var t=totals(b);
-      return Math.round(Math.min(t.pow/NEED_POW,1)*45 + Math.min(t.mob/NEED_MOB,1)*45 + t.inc*0.55);
-    }
-
-    /* ── the valley, drawn rough ────────────────────────────────────────── */
-    var svg=wrap.querySelector('[data-valley]');
-    function drawValley(){
-      svg.innerHTML='';
-      var W=1000,H=700, floor=566;
-      var defs=el('defs');
-      defs.innerHTML=
-        '<filter id="ivRough" x="-6%" y="-6%" width="112%" height="112%">'+
-          '<feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" seed="9" result="n"/>'+
-          '<feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/>'+
-        '</filter>'+
-        '<linearGradient id="ivSky" x1="0" y1="0" x2="0" y2="1">'+
-          '<stop offset="0" stop-color="#dbeaf3"/><stop offset="1" stop-color="#f2f6f4"/></linearGradient>'+
-        '<pattern id="ivPaper" width="26" height="26" patternUnits="userSpaceOnUse">'+
-          '<path d="M26 0 L0 0 0 26" fill="none" stroke="#e6eeea" stroke-width="1.1"/></pattern>';
-      svg.appendChild(defs);
-      svg.appendChild(el('rect',{x:-400,y:-300,width:1800,height:1300,fill:'url(#ivSky)'}));
-      svg.appendChild(el('rect',{x:-400,y:-300,width:1800,height:1300,fill:'url(#ivPaper)',opacity:'.5'}));
-
-      /* mountain walls, wobbled by a fixed seed so they look drawn, not plotted */
-      function ridge(x0,x1,peak,fill,op,sd){
-        var d='M'+x0+' '+floor, n=14;
-        for(var i=0;i<=n;i++){
-          var t=i/n, x=x0+(x1-x0)*t;
-          var y=floor-Math.sin(t*Math.PI)*peak*(0.82+0.36*CG.rnd(sd+':'+i));
-          d+=' L'+x.toFixed(0)+' '+y.toFixed(0);
-        }
-        d+=' L'+x1+' '+floor+' Z';
-        var p=el('path',{d:d,fill:fill,opacity:op,stroke:'#7d9488','stroke-width':2.2,
-                        'stroke-linejoin':'round',filter:'url(#ivRough)'});
-        svg.appendChild(p);
-      }
-      ridge(-40,320,392,'#cfe0d6','.95','ridgeL');
-      ridge(680,1040,418,'#cfe0d6','.95','ridgeR');
-      ridge(110,440,250,'#dcebe1','.9','ridgeL2');
-      ridge(580,910,270,'#dcebe1','.9','ridgeR2');
-
-      /* the inversion lid — a dashed ceiling that drops as the draw gets worse */
-      var lid=el('g',{'data-lid':'',opacity:'0'});
-      lid.appendChild(el('rect',{x:0,y:0,width:W,height:1,fill:'#8a7333',opacity:'.14','data-lidfill':''}));
-      lid.appendChild(el('path',{d:'M0 0 L'+W+' 0',stroke:'#8a7333','stroke-width':3,
-                                'stroke-dasharray':'14 10','data-lidline':''}));
-      var lt=el('text',{x:16,y:-10,class:'iv-lidlbl','data-lidlbl':''});
-      lid.appendChild(lt); svg.appendChild(lid);
-
-      /* valley floor */
-      svg.appendChild(el('path',{d:'M0 '+floor+' L'+W+' '+floor,stroke:'#6f8878','stroke-width':3.4,
-                                'stroke-linecap':'round',filter:'url(#ivRough)'}));
-      svg.appendChild(el('g',{'data-haze':''}));
-      svg.appendChild(el('g',{'data-towns':''}));
-      svg.appendChild(el('g',{'data-windg':''}));
-      return {W:W,H:H,floor:floor};
-    }
-    var GEO=drawValley();
-    function segX(i){ var m=90, span=(GEO.W-2*m); return m + span*((i+0.5)/NSEG); }
-
-    /* a little hand-drawn town: stacks smoke, panels glint, turbines turn */
-    function townArt(g,x,mix,mine){
-      var f=GEO.floor;
-      var base=el('g',{transform:'translate('+x.toFixed(0)+','+f+') scale(1.42)',class:'iv-town'+(mine?' mine':'')});
-      base.appendChild(el('path',{d:'M-40 0 h80',stroke:'#6f8878','stroke-width':3,'stroke-linecap':'round'}));
-      /* buildings */
-      [[-30,26],[-14,38],[2,30]].forEach(function(b,i){
-        base.appendChild(el('rect',{x:b[0],y:-b[1],width:12,height:b[1],fill:'#fff',
-          stroke:'#5b7364','stroke-width':2,rx:1.5}));
-      });
-      if(mix.stack>0){
-        base.appendChild(el('rect',{x:18,y:-46,width:11,height:46,fill:'#fff',stroke:'#6b5b4b','stroke-width':2.2}));
-        var puff=el('path',{d:'M23 -50 q-9 -13 2 -19 q11 -5 13 6 q10 2 5 12',fill:'#b9a48c',
-          opacity:String(Math.min(0.85,0.2+mix.stack/70)),class:'iv-puff'});
-        base.appendChild(puff);
-      }
-      if(mix.clean>0){
-        var t=el('g',{transform:'translate(-52,-4)'});
-        t.appendChild(el('path',{d:'M0 0 L0 -40',stroke:'#5b7364','stroke-width':2.4}));
-        var bl=el('g',{transform:'translate(0,-40)',class:'iv-rotor'});
-        [0,120,240].forEach(function(a){
-          bl.appendChild(el('path',{d:'M0 0 L0 -15',stroke:'#5b7364','stroke-width':2.4,
-            transform:'rotate('+a+')','stroke-linecap':'round'}));
-        });
-        t.appendChild(bl); base.appendChild(t);
-        base.appendChild(el('path',{d:'M34 0 l7 -11 h15 l-7 11 Z',fill:'#cfe3ef',stroke:'#1C7293','stroke-width':1.8}));
-      }
-      if(mix.road>0){
-        base.appendChild(el('path',{d:'M-44 6 h88',stroke:'#9aa8a0','stroke-width':4,'stroke-dasharray':'9 7'}));
-      }
-      g.appendChild(base);
-      return base;
-    }
-
-    function renderValley(){
-      var ph=phase(), r=R();
-      var towns=svg.querySelector('[data-towns]'), haze=svg.querySelector('[data-haze]'),
-          windg=svg.querySelector('[data-windg]'), lid=svg.querySelector('[data-lid]');
-      towns.innerHTML=''; haze.innerHTML=''; windg.innerHTML='';
-
-      var showAir = (ph==='weather'||ph==='adapt'||ph==='reveal'||ph==='final');
-      var e=segEmit(r), c=showAir?concentration(r):null, inv=invOf(r), w=windOf(r);
-      var mySeg = joined()? segOf(PK) : -1, myHome = joined()? homeOf(PK,r) : -1;
-
-      /* the lid */
-      if(showAir && inv.k!=='none'){
-        var y = inv.k==='strong' ? 322 : 218;
-        lid.setAttribute('opacity','1');
-        lid.querySelector('[data-lidfill]').setAttribute('y',String(y));
-        lid.querySelector('[data-lidfill]').setAttribute('height',String(GEO.floor-y));
-        lid.querySelector('[data-lidline]').setAttribute('d','M0 '+y+' L'+GEO.W+' '+y);
-        var lbl=lid.querySelector('[data-lidlbl]');
-        lbl.setAttribute('y',String(y-9)); lbl.textContent=inv.name+' — the valley cannot vent';
-      } else lid.setAttribute('opacity','0');
-
-      /* haze columns */
-      if(showAir){
-        var peak=Math.max(1,Math.max.apply(null,c));
-        for(var j=0;j<NSEG;j++){
-          var a=Math.min(0.72,(c[j]/peak)*0.72), top=inv.k==='strong'?322:(inv.k==='weak'?218:118);
-          if(a<=0.02) continue;
-          var x=segX(j), wdt=(GEO.W-180)/NSEG;
-          haze.appendChild(el('rect',{x:(x-wdt/2).toFixed(0),y:top,width:wdt.toFixed(0),
-            height:(GEO.floor-top).toFixed(0),fill:'#8a7333',opacity:a.toFixed(3),class:'iv-haze'}));
-        }
-      }
-
-      /* towns */
-      for(var i=0;i<NSEG;i++){
-        var bs=buildsFor(r), stack=0, road=0, clean=0;
-        Object.keys(bs).forEach(function(k){
-          if(segOf(k)!==i) return;
-          var b=bs[k];
-          CAT.forEach(function(cc){
-            var n=b[cc.id]||0; if(!n) return;
-            if(cc.emit && cc.grp==='Mobility') road+=cc.emit*n;
-            else if(cc.emit) stack+=cc.emit*n;
-            if(cc.emit===0 && (cc.pow||cc.mob)) clean+=n;
-          });
-        });
-        var t=townArt(towns, segX(i), {stack:stack,road:road,clean:clean}, i===mySeg);
-        if(i===mySeg){
-          var tag=el('text',{x:segX(i),y:GEO.floor+34,'text-anchor':'middle',class:'iv-tag'});
-          tag.textContent='your town'; towns.appendChild(tag);
-        }
-        if(showAir && i===myHome){
-          var hm=el('g',{transform:'translate('+segX(i).toFixed(0)+','+(GEO.floor+62)+')'});
-          hm.appendChild(el('path',{d:'M-9 0 L0 -9 L9 0 M-6 0 v8 h12 v-8',fill:'none',
-            stroke:'#A4373A','stroke-width':2.4,'stroke-linejoin':'round','stroke-linecap':'round'}));
-          var ht=el('text',{x:0,y:22,'text-anchor':'middle',class:'iv-tag home'});
-          ht.textContent='you live here'; hm.appendChild(ht); towns.appendChild(hm);
-        }
-      }
-
-      /* wind */
-      if(showAir){
-        var y=118, x0=w>0?120:880, x1=w>0?880:120, mid=(x0+x1)/2;
-        var a=el('path',{d:'M'+x0+' '+y+' L'+x1+' '+y,stroke:'#1C7293','stroke-width':3,
-          'stroke-linecap':'round','stroke-dasharray':'20 12',class:'iv-wind'});
-        windg.appendChild(a);
-        var s=w>0?-1:1;
-        windg.appendChild(el('path',{d:'M'+x1+' '+y+' l'+(14*s)+' -8 M'+x1+' '+y+' l'+(14*s)+' 8',
-          stroke:'#1C7293','stroke-width':3,'stroke-linecap':'round'}));
-        var wt=el('text',{x:mid,y:y-14,'text-anchor':'middle',class:'iv-windlbl'});
-        wt.textContent = (w>0?'wind blows this way ▸':'◂ wind blows this way');
-        windg.appendChild(wt);
-      }
-    }
-
-    /* ── the build palette ──────────────────────────────────────────────── */
-    var catBox=wrap.querySelector('[data-catalogue]');
-    function drawCatalogue(){
-      var groups={}; CAT.forEach(function(c){ (groups[c.grp]=groups[c.grp]||[]).push(c); });
-      catBox.innerHTML='';
-      Object.keys(groups).forEach(function(g){
-        var h=document.createElement('div'); h.className='iv-grp';
-        h.innerHTML='<div class="iv-gtitle">'+g+'</div>';
-        groups[g].forEach(function(c){
-          var row=document.createElement('div'); row.className='iv-row'; row.dataset.item=c.id;
-          row.innerHTML=
-            '<div class="iv-rmain"><div class="iv-rname">'+esc(c.name)+'</div>'+
-            '<div class="iv-rnote">'+esc(c.note)+'</div>'+
-            '<div class="iv-rstats">'+
-              '<span class="c">'+c.cost+'cr</span>'+
-              (c.pow?'<span class="p">+'+c.pow+' power</span>':'')+
-              (c.mob?'<span class="p">+'+c.mob+' mobility</span>':'')+
-              (c.inc?'<span class="i">+'+c.inc+' income</span>':'')+
-              (c.emit?'<span class="e">'+c.emit+' emissions</span>':'')+
-              (c.cut?'<span class="g">cleans up</span>':'')+
-            '</div></div>'+
-            '<div class="iv-step"><button type="button" data-dec>−</button>'+
-              '<b data-n>0</b><button type="button" data-inc>+</button></div>';
-          row.querySelector('[data-inc]').addEventListener('click',function(){ change(c,1); });
-          row.querySelector('[data-dec]').addEventListener('click',function(){ change(c,-1); });
-          h.appendChild(row);
-        });
-        catBox.appendChild(h);
-      });
-    }
-    function change(c,d){
-      if(!canBuild()) return;
-      var n=(myBuild[c.id]||0)+d;
-      if(n<0||n>(c.max||9)) return;
-      var trial={}; for(var k in myBuild) trial[k]=myBuild[k]; trial[c.id]=n;
-      var lim = (phase()==='adapt') ? BUDGET+ADAPT_BUDGET : BUDGET;
-      if(totals(trial).cost>lim) return;
-      myBuild[c.id]=n; dirty=true; renderBuild(); renderValley(); pushBuild();
-    }
-    function canBuild(){ return joined() && (phase()==='build'||phase()==='adapt'); }
-    var pushT=null;
-    function pushBuild(){
-      if(!backend||!joined()) return;
-      clearTimeout(pushT);
-      pushT=setTimeout(function(){
-        var full={}; CAT.forEach(function(c){ full[c.id]=myBuild[c.id]||0; });
-        var o={builds:{}}; o.builds['r'+R()]={}; o.builds['r'+R()][PK]=full;
-        backend.mergeDocShard('polls',GID,o); dirty=false;
-      },420);
-    }
-    function renderBuild(){
-      var t=totals(myBuild), lim=(phase()==='adapt')?BUDGET+ADAPT_BUDGET:BUDGET;
-      function set(m,v,max){ wrap.querySelector(m).style.width=Math.min(100,v/max*100)+'%'; }
-      set('[data-m-pow]',t.pow,NEED_POW); set('[data-m-mob]',t.mob,NEED_MOB); set('[data-m-bud]',t.cost,lim);
-      wrap.querySelector('[data-v-pow]').textContent=t.pow+' / '+NEED_POW;
-      wrap.querySelector('[data-v-mob]').textContent=t.mob+' / '+NEED_MOB;
-      wrap.querySelector('[data-v-bud]').textContent=t.cost+' / '+lim;
-      wrap.querySelector('[data-v-emit]').textContent=t.emit;
-      wrap.querySelector('[data-m-pow]').parentNode.parentNode.classList.toggle('short',t.pow<NEED_POW);
-      wrap.querySelector('[data-m-mob]').parentNode.parentNode.classList.toggle('short',t.mob<NEED_MOB);
-      CAT.forEach(function(c){
-        var row=catBox.querySelector('[data-item="'+c.id+'"]'); if(!row) return;
-        row.querySelector('[data-n]').textContent=myBuild[c.id]||0;
-        row.classList.toggle('on',(myBuild[c.id]||0)>0);
-      });
-      wrap.querySelector('[data-buildpane]').classList.toggle('locked',!canBuild());
-    }
-
-    /* ── panels ─────────────────────────────────────────────────────────── */
-    var statusEl=wrap.querySelector('[data-status]'), meEl=wrap.querySelector('[data-me]'),
-        boardsEl=wrap.querySelector('[data-boards]'), capEl=wrap.querySelector('[data-caption]');
-    function renderMe(){
-      if(!joined()||phase()==='idle'||phase()==='lobby'){ meEl.hidden=true; return; }
-      meEl.hidden=false;
-      var r=R(), c=concentration(r), inv=invOf(r), t=totals(myBuild);
-      var showAir=(phase()==='weather'||phase()==='adapt'||phase()==='reveal'||phase()==='final');
-      var breathe=showAir?Math.round(c[homeOf(PK,r)]):null;
-      meEl.innerHTML=
-        '<div class="iv-mehead">Your plot</div>'+
-        '<div class="iv-merow"><span>Prosperity</span><b>'+prosperity(myBuild)+'</b></div>'+
-        '<div class="iv-merow"><span>You emit</span><b>'+t.emit+'</b></div>'+
-        (showAir?'<div class="iv-merow big"><span>Air you breathe</span><b class="'+
-          (breathe>90?'bad':breathe>45?'mid':'good')+'">'+breathe+'</b></div>'+
-          '<div class="iv-merow"><span>Harm exported</span><b>'+harmExported(PK,r)+'</b></div>':'');
-    }
-    function renderBoards(){
-      if(phase()!=='reveal'&&phase()!=='final'){ boardsEl.hidden=true; return; }
-      boardsEl.hidden=false;
-      var r=R(), c=concentration(r), bs=buildsFor(r), rows=[];
-      Object.keys(bs).forEach(function(k){
-        rows.push({k:k, name:(players()[k]||{}).n||'Player',
-          pro:prosperity(bs[k]), air:Math.round(c[homeOf(k,r)]), harm:harmExported(k,r)});
-      });
-      function board(ttl,key,dir,unit){
-        var s=rows.slice().sort(function(a,b){ return dir*(b[key]-a[key]); }).slice(0,5);
-        var mine=rows.filter(function(x){return x.k===PK;})[0];
-        var rank=mine?rows.slice().sort(function(a,b){return dir*(b[key]-a[key]);})
-                       .findIndex(function(x){return x.k===PK;})+1:0;
-        return '<div class="iv-board"><div class="iv-bttl">'+ttl+'</div>'+
-          s.map(function(x,i){ return '<div class="iv-brow'+(x.k===PK?' me':'')+'"><i>'+(i+1)+'</i>'+
-            esc(x.name)+'<b>'+x[key]+'</b></div>'; }).join('')+
-          (mine&&rank>5?'<div class="iv-brow me"><i>'+rank+'</i>'+esc(mine.name)+'<b>'+mine[key]+'</b></div>':'')+
-          '</div>';
-      }
-      boardsEl.innerHTML=board('Most prosperous','pro',1)+
-                         board('Cleanest air breathed','air',-1)+
-                         board('Least harm exported','harm',-1);
-    }
-
-    /* ── phase clock ────────────────────────────────────────────────────── */
-    var clockWrap=wrap.querySelector('[data-clockwrap]'), clockEl=wrap.querySelector('[data-clock]'),
-        phaseEl=wrap.querySelector('[data-phasename]');
-    var PHASE_NAME={build:'Build your town',weather:'The draw',adapt:'Adapt',
-                    reveal:'Results',lobby:'Lobby',final:'Final results'};
-    function tick(){
-      var dl=state.deadline, left=dl?dl-Date.now():null;
-      var timed=(phase()==='build'||phase()==='adapt'||phase()==='weather');
-      clockWrap.hidden=!(timed&&dl);
-      if(timed&&dl){
-        clockEl.textContent=CG.clock(left);
-        clockEl.classList.toggle('low',left<30000);
-        phaseEl.textContent=PHASE_NAME[phase()]||'';
-      }
-      if(HOST&&dl&&left<=0) advance();
-    }
-    setInterval(tick,250);
-
-    /* ── host flow ──────────────────────────────────────────────────────── */
-    function mins(){ return parseInt(wrap.querySelector('[data-buildmin]').value,10)||7; }
-    function setPhase(p,secs,extra){
-      var o=extra||{}; o.phase=p;
-      o.deadline = secs? (Date.now()+secs*1000) : null;
-      backend.mergeDoc('polls',GID,o);
-    }
-    function advance(){
-      var ph=phase();
-      if(ph==='build')       setPhase('weather',22);
-      else if(ph==='weather')setPhase('adapt',Math.max(120,Math.round(mins()*60*0.5)));
-      else if(ph==='adapt')  setPhase('reveal',null);
-      else if(ph==='reveal'){
-        if(R()<NR()) setPhase('build',mins()*60,{round:R()+1});
-        else setPhase('final',null);
-      }
-    }
-    function wireHost(){
-      var bar=wrap.querySelector('[data-hostbar]'); bar.hidden=false;
-      root.classList.add('cg-host');
-      bar.querySelector('[data-open]').addEventListener('click',function(){
-        backend.setDoc('polls',GID,{phase:'lobby',round:1,players:{},builds:{},
-          gameId:Date.now()%100000, rounds:parseInt(wrap.querySelector('[data-rounds]').value,10)||1});
-      });
-      bar.querySelector('[data-start]').addEventListener('click',function(){
-        if(!Object.keys(players()).length && !confirm('Nobody has joined yet. Start anyway?')) return;
-        setPhase('build',mins()*60,{round:1});
-      });
-      bar.querySelector('[data-skip]').addEventListener('click',advance);
-      bar.querySelector('[data-reset]').addEventListener('click',function(){
-        if(confirm('Reset the game for everyone?')) backend.setDoc('polls',GID,{phase:'idle'});
-      });
-    }
-    function renderHost(){
-      if(!HOST) return;
-      var bar=wrap.querySelector('[data-hostbar]'), ph=phase(), n=Object.keys(players()).length;
-      bar.querySelector('[data-open]').hidden = !(ph==='idle'||ph==='final');
-      bar.querySelector('[data-open]').textContent = ph==='final'?'New game':'Open the lobby';
-      bar.querySelector('[data-start]').hidden = ph!=='lobby';
-      bar.querySelector('[data-skip]').hidden = !(ph==='build'||ph==='weather'||ph==='adapt'||ph==='reveal');
-      var s=bar.querySelector('[data-hoststatus]');
-      var built=Object.keys(buildsFor(R())).length;
-      s.textContent = ph==='idle' ? 'Open the lobby, then press Start once. It runs itself from there.'
-        : ph==='lobby' ? n+' joined — students tap Join on their own screens.'
-        : ph==='build' ? 'Round '+R()+' — '+built+' of '+n+' have built something.'
-        : ph==='weather'? 'Drawing the weather…'
-        : ph==='adapt' ? 'They can see the plume and retrofit.'
-        : ph==='reveal'? 'Results are on every screen'+(R()<NR()?' — round '+(R()+1)+' starts next.':'.')
-        : 'Game over.';
-    }
-
-    function renderCaption(){
-      var ph=phase(), r=R(), inv=invOf(r), w=windOf(r);
-      capEl.innerHTML =
-        ph==='idle'||ph==='lobby' ? 'A valley, nine towns, and one shared column of air.'
-      : ph==='build' ? 'Build your town. Nobody can see the weather yet.'
-      : ph==='weather'? '<b>'+inv.name+'</b> · wind blowing '+(w>0?'down-valley':'up-valley')+
-                        ' — where will it all end up?'
-      : '<b>'+inv.name+'</b> · wind '+(w>0?'down-valley':'up-valley')+
-        '. Shaded columns are what people are breathing.';
-    }
-
-    function render(){
-      var ph=phase();
-      wrap.querySelector('[data-joinbox]').hidden = HOST||joined()||!(ph==='lobby'||ph==='build');
-      renderBuild(); renderValley(); renderMe(); renderBoards(); renderHost(); renderCaption();
-      var n=Object.keys(players()).length;
-      if(HOST) statusEl.textContent=n+' player'+(n===1?'':'s')+' in the valley.';
-      else if(ph==='idle') statusEl.textContent='Waiting for the instructor to open the game.';
-      else if(!joined()) statusEl.textContent='Tap Join — you will be dealt a plot.';
-      else if(ph==='lobby') statusEl.textContent='You are in. Your plot is marked in the valley below.';
-      else if(ph==='build') statusEl.textContent='Meet both demands inside your budget. Emissions are up to you.';
-      else if(ph==='weather') statusEl.textContent='The weather is being drawn…';
-      else if(ph==='adapt') statusEl.textContent='You have '+ADAPT_BUDGET+' extra credits. Retrofit if you can.';
-      else statusEl.textContent='Results are in.';
-    }
-
-    /* ── boot ───────────────────────────────────────────────────────────── */
-    wrap.querySelector('[data-join]').addEventListener('click',function(){
-      if(!backend) return;
-      var o={players:{}}; o.players[PK]={n:'Player '+(1+Math.floor(CG.rnd(PK)*899)), t:Date.now()};
-      backend.mergeDocShard('polls',GID,o);
-    });
-    drawCatalogue(); renderBuild();
-
-    window.__deckLiveReady.then(function(live){
-      backend=live.backend; HOST=live.HOST;
-      if(HOST) wireHost();
-      backend.subscribeDoc('polls',GID,function(d){
-        var prevPhase=phase(), prevRound=R();
-        state=d||{};
-        if(R()!==prevRound){ myBuild={}; }          /* a new round is a fresh town */
-        if(prevPhase!=='weather'&&phase()==='weather') root.classList.add('iv-drawing');
-        if(phase()!=='weather') root.classList.remove('iv-drawing');
-        var mine=buildsFor(R())[PK];
-        if(mine && !dirty){ myBuild={}; CAT.forEach(function(c){ if(mine[c.id]) myBuild[c.id]=mine[c.id]; }); }
-        render();
-      });
-      render();
-    });
-  })();</script>
-</section>
 <section class="slide" data-type="content" style="--accent:#2D6A4F">
   <div class="bleed-grid">
     <div class="bleed-text">
@@ -4768,6 +3920,71 @@ window.__cg = (function(){
   <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
 </section>
 <section class="slide hc-slide ia-slide" data-type="content" style="--accent:#8a6a2f">
+  <svg class="ia-sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="iaNib" x="-12%" y="-12%" width="124%" height="124%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="0.9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="ia-car" viewBox="0 0 24 24">
+      <path d="M2.6 15.4 L4.3 10.9 C4.6 10.1 5.2 9.7 6 9.7 L13.7 9.7 C14.5 9.7 15.2 10 15.8 10.5 L18.9 13.2 L20.7 13.8 C21.3 14 21.6 14.5 21.6 15.1 L21.6 16.4 L2.6 16.4 Z"/>
+      <path d="M5.9 13.3 L15.9 13.3"/>
+      <circle cx="7.3" cy="16.5" r="1.8"/><circle cx="16.9" cy="16.5" r="1.8"/>
+      <path d="M2.2 19.2 C1.2 19.6 0.8 18.7 1.7 18.2"/>
+      <path d="M4.6 19.9 C3.5 20.4 3.1 19.4 4.1 18.9"/>
+    </symbol>
+    <symbol id="ia-coal" viewBox="0 0 24 24">
+      <path d="M3.2 20.4 L20.8 20.4"/>
+      <path d="M5.8 20.4 L5.8 11.4 L9.2 11.4 L9.2 20.4"/>
+      <path d="M12.4 20.4 L12.4 8.6 L16.2 8.6 L16.2 20.4"/>
+      <path d="M7.5 9.6 C8.8 8.2 6.9 7 8.3 5.6"/>
+      <path d="M14.3 6.9 C15.7 5.4 13.7 4.1 15.2 2.6"/>
+    </symbol>
+    <symbol id="ia-beef" viewBox="0 0 24 24">
+      <path d="M5.6 9.4 C7.1 6.7 11.7 5.7 15.1 6.9 C18.7 8.1 20.1 11.3 18.7 14 C17.3 16.7 13.1 18 9.7 16.8 C6.5 15.7 4.3 11.9 5.6 9.4 Z"/>
+      <path d="M9.3 9.6 C10.9 10.6 12.5 11.2 14.7 11.4"/>
+      <path d="M8.7 12.2 C10.3 13 12.1 13.4 13.9 13.5"/>
+    </symbol>
+    <symbol id="ia-walk" viewBox="0 0 24 24">
+      <circle cx="12.7" cy="4.3" r="1.8"/>
+      <path d="M12.3 6.7 L10.7 12.2"/>
+      <path d="M12.4 8.2 L15.3 9.9"/>
+      <path d="M11.5 8.6 L8.6 10.9"/>
+      <path d="M10.7 12.2 L8.2 18.4"/>
+      <path d="M10.7 12.2 L14.3 15.6 L14.7 19.8"/>
+    </symbol>
+    <symbol id="ia-noplug" viewBox="0 0 24 24">
+      <path d="M9.2 7.9 L9.2 4.6"/><path d="M14.8 7.9 L14.8 4.6"/>
+      <path d="M7.5 7.9 L16.5 7.9 L16.5 11.9 C16.5 14.4 14.5 16.4 12 16.4 C9.5 16.4 7.5 14.4 7.5 11.9 Z"/>
+      <path d="M12 16.4 L12 19.6"/>
+      <path d="M4.1 20.1 L19.9 3.9"/>
+    </symbol>
+    <symbol id="ia-pea" viewBox="0 0 24 24">
+      <path d="M5.7 14.9 C4.5 10.3 8.3 5.7 13.5 5.3 C16.7 5.1 18.9 6.7 19 8.9 C19.1 12.5 14.7 16.9 9.9 17.5 C7.5 17.8 6.1 16.7 5.7 14.9 Z"/>
+      <circle cx="9.7" cy="13.3" r="1.5"/><circle cx="12.5" cy="11" r="1.5"/><circle cx="15.1" cy="8.8" r="1.5"/>
+    </symbol>
+    <symbol id="ia-ev" viewBox="0 0 24 24">
+      <path d="M2.6 16.2 L4.3 11.9 C4.6 11.1 5.2 10.7 6 10.7 L13.4 10.7 C14.2 10.7 14.9 11 15.5 11.5 L18.5 14 L20.4 14.6 C21 14.8 21.3 15.3 21.3 15.9 L21.3 17.1 L2.6 17.1 Z"/>
+      <path d="M5.9 14.1 L15.6 14.1"/>
+      <circle cx="7.2" cy="17.2" r="1.7"/><circle cx="16.6" cy="17.2" r="1.7"/>
+      <path d="M13.9 2.4 L11.4 6.9 L13.6 6.9 L12.7 10.2 L16 5.5 L13.7 5.5 Z"/>
+    </symbol>
+    <symbol id="ia-solar" viewBox="0 0 24 24">
+      <path d="M3.4 19.2 L7.6 11.9 L20.6 11.9 L17 19.2 Z"/>
+      <path d="M9.8 11.9 L6.4 19.2"/><path d="M13.6 11.9 L10.6 19.2"/><path d="M17.1 11.9 L14.6 19.2"/>
+      <path d="M6.5 15.6 L19.1 15.6"/>
+      <circle cx="6.2" cy="5.6" r="2.2"/>
+      <path d="M6.2 1.7 L6.2 2.7"/><path d="M6.2 8.5 L6.2 9.5"/>
+      <path d="M2.3 5.6 L3.3 5.6"/><path d="M9.1 5.6 L10.1 5.6"/>
+      <path d="M3.4 2.8 L4.1 3.5"/><path d="M8.3 7.7 L9 8.4"/>
+    </symbol>
+    <symbol id="ia-chicken" viewBox="0 0 24 24">
+      <path d="M8.6 15.6 C6.6 13.6 7 10 9.4 7.8 C11.8 5.6 15.4 5.6 17.2 7.6 C19 9.6 18.6 12.8 16.4 14.8 C14.8 16.2 12.8 16.6 11.2 16"/>
+      <path d="M8.6 15.6 L5.9 18.3"/>
+      <circle cx="4.8" cy="19.2" r="1.35"/><circle cx="6.1" cy="20.4" r="1.35"/>
+    </symbol>
+  </defs>
+</svg>
   <div class="hc-root">
     <div class="hc-head">
       <div class="eyebrow">8.7  ·  What One Person Can Change</div>
@@ -4776,96 +3993,99 @@ window.__cg = (function(){
       <button class="hc-btn hc-srcbtn" type="button" data-ia-src>Method &amp; sources</button>
     </div>
     <div class="hc-panel ia-panel">
-      <div class="ia-col">
-        <div class="hc-tag">What a year costs the air</div>
-        <div class="ia-card" style="--c:#a4373a">
-          <div class="ia-ico">&#128663;</div>
+      <div class="hc-tag ia-tl">What a year costs the air</div>
+      <div class="ia-sp"></div>
+      <div class="hc-tag ia-tr">The other choice <em class="ia-hint" data-ia-hint>click to swap &#8594;</em></div>
+
+      <div class="ia-card" style="--c:#a4373a">
+        <svg class="ia-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ia-car"/></svg>
+        <div class="ia-txt">
+          <div class="ia-name">Driving a gas car for a year</div>
+          <div class="ia-num"><b>4.6</b><span>metric tons CO&#8322;</span></div>
+          <div class="ia-note">11,500 miles at 22.2 mpg, 400 g per mile &middot; EPA</div>
+        </div>
+      </div>
+      <div class="ia-link" aria-hidden="true"><svg viewBox="0 0 74 26"><path class="ia-link-line" d="M2 13 L67 13"/><path class="ia-link-head" d="M70 13 L60.5 7.9 M70 13 L60.5 18.1"/></svg></div>
+      <div class="ia-swap">
+        <div class="ia-card ia-after stage-item" style="--c:#1c7293" data-v="1216">
+          <svg class="ia-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ia-ev"/></svg>
           <div class="ia-txt">
-            <div class="ia-name">Driving a gas car for a year</div>
-            <div class="ia-num"><b>4.6</b><span>metric tons CO&#8322;</span></div>
-            <div class="ia-note">11,500 miles at 22.2 mpg, 400 g per mile &middot; EPA</div>
+            <div class="ia-name">Driving an EV for a year, US grid mix</div>
+            <div class="ia-num"><b>1.2</b><span>metric tons CO&#8322;</span></div>
+            <div class="ia-note">3,310 kWh &times; 0.81 lb per kWh &middot; EPA + EIA</div>
           </div>
         </div>
-        <div class="ia-card" style="--c:#a4373a">
-          <div class="ia-ico">&#128268;</div>
+        <div class="ia-card ia-before" style="--c:#2d6a4f" data-v="0">
+          <svg class="ia-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ia-walk"/></svg>
           <div class="ia-txt">
-            <div class="ia-name">Electricity from coal for a house, one year</div>
-            <div class="ia-num"><b>8.8</b><span>metric tons CO&#8322;e</span></div>
-            <div class="ia-note">10,791 kWh &times; 820 g per kWh, lifecycle &middot; EIA + IPCC</div>
-          </div>
-        </div>
-        <div class="ia-card" style="--c:#a4373a">
-          <div class="ia-ico">&#129385;</div>
-          <div class="ia-txt">
-            <div class="ia-name">Eating 1 kg of beef every day for a year</div>
-            <div class="ia-num"><b>36.3</b><span>metric tons CO&#8322;e</span></div>
-            <div class="ia-note">365 &times; 99.5 kg per kg &middot; Poore &amp; Nemecek 2018</div>
+            <div class="ia-name">Walking for a year</div>
+            <div class="ia-num"><b>0</b><span>kg CO&#8322;</span></div>
+            <div class="ia-note">No fuel burned, nothing out the tailpipe</div>
           </div>
         </div>
       </div>
-      <div class="ia-col">
-        <div class="hc-tag">The other choice <em class="ia-hint" data-ia-hint>click to swap &#8594;</em></div>
-        <div class="ia-swap">
-          <div class="ia-card ia-after stage-item" style="--c:#1c7293" data-v="1216">
-            <div class="ia-ico">&#9889;</div>
-            <div class="ia-txt">
-              <div class="ia-name">Driving an EV for a year, US grid mix</div>
-              <div class="ia-num"><b>1.2</b><span>metric tons CO&#8322;</span></div>
-              <div class="ia-note">3,310 kWh &times; 0.81 lb per kWh &middot; EPA + EIA <i>&#8212; 74% less than the gas car</i></div>
-            </div>
-          </div>
-          <div class="ia-card ia-before" style="--c:#2d6a4f" data-v="0">
-            <div class="ia-ico">&#128694;</div>
-            <div class="ia-txt">
-              <div class="ia-name">Walking for a year</div>
-              <div class="ia-num"><b>0</b><span>kg CO&#8322;</span></div>
-              <div class="ia-note">No fuel burned, nothing out the tailpipe</div>
-            </div>
+
+      <div class="ia-card" style="--c:#a4373a">
+        <svg class="ia-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ia-coal"/></svg>
+        <div class="ia-txt">
+          <div class="ia-name">Electricity from coal for a house, one year</div>
+          <div class="ia-num"><b>8.8</b><span>metric tons CO&#8322;e</span></div>
+          <div class="ia-note">10,791 kWh &times; 820 g per kWh, lifecycle &middot; EIA + IPCC</div>
+        </div>
+      </div>
+      <div class="ia-link" aria-hidden="true"><svg viewBox="0 0 74 26"><path class="ia-link-line" d="M2 13 L67 13"/><path class="ia-link-head" d="M70 13 L60.5 7.9 M70 13 L60.5 18.1"/></svg></div>
+      <div class="ia-swap">
+        <div class="ia-card ia-after stage-item" style="--c:#1c7293" data-v="442">
+          <svg class="ia-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ia-solar"/></svg>
+          <div class="ia-txt">
+            <div class="ia-name">Electricity from rooftop solar, one year</div>
+            <div class="ia-num"><b>0.44</b><span>metric tons CO&#8322;e</span></div>
+            <div class="ia-note">10,791 kWh &times; 41 g per kWh, lifecycle &middot; IPCC</div>
           </div>
         </div>
-        <div class="ia-swap">
-          <div class="ia-card ia-after stage-item" style="--c:#1c7293" data-v="442">
-            <div class="ia-ico">&#9728;&#65039;</div>
-            <div class="ia-txt">
-              <div class="ia-name">Electricity from rooftop solar, one year</div>
-              <div class="ia-num"><b>0.44</b><span>metric tons CO&#8322;e</span></div>
-              <div class="ia-note">10,791 kWh &times; 41 g per kWh, lifecycle &middot; IPCC <i>&#8212; 95% less than coal</i></div>
-            </div>
-          </div>
-          <div class="ia-card ia-before" style="--c:#2d6a4f" data-v="0">
-            <div class="ia-ico">&#128683;</div>
-            <div class="ia-txt">
-              <div class="ia-name">Using no electricity for a year</div>
-              <div class="ia-num"><b>0</b><span>kg CO&#8322;</span></div>
-              <div class="ia-note">Nothing generated, nothing emitted</div>
-            </div>
-          </div>
-        </div>
-        <div class="ia-swap">
-          <div class="ia-card ia-after stage-item" style="--c:#1c7293" data-v="3603">
-            <div class="ia-ico">&#127831;</div>
-            <div class="ia-txt">
-              <div class="ia-name">Eating 1 kg of chicken every day for a year</div>
-              <div class="ia-num"><b>3.6</b><span>metric tons CO&#8322;e</span></div>
-              <div class="ia-note">365 &times; 9.87 kg per kg &middot; Poore &amp; Nemecek <i>&#8212; 90% less than beef</i></div>
-            </div>
-          </div>
-          <div class="ia-card ia-before" style="--c:#2d6a4f" data-v="358">
-            <div class="ia-ico">&#129367;</div>
-            <div class="ia-txt">
-              <div class="ia-name">Eating 1 kg of vegan food every day for a year</div>
-              <div class="ia-num"><b>358</b><span>kg CO&#8322;e</span></div>
-              <div class="ia-note">Peas, 365 &times; 0.98 kg per kg &middot; Poore &amp; Nemecek</div>
-            </div>
+        <div class="ia-card ia-before" style="--c:#2d6a4f" data-v="0">
+          <svg class="ia-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ia-noplug"/></svg>
+          <div class="ia-txt">
+            <div class="ia-name">Using no electricity for a year</div>
+            <div class="ia-num"><b>0</b><span>kg CO&#8322;</span></div>
+            <div class="ia-note">Nothing generated, nothing emitted</div>
           </div>
         </div>
       </div>
+
+      <div class="ia-card" style="--c:#a4373a">
+        <svg class="ia-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ia-beef"/></svg>
+        <div class="ia-txt">
+          <div class="ia-name">Eating 1 kg of beef every day for a year</div>
+          <div class="ia-num"><b>36.3</b><span>metric tons CO&#8322;e</span></div>
+          <div class="ia-note">365 &times; 99.5 kg per kg &middot; Poore &amp; Nemecek 2018</div>
+        </div>
+      </div>
+      <div class="ia-link" aria-hidden="true"><svg viewBox="0 0 74 26"><path class="ia-link-line" d="M2 13 L67 13"/><path class="ia-link-head" d="M70 13 L60.5 7.9 M70 13 L60.5 18.1"/></svg></div>
+      <div class="ia-swap">
+        <div class="ia-card ia-after stage-item" style="--c:#1c7293" data-v="3603">
+          <svg class="ia-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ia-chicken"/></svg>
+          <div class="ia-txt">
+            <div class="ia-name">Eating 1 kg of chicken every day for a year</div>
+            <div class="ia-num"><b>3.6</b><span>metric tons CO&#8322;e</span></div>
+            <div class="ia-note">365 &times; 9.87 kg per kg &middot; Poore &amp; Nemecek</div>
+          </div>
+        </div>
+        <div class="ia-card ia-before" style="--c:#2d6a4f" data-v="358">
+          <svg class="ia-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#ia-pea"/></svg>
+          <div class="ia-txt">
+            <div class="ia-name">Eating 1 kg of vegan food every day for a year</div>
+            <div class="ia-num"><b>358</b><span>kg CO&#8322;e</span></div>
+            <div class="ia-note">Peas, 365 &times; 0.98 kg per kg &middot; Poore &amp; Nemecek</div>
+          </div>
+        </div>
+      </div>
+
       <div class="ia-foot">
         <div class="ia-tot"><span>Left column, one year</span><b>49.8 t CO&#8322;e</b></div>
         <div class="ia-arrow">&#8594;</div>
         <div class="ia-tot ia-totr"><span>Right column, one year</span><b data-ia-total>0.4 t CO&#8322;e</b></div>
         <div class="ia-cut" data-ia-cut>99% lower</div>
-        <p class="ia-msg" data-ia-msg>The perfect version of every choice is almost nothing. Nobody lives this way.</p>
       </div>
       <div class="hc-src" hidden data-ia-panel>
         <div class="hc-src-top"><strong>Method &amp; sources</strong><button class="hc-btn" type="button" data-ia-close>Close</button></div>
@@ -4887,12 +4107,8 @@ window.__cg = (function(){
     var root=document.currentScript.closest('.ia-slide'); if(!root) return;
     var LEFT=49759;
     var totEl=root.querySelector('[data-ia-total]'), cutEl=root.querySelector('[data-ia-cut]'),
-        msgEl=root.querySelector('[data-ia-msg]'), hintEl=root.querySelector('[data-ia-hint]');
-    var MSG=["The perfect version of every choice is almost nothing. Nobody lives this way.",
-             "An electric car is not a zero, but it keeps almost three quarters of the saving.",
-             "Solar panels carry a lifecycle cost. Against coal it barely registers.",
-             "Chicken instead of beef gives up the least and saves the most. Even the realistic column is about 89% lower."];
-    function fmt(kg){ return kg>=1000 ? (kg/1000).toFixed(kg<10000?1:1)+' t CO\u2082e' : Math.round(kg)+' kg CO\u2082e'; }
+        hintEl=root.querySelector('[data-ia-hint]');
+    function fmt(kg){ return kg>=1000 ? (kg/1000).toFixed(1)+' t CO\u2082e' : Math.round(kg)+' kg CO\u2082e'; }
     function render(){
       var sum=0, n=0;
       Array.prototype.forEach.call(root.querySelectorAll('.ia-swap'), function(sw){
@@ -4903,7 +4119,6 @@ window.__cg = (function(){
       });
       totEl.textContent=fmt(sum);
       cutEl.textContent=Math.round((1-sum/LEFT)*100)+'% lower';
-      msgEl.textContent=MSG[n];
       hintEl.style.visibility = n>=3 ? 'hidden' : '';
     }
     new MutationObserver(render).observe(root, {subtree:true, attributes:true, attributeFilter:['class']});
@@ -5057,75 +4272,6 @@ window.__cg = (function(){
     <iframe class="embed-frame" data-src="https://ourworldindata.org/grapher/sulphur-dioxide-and-coal?time=earliest..2024&country=GBR~USA~CHN~IND&tab=line" title="Clean Air Act Benefits" loading="lazy" allow="web-share; clipboard-write"></iframe>
   </div>
 </section>
-<section class="slide captrade" data-type="captrade" data-ct-id="ch8-cap-trade" style="--accent:#A4373A">
-  <div class="ct-root">
-    <div class="ct-head">
-      <div class="eyebrow">8.7  ·  How Are We Responding to Pollution in the Atmosphere?</div>
-      <h2 class="heading">Cap-and-Trade: Let the Market Find the Cheap Cuts</h2>
-      <div class="ct-sub">You run a factory that pollutes — and so does everyone. Round 1 has no cap: pollute freely. Then a pollution cap arrives and gets stricter every round. Clean up and go under your cap to earn credits you can sell — or keep polluting over the cap and buy credits from cleaner factories. Watch what happens to total pollution, and to costs, as the cap falls.</div>
-    </div>
-    <div class="ct-body">
-      <div class="ct-left">
-        <div class="ct-hostbar" data-ct-hostbar>
-          <button class="ct-hbtn start" type="button" data-ct-start>Open the lobby</button>
-          <button class="ct-hbtn go" type="button" data-ct-round hidden>Start Round 1 ▸</button>
-          <button class="ct-hbtn run" type="button" data-ct-end hidden>End round — show results ▸</button>
-          <button class="ct-hbtn new" type="button" data-ct-new hidden>New game</button>
-        </div>
-        <div class="ct-status" data-ct-status>Waiting for the instructor to open the market…</div>
-        <div class="ct-join" data-ct-join hidden>
-          <button class="ct-hbtn start" type="button" data-ct-joinbtn>Join as a factory 🏭</button>
-        </div>
-        <div class="ct-factory" data-ct-factory hidden>
-          <div class="ct-factory-head">🏭 <strong data-ct-me>Your factory</strong> emits <strong>5 tons</strong> of pollution.
-            Cleanup costs YOU <strong data-ct-cost>$?</strong> per ton — and your tech can clean at most 4 tons
-            (no factory can reach zero).</div>
-          <div class="ct-hint2" data-ct-hint2></div>
-          <div class="ct-decide" data-ct-decide>
-            <div class="ct-ctrl">
-              <div class="ct-ctrl-lbl">🧹 Reduce pollution <span class="ct-ctrl-sub">(cleanup costs your rate per ton)</span></div>
-              <div class="ct-decide-row">
-                <input class="ct-range" data-ct-a type="range" min="0" max="4" step="1" value="0">
-                <div class="ct-range-out"><span class="ct-range-num" data-ct-anum>0</span><span class="ct-range-unit">tons (max 4)</span></div>
-              </div>
-            </div>
-            <div class="ct-ctrl" data-ct-traderow hidden>
-              <div class="ct-ctrl-lbl">🎫 Buy or sell credits <span class="ct-ctrl-sub">◀ sell&nbsp;&nbsp;·&nbsp;&nbsp;buy ▶ (go under the cap to earn credits you can sell)</span></div>
-              <div class="ct-decide-row">
-                <input class="ct-range" data-ct-t type="range" min="-3" max="3" step="1" value="0">
-                <div class="ct-range-out"><span class="ct-range-num sm" data-ct-tnum>0</span></div>
-              </div>
-            </div>
-            <div class="ct-comply" data-ct-comply></div>
-            <div class="ct-readout" data-ct-readout></div>
-            <button class="ct-hbtn go ct-submit" type="button" data-ct-submit>Lock in my plan</button>
-          </div>
-        </div>
-        <div class="ct-result" data-ct-result hidden></div>
-        <div class="ct-board" data-ct-board hidden>
-          <div class="ct-board-title" data-ct-boardtitle>Leaderboard</div>
-          <div class="ct-board-rows" data-ct-boardrows></div>
-        </div>
-      </div>
-      <div class="ct-right">
-        <div class="ct-capcard" data-ct-capcard hidden>
-          <div class="ct-capcard-round" data-ct-croundlbl>ROUND 1 of 4</div>
-          <div class="ct-capcard-main" data-ct-capmain></div>
-          <div class="ct-capcard-sub" data-ct-capsub></div>
-        </div>
-        <div class="ct-chart" data-ct-histwrap hidden>
-          <div class="ct-chart-title">Pollution emitted, round by round</div>
-          <div class="ct-histbars" data-ct-histbars></div>
-          <div class="ct-chart-key"><span class="ct-key em">▮ tons emitted</span>
-            <span class="ct-key cap">╌ the cap</span><span class="ct-key cost">$ = class total cost</span></div>
-        </div>
-        <div class="ct-lesson" data-ct-lesson hidden></div>
-        <div class="ct-idlehint" data-ct-idlehint>Round 1 has no pollution cap — polluting is free. Then a cap on pollution arrives and gets stricter every round. Watch total pollution fall — and watch each factory pick its cheaper path: clean up, go under the cap, and sell credits… or keep polluting over the cap and buy them.</div>
-      </div>
-    </div>
-    <div class="ct-foot">Cap-and-trade: the regulator sets a pollution CAP per factory and lowers it over time. Emit UNDER your cap and you earn credits to sell; emit OVER it and you must buy credits from cleaner factories. Each factory picks whichever is cheaper — cleaning up or buying — so the cap's pollution cut happens at the lowest possible total cost.</div>
-  </div>
-</section>
 <section class="slide inspect" data-type="inspect" data-ins-id="ch8-inspector" style="--accent:#A4373A">
   <div class="ins-root">
     <div class="ins-head">
@@ -5234,17 +4380,6 @@ window.__cg = (function(){
       Polinsky, A. M., &amp; Shavell, S. (2000). The economic theory of public enforcement of law. <em>Journal of Economic Literature, 38</em>(1), 45–76. &nbsp;·&nbsp;
       Gray, W. B., &amp; Shimshack, J. P. (2011). The effectiveness of environmental monitoring and enforcement. <em>Review of Environmental Economics and Policy, 5</em>(1), 3–24.</span></p>
   </div>
-</section>
-<section class="slide" data-type="content" style="--accent:#40916C">
-  <div class="bleed-grid">
-    <div class="bleed-text">
-<div class="eyebrow">8.8  ·  What Can I Do?</div>
-<h2 class="heading">Clean Air Starts With You</h2>
-<ul class="bullets"><li><strong>Choose transportation wisely:</strong> reduce idling, maintain your vehicle, and use public transit or cycling when possible.</li><li><strong>At home and campus:</strong> raise the thermostat in summer, lower in winter. Use ENERGY STAR appliances.</li><li>Explore new technologies.</li><li>Learn about power generation in your community to influence local energy and air quality policy.</li></ul>
-    </div>
-    <div class="bleed-media cover"><img loading="lazy" decoding="async" data-src="media/image22.jpg" alt=""></div>
-  </div>
-  <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
 </section>
 <section class="slide" data-type="grid" style="--accent:#2D6A4F">
   <div class="slide-inner col">
@@ -6656,7 +5791,7 @@ window.__cg = (function(){
 
 <div class="hud">
   <button onclick="prev()" title="Previous (left arrow)">&#8249;</button>
-  <span class="counter" id="counter">1 / 33</span>
+  <span class="counter" id="counter">1 / 28</span>
   <button onclick="next()" title="Next (right arrow)">&#8250;</button>
   <button onclick="toggleMenu()" title="Slide menu (O)">&#9776;</button>
   <button onclick="toggleFs()" title="Fullscreen (F)">&#9974;</button>
@@ -6665,7 +5800,7 @@ window.__cg = (function(){
 <div class="menu" id="menu">
   <button class="menu-close" onclick="toggleMenu(false)" aria-label="Close menu">&times;</button>
   <h3>Chapter 8 &middot; Jump to a slide</h3>
-  <div class="menu-grid"><button class="menu-item" data-go="0"><span class="menu-num">1</span>Title</button><button class="menu-item" data-go="1"><span class="menu-num">2</span>Outline</button><button class="menu-item" data-go="2"><span class="menu-num">3</span>Announcements</button><button class="menu-item" data-go="3"><span class="menu-num">4</span>8.1 Air</button><button class="menu-item" data-go="4"><span class="menu-num">5</span>8.1 Layers</button><button class="menu-item" data-go="5"><span class="menu-num">6</span>8.2 Weather vs Climate</button><button class="menu-item" data-go="6"><span class="menu-num">7</span>8.2 Humidity</button><button class="menu-item" data-go="7"><span class="menu-num">8</span>8.3 Circulation</button><button class="menu-item" data-go="8"><span class="menu-num">9</span>8.4 Pollution Sources</button><button class="menu-item" data-go="9"><span class="menu-num">10</span>8.4 Primary Pollutants</button><button class="menu-item" data-go="10"><span class="menu-num">11</span>8.4 Secondary Pollutants</button><button class="menu-item" data-go="11"><span class="menu-num">12</span>8.5 Ozone Layer</button><button class="menu-item" data-go="12"><span class="menu-num">13</span>8.5 ▶ Ozone Destruction (sim)</button><button class="menu-item" data-go="13"><span class="menu-num">14</span>8.6 Acid Rain</button><button class="menu-item" data-go="14"><span class="menu-num">15</span>Consequences</button><button class="menu-item" data-go="15"><span class="menu-num">16</span>Deaths from Air Pollution</button><button class="menu-item" data-go="16"><span class="menu-num">17</span>8.4 Vehicle Emissions</button><button class="menu-item" data-go="17"><span class="menu-num">18</span>8.4 ▶ Externality Madness</button><button class="menu-item" data-go="18"><span class="menu-num">19</span>8.6 Where the Costs Come From</button><button class="menu-item" data-go="19"><span class="menu-num">20</span>8.6 ★ Inversion (game)</button><button class="menu-item" data-go="20"><span class="menu-num">21</span>Indoor Air Pollution</button><button class="menu-item" data-go="21"><span class="menu-num">22</span>Indoor Air Pollution (charts)</button><button class="menu-item" data-go="22"><span class="menu-num">23</span>8.6 ▶ Mortality Compared</button><button class="menu-item" data-go="23"><span class="menu-num">24</span>8.7 US Air Policy</button><button class="menu-item" data-go="24"><span class="menu-num">25</span>8.7 One Person, One Year</button><button class="menu-item" data-go="25"><span class="menu-num">26</span>8.7 Clean Air Act: Costs &amp; Benefits</button><button class="menu-item" data-go="26"><span class="menu-num">27</span>Clean Air Act Benefits</button><button class="menu-item" data-go="27"><span class="menu-num">28</span>SO₂ and Coal</button><button class="menu-item" data-go="28"><span class="menu-num">29</span>8.7 ▶ Cap-and-Trade Sim</button><button class="menu-item" data-go="29"><span class="menu-num">30</span>8.7 ▶ Inspector (enforcement game)</button><button class="menu-item" data-go="30"><span class="menu-num">31</span>8.8 What Can I Do?</button><button class="menu-item" data-go="31"><span class="menu-num">32</span>Key Concepts</button><button class="menu-item" data-go="32"><span class="menu-num">33</span>Ch 6–8 ▶ Review Game</button></div>
+  <div class="menu-grid"><button class="menu-item" data-go="0"><span class="menu-num">1</span>Title</button><button class="menu-item" data-go="1"><span class="menu-num">2</span>Outline</button><button class="menu-item" data-go="2"><span class="menu-num">3</span>Announcements</button><button class="menu-item" data-go="3"><span class="menu-num">4</span>8.1 Air</button><button class="menu-item" data-go="4"><span class="menu-num">5</span>8.1 Layers</button><button class="menu-item" data-go="5"><span class="menu-num">6</span>8.2 Weather vs Climate</button><button class="menu-item" data-go="6"><span class="menu-num">7</span>8.2 Humidity</button><button class="menu-item" data-go="7"><span class="menu-num">8</span>8.4 Pollution Sources</button><button class="menu-item" data-go="8"><span class="menu-num">9</span>8.4 Primary Pollutants</button><button class="menu-item" data-go="9"><span class="menu-num">10</span>8.4 Secondary Pollutants</button><button class="menu-item" data-go="10"><span class="menu-num">11</span>8.5 Ozone Layer</button><button class="menu-item" data-go="11"><span class="menu-num">12</span>8.6 Acid Rain</button><button class="menu-item" data-go="12"><span class="menu-num">13</span>Consequences</button><button class="menu-item" data-go="13"><span class="menu-num">14</span>Deaths from Air Pollution</button><button class="menu-item" data-go="14"><span class="menu-num">15</span>8.4 Vehicle Emissions</button><button class="menu-item" data-go="15"><span class="menu-num">16</span>8.4 ▶ Externality Madness</button><button class="menu-item" data-go="16"><span class="menu-num">17</span>8.6 Where the Costs Come From</button><button class="menu-item" data-go="17"><span class="menu-num">18</span>Indoor Air Pollution</button><button class="menu-item" data-go="18"><span class="menu-num">19</span>Indoor Air Pollution (charts)</button><button class="menu-item" data-go="19"><span class="menu-num">20</span>8.6 ▶ Mortality Compared</button><button class="menu-item" data-go="20"><span class="menu-num">21</span>8.7 US Air Policy</button><button class="menu-item" data-go="21"><span class="menu-num">22</span>8.7 One Person, One Year</button><button class="menu-item" data-go="22"><span class="menu-num">23</span>8.7 Clean Air Act: Costs &amp; Benefits</button><button class="menu-item" data-go="23"><span class="menu-num">24</span>Clean Air Act Benefits</button><button class="menu-item" data-go="24"><span class="menu-num">25</span>SO₂ and Coal</button><button class="menu-item" data-go="25"><span class="menu-num">26</span>8.7 ▶ Inspector (enforcement game)</button><button class="menu-item" data-go="26"><span class="menu-num">27</span>Key Concepts</button><button class="menu-item" data-go="27"><span class="menu-num">28</span>Ch 6–8 ▶ Review Game</button></div>
 </div>
 
 <script>
