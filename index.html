@@ -3781,7 +3781,10 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
       else if(types[si]==='r' || types[si]==='k'){ games[q]={type:types[si]}; }
       else if(types[si]==='f'){
         // the same three patterns for the whole class, so the reveal compares like with like
-        var seq=FM_ROUNDS.map(function(n){ return shuffleArr(range(FM_N)).slice(0,n).sort(function(a,b){ return a-b; }); });
+        // one flat list: Firestore has no nested arrays, so the rounds are sliced out of it
+        var seq=[]; FM_ROUNDS.forEach(function(n){
+          seq=seq.concat(shuffleArr(range(FM_N)).slice(0,n).sort(function(a,b){ return a-b; }));
+        });
         games[q]={type:'f', seq:seq};
       }
       else if(types[si]==='m'){
@@ -4185,6 +4188,10 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
     var s=gmState(pos);
     return {pos:pos, gm:gm, s:s, locked:gmLocked(pos,s)};
   }
+  function fmSeq(gm, r){            // the r-th pattern out of the flat list
+    var at=0; for(var i=0;i<r;i++) at+=FM_ROUNDS[i];
+    return (gm.seq||[]).slice(at, at+FM_ROUNDS[r]);
+  }
   function fmTotal(s){ return s.fhits.reduce(function(a,b){ return a+b; },0); }
   function fmStart(){
     var c=fmState(); if(!c || c.locked || c.s.done) return;
@@ -4201,7 +4208,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
   }
   function fmTap(i){
     var c=fmState(); if(!c || c.locked || c.s.done || c.s.ph!=='pick') return;
-    var s=c.s, need=FM_ROUNDS[s.fr], want=c.gm.seq[s.fr]||[];
+    var s=c.s, need=FM_ROUNDS[s.fr], want=fmSeq(c.gm, s.fr);
     var at=s.fsel.indexOf(i);
     if(at>-1) s.fsel.splice(at,1);
     else if(s.fsel.length<need) s.fsel.push(i);
@@ -4282,7 +4289,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
         : locked ? 'Time’s up!' : 'Tap the pad, wait for green, then tap as fast as you can. Three tries, and the fastest 10% earn a bonus point.';
     } else if(gm.type==='f'){
       var done=s.fr>=FM_ROUNDS.length, r=Math.min(s.fr, FM_ROUNDS.length-1);
-      var want=gm.seq[r]||[], need=FM_ROUNDS[r], watch=s.ph==='watch', pick=s.ph==='pick';
+      var want=fmSeq(gm, r), need=FM_ROUNDS[r], watch=s.ph==='watch', pick=s.ph==='pick';
       var cells='';
       for(var i=0;i<FM_N;i++){
         var on=(watch && want.indexOf(i)>-1), sel=(pick && s.fsel.indexOf(i)>-1);
@@ -5002,11 +5009,22 @@ show(start);
   function localBackend(){
     // same-origin, cross-tab fallback (also used for preview / offline).
     // Single browser = no contention, so everything lives in one localStorage doc.
+    // It also enforces Firestore's no-nested-arrays rule, because a slide tested only
+    // in local mode would otherwise ship a payload that Firestore silently rejects.
+    const noNested = (v, path, inArr) => {
+      if(Array.isArray(v)){
+        if(inArr) throw new Error('nested array at '+path+' — Firestore rejects these');
+        v.forEach((x,i)=>noNested(x, path+'['+i+']', true));
+      } else if(v && typeof v==='object'){
+        for(const k in v) noNested(v[k], path?path+'.'+k:k, false);
+      }
+    };
     const subs = {};                       // 'coll:id' -> [thunk,...]
     const sk = (coll,id) => 'iv:'+coll+':'+id;
     const key = (coll,id) => coll+':'+id;
     const read = (coll,id) => { try{ return JSON.parse(localStorage.getItem(sk(coll,id))||'{}'); }catch(e){ return {}; } };
-    const write = (coll,id,d) => localStorage.setItem(sk(coll,id), JSON.stringify(d));
+    const write = (coll,id,d) => { noNested(d, coll+'/'+id, false);
+      localStorage.setItem(sk(coll,id), JSON.stringify(d)); };
     const emit = (coll,id) => (subs[key(coll,id)]||[]).forEach(t=>t());
     const on = (coll,id,thunk) => { (subs[key(coll,id)]=subs[key(coll,id)]||[]).push(thunk); thunk(); return ()=>{}; };
     function applyInc(target,obj){
