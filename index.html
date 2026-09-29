@@ -2558,12 +2558,25 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 }
 @media(prefers-reduced-motion:reduce){ .mf-card .mf-flip,.mf-seal,.mf-hist,.mf-hb,.mf-verdict{animation:none !important;} }
 /* ── end Mortality Face-Off ── */
-/* ── ledger slides (Where the Costs Come From, Clean Air Act): the diagram gets
-   the whole panel, the detail card opens as a popup when a category is clicked,
-   and the running total leads with a big number. ─────────────────────────── */
-.hc-panel{grid-template-columns:minmax(0,1fr) !important;
-  grid-template-rows:minmax(0,1fr) auto !important;}
-.hc-right{display:contents;}
+/* ── ledger slides (Where the Costs Come From, Clean Air Act) ─────────────
+   The diagram gets the full width AND most of the height: .hc-left becomes a
+   display:contents pass-through so the picks, the flow and the total are grid
+   items in their own right, and the scenario controls sit beside the total
+   instead of on their own row. The detail card opens as a popup when a category
+   is clicked. Everything here is scoped away from .ia-panel, which borrows
+   .hc-panel for a completely different 3-row layout. ───────────────────────── */
+.hc-panel:not(.ia-panel){
+  grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) !important;
+  grid-template-rows:auto minmax(0,1fr) auto !important;
+  align-content:stretch;}
+.hc-panel:not(.ia-panel) .hc-left{display:contents;}
+.hc-panel:not(.ia-panel) .hc-right{display:contents;}
+.hc-panel:not(.ia-panel) .hc-picks{grid-column:1 / -1; grid-row:1;}
+.hc-panel:not(.ia-panel) .hc-flow{grid-column:1 / -1; grid-row:2; min-height:0; padding:.2rem 0;}
+.hc-panel:not(.ia-panel) .hc-total{grid-column:1; grid-row:3; align-self:end;}
+.hc-panel:not(.ia-panel) .hc-rate{grid-column:2; grid-row:3; align-self:end; margin-top:0;}
+.hc-panel:not(.ia-panel) .hc-svg{width:100%; height:100%;}
+/* the detail card, now a popup */
 .hc-pop{position:absolute; inset:0; z-index:8; display:flex; align-items:center;
   justify-content:center; background:rgba(40,34,22,.45); padding:clamp(1rem,3vh,2rem);}
 .hc-pop[hidden]{display:none !important;}
@@ -2571,20 +2584,14 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
   box-shadow:0 18px 50px rgba(0,0,0,.35);}
 .hc-pop-x{position:absolute; top:clamp(.6rem,2vh,1.1rem); right:clamp(.8rem,2vw,1.4rem); z-index:2;
   background:#fffdf6;}
-.hc-rate{grid-column:1; margin-top:.5rem;}
+/* the headline total */
 .hc-tv{display:flex; align-items:baseline; gap:.55rem; flex-wrap:wrap; margin:.1rem 0 .4rem;}
 .hc-tv span{font-family:'Inter',sans-serif; font-weight:800; letter-spacing:.14em;
   text-transform:uppercase; color:var(--gold); font-size:clamp(.58rem,.9vw,.68rem);}
 .hc-tv b{font-family:'Merriweather',Georgia,serif; font-weight:900; color:var(--ink);
-  font-size:clamp(2rem,4.6vw,3.5rem); line-height:1;}
-.hc-flow{min-height:0;}
-
-/* give the diagram the room the popup freed up, and keep the blocks under it tight */
-.hc-flow{min-height:clamp(105px,18.5vh,185px); padding:.1rem 0;}
-.hc-svg{width:100%; height:100%;}
-.hc-tv b{font-size:clamp(1.8rem,4vw,3rem);}
-.hc-ins{font-size:clamp(.76rem,1.1vw,.88rem); margin:.3rem 0 0;}
+  font-size:clamp(1.9rem,4.2vw,3.3rem); line-height:1;}
 .hc-total{padding-top:.4rem;}
+.hc-ins{font-size:clamp(.76rem,1.1vw,.88rem); margin:.3rem 0 0;}
 .hc-rate{padding:.45rem .75rem;}
 .hc-rate .hc-seg{margin:.25rem 0 .3rem;}
 .hc-rate p{font-size:clamp(.7rem,1vw,.8rem); line-height:1.35;}
