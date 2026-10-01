@@ -1719,7 +1719,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
   text-transform:uppercase; color:var(--ink3); text-align:center;}
 
 
-/* ── The Hidden Effects (slide 11 mini-game) ─────────────────────────────── */
+/* ── Beyond the Lungs (slide 11: four host-run research questions) ──────── */
 .pp-slide .pp-defs{position:absolute; width:0; height:0; overflow:hidden;}
 .pp-slide .bleed-media.pp-media{background:linear-gradient(160deg,#fbf7ee,#f3ecdc); display:flex; align-items:stretch;
   justify-content:center; padding:clamp(.8rem,2.2vh,1.6rem) clamp(.8rem,1.8vw,1.6rem); overflow:hidden;}
@@ -2761,8 +2761,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
   <circle cx="432" cy="71" r="9.5" fill="#fffdf6"/>
   <path d="M421,85 C421,82 443,82 443,85 L440,120 H424 Z" fill="#e7d6b0"/>
   <path d="M427,120 L422,152 M437,120 L442,152 M421,89 L412,112 M443,89 L452,112" stroke-width="2.2"/>
-  <path d="M278,110 C320,72 370,58 412,64" stroke-dasharray="6 6" stroke-width="1.6"/>
-  <path d="M402,56 L414,64 L402,70" stroke-width="1.6"/>
+  <path d="M262,152 V146 H432 V152" stroke-dasharray="5 5" stroke-width="1.6"/>
 </g>
 <text x="112" y="45" font-family="Inter,system-ui,sans-serif" font-weight="800" fill="#3b3222" font-size="11" text-anchor="middle">ETHYL</text>
 <text x="112" y="142" font-family="Inter,system-ui,sans-serif" font-weight="800" fill="#3b3222" font-size="7.5" text-anchor="middle" fill="#A4373A">CONTAINS LEAD</text>
@@ -2770,7 +2769,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 <text x="262" y="192" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="12" text-anchor="middle">1975</text>
 <text x="240" y="208" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10">lead starts leaving gasoline</text>
 <text x="432" y="192" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="12" text-anchor="middle">1990s</text>
-<text x="345" y="56" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="12" text-anchor="middle">&#8776; 20 years</text>
+<text x="347" y="140" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="12" text-anchor="middle">&#8776; 20 years</text>
 <text x="474" y="66" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="28" text-anchor="middle" fill="#A4373A">?</text>
 </svg></template><template data-pp-art="lead_ev"><svg class="pp-svg" viewBox="0 0 520 230" role="img"
   aria-label="Range chart: a 2022 meta-analysis credits lead with 7 to 28 percent of the fall in U.S. murders; a 2007 study credited it with about 56 percent of the fall in violent crime from 1992 to 2002.">
@@ -2873,7 +2872,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
     viewKey=null; render();
   }
 
-  // ── the clicker drives a running game on the host's screen only ──
+  // ── the clicker drives the questions on the host's screen only, while they run ──
   SEC.__deckNext=function(){
     if(!HOST || !backend || !running()) return false;
     if(!rev()) reveal(); else if(q()<Q.length-1) go(q()+1,false); else go(Q.length,false);
@@ -2894,11 +2893,12 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 
   function introHTML(){
     var grid=Q.map(function(x,i){ return '<div class="pp-tile"><div class="pp-tart">'+thumb(x.art)+'</div><span>'+x.tag+'</span></div>'; }).join('');
-    return '<div class="pp-intro"><div class="pp-kick">A mini-game</div><div class="pp-title">The Hidden Effects</div>'
-      + '<p class="pp-lead">Four pollutants, four findings that surprised the researchers who made them. '
-      + (HOST ? 'Students vote on their own devices; you reveal the evidence.' : 'Vote on your device, then see the evidence.')+'</p>'
+    return '<div class="pp-intro"><div class="pp-kick">Four research findings</div><div class="pp-title">Beyond the Lungs</div>'
+      + '<p class="pp-lead">Each of these pollutants does more than damage the lungs. The four findings ahead are '
+      + '<b>interesting but concerning</b>. '
+      + (HOST ? 'Students predict on their own devices; you reveal the evidence.' : 'Make your prediction on your device, then see the evidence.')+'</p>'
       + '<div class="pp-tiles">'+grid+'</div>'
-      + (HOST ? '<button class="pp-btn" data-pp="start">Start the game &rarr;</button><div class="pp-hint">After you start, your clicker reveals each answer and moves to the next question.</div>'
+      + (HOST ? '<button class="pp-btn" data-pp="start">Begin &rarr;</button><div class="pp-hint">After you start, your clicker reveals each answer and moves to the next question.</div>'
               : '<div class="pp-wait">Waiting for your instructor to start&hellip;</div>')
       + '</div>';
   }
@@ -2923,7 +2923,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
         + (p!==null ? '<p class="pp-class"><b>'+p+'%</b> of the class got it right.</p>' : '')
         + '<p class="pp-cite">'+x.cite+'</p></div>';
     } else if(!HOST){
-      foot='<div class="pp-me">'+(mine===null ? 'Tap your answer.' : 'Locked in: <b>'+LETTERS[mine]+'</b>. Waiting for the reveal&hellip;')+'</div>';
+      foot='<div class="pp-me">'+(mine===null ? 'Tap your prediction.' : 'Prediction recorded: <b>'+LETTERS[mine]+'</b>. Waiting for the evidence&hellip;')+'</div>';
     }
     var ctl='';
     if(HOST){
@@ -2940,9 +2940,9 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
       return '<div class="pp-sum"><div class="pp-tart">'+thumb(x.art)+'</div><div><div class="pp-sumtag">'+x.tag+'</div>'
         + '<div class="pp-sumans">'+x.short+'</div>'
         + '<div class="pp-sumpct">'+(p===null ? '' : p+'% of the class got it right')+'</div></div></div>'; }).join('');
-    return '<div class="pp-intro"><div class="pp-kick">The Hidden Effects</div><div class="pp-title sm">Pollution reaches far past the lungs</div>'
+    return '<div class="pp-intro"><div class="pp-kick">Beyond the Lungs</div><div class="pp-title sm">Pollution&rsquo;s costs reach far past the lungs</div>'
       + '<div class="pp-sums">'+rows+'</div>'
-      + (HOST ? '<div class="pp-ctl"><button class="pp-btn ghost" data-pp="back">&larr; Back to the last answer</button><button class="pp-btn ghost" data-pp="again">Play again</button></div>' : '')
+      + (HOST ? '<div class="pp-ctl"><button class="pp-btn ghost" data-pp="back">&larr; Back to the last answer</button><button class="pp-btn ghost" data-pp="again">Start over</button></div>' : '')
       + '</div>';
   }
 
@@ -5333,7 +5333,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 <div class="menu" id="menu">
   <button class="menu-close" onclick="toggleMenu(false)" aria-label="Close menu">&times;</button>
   <h3>Chapter 8 &middot; Jump to a slide</h3>
-  <div class="menu-grid"><button class="menu-item" data-go="0"><span class="menu-num">1</span>Title</button><button class="menu-item" data-go="1"><span class="menu-num">2</span>Outline</button><button class="menu-item" data-go="2"><span class="menu-num">3</span>Announcements</button><button class="menu-item" data-go="3"><span class="menu-num">4</span>8.4 ▶ Externalities Bracket</button><button class="menu-item" data-go="4"><span class="menu-num">5</span>Key Concepts ▸</button><button class="menu-item" data-go="5"><span class="menu-num">6</span>8.1 Air</button><button class="menu-item" data-go="6"><span class="menu-num">7</span>8.1 Layers</button><button class="menu-item" data-go="7"><span class="menu-num">8</span>8.2 Weather vs Climate</button><button class="menu-item" data-go="8"><span class="menu-num">9</span>8.2 Humidity</button><button class="menu-item" data-go="9"><span class="menu-num">10</span>8.4 Pollution Sources</button><button class="menu-item" data-go="10"><span class="menu-num">11</span>8.4 ▶ The Hidden Effects</button><button class="menu-item" data-go="11"><span class="menu-num">12</span>8.4 Secondary Pollutants</button><button class="menu-item" data-go="12"><span class="menu-num">13</span>8.5 Ozone</button><button class="menu-item" data-go="13"><span class="menu-num">14</span>8.6 Acid Rain</button><button class="menu-item" data-go="14"><span class="menu-num">15</span>Consequences ▸</button><button class="menu-item" data-go="15"><span class="menu-num">16</span>8.6 ▶ Not a game: Mortality Compared</button><button class="menu-item" data-go="16"><span class="menu-num">17</span>Deaths from Air Pollution</button><button class="menu-item" data-go="17"><span class="menu-num">18</span>Indoor Air Pollution</button><button class="menu-item" data-go="18"><span class="menu-num">19</span>Indoor Air Pollution (charts)</button><button class="menu-item" data-go="19"><span class="menu-num">20</span>8.4 Vehicle Emissions</button><button class="menu-item" data-go="20"><span class="menu-num">21</span>8.6 Where the Costs Come From</button><button class="menu-item" data-go="21"><span class="menu-num">22</span>Solutions? ▸</button><button class="menu-item" data-go="22"><span class="menu-num">23</span>8.7 One Person, One Year</button><button class="menu-item" data-go="23"><span class="menu-num">24</span>8.7 US Air Policy</button><button class="menu-item" data-go="24"><span class="menu-num">25</span>8.7 Clean Air Act: Costs &amp; Benefits</button><button class="menu-item" data-go="25"><span class="menu-num">26</span>U.S. Emissions 1927–2022</button><button class="menu-item" data-go="26"><span class="menu-num">27</span>SO₂ and Coal</button><button class="menu-item" data-go="27"><span class="menu-num">28</span>Why so hard? ▸</button><button class="menu-item" data-go="28"><span class="menu-num">29</span>Key Concepts</button><button class="menu-item" data-go="29"><span class="menu-num">30</span>Module 3 ▶ Review Game</button></div>
+  <div class="menu-grid"><button class="menu-item" data-go="0"><span class="menu-num">1</span>Title</button><button class="menu-item" data-go="1"><span class="menu-num">2</span>Outline</button><button class="menu-item" data-go="2"><span class="menu-num">3</span>Announcements</button><button class="menu-item" data-go="3"><span class="menu-num">4</span>8.4 ▶ Externalities Bracket</button><button class="menu-item" data-go="4"><span class="menu-num">5</span>Key Concepts ▸</button><button class="menu-item" data-go="5"><span class="menu-num">6</span>8.1 Air</button><button class="menu-item" data-go="6"><span class="menu-num">7</span>8.1 Layers</button><button class="menu-item" data-go="7"><span class="menu-num">8</span>8.2 Weather vs Climate</button><button class="menu-item" data-go="8"><span class="menu-num">9</span>8.2 Humidity</button><button class="menu-item" data-go="9"><span class="menu-num">10</span>8.4 Pollution Sources</button><button class="menu-item" data-go="10"><span class="menu-num">11</span>8.4 ▶ Beyond the Lungs</button><button class="menu-item" data-go="11"><span class="menu-num">12</span>8.4 Secondary Pollutants</button><button class="menu-item" data-go="12"><span class="menu-num">13</span>8.5 Ozone</button><button class="menu-item" data-go="13"><span class="menu-num">14</span>8.6 Acid Rain</button><button class="menu-item" data-go="14"><span class="menu-num">15</span>Consequences ▸</button><button class="menu-item" data-go="15"><span class="menu-num">16</span>8.6 ▶ Not a game: Mortality Compared</button><button class="menu-item" data-go="16"><span class="menu-num">17</span>Deaths from Air Pollution</button><button class="menu-item" data-go="17"><span class="menu-num">18</span>Indoor Air Pollution</button><button class="menu-item" data-go="18"><span class="menu-num">19</span>Indoor Air Pollution (charts)</button><button class="menu-item" data-go="19"><span class="menu-num">20</span>8.4 Vehicle Emissions</button><button class="menu-item" data-go="20"><span class="menu-num">21</span>8.6 Where the Costs Come From</button><button class="menu-item" data-go="21"><span class="menu-num">22</span>Solutions? ▸</button><button class="menu-item" data-go="22"><span class="menu-num">23</span>8.7 One Person, One Year</button><button class="menu-item" data-go="23"><span class="menu-num">24</span>8.7 US Air Policy</button><button class="menu-item" data-go="24"><span class="menu-num">25</span>8.7 Clean Air Act: Costs &amp; Benefits</button><button class="menu-item" data-go="25"><span class="menu-num">26</span>U.S. Emissions 1927–2022</button><button class="menu-item" data-go="26"><span class="menu-num">27</span>SO₂ and Coal</button><button class="menu-item" data-go="27"><span class="menu-num">28</span>Why so hard? ▸</button><button class="menu-item" data-go="28"><span class="menu-num">29</span>Key Concepts</button><button class="menu-item" data-go="29"><span class="menu-num">30</span>Module 3 ▶ Review Game</button></div>
 </div>
 
 <script>
