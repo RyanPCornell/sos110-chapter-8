@@ -1719,6 +1719,84 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
   text-transform:uppercase; color:var(--ink3); text-align:center;}
 
 
+/* ── The Hidden Effects (slide 11 mini-game) ─────────────────────────────── */
+.pp-slide .pp-defs{position:absolute; width:0; height:0; overflow:hidden;}
+.pp-slide .bleed-media.pp-media{background:linear-gradient(160deg,#fbf7ee,#f3ecdc); display:flex; align-items:stretch;
+  justify-content:center; padding:clamp(.8rem,2.2vh,1.6rem) clamp(.8rem,1.8vw,1.6rem); overflow:hidden;}
+.pp-panel{position:relative; flex:1; min-width:0; display:flex; flex-direction:column; gap:clamp(.35rem,1vh,.65rem);
+  background:#fffdf7; border:1.5px solid rgba(120,100,60,.32); border-radius:16px;
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 10px 30px rgba(60,45,20,.10);
+  padding:clamp(.7rem,1.8vh,1.2rem) clamp(.8rem,1.6vw,1.3rem); overflow:auto; color:#3b3222;}
+.pp-svg{display:block; width:100%; height:auto;}
+/* the pollutant card the question is about lights up; the others step back */
+.pp-slide .pair{transition:opacity .35s ease, box-shadow .35s ease, transform .35s ease;}
+.pp-slide .pair.pp-lit{box-shadow:0 0 0 2.5px var(--accent), 0 10px 26px rgba(60,45,20,.16); transform:translateX(4px);}
+.pp-slide .pair.pp-dim{opacity:.42;}
+
+.pp-intro{display:flex; flex-direction:column; align-items:center; text-align:center; gap:clamp(.4rem,1.1vh,.8rem); margin:auto 0;}
+.pp-kick{font-family:'Inter',sans-serif; font-weight:800; letter-spacing:.09em; text-transform:uppercase;
+  font-size:clamp(.66rem,1vw,.78rem); color:var(--accent);}
+.pp-title{font-family:'Merriweather',Georgia,serif; font-style:italic; font-weight:900; line-height:1.05;
+  font-size:clamp(1.7rem,3.4vw,2.7rem); transform:skewX(-6deg); filter:url(#ppNib);}
+.pp-title.sm{font-size:clamp(1.25rem,2.4vw,1.85rem);}
+.pp-lead{font-size:clamp(.85rem,1.3vw,1rem); color:#5e5340; max-width:42ch; margin:0;}
+.pp-tiles{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(.4rem,1vw,.7rem); width:100%; max-width:34rem;}
+.pp-tile{background:#fbf6ea; border:1px solid rgba(120,100,60,.22); border-radius:12px; padding:.35rem .45rem .45rem;}
+.pp-tile span{display:block; font-family:'Merriweather',serif; font-weight:700; font-size:clamp(.72rem,1.05vw,.86rem); margin-top:.15rem;}
+.pp-tart .pp-svg{max-height:clamp(52px,9vh,84px); width:auto; margin:0 auto;}
+.pp-btn{font-family:'Inter',sans-serif; font-weight:800; cursor:pointer; border:none; color:#fff; background:var(--accent);
+  border-radius:12px; padding:.7rem 1.4rem; font-size:clamp(.9rem,1.4vw,1.05rem); transition:filter .15s, transform .08s;}
+.pp-btn:hover{filter:brightness(1.07);} .pp-btn:active{transform:translateY(1px);}
+.pp-btn.ghost{background:#fff; color:#3b3222; border:1.5px solid rgba(120,100,60,.38);}
+.pp-hint{font-size:clamp(.7rem,1vw,.8rem); color:#8a8069; font-style:italic;}
+.pp-wait,.pp-me{font-family:'Merriweather',serif; font-style:italic; color:#6b6350; font-size:clamp(.82rem,1.25vw,.96rem);}
+.pp-me{text-align:center;} .pp-me b{color:var(--accent); font-style:normal;}
+
+.pp-top{display:flex; justify-content:space-between; align-items:baseline; gap:.8rem;}
+.pp-tag{font-family:'Inter',sans-serif; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+  font-size:clamp(.66rem,1vw,.78rem); color:var(--accent);}
+.pp-count{font-family:'Inter',sans-serif; font-size:clamp(.72rem,1.05vw,.84rem); color:#6b6350;}
+.pp-count b{font-family:'Merriweather',serif; color:#3b3222; font-size:1.15em;}
+.pp-art{background:#fbf6ea; border:1px solid rgba(120,100,60,.2); border-radius:12px; padding:.3rem .5rem;}
+.pp-art .pp-svg{max-height:clamp(120px,27vh,250px); width:auto; max-width:100%; margin:0 auto;}
+.pp-art.ev{animation:pp-in .55s ease both;}
+@keyframes pp-in{from{opacity:0; transform:scale(.97);} to{opacity:1; transform:none;}}
+.pp-q{font-family:'Merriweather',Georgia,serif; font-weight:800; line-height:1.25; font-size:clamp(.98rem,1.7vw,1.3rem);}
+.pp-opts{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(.35rem,.8vw,.55rem);}
+.pp-opt{position:relative; overflow:hidden; display:flex; align-items:center; gap:.55rem; text-align:left; cursor:pointer;
+  background:#fff; border:1.5px solid #e4dcc9; border-radius:12px; padding:clamp(.45rem,1.1vh,.7rem) .7rem;
+  font-family:'Inter',sans-serif; font-size:clamp(.8rem,1.2vw,.95rem); color:#2c2519; transition:border-color .15s, background .15s;}
+.pp-opt:hover:not(:disabled){border-color:var(--accent); background:#fffaf0;}
+.pp-opt:disabled{cursor:default;}
+.pp-l{flex:none; width:1.6em; height:1.6em; border-radius:7px; display:inline-flex; align-items:center; justify-content:center;
+  background:#f3ead6; font-family:'Merriweather',serif; font-weight:900; color:#8a6a2f; position:relative; z-index:1;}
+.pp-t{position:relative; z-index:1; flex:1;}
+.pp-opt.mine{border-color:var(--accent); background:#fff7e6;}
+.pp-bar{position:absolute; left:0; top:0; bottom:0; background:rgba(120,100,60,.10); z-index:0; transition:width .7s ease;}
+.pp-share{position:relative; z-index:1; font-family:'Merriweather',serif; font-weight:900; font-size:.9em; color:#6b6350;}
+.pp-opt.right{border-color:#2D6A4F; background:#eef6f0;}
+.pp-opt.right .pp-bar{background:rgba(45,106,79,.16);}
+.pp-opt.right .pp-l{background:#2D6A4F; color:#fff;}
+.pp-opt.right .pp-share{color:#2D6A4F;}
+.pp-opt.wrong{opacity:.6;}
+.pp-tick{position:relative; z-index:1; width:1.3em; height:1.3em; color:#2D6A4F; flex:none;}
+.pp-exp{font-size:clamp(.78rem,1.15vw,.9rem); line-height:1.45; color:#3b3222; animation:pp-in .5s ease both;}
+.pp-exp p{margin:.15rem 0;}
+.pp-class{font-family:'Merriweather',serif; font-style:italic;} .pp-class b{color:#2D6A4F; font-style:normal;}
+.pp-cite{font-size:.86em; color:#6b6350; border-top:1px solid rgba(120,100,60,.22); padding-top:.3rem;}
+.pp-ctl{display:flex; align-items:center; gap:.8rem; flex-wrap:wrap; justify-content:center; margin-top:auto;}
+
+.pp-sums{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(.4rem,1vw,.7rem); width:100%; text-align:left;}
+.pp-sum{display:flex; gap:.55rem; align-items:center; background:#fbf6ea; border:1px solid rgba(120,100,60,.22); border-radius:12px; padding:.45rem .55rem;}
+.pp-sum .pp-tart{flex:none; width:38%;}
+.pp-sum .pp-tart .pp-svg{max-height:70px;}
+.pp-sumtag{font-family:'Inter',sans-serif; font-weight:800; letter-spacing:.05em; text-transform:uppercase; font-size:.68rem; color:var(--accent);}
+.pp-sumans{font-family:'Merriweather',serif; font-weight:800; font-size:clamp(.8rem,1.15vw,.95rem); line-height:1.25;}
+.pp-sumpct{font-size:.74rem; color:#2D6A4F; font-style:italic; margin-top:.1rem;}
+@media(max-width:760px){ .pp-opts,.pp-sums{grid-template-columns:1fr;} .pp-art .pp-svg{max-height:180px;} }
+@media(prefers-reduced-motion:reduce){ .pp-art.ev,.pp-exp,.pp-bar,.pp-slide .pair{animation:none; transition:none;} }
+
+
 /* announcements / upcoming assignments */
 .slide[data-type="announce"]{background:linear-gradient(160deg,#f7faf8,#eaf1ed);}
 .an-head{margin-bottom:clamp(.8rem,2vh,1.4rem);}
@@ -2511,14 +2589,393 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
   })();
   </script>
 </section>
-<section class="slide" data-type="content" style="--accent:#BC8A2E">
+<section class="slide pp-slide" data-type="content" style="--accent:#BC8A2E">
   <div class="bleed-grid">
     <div class="bleed-text">
 <div class="eyebrow">8.4  ·  How Does the Atmosphere Become Polluted? — Primary Pollutants</div>
 <h2 class="heading">Primary Pollutants</h2>
 <div class="pairs"><div class="pair"><div class="pair-head">Carbon Monoxide (CO)</div><div class="pair-desc">From incomplete combustion in idling vehicles. Binds to hemoglobin, cutting the blood's ability to carry oxygen.</div></div><div class="pair"><div class="pair-head">Particulate Matter (PM)</div><div class="pair-desc">Particles &lt;10μm suspended in air. Smallest particles penetrate lungs and enter bloodstream. <u>Linked to respiratory health problems.</u></div></div><div class="pair"><div class="pair-head">Toxic Metals</div><div class="pair-desc">Lead, mercury, arsenic travel in airborne particles. Lead is a neurotoxin causing developmental damage.</div></div><div class="pair"><div class="pair-head">VOCs</div><div class="pair-desc">Volatile organic compounds from fossil fuel burning and solvents. Higher concentrations indoors.</div></div></div>
     </div>
-    <div class="bleed-media contain"><img loading="lazy" decoding="async" data-src="media/image11.jpg" alt=""></div>
+    <div class="bleed-media pp-media"><div class="pp-panel" data-pp-root aria-live="polite"></div>
+<svg class="pp-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs>
+  <filter id="ppNib" x="-6%" y="-6%" width="112%" height="112%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.032" numOctaves="2" seed="5" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="1.8" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <pattern id="ppHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(38)">
+    <line x1="0" y1="0" x2="0" y2="6" stroke="#3b3222" stroke-width="1.1" opacity=".32"/>
+  </pattern>
+  <pattern id="ppHatchG" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-40)">
+    <line x1="0" y1="0" x2="0" y2="5" stroke="#2D6A4F" stroke-width="1.3" opacity=".55"/>
+  </pattern>
+  <pattern id="ppHatchR" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-40)">
+    <line x1="0" y1="0" x2="0" y2="5" stroke="#A4373A" stroke-width="1.3" opacity=".55"/>
+  </pattern>
+  <g id="ppCar">
+    <path d="M4,0 C4,-10 10,-16 20,-17 L28,-28 C30,-31 33,-32 37,-32 H56 C60,-32 63,-31 65,-28 L73,-17 C82,-16 88,-10 88,0 Z" fill="#efe3c4"/>
+    <path d="M31,-18 L37,-27 H48 V-18 Z M52,-18 V-27 H58 L64,-18 Z" fill="#fffdf6" stroke-width="1.5"/>
+    <circle cx="24" cy="1" r="8" fill="#fbf6e9"/><circle cx="68" cy="1" r="8" fill="#fbf6e9"/>
+    <circle cx="24" cy="1" r="2.4" fill="#3b3222" stroke="none"/><circle cx="68" cy="1" r="2.4" fill="#3b3222" stroke="none"/>
+  </g>
+  <g id="ppPuff">
+    <path d="M0,0 C-6,-1 -9,-8 -4,-12 C-4,-19 5,-22 9,-17 C13,-23 23,-20 22,-12 C28,-10 28,-1 21,0 Z" fill="#e8e2d6"/>
+  </g>
+  <g id="ppHouse">
+    <path d="M0,0 V-22 L14,-34 L28,-22 V0 Z" fill="#f3ead6"/>
+    <path d="M10,0 V-11 H18 V0" fill="#fffdf6" stroke-width="1.4"/>
+  </g>
+</defs></svg>
+<script type="application/json" data-pp-qs>[{"card": 0, "tag": "Carbon monoxide", "art": "co", "q": "When toll plazas switched to E-ZPass and cars stopped idling in line, what fell among babies born nearby?", "opts": ["Car crashes near the toll plaza", "Premature births and low birth weight", "The price of gasoline nearby", "Noise complaints from neighbors"], "a": 1, "short": "Fewer premature, low-birth-weight babies", "exp": "Cars waiting at a toll booth idle, then accelerate away, which is when engines burn fuel least completely and release the most carbon monoxide and other exhaust. E-ZPass let traffic roll through. Among mothers living within 2 km of a toll plaza, premature births fell 10.8% and low-birth-weight babies fell 11.8%, compared with mothers living 2 to 10 km away.", "cite": "Currie, J., &amp; Walker, R. (2011). Traffic congestion and infant health: Evidence from E-ZPass. <i>American Economic Journal: Applied Economics</i>, 3(1), 65&ndash;90."}, {"card": 1, "tag": "Particulate matter", "art": "pm", "q": "In tournament chess, what happens when there are more fine particles in the air of the playing hall?", "opts": ["Games last longer", "Players offer more draws", "Players make more mistakes", "Nothing measurable"], "a": 2, "short": "More mistakes at the chessboard", "exp": "Researchers had a chess engine grade every move in official tournament games and matched each one to an air sensor in the hall. When fine particles (PM₂.₅) rose by 10 µg/m³, a player’s chance of making an erroneous move rose by 26.3%, and the effect grew stronger when players were short on time. Particles small enough to reach the bloodstream reach the brain, too.", "cite": "Künn, S., Palacios, J., &amp; Pestel, N. (2023). Indoor air quality and strategic decision making. <i>Management Science</i>, 69(9), 5354&ndash;5377."}, {"card": 2, "tag": "Toxic metals: lead", "art": "lead", "q": "After the United States took lead out of gasoline, what fell about twenty years later?", "opts": ["Murder and other violent crime", "Traffic deaths", "Gasoline prices", "Birth rates"], "a": 0, "short": "Murder and other violent crime", "exp": "Lead harms the developing brain, and the children most exposed to leaded gasoline reached their late teens and twenties about two decades later. As lead left gasoline, violent crime, murder included, fell. How much of the drop lead explains is debated: an early study credited it with about 56% of the fall in violent crime from 1992 to 2002, while a 2022 review that corrects for publication bias puts lead’s share of the fall in U.S. murders at 7 to 28%.", "cite": "Reyes, J. W. (2007). Environmental policy as social policy? The impact of childhood lead exposure on crime. <i>B.E. Journal of Economic Analysis &amp; Policy</i>, 7(1). · Higney, A., Hanley, N., &amp; Moro, M. (2022). The lead-crime hypothesis: A meta-analysis. <i>Regional Science and Urban Economics</i>, 97, 103826."}, {"card": 3, "tag": "VOCs", "art": "voc", "q": "In industrialized cities today, what produces about half of the smog-forming VOCs that come from fossil fuels?", "opts": ["Gas stations", "Oil refineries", "Airplanes", "Everyday products: paint, cleaners, perfume, deodorant"], "a": 3, "short": "Paint, cleaners, perfume and deodorant", "exp": "As car exhaust got cleaner, a new source caught up: chemicals that evaporate from products we use every day. Paints, cleaning sprays, glues, pesticides, and personal-care products like perfume and deodorant now make up about half of the fossil-fuel VOCs in industrialized cities. It is also why VOC levels are often higher indoors, where those products are used.", "cite": "McDonald, B. C., et al. (2018). Volatile chemical products emerging as largest petrochemical source of urban organic emissions. <i>Science</i>, 359(6377), 760&ndash;764."}]</script>
+<template data-pp-art="co"><svg class="pp-svg" viewBox="0 0 520 230" role="img"
+  aria-label="A queue of cars idling at a toll booth with exhaust puffs behind each, and houses near and far from the plaza.">
+<g filter="url(#ppNib)" fill="none" stroke="#3b3222" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6,172 C150,170 380,173 514,171"/>
+  <path d="M6,200 C150,202 370,199 514,201" stroke-width="1.5"/>
+  <path d="M26,186 h20 M70,186 h20 M114,186 h20 M158,186 h20 M202,186 h20" stroke-width="1.4" opacity=".5"/>
+  <g opacity=".9">
+    <use href="#ppPuff" transform="translate(2,166) scale(.62)"/>
+    <use href="#ppPuff" transform="translate(-8,150) scale(.46)"/>
+    <use href="#ppPuff" transform="translate(92,166) scale(.62)"/>
+    <use href="#ppPuff" transform="translate(84,150) scale(.46)"/>
+    <use href="#ppPuff" transform="translate(182,166) scale(.62)"/>
+    <use href="#ppPuff" transform="translate(174,150) scale(.46)"/>
+  </g>
+  <use href="#ppCar" transform="translate(20,170) scale(.8)"/>
+  <use href="#ppCar" transform="translate(110,170) scale(.8)"/>
+  <use href="#ppCar" transform="translate(200,170) scale(.8)"/>
+  <path d="M296,172 V106 H344 V172" fill="#f3ead6"/>
+  <path d="M288,108 L320,86 L352,108 Z" fill="#e7d6b0"/>
+  <rect x="306" y="118" width="28" height="22" rx="2" fill="#fffdf6"/>
+  <circle cx="296" cy="150" r="3.5" fill="#3b3222"/>
+  <path d="M296,150 L270,120" stroke-width="4"/>
+  <path d="M291,144 L286,138 M281,132 L276,126" stroke="#A4373A" stroke-width="4.4"/>
+  <use href="#ppHouse" transform="translate(372,170)"/>
+  <use href="#ppHouse" transform="translate(458,170) scale(.85)"/>
+  <use href="#ppHouse" transform="translate(488,170) scale(.7)"/>
+  <path d="M320,214 H512" stroke-width="1.6"/>
+  <path d="M320,209 V219 M392,209 V219 M508,209 V219" stroke-width="1.6"/>
+  <path d="M324,206 C340,203 372,203 388,206" stroke="#A4373A" stroke-width="1.6"/>
+</g>
+<text x="96" y="136" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="13" text-anchor="middle">CO</text>
+<text x="186" y="136" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="13" text-anchor="middle">CO</text>
+<text x="320" y="102" font-family="Inter,system-ui,sans-serif" font-weight="800" fill="#3b3222" font-size="10" text-anchor="middle">TOLL</text>
+<text x="320" y="228" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10" text-anchor="middle">0</text>
+<text x="392" y="228" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10" text-anchor="middle">2 km</text>
+<text x="504" y="228" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10" text-anchor="middle">10 km</text>
+<text x="356" y="200" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10" fill="#A4373A">within 2 km</text>
+<text x="20" y="40" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="15">idle &#8594; accelerate &#8594; burn fuel badly</text>
+</svg></template><template data-pp-art="co_ev"><svg class="pp-svg" viewBox="0 0 520 230" role="img"
+  aria-label="Bar chart: after E-ZPass, premature births fell 10.8 percent and low birth weight fell 11.8 percent among mothers within 2 kilometres of a toll plaza.">
+<text x="260" y="26" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="15" text-anchor="middle">Mothers within 2 km of a toll plaza, after E-ZPass</text>
+<g filter="url(#ppNib)" fill="none" stroke="#3b3222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M70,62 C200,61 340,63 470,62" stroke-width="2.4"/>
+  <path d="M130,64 H214 V156 H130 Z" fill="url(#ppHatchG)"/>
+  <path d="M306,64 H390 V164 H306 Z" fill="url(#ppHatchG)"/>
+  <path d="M172,168 V184 M166,178 L172,186 L178,178" stroke="#2D6A4F"/>
+  <path d="M348,176 V192 M342,186 L348,194 L354,186" stroke="#2D6A4F"/>
+</g>
+<text x="172" y="112" font-family="Inter,system-ui,sans-serif" font-weight="800" fill="#3b3222" font-size="22" text-anchor="middle" fill="#2D6A4F">&#8722;10.8%</text>
+<text x="348" y="116" font-family="Inter,system-ui,sans-serif" font-weight="800" fill="#3b3222" font-size="22" text-anchor="middle" fill="#2D6A4F">&#8722;11.8%</text>
+<text x="172" y="208" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="13" text-anchor="middle">premature births</text>
+<text x="348" y="214" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="13" text-anchor="middle">low birth weight</text>
+<text x="62" y="58" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10" text-anchor="end">0</text>
+<text x="260" y="228" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="11" text-anchor="middle" opacity=".75">compared with mothers 2 to 10 km away</text>
+</svg></template><template data-pp-art="pm"><svg class="pp-svg" viewBox="0 0 520 230" role="img"
+  aria-label="A chessboard mid-game with a king, a knight, pawns and a rook, a running chess clock, and fine particles drifting past an air sensor.">
+<g filter="url(#ppNib)" fill="none" stroke="#3b3222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="74" y="58" width="34" height="34" fill="#e6d7b6" stroke="none"/><rect x="74" y="58" width="34" height="34" fill="url(#ppHatch)" stroke="none"/><rect x="142" y="58" width="34" height="34" fill="#e6d7b6" stroke="none"/><rect x="142" y="58" width="34" height="34" fill="url(#ppHatch)" stroke="none"/><rect x="210" y="58" width="34" height="34" fill="#e6d7b6" stroke="none"/><rect x="210" y="58" width="34" height="34" fill="url(#ppHatch)" stroke="none"/><rect x="40" y="92" width="34" height="34" fill="#e6d7b6" stroke="none"/><rect x="40" y="92" width="34" height="34" fill="url(#ppHatch)" stroke="none"/><rect x="108" y="92" width="34" height="34" fill="#e6d7b6" stroke="none"/><rect x="108" y="92" width="34" height="34" fill="url(#ppHatch)" stroke="none"/><rect x="176" y="92" width="34" height="34" fill="#e6d7b6" stroke="none"/><rect x="176" y="92" width="34" height="34" fill="url(#ppHatch)" stroke="none"/><rect x="74" y="126" width="34" height="34" fill="#e6d7b6" stroke="none"/><rect x="74" y="126" width="34" height="34" fill="url(#ppHatch)" stroke="none"/><rect x="142" y="126" width="34" height="34" fill="#e6d7b6" stroke="none"/><rect x="142" y="126" width="34" height="34" fill="url(#ppHatch)" stroke="none"/><rect x="210" y="126" width="34" height="34" fill="#e6d7b6" stroke="none"/><rect x="210" y="126" width="34" height="34" fill="url(#ppHatch)" stroke="none"/><rect x="40" y="160" width="34" height="34" fill="#e6d7b6" stroke="none"/><rect x="40" y="160" width="34" height="34" fill="url(#ppHatch)" stroke="none"/><rect x="108" y="160" width="34" height="34" fill="#e6d7b6" stroke="none"/><rect x="108" y="160" width="34" height="34" fill="url(#ppHatch)" stroke="none"/><rect x="176" y="160" width="34" height="34" fill="#e6d7b6" stroke="none"/><rect x="176" y="160" width="34" height="34" fill="url(#ppHatch)" stroke="none"/>
+  <rect x="40" y="58" width="204" height="136" stroke-width="2.6"/>
+  <g transform="translate(91,154) scale(.62)">
+    <path d="M-14,0 H14 V-6 H-14 Z" fill="#fffdf6"/>
+    <path d="M-10,-6 C-8,-18 -6,-30 -9,-38 H9 C6,-30 8,-18 10,-6 Z" fill="#fffdf6"/>
+    <path d="M-11,-38 H11"/><path d="M-8,-38 C-9,-48 9,-48 8,-38" fill="#fffdf6"/>
+    <path d="M0,-47 V-62 M-6,-56 H6" stroke-width="2.6"/>
+  </g>
+  <g transform="translate(159,120) scale(.64)">
+    <path d="M-18,0 H18 V-6 H-18 Z" fill="#3b3222"/>
+    <path d="M14,-6 C17,-20 18,-34 12,-46 L9,-57 L4,-48 C-4,-49 -12,-44 -16,-36 L-23,-27 C-25,-23 -21,-19 -15,-21 C-10,-22 -6,-24 -3,-27 C-8,-19 -12,-12 -12,-6 Z" fill="#3b3222"/>
+    <path d="M8,-44 C10,-35 11,-25 10,-15" stroke="#fffdf6" stroke-width="1.6"/>
+  </g>
+  <g transform="translate(193,188) scale(.56)">
+    <path d="M-11,0 H11 V-5 H-11 Z" fill="#fffdf6"/>
+    <path d="M-7,-5 C-5,-14 -4,-18 -6,-22 H6 C4,-18 5,-14 7,-5 Z" fill="#fffdf6"/>
+    <circle cx="0" cy="-28" r="6.5" fill="#fffdf6"/>
+  </g>
+  <g transform="translate(125,86) scale(.56)">
+    <path d="M-11,0 H11 V-5 H-11 Z" fill="#3b3222"/>
+    <path d="M-7,-5 C-5,-14 -4,-18 -6,-22 H6 C4,-18 5,-14 7,-5 Z" fill="#3b3222"/>
+    <circle cx="0" cy="-28" r="6.5" fill="#3b3222"/>
+  </g>
+  <g transform="translate(227,86) scale(.58)">
+    <path d="M-13,0 H13 V-6 H-13 Z" fill="#3b3222"/>
+    <path d="M-9,-6 L-7,-30 H7 L9,-6 Z" fill="#3b3222"/>
+    <path d="M-10,-30 V-40 H-5 V-35 H-2 V-40 H2 V-35 H5 V-40 H10 V-30 Z" fill="#3b3222"/>
+  </g>
+  <path d="M286,190 V128 C286,118 292,112 302,112 H384 C394,112 400,118 400,128 V190 Z" fill="#f3ead6"/>
+  <circle cx="320" cy="152" r="22" fill="#fffdf6"/>
+  <circle cx="366" cy="152" r="22" fill="#fffdf6"/>
+  <path d="M320,152 V136 M320,152 L330,158 M366,152 V138 M366,152 L356,146" stroke-width="1.8"/>
+  <path d="M310,112 V104 H330 V112 M356,112 V100 H376 V112" fill="#e7d6b0"/>
+  <path d="M432,190 V140 H500 V190 Z" fill="#f3ead6"/>
+  <rect x="442" y="150" width="48" height="20" rx="2" fill="#fffdf6"/>
+  <circle cx="466" cy="181" r="5"/>
+</g>
+<g fill="#3b3222" opacity=".5"><circle cx="60" cy="40" r="2.6"/><circle cx="92" cy="30" r="1.8"/><circle cx="128" cy="46" r="3.4"/><circle cx="170" cy="26" r="2.2"/><circle cx="210" cy="40" r="2.8"/><circle cx="250" cy="22" r="1.6"/><circle cx="276" cy="48" r="3.1"/><circle cx="318" cy="30" r="2.0"/><circle cx="352" cy="44" r="2.6"/><circle cx="392" cy="24" r="1.7"/><circle cx="430" cy="38" r="3.0"/><circle cx="470" cy="28" r="2.2"/><circle cx="498" cy="46" r="1.6"/><circle cx="80" cy="64" r="1.6"/><circle cx="232" cy="70" r="2.0"/><circle cx="150" cy="84" r="1.4"/><circle cx="300" cy="74" r="2.4"/><circle cx="408" cy="70" r="1.8"/><circle cx="456" cy="86" r="2.6"/><circle cx="266" cy="98" r="1.5"/><circle cx="116" cy="22" r="1.4"/><circle cx="190" cy="58" r="1.7"/><circle cx="372" cy="92" r="1.6"/><circle cx="484" cy="100" r="2.0"/><circle cx="26" cy="82" r="2.1"/></g>
+<circle cx="181" cy="96" r="1.6" fill="#fffdf6"/>
+<text x="466" y="164" font-family="Inter,system-ui,sans-serif" font-weight="800" fill="#3b3222" font-size="9.5" text-anchor="middle">PM&#8322;.&#8325;</text>
+<text x="466" y="134" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10" text-anchor="middle">air sensor</text>
+<text x="343" y="208" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="11" text-anchor="middle">the clock is running</text>
+</svg></template><template data-pp-art="pm_ev"><svg class="pp-svg" viewBox="0 0 520 230" role="img"
+  aria-label="Bar chart: a 10 microgram per cubic metre rise in indoor fine particles raised the chance of an erroneous chess move by 26.3 percent.">
+<text x="260" y="26" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="15" text-anchor="middle">Chance of making an erroneous move</text>
+<g filter="url(#ppNib)" fill="none" stroke="#3b3222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M90,190 C220,191 330,189 450,190" stroke-width="2.4"/>
+  <path d="M140,188 V80 H220 V188" fill="url(#ppHatch)"/>
+  <path d="M300,188 V52 H380 V188" fill="url(#ppHatchR)"/>
+  <path d="M300,80 H380" stroke-dasharray="5 5" stroke-width="1.5"/>
+  <path d="M396,80 V54 M390,62 L396,52 L402,62" stroke="#A4373A"/>
+</g>
+<text x="180" y="72" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="12" text-anchor="middle">baseline</text>
+<text x="340" y="44" font-family="Inter,system-ui,sans-serif" font-weight="800" fill="#3b3222" font-size="22" text-anchor="middle" fill="#A4373A">+26.3%</text>
+<text x="180" y="210" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="13" text-anchor="middle">cleaner air</text>
+<text x="340" y="210" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="13" text-anchor="middle">+10 &#181;g/m&#179; PM&#8322;.&#8325;</text>
+<text x="260" y="228" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="11" text-anchor="middle" opacity=".75">and the effect grew under time pressure</text>
+</svg></template><template data-pp-art="lead"><svg class="pp-svg" viewBox="0 0 520 230" role="img"
+  aria-label="A vintage gasoline pump labelled Ethyl, contains lead, and a timeline from 1975 to the 1990s in which a child grows into a young adult.">
+<g filter="url(#ppNib)" fill="none" stroke="#3b3222" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M50,206 C110,205 170,207 214,206" stroke-width="1.6"/>
+  <path d="M74,204 V74 C74,68 78,64 84,64 H140 C146,64 150,68 150,74 V204 Z" fill="#efe3c4"/>
+  <circle cx="112" cy="40" r="26" fill="#fffdf6"/>
+  <path d="M100,64 V58 M124,64 V58" stroke-width="1.8"/>
+  <rect x="86" y="80" width="52" height="34" rx="3" fill="#fffdf6"/>
+  <path d="M96,104 L104,90 M112,104 V88 M120,104 L128,92" stroke-width="1.4"/>
+  <rect x="80" y="128" width="64" height="34" rx="2" fill="#f6dccf" stroke="#A4373A" stroke-width="1.6"/>
+  <path d="M150,96 C176,96 182,120 178,150 C175,168 186,176 192,168" stroke-width="3"/>
+  <path d="M186,160 L200,152 L204,160 L192,170 Z" fill="#3b3222"/>
+  <path d="M232,170 C300,170 400,170 504,170" stroke-width="2"/>
+  <path d="M496,164 L506,170 L496,176"/>
+  <path d="M262,164 V176 M432,164 V176" stroke-width="1.8"/>
+  <circle cx="262" cy="117" r="7.5" fill="#fffdf6"/>
+  <path d="M254,128 C254,125 270,125 270,128 L268,146 H256 Z" fill="#e7d6b0"/>
+  <path d="M258,146 L255,160 M266,146 L269,160 M254,131 L248,141 M270,131 L276,141" stroke-width="2"/>
+  <circle cx="432" cy="71" r="9.5" fill="#fffdf6"/>
+  <path d="M421,85 C421,82 443,82 443,85 L440,120 H424 Z" fill="#e7d6b0"/>
+  <path d="M427,120 L422,152 M437,120 L442,152 M421,89 L412,112 M443,89 L452,112" stroke-width="2.2"/>
+  <path d="M278,110 C320,72 370,58 412,64" stroke-dasharray="6 6" stroke-width="1.6"/>
+  <path d="M402,56 L414,64 L402,70" stroke-width="1.6"/>
+</g>
+<text x="112" y="45" font-family="Inter,system-ui,sans-serif" font-weight="800" fill="#3b3222" font-size="11" text-anchor="middle">ETHYL</text>
+<text x="112" y="142" font-family="Inter,system-ui,sans-serif" font-weight="800" fill="#3b3222" font-size="7.5" text-anchor="middle" fill="#A4373A">CONTAINS LEAD</text>
+<text x="112" y="153" font-family="Inter,system-ui,sans-serif" font-weight="800" fill="#3b3222" font-size="7.5" text-anchor="middle" fill="#A4373A">(TETRAETHYL)</text>
+<text x="262" y="192" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="12" text-anchor="middle">1975</text>
+<text x="240" y="208" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10">lead starts leaving gasoline</text>
+<text x="432" y="192" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="12" text-anchor="middle">1990s</text>
+<text x="345" y="56" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="12" text-anchor="middle">&#8776; 20 years</text>
+<text x="474" y="66" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="28" text-anchor="middle" fill="#A4373A">?</text>
+</svg></template><template data-pp-art="lead_ev"><svg class="pp-svg" viewBox="0 0 520 230" role="img"
+  aria-label="Range chart: a 2022 meta-analysis credits lead with 7 to 28 percent of the fall in U.S. murders; a 2007 study credited it with about 56 percent of the fall in violent crime from 1992 to 2002.">
+<text x="260" y="26" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="15" text-anchor="middle">Share of the drop in crime that studies credit to lead</text>
+<g filter="url(#ppNib)" fill="none" stroke="#3b3222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M60.0,120 C186.0,119 354.0,121 480.0,120" stroke-width="2.4"/>
+  <path d="M60.0,114 V126" stroke-width="1.5"/><path d="M165.0,114 V126" stroke-width="1.5"/><path d="M270.0,114 V126" stroke-width="1.5"/><path d="M375.0,114 V126" stroke-width="1.5"/><path d="M480.0,114 V126" stroke-width="1.5"/>
+  <path d="M89.4,104 H177.60000000000002 V136 H89.4 Z" fill="url(#ppHatchG)" stroke="#2D6A4F"/>
+  <path d="M295.20000000000005,106 L305.20000000000005,120 L295.20000000000005,134 L285.20000000000005,120 Z" fill="#BC8A2E" stroke="#3b3222"/>
+  <path d="M133.5,104 V78" stroke="#2D6A4F" stroke-width="1.5"/>
+  <path d="M295.20000000000005,134 V160" stroke-width="1.5"/>
+</g>
+<text x="60.0" y="146" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10" text-anchor="middle" opacity=".7">0%</text><text x="165.0" y="146" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10" text-anchor="middle" opacity=".7">25%</text><text x="270.0" y="146" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10" text-anchor="middle" opacity=".7">50%</text><text x="375.0" y="146" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10" text-anchor="middle" opacity=".7">75%</text><text x="480.0" y="146" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10" text-anchor="middle" opacity=".7">100%</text>
+<text x="133.5" y="62" font-family="Inter,system-ui,sans-serif" font-weight="800" fill="#3b3222" font-size="16" text-anchor="middle" fill="#2D6A4F">7&#8211;28%</text>
+<text x="133.5" y="76" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="11" text-anchor="middle">of the fall in U.S. murders</text>
+<text x="137.5" y="48" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10" text-anchor="middle" opacity=".8">Higney et al. 2022, meta-analysis</text>
+<text x="295.20000000000005" y="178" font-family="Inter,system-ui,sans-serif" font-weight="800" fill="#3b3222" font-size="16" text-anchor="middle" fill="#8a6a2f">&#8776; 56%</text>
+<text x="295.20000000000005" y="194" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="11" text-anchor="middle">of the 1992&#8211;2002 fall in violent crime</text>
+<text x="295.20000000000005" y="208" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10" text-anchor="middle" opacity=".8">Reyes 2007</text>
+<text x="260" y="226" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="11" text-anchor="middle" opacity=".75">Estimates differ in size. They point the same way.</text>
+</svg></template><template data-pp-art="voc"><svg class="pp-svg" viewBox="0 0 520 230" role="img"
+  aria-label="A city scene with VOC vapours rising from an oil refinery, a gas station, a car, an apartment building and an airplane.">
+<g filter="url(#ppNib)" fill="none" stroke="#3b3222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6,196 C150,194 370,197 514,195" stroke-width="2.2"/>
+  <path d="M22,196 V112 H36 V196 M46,196 V92 H58 V196" fill="#e7d6b0"/>
+  <path d="M64,196 V150 C64,140 104,140 104,150 V196 Z" fill="#efe3c4"/>
+  <path d="M66,160 H102 M66,174 H102" stroke-width="1.3"/>
+  <path d="M126,196 V136 M196,196 V136 M118,136 H204 L196,124 H126 Z" fill="#f3ead6"/>
+  <path d="M152,196 V160 H170 V196 Z" fill="#fffdf6"/>
+  <path d="M170,170 C180,170 182,180 178,188" stroke-width="1.6"/>
+  <use href="#ppCar" transform="translate(222,194) scale(.78)"/>
+  <path d="M326,196 V104 H404 V196 Z" fill="#f3ead6"/>
+  <path d="M338,118 H356 V138 H338 Z M374,118 H392 V138 H374 Z M338,152 H356 V172 H338 Z M374,152 H392 V172 H374 Z" fill="#fffdf6" stroke-width="1.5"/>
+  <path d="M378,170 V160 H384 V170 Z M380,160 V157 H383" stroke-width="1.3" fill="#A4373A"/>
+  <path d="M342,170 V162 C342,160 350,160 350,162 V170 Z" stroke-width="1.3" fill="#d9e0bd"/>
+  <path d="M412,52 C440,44 474,42 506,46 C510,48 510,52 506,54 C474,58 440,58 412,52 Z" fill="#fffdf6"/>
+  <path d="M450,52 L436,70 H446 L466,54 M474,48 L488,34 H496 L486,48" fill="#efe3c4"/>
+</g>
+<g fill="none" stroke="#8a6a2f" stroke-width="1.8" stroke-linecap="round" opacity=".75">
+  <path transform="translate(29,104)" d="M0,0 C-6,-8 6,-14 0,-22 C-6,-30 6,-36 0,-44"/><path transform="translate(52,84)" d="M0,0 C-6,-8 6,-14 0,-22 C-6,-30 6,-36 0,-44"/>
+  <path transform="translate(150,118)" d="M0,0 C-6,-8 6,-14 0,-22 C-6,-30 6,-36 0,-44"/><path transform="translate(176,118)" d="M0,0 C-6,-8 6,-14 0,-22 C-6,-30 6,-36 0,-44"/>
+  <path transform="translate(212,186) scale(.8)" d="M0,0 C-6,-8 6,-14 0,-22 C-6,-30 6,-36 0,-44"/>
+  <path transform="translate(347,98)" d="M0,0 C-6,-8 6,-14 0,-22 C-6,-30 6,-36 0,-44"/><path transform="translate(383,98)" d="M0,0 C-6,-8 6,-14 0,-22 C-6,-30 6,-36 0,-44"/>
+  <path transform="translate(410,58) scale(.7)" d="M0,0 C-6,-8 6,-14 0,-22 C-6,-30 6,-36 0,-44"/>
+</g>
+<text x="260" y="26" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="15" text-anchor="middle">Where do a city&#8217;s VOCs come from?</text>
+<text x="62" y="214" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10.5" text-anchor="middle">refinery</text>
+<text x="161" y="214" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10.5" text-anchor="middle">gas station</text>
+<text x="256" y="214" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10.5" text-anchor="middle">traffic</text>
+<text x="365" y="214" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10.5" text-anchor="middle">homes</text>
+<text x="460" y="78" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="10.5" text-anchor="middle">air travel</text>
+</svg></template><template data-pp-art="voc_ev"><svg class="pp-svg" viewBox="0 0 520 230" role="img"
+  aria-label="Donut chart: in industrialized cities, everyday volatile chemical products make up about half of fossil-fuel VOC emissions; fuels, vehicles and other sources make up the other half.">
+<text x="260" y="24" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="15" text-anchor="middle">Fossil-fuel VOCs in industrialized cities</text>
+<g filter="url(#ppNib)" fill="none" stroke="#3b3222" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M170,40 A78,78 0 0 1 170,196 L170,162 A44,44 0 0 0 170,74 Z" fill="url(#ppHatchR)"/>
+  <path d="M170,40 A78,78 0 0 0 170,196 L170,162 A44,44 0 0 1 170,74 Z" fill="#efe9dc"/>
+  <path d="M232,94 C262,84 286,84 300,86" stroke-width="1.5"/>
+  <path d="M112,170 C92,188 76,196 58,198" stroke-width="1.5"/>
+</g>
+<text x="170" y="124" font-family="Inter,system-ui,sans-serif" font-weight="800" fill="#3b3222" font-size="20" text-anchor="middle">&#189;</text>
+<text x="306" y="84" font-family="Inter,system-ui,sans-serif" font-weight="800" fill="#3b3222" font-size="15" fill="#A4373A">about half:</text>
+<text x="306" y="102" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="13">everyday products</text>
+<text x="306" y="124" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="11" opacity=".8">paint &#183; cleaning sprays &#183; glue</text>
+<text x="306" y="140" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="11" opacity=".8">pesticides &#183; perfume &#183; deodorant</text>
+<text x="306" y="164" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="11" opacity=".8">(volatile chemical products)</text>
+<text x="20" y="214" font-family="Merriweather,Georgia,serif" font-style="italic" fill="#3b3222" font-size="12">fuels, vehicles and other sources</text>
+</svg></template>
+<script>
+(function(){
+  var SEC=document.currentScript.closest('.pp-slide');
+  if(!SEC || SEC.__ppWired) return; SEC.__ppWired=true;
+  if(!window.__deckLiveReady){ window.__deckLiveReady=new Promise(function(r){ window.__deckLiveResolve=r; }); }
+  var GID='ch8-pp-hidden', LETTERS=['A','B','C','D'];
+  var Q=JSON.parse(SEC.querySelector('[data-pp-qs]').textContent);
+  var ART={}; SEC.querySelectorAll('template[data-pp-art]').forEach(function(t){ ART[t.dataset.ppArt]=t.innerHTML; });
+  var root=SEC.querySelector('[data-pp-root]'), cards=SEC.querySelectorAll('.bleed-text .pair');
+  var backend=null, HOST=false, st={}, viewKey=null;
+
+  function ls(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }catch(e){ return null; } }
+  function g(){ return st.g||0; }
+  function q(){ return (typeof st.q==='number') ? st.q : -1; }
+  function rev(){ return !!st.rev; }
+  function running(){ return q()>=0 && q()<Q.length; }
+  function counts(i){ var v=((st.v||{})['g'+g()]||{})['q'+i]||{}; return [0,1,2,3].map(function(k){ return +v['o'+k]||0; }); }
+  function total(c){ return c.reduce(function(a,b){ return a+b; },0); }
+  function myVote(i){ var x=ls('pp:'+GID+':'+g()+':'+i); return x===null ? null : +x; }
+  function pct(i){ var c=counts(i), n=total(c); return n ? Math.round(c[Q[i].a]/n*100) : null; }
+  function thumb(k){ return ART[k].replace('class="pp-svg"','class="pp-svg pp-thumb"'); }
+
+  // ── host actions; the main doc only ever holds {g, q, rev} ──
+  function start(){ backend.setDoc('polls', GID, {g:g()+1, q:0, rev:false}); }   // also clears every vote shard
+  function reveal(){ backend.mergeDoc('polls', GID, {rev:true}); }
+  function go(i, r){ backend.mergeDoc('polls', GID, {q:i, rev:!!r}); }
+  function vote(k){
+    var i=q(); if(!backend || !running() || rev() || myVote(i)!==null) return;
+    ls('pp:'+GID+':'+g()+':'+i, String(k));
+    var o={}; o['o'+k]=backend.inc(1); var qq={}; qq['q'+i]=o; var gg={}; gg['g'+g()]=qq;
+    backend.mergeDocShard('polls', GID, {v:gg});
+    viewKey=null; render();
+  }
+
+  // ── the clicker drives a running game on the host's screen only ──
+  SEC.__deckNext=function(){
+    if(!HOST || !backend || !running()) return false;
+    if(!rev()) reveal(); else if(q()<Q.length-1) go(q()+1,false); else go(Q.length,false);
+    return true;
+  };
+  SEC.__deckPrev=function(){
+    if(!HOST || !backend) return false;
+    if(running() && rev()){ go(q(), false); return true; }
+    if(running() && q()>0){ go(q()-1, true); return true; }
+    if(q()===Q.length){ go(Q.length-1, true); return true; }
+    return false;
+  };
+
+  function lightCards(){
+    var i=running() ? Q[q()].card : -1;
+    cards.forEach(function(c,k){ c.classList.toggle('pp-lit', k===i); c.classList.toggle('pp-dim', i>-1 && k!==i); });
+  }
+
+  function introHTML(){
+    var grid=Q.map(function(x,i){ return '<div class="pp-tile"><div class="pp-tart">'+thumb(x.art)+'</div><span>'+x.tag+'</span></div>'; }).join('');
+    return '<div class="pp-intro"><div class="pp-kick">A mini-game</div><div class="pp-title">The Hidden Effects</div>'
+      + '<p class="pp-lead">Four pollutants, four findings that surprised the researchers who made them. '
+      + (HOST ? 'Students vote on their own devices; you reveal the evidence.' : 'Vote on your device, then see the evidence.')+'</p>'
+      + '<div class="pp-tiles">'+grid+'</div>'
+      + (HOST ? '<button class="pp-btn" data-pp="start">Start the game &rarr;</button><div class="pp-hint">After you start, your clicker reveals each answer and moves to the next question.</div>'
+              : '<div class="pp-wait">Waiting for your instructor to start&hellip;</div>')
+      + '</div>';
+  }
+
+  function questionHTML(){
+    var i=q(), x=Q[i], r=rev(), c=counts(i), n=total(c), mine=myVote(i);
+    var opts=x.opts.map(function(o,k){
+      var cls='pp-opt'+(r ? (k===x.a?' right':' wrong') : '')+(mine===k?' mine':'');
+      var share=n ? Math.round(c[k]/n*100) : 0;
+      var bar = r ? '<i class="pp-bar" style="width:'+share+'%"></i><b class="pp-share">'+share+'%</b>' : '';
+      var tick = (r && k===x.a) ? '<svg class="pp-tick" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.2 13c1.9 1.6 3.4 3.3 4.8 5.1 3-4.7 6.4-8.9 10.6-12.6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>' : '';
+      var dis = (HOST || r || mine!==null) ? ' disabled' : '';
+      return '<button class="'+cls+'" data-ppv="'+k+'"'+dis+'><span class="pp-l">'+LETTERS[k]+'</span><span class="pp-t">'+o+'</span>'+tick+bar+'</button>';
+    }).join('');
+    var top='<div class="pp-top"><span class="pp-tag">'+(i+1)+' of '+Q.length+' &middot; '+x.tag+'</span>'
+      + '<span class="pp-count">'+(n ? '<b>'+n+'</b> '+(n===1?'vote':'votes')+(r?'':' in') : (r?'':'Waiting for votes'))+'</span></div>';
+    var art='<div class="pp-art'+(r?' ev':'')+'">'+(r ? ART[x.art+'_ev'] : ART[x.art])+'</div>';
+    var foot='';
+    if(r){
+      var p=pct(i);
+      foot='<div class="pp-exp"><p>'+x.exp+'</p>'
+        + (p!==null ? '<p class="pp-class"><b>'+p+'%</b> of the class got it right.</p>' : '')
+        + '<p class="pp-cite">'+x.cite+'</p></div>';
+    } else if(!HOST){
+      foot='<div class="pp-me">'+(mine===null ? 'Tap your answer.' : 'Locked in: <b>'+LETTERS[mine]+'</b>. Waiting for the reveal&hellip;')+'</div>';
+    }
+    var ctl='';
+    if(HOST){
+      ctl='<div class="pp-ctl">'
+        + (r ? (i<Q.length-1 ? '<button class="pp-btn" data-pp="next">Next question &rarr;</button>' : '<button class="pp-btn" data-pp="sum">See all four &rarr;</button>')
+             : '<button class="pp-btn" data-pp="reveal">Reveal the answer</button>')
+        + '<span class="pp-hint">or press your clicker</span></div>';
+    }
+    return top+art+'<div class="pp-q">'+x.q+'</div><div class="pp-opts">'+opts+'</div>'+foot+ctl;
+  }
+
+  function summaryHTML(){
+    var rows=Q.map(function(x,i){ var p=pct(i);
+      return '<div class="pp-sum"><div class="pp-tart">'+thumb(x.art)+'</div><div><div class="pp-sumtag">'+x.tag+'</div>'
+        + '<div class="pp-sumans">'+x.short+'</div>'
+        + '<div class="pp-sumpct">'+(p===null ? '' : p+'% of the class got it right')+'</div></div></div>'; }).join('');
+    return '<div class="pp-intro"><div class="pp-kick">The Hidden Effects</div><div class="pp-title sm">Pollution reaches far past the lungs</div>'
+      + '<div class="pp-sums">'+rows+'</div>'
+      + (HOST ? '<div class="pp-ctl"><button class="pp-btn ghost" data-pp="back">&larr; Back to the last answer</button><button class="pp-btn ghost" data-pp="again">Play again</button></div>' : '')
+      + '</div>';
+  }
+
+  function render(){
+    lightCards();
+    var i=q();
+    var key=[g(), i, rev()?1:0, HOST?1:0, running()?JSON.stringify(counts(i)):'', running()?String(myVote(i)):'',
+             i===Q.length ? Q.map(function(x,k){ return pct(k); }).join(',') : ''].join('|');
+    if(key===viewKey) return; viewKey=key;
+    root.className='pp-panel'+(running()?' play':'')+(rev()?' rev':'');
+    root.innerHTML = running() ? questionHTML() : (i===Q.length ? summaryHTML() : introHTML());
+  }
+
+  root.addEventListener('click', function(e){
+    var v=e.target.closest('[data-ppv]'); if(v){ vote(+v.dataset.ppv); return; }
+    var b=e.target.closest('[data-pp]'); if(!b || !backend || !HOST) return;
+    var a=b.dataset.pp;
+    if(a==='start') start();
+    else if(a==='reveal') reveal();
+    else if(a==='next') go(q()+1, false);
+    else if(a==='sum') go(Q.length, false);
+    else if(a==='back') go(Q.length-1, true);
+    else if(a==='again') backend.setDoc('polls', GID, {g:g()+1, q:-1, rev:false});
+  });
+
+  window.__deckLiveReady.then(function(live){
+    backend=live.backend; HOST=live.HOST;
+    if(HOST) SEC.classList.add('pp-host');
+    backend.subscribeDoc('polls', GID, function(d){ st=d||{}; render(); });
+  });
+  render();
+})();
+</script></div>
   </div>
   <div class="footer">© 2023 W. W. Norton &amp; Company, Inc.</div>
 </section>
@@ -4876,7 +5333,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
 <div class="menu" id="menu">
   <button class="menu-close" onclick="toggleMenu(false)" aria-label="Close menu">&times;</button>
   <h3>Chapter 8 &middot; Jump to a slide</h3>
-  <div class="menu-grid"><button class="menu-item" data-go="0"><span class="menu-num">1</span>Title</button><button class="menu-item" data-go="1"><span class="menu-num">2</span>Outline</button><button class="menu-item" data-go="2"><span class="menu-num">3</span>Announcements</button><button class="menu-item" data-go="3"><span class="menu-num">4</span>8.4 ▶ Externalities Bracket</button><button class="menu-item" data-go="4"><span class="menu-num">5</span>Key Concepts ▸</button><button class="menu-item" data-go="5"><span class="menu-num">6</span>8.1 Air</button><button class="menu-item" data-go="6"><span class="menu-num">7</span>8.1 Layers</button><button class="menu-item" data-go="7"><span class="menu-num">8</span>8.2 Weather vs Climate</button><button class="menu-item" data-go="8"><span class="menu-num">9</span>8.2 Humidity</button><button class="menu-item" data-go="9"><span class="menu-num">10</span>8.4 Pollution Sources</button><button class="menu-item" data-go="10"><span class="menu-num">11</span>8.4 Primary Pollutants</button><button class="menu-item" data-go="11"><span class="menu-num">12</span>8.4 Secondary Pollutants</button><button class="menu-item" data-go="12"><span class="menu-num">13</span>8.5 Ozone</button><button class="menu-item" data-go="13"><span class="menu-num">14</span>8.6 Acid Rain</button><button class="menu-item" data-go="14"><span class="menu-num">15</span>Consequences ▸</button><button class="menu-item" data-go="15"><span class="menu-num">16</span>8.6 ▶ Not a game: Mortality Compared</button><button class="menu-item" data-go="16"><span class="menu-num">17</span>Deaths from Air Pollution</button><button class="menu-item" data-go="17"><span class="menu-num">18</span>Indoor Air Pollution</button><button class="menu-item" data-go="18"><span class="menu-num">19</span>Indoor Air Pollution (charts)</button><button class="menu-item" data-go="19"><span class="menu-num">20</span>8.4 Vehicle Emissions</button><button class="menu-item" data-go="20"><span class="menu-num">21</span>8.6 Where the Costs Come From</button><button class="menu-item" data-go="21"><span class="menu-num">22</span>Solutions? ▸</button><button class="menu-item" data-go="22"><span class="menu-num">23</span>8.7 One Person, One Year</button><button class="menu-item" data-go="23"><span class="menu-num">24</span>8.7 US Air Policy</button><button class="menu-item" data-go="24"><span class="menu-num">25</span>8.7 Clean Air Act: Costs &amp; Benefits</button><button class="menu-item" data-go="25"><span class="menu-num">26</span>U.S. Emissions 1927–2022</button><button class="menu-item" data-go="26"><span class="menu-num">27</span>SO₂ and Coal</button><button class="menu-item" data-go="27"><span class="menu-num">28</span>Why so hard? ▸</button><button class="menu-item" data-go="28"><span class="menu-num">29</span>Key Concepts</button><button class="menu-item" data-go="29"><span class="menu-num">30</span>Module 3 ▶ Review Game</button></div>
+  <div class="menu-grid"><button class="menu-item" data-go="0"><span class="menu-num">1</span>Title</button><button class="menu-item" data-go="1"><span class="menu-num">2</span>Outline</button><button class="menu-item" data-go="2"><span class="menu-num">3</span>Announcements</button><button class="menu-item" data-go="3"><span class="menu-num">4</span>8.4 ▶ Externalities Bracket</button><button class="menu-item" data-go="4"><span class="menu-num">5</span>Key Concepts ▸</button><button class="menu-item" data-go="5"><span class="menu-num">6</span>8.1 Air</button><button class="menu-item" data-go="6"><span class="menu-num">7</span>8.1 Layers</button><button class="menu-item" data-go="7"><span class="menu-num">8</span>8.2 Weather vs Climate</button><button class="menu-item" data-go="8"><span class="menu-num">9</span>8.2 Humidity</button><button class="menu-item" data-go="9"><span class="menu-num">10</span>8.4 Pollution Sources</button><button class="menu-item" data-go="10"><span class="menu-num">11</span>8.4 ▶ The Hidden Effects</button><button class="menu-item" data-go="11"><span class="menu-num">12</span>8.4 Secondary Pollutants</button><button class="menu-item" data-go="12"><span class="menu-num">13</span>8.5 Ozone</button><button class="menu-item" data-go="13"><span class="menu-num">14</span>8.6 Acid Rain</button><button class="menu-item" data-go="14"><span class="menu-num">15</span>Consequences ▸</button><button class="menu-item" data-go="15"><span class="menu-num">16</span>8.6 ▶ Not a game: Mortality Compared</button><button class="menu-item" data-go="16"><span class="menu-num">17</span>Deaths from Air Pollution</button><button class="menu-item" data-go="17"><span class="menu-num">18</span>Indoor Air Pollution</button><button class="menu-item" data-go="18"><span class="menu-num">19</span>Indoor Air Pollution (charts)</button><button class="menu-item" data-go="19"><span class="menu-num">20</span>8.4 Vehicle Emissions</button><button class="menu-item" data-go="20"><span class="menu-num">21</span>8.6 Where the Costs Come From</button><button class="menu-item" data-go="21"><span class="menu-num">22</span>Solutions? ▸</button><button class="menu-item" data-go="22"><span class="menu-num">23</span>8.7 One Person, One Year</button><button class="menu-item" data-go="23"><span class="menu-num">24</span>8.7 US Air Policy</button><button class="menu-item" data-go="24"><span class="menu-num">25</span>8.7 Clean Air Act: Costs &amp; Benefits</button><button class="menu-item" data-go="25"><span class="menu-num">26</span>U.S. Emissions 1927–2022</button><button class="menu-item" data-go="26"><span class="menu-num">27</span>SO₂ and Coal</button><button class="menu-item" data-go="27"><span class="menu-num">28</span>Why so hard? ▸</button><button class="menu-item" data-go="28"><span class="menu-num">29</span>Key Concepts</button><button class="menu-item" data-go="29"><span class="menu-num">30</span>Module 3 ▶ Review Game</button></div>
 </div>
 
 <script>
@@ -4927,13 +5384,18 @@ function show(i, back){
   counter.textContent = (cur+1)+' / '+slides.length;
   location.hash = 'slide-'+(cur+1);
 }
+// A bespoke slide may claim a clicker press by defining s.__deckNext / s.__deckPrev
+// and returning true (e.g. a host-run game that reveals and advances on the clicker).
+// Slides without them are unaffected.
 function next(){
   const s = slides[cur], n = stageItems(s).length;
+  if(typeof s.__deckNext === 'function' && s.__deckNext()) return;
   if(n){ const k = stageShown(s); if(k < n){ setStage(s, k + 1); return; } }
   show(cur+1);
 }
 function prev(){
   const s = slides[cur];
+  if(typeof s.__deckPrev === 'function' && s.__deckPrev()) return;
   if(stageItems(s).length){ const k = stageShown(s); if(k > 0){ setStage(s, k - 1); return; } }
   show(cur-1, true);
 }
