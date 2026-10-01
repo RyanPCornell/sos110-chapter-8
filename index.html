@@ -1236,6 +1236,10 @@ img.bleed{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
 .xm-setup .xm-trophy{width:clamp(70px,11vh,100px); height:auto;}
 .xm-cap{color:var(--ink2); line-height:1.5; margin:0;}
 .xm-row{display:flex; justify-content:center; gap:.6rem; margin-top:.6rem;}
+/* end-of-game navigation: the two ways back sit together; New game stands apart */
+.xm-endnav{flex-wrap:wrap; align-items:center;}
+.xm-endnav .xm-newbtn{margin-left:1.4rem; opacity:.75;}
+.xm-endnav .xm-newbtn:hover{opacity:1;}
 /* top bar */
 .xm-bar{display:flex; align-items:center; gap:clamp(.6rem,1.4vw,1.2rem); flex-wrap:wrap; padding-bottom:.45rem; margin-bottom:.35rem; border-bottom:1px solid var(--hair2); padding-right:5.5rem;}
 .xm-clock{font-family:'Merriweather',Georgia,serif; font-weight:900; font-size:clamp(1.3rem,2.4vw,1.8rem); color:var(--ink); font-variant-numeric:tabular-nums;}
@@ -2115,7 +2119,7 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
     } else if(ph==='reveal'){
       var B2 = (!HOST && myMode())? myB() : null, secs=(Date.now()-revAt[gid()])/1000, casc= secs<REV_ALL ? secs : null;
       var bar='<div class="xm-bar"><span class="xm-tag">The whole bracket, revealed</span>'
-        + (HOST? '<button class="xm-btn" data-act="openover">The story of the bracket &rarr;</button><button class="xm-btn ghost sm" data-act="finish">Final standings</button>' : '')
+        + (HOST? '<button class="xm-btn" data-act="openover">The story of the bracket &rarr;</button><button class="xm-btn ghost sm" data-act="finish">Final standings &rarr;</button>' : '')
         + (B2 && myMode()!=='watch' ? scoreStrip(B2) : '')+'</div>';
       h = bar + '<div class="xm-revwrap'+(HOST?' host':'')+'"><div class="xm-revmain">'+bracketHTML(B2||[], {rev:4, useB:!!B2, el:casc})+'</div>'
         + (HOST? '<aside class="xm-side">'+boardHTML(10,'Top 10')+'</aside>' : '')+'</div>'
@@ -2133,7 +2137,11 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
       h='<div class="xm-final"><div class="xm-finalh">'+TROPHY+'<div><div class="xm-big">Final Standings</div>'
         + '<div class="xm-muted">Highest cost: <b>'+ITEMS[TRUTH[14]].name+'</b> ('+esc(ITEMS[TRUTH[14]].qty)+'), '+money(ITEMS[TRUTH[14]].usd)
         + (champShare!==null? ' · '+champShare+'% of the class picked it' : '')+(perfect? ' · '+perfect+' perfect bracket'+(perfect>1?'s':'') : '')+'</div></div></div>'
-        + yours + boardHTML(10,'Top 10') + (HOST? '<div class="xm-row"><button class="xm-btn ghost" data-act="new">New game</button></div>' : '') + '</div>';
+        + yours + boardHTML(10,'Top 10')
+        + (HOST? '<div class="xm-row xm-endnav">'
+               + '<button class="xm-btn ghost" data-act="toreveal">&larr; The bracket</button>'
+               + '<button class="xm-btn ghost" data-act="tostory">The story of the bracket</button>'
+               + '<button class="xm-btn ghost sm xm-newbtn" data-act="new">New game</button></div>' : '') + '</div>';
     }
     el.stage.innerHTML=h;
     var inp=el.stage.querySelector('[data-nf-in]'); if(inp) inp.focus();
@@ -2160,7 +2168,16 @@ button.xm-team{cursor:pointer;} button.xm-team:hover{border-color:var(--gold); b
     if(a==='open') openBracket();
     else if(a==='endfill') endFill();
     else if(a==='finish') finish();
-    else if(a==='new') backend.mergeDoc('polls', GID, {phase:'idle'});
+    else if(a==='toreveal' || a==='tostory'){
+      revAt[gid()]=Date.now()-(REV_ALL+1)*1000; overFor=gid(); clearTimeout(autoT);
+      overOpen = a==='tostory'; viewKey=null;
+      backend.mergeDoc('polls', GID, {phase:'reveal'});
+    }
+    else if(a==='new'){
+      // this one wipes the class's game, so it asks first
+      if(window.confirm('Start a new game? The current bracket and standings will be cleared from every screen.'))
+        backend.mergeDoc('polls', GID, {phase:'idle'});
+    }
   });
   SEC.addEventListener('submit', function(e){ var f=e.target.closest('[data-nf]'); if(!f) return; e.preventDefault();
     var inp=f.querySelector('[data-nf-in]'); join('named', inp? inp.value.trim() : ''); });
